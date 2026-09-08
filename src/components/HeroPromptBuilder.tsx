@@ -1,0 +1,464 @@
+import React, { useState, useEffect } from 'react';
+import { 
+  Sparkles, 
+  Cpu, 
+  Layers, 
+  Binary, 
+  Sliders, 
+  CheckCircle2, 
+  ArrowRight, 
+  Zap, 
+  RefreshCw, 
+  Check, 
+  Terminal, 
+  ExternalLink,
+  ChevronDown,
+  ChevronUp,
+  X
+} from 'lucide-react';
+import { circuitAudio } from '../utils/audio';
+
+type GenerationMode = '3d' | '2d';
+
+interface GenerationStep {
+  title: string;
+  detail: string;
+  status: 'pending' | 'active' | 'completed';
+}
+
+const PROMPT_PRESETS = [
+  {
+    id: 'plant',
+    label: '🌿 Plant Watering System',
+    prompt: 'Build an automatic plant watering system with an ESP32, capacitive soil moisture sensor, IRLZ44N MOSFET, and 5V pump.',
+    mcu: 'ESP32-WROOM',
+    components: ['ESP32', 'Capacitive Soil Sensor', 'IRLZ44N MOSFET', '5V Mini Pump', '1N4007 Diode', '220Ω Resistor'],
+    targetHash: '#ai-agent'
+  },
+  {
+    id: 'traffic',
+    label: '🚦 Traffic Light Controller',
+    prompt: 'Build a traffic light controller using an Arduino Uno, Red, Yellow, and Green LEDs, three 220 ohm resistors, and a pedestrian push button.',
+    mcu: 'Arduino Uno R3',
+    components: ['Arduino Uno', 'Red LED', 'Yellow LED', 'Green LED', '3x 220Ω Resistors', 'Push Button', 'Pull-down Resistor'],
+    targetHash: '#simulation'
+  },
+  {
+    id: 'tone',
+    label: '⚡ 555 Audio Synthesizer',
+    prompt: 'Build a 555 timer astable multivibrator tone generator that produces an 880 Hz square wave for an 8 ohm mini speaker.',
+    mcu: 'NE555 Timer IC',
+    components: ['NE555 Timer', '10kΩ Resistor', '4.7kΩ Resistor', '100nF Ceramic Cap', '10µF Electrolytic', '8Ω Speaker'],
+    targetHash: '#simulation'
+  },
+  {
+    id: 'solar',
+    label: '☀️ Solar Battery Charger',
+    prompt: 'Build a solar lithium-ion battery charging circuit with a TP4056 charge controller, 18650 cell, and voltage telemetry monitor.',
+    mcu: 'RP2040 Pico',
+    components: ['TP4056 Module', '18650 Li-Ion Cell', 'Solar Mini Panel (6V)', 'INA219 Current Sensor', 'SSD1306 OLED'],
+    targetHash: '#ai-code'
+  }
+];
+
+export const HeroPromptBuilder: React.FC = () => {
+  const [promptText, setPromptText] = useState(
+    'Build an automatic plant watering system with an ESP32, soil moisture sensor, and pump.'
+  );
+  const [generationMode, setGenerationMode] = useState<GenerationMode>('3d');
+  const [selectedMcu, setSelectedMcu] = useState('ESP32-WROOM');
+  const [powerDomain, setPowerDomain] = useState('Dual Rail 3.3V / 5.0V');
+  const [showComponents, setShowComponents] = useState(false);
+  const [showAdvanced, setShowAdvanced] = useState(false);
+
+  // Generation Sequence State
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [currentStepIndex, setCurrentStepIndex] = useState(0);
+  const [isCompleted, setIsCompleted] = useState(false);
+  const [progressPercent, setProgressPercent] = useState(0);
+
+  const GENERATION_STEPS: GenerationStep[] = [
+    {
+      title: 'Understanding Requirements',
+      detail: 'Extracting threshold (moisture < 35%), duty cycle, and hysteresis specifications.',
+      status: currentStepIndex > 0 ? 'completed' : currentStepIndex === 0 && isGenerating ? 'active' : 'pending'
+    },
+    {
+      title: 'Component Selection & Pinout Matching',
+      detail: `Matching ${selectedMcu} GPIOs with low-side MOSFET gate drive and analog ADC input.`,
+      status: currentStepIndex > 1 ? 'completed' : currentStepIndex === 1 ? 'active' : 'pending'
+    },
+    {
+      title: 'Generating Circuit Topology & Netlist',
+      detail: 'Connecting VCC, GND, flyback protection diode, and current limiting resistors. Zero floating nets.',
+      status: currentStepIndex > 2 ? 'completed' : currentStepIndex === 2 ? 'active' : 'pending'
+    },
+    {
+      title: generationMode === '3d' ? 'Synthesizing 3D Breadboard Prototype' : 'Synthesizing 2D Engineering Schematic',
+      detail: generationMode === '3d' ? 'Placing ICs on solderless rows with color-coded jumper routing.' : 'Rendering IEEE standard logic symbols and net identifiers.',
+      status: currentStepIndex > 3 ? 'completed' : currentStepIndex === 3 ? 'active' : 'pending'
+    },
+    {
+      title: 'Generating Firmware & MCU Synchronization',
+      detail: 'Writing non-blocking C++ state machine with 12-bit ADC filtering.',
+      status: currentStepIndex > 4 ? 'completed' : currentStepIndex === 4 ? 'active' : 'pending'
+    },
+    {
+      title: 'Running Mixed-Signal Simulation & DRC Check',
+      detail: 'Testing DC operating points, voltage drop across MOSFET, and ground loop integrity.',
+      status: currentStepIndex > 5 ? 'completed' : currentStepIndex === 5 ? 'active' : 'pending'
+    },
+    {
+      title: 'Engineering Project Ready',
+      detail: 'Synchronized across 2D, 3D, simulation, firmware, and bill of materials.',
+      status: isCompleted ? 'completed' : 'pending'
+    }
+  ];
+
+  // Generation Sequence Animation Effect
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (isGenerating && currentStepIndex < 6) {
+      timer = setTimeout(() => {
+        circuitAudio.playRelayClick();
+        setCurrentStepIndex((prev) => prev + 1);
+        setProgressPercent(Math.round(((currentStepIndex + 1) / 6) * 100));
+      }, 700);
+    } else if (isGenerating && currentStepIndex >= 6) {
+      circuitAudio.playBeepSuccess();
+      setIsGenerating(false);
+      setIsCompleted(true);
+      setProgressPercent(100);
+    }
+    return () => clearTimeout(timer);
+  }, [isGenerating, currentStepIndex]);
+
+  const handleStartBuild = () => {
+    if (!promptText.trim()) return;
+    setIsGenerating(true);
+    setIsCompleted(false);
+    setCurrentStepIndex(0);
+    setProgressPercent(10);
+    circuitAudio.playTone(523.25, 0.1, 'sine');
+  };
+
+  const handleSelectPreset = (preset: typeof PROMPT_PRESETS[0]) => {
+    setPromptText(preset.prompt);
+    setSelectedMcu(preset.mcu);
+    setIsCompleted(false);
+    circuitAudio.playTone(659.25, 0.08, 'triangle');
+  };
+
+  return (
+    <div className="w-full max-w-4xl mx-auto mt-6 relative z-20">
+      {/* Container with Crystal Clear Transparent Glass so the K shows behind it */}
+      <div className="transparent-glass-card rounded-2xl bg-black/15 border border-[#A58D66]/25 p-5 sm:p-7 relative overflow-hidden transition-all duration-300 hover:border-[#407E8C]/50 backdrop-blur-[1px]">
+        
+        {/* Subtle Engineering Grid Background */}
+        <div 
+          className="absolute inset-0 pointer-events-none opacity-10"
+          style={{
+            backgroundImage: 'radial-gradient(circle at 1px 1px, #A58D66 1px, transparent 0)',
+            backgroundSize: '24px 24px'
+          }}
+        />
+
+        {/* Top Control Bar: Prompt Question & 2D/3D Mode Selector */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#A58D66]/20 pb-4 mb-4 relative z-10">
+          <div className="flex items-center gap-2.5">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#407E8C] animate-pulse shadow-[0_0_8px_#407E8C]" />
+            <h2 className="text-base sm:text-lg font-serif font-bold text-[#E5E1DD] tracking-wide">
+              What Will You Force Into Existence?
+            </h2>
+            <span className="hidden md:inline text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-[#A58D66]/20 text-[#A58D66] border border-[#A58D66]/30 animate-ambition">
+              AUTONOMOUS SYNTHESIS
+            </span>
+          </div>
+
+          {/* 2D / 3D Mode Selector Pills */}
+          <div className="flex items-center gap-1 p-1 bg-black/40 rounded-xl border border-[#A58D66]/20 self-start sm:self-auto backdrop-blur-[2px]">
+            <button
+              type="button"
+              onClick={() => {
+                setGenerationMode('2d');
+                circuitAudio.playTone(440, 0.05, 'triangle');
+              }}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+                generationMode === '2d'
+                  ? 'bg-gradient-to-r from-[#A58D66] to-[#8C7654] text-[#080f14] shadow-md font-bold'
+                  : 'text-[#E5E1DD]/60 hover:text-[#E5E1DD]'
+              }`}
+            >
+              <Binary className="w-3.5 h-3.5" />
+              <span>2D Schematic</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => {
+                setGenerationMode('3d');
+                circuitAudio.playTone(550, 0.05, 'triangle');
+              }}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+                generationMode === '3d'
+                  ? 'bg-gradient-to-r from-[#A58D66] to-[#8C7654] text-[#080f14] shadow-md font-bold'
+                  : 'text-[#E5E1DD]/60 hover:text-[#E5E1DD]'
+              }`}
+            >
+              <Layers className="w-3.5 h-3.5" />
+              <span>3D Breadboard</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Large Prompt Input Console */}
+        <div className="relative mb-3 z-10">
+          <textarea
+            value={promptText}
+            onChange={(e) => setPromptText(e.target.value)}
+            disabled={isGenerating}
+            placeholder="Describe your electronic system (e.g. Build an automatic plant watering system with ESP32, soil moisture probe, and 5V pump)..."
+            rows={2}
+            className="w-full bg-black/35 border border-[#A58D66]/25 focus:border-[#A58D66] rounded-xl p-3.5 sm:p-4 text-sm sm:text-base text-[#E5E1DD] placeholder:text-[#E5E1DD]/40 focus:outline-none focus:ring-2 focus:ring-[#A58D66]/20 font-sans resize-none transition-all font-light backdrop-blur-[2px]"
+          />
+          {promptText && (
+            <button
+              onClick={() => setPromptText('')}
+              className="absolute top-3 right-3 text-[#E5E1DD]/40 hover:text-[#E5E1DD] p-1"
+              title="Clear prompt"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          )}
+        </div>
+
+        {/* Preset Idea Badges */}
+        <div className="flex flex-wrap items-center gap-2 mb-4 relative z-10">
+          <span className="text-[11px] font-mono text-[#A58D66] uppercase tracking-wider">
+            Quick Ideas:
+          </span>
+          {PROMPT_PRESETS.map((preset) => (
+            <button
+              key={preset.id}
+              onClick={() => handleSelectPreset(preset)}
+              className="px-2.5 py-1 rounded-lg bg-black/30 hover:bg-[#407E8C]/25 border border-[#A58D66]/20 hover:border-[#A58D66]/50 text-xs text-[#E5E1DD]/80 hover:text-[#E5E1DD] transition-all cursor-pointer font-medium backdrop-blur-[2px]"
+            >
+              {preset.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Expandable Options: [Choose Components] & [Advanced Settings] */}
+        <div className="flex flex-wrap items-center justify-between gap-3 border-t border-[#A58D66]/15 pt-3 mb-4 relative z-10 text-xs">
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setShowComponents(!showComponents)}
+              className="flex items-center gap-1 text-[#E5E1DD]/80 hover:text-[#E5E1DD] px-2.5 py-1 rounded-md bg-[#407E8C]/15 hover:bg-[#407E8C]/25 border border-[#407E8C]/35 transition-colors"
+            >
+              <Cpu className="w-3.5 h-3.5 text-[#A58D66]" />
+              <span>Target: {selectedMcu}</span>
+              {showComponents ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setShowAdvanced(!showAdvanced)}
+              className="flex items-center gap-1 text-[#E5E1DD]/80 hover:text-[#E5E1DD] px-2.5 py-1 rounded-md bg-[#407E8C]/15 hover:bg-[#407E8C]/25 border border-[#407E8C]/35 transition-colors"
+            >
+              <Sliders className="w-3.5 h-3.5 text-[#76B4C2]" />
+              <span>Power: {powerDomain}</span>
+              {showAdvanced ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
+            </button>
+          </div>
+
+          {/* Primary Action Button: BUILD WITH KITT */}
+          <button
+            type="button"
+            onClick={handleStartBuild}
+            disabled={isGenerating || !promptText.trim()}
+            className="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-[#A58D66] to-[#8C7654] hover:from-[#BFA378] hover:to-[#A58D66] disabled:opacity-50 text-[#080f14] font-bold text-sm shadow-[0_0_20px_rgba(165,141,102,0.35)] transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer"
+          >
+            {isGenerating ? (
+              <>
+                <RefreshCw className="w-4 h-4 animate-spin text-[#080f14]" />
+                <span>Synthesizing Project ({progressPercent}%)...</span>
+              </>
+            ) : (
+              <>
+                <Zap className="w-4 h-4 text-[#080f14] fill-[#080f14]" />
+                <span>SYNTHESIZE WITH KITT</span>
+                <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#080f14]/20 font-mono font-normal">
+                  ↵ Enter
+                </span>
+              </>
+            )}
+          </button>
+        </div>
+
+        {/* Expandable Component Selector Drawer */}
+        {showComponents && (
+          <div className="mt-3 p-3.5 rounded-xl bg-[#0b141a] border border-[#A58D66]/20 space-y-2 animate-in fade-in duration-200 relative z-10 text-xs">
+            <span className="text-[11px] font-mono text-[#A58D66] uppercase tracking-wider font-semibold">
+              Select Microcontroller Architecture:
+            </span>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1">
+              {['ESP32-WROOM', 'Arduino Uno R3', 'RP2040 Pico', 'STM32 BluePill'].map((mcu) => (
+                <button
+                  key={mcu}
+                  onClick={() => {
+                    setSelectedMcu(mcu);
+                    circuitAudio.playTone(330, 0.04, 'sine');
+                  }}
+                  className={`p-2 rounded-lg border text-left transition-all ${
+                    selectedMcu === mcu
+                      ? 'bg-[#A58D66]/20 border-[#A58D66]/60 text-[#E5E1DD] font-semibold shadow-sm'
+                      : 'bg-white/5 border-white/10 text-[#E5E1DD]/70 hover:bg-white/10'
+                  }`}
+                >
+                  {mcu}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Expandable Advanced Settings Drawer */}
+        {showAdvanced && (
+          <div className="mt-3 p-3.5 rounded-xl bg-[#0b141a] border border-[#A58D66]/20 space-y-2 animate-in fade-in duration-200 relative z-10 text-xs">
+            <span className="text-[11px] font-mono text-[#407E8C] uppercase tracking-wider font-semibold">
+              Power Supply Rails & Protection:
+            </span>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1">
+              {[
+                { name: 'Dual Rail 3.3V / 5.0V', desc: 'Separate logic & motor supplies' },
+                { name: 'Single 3.3V Ultra-Low', desc: 'Optimized for battery & RTC deep-sleep' },
+                { name: '12.0V High Torque', desc: 'Optoisolated relay/FET industrial rail' }
+              ].map((p) => (
+                <button
+                  key={p.name}
+                  onClick={() => {
+                    setPowerDomain(p.name);
+                    circuitAudio.playTone(392, 0.04, 'sine');
+                  }}
+                  className={`p-2 rounded-lg border text-left transition-all ${
+                    powerDomain === p.name
+                      ? 'bg-[#407E8C]/25 border-[#407E8C] text-[#E5E1DD] font-semibold shadow-sm'
+                      : 'bg-white/5 border-white/10 text-[#E5E1DD]/70 hover:bg-white/10'
+                  }`}
+                >
+                  <div className="font-semibold">{p.name}</div>
+                  <div className="text-[10px] text-[#E5E1DD]/50">{p.desc}</div>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* REAL-TIME GENERATION PROGRESS WINDOW */}
+        {(isGenerating || isCompleted) && (
+          <div className="mt-4 p-4 sm:p-5 rounded-xl bg-[#080f14] border border-[#A58D66]/30 space-y-4 animate-in fade-in duration-300 relative z-10 shadow-xl">
+            {/* Header with Progress Bar */}
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Terminal className="w-4 h-4 text-[#A58D66]" />
+                <span className="text-xs font-mono font-bold text-[#E5E1DD] uppercase tracking-wider">
+                  Oracle Synthesis Pipeline
+                </span>
+              </div>
+              <span className="text-xs font-mono font-bold text-[#A58D66]">
+                {isCompleted ? '✓ COMPLETED 100%' : `${progressPercent}%`}
+              </span>
+            </div>
+
+            {/* Progress Bar Track */}
+            <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
+              <div 
+                className="h-full bg-gradient-to-r from-[#A58D66] via-[#E5E1DD] to-[#407E8C] transition-all duration-500"
+                style={{ width: `${progressPercent}%` }}
+              />
+            </div>
+
+            {/* Step Checkpoints List */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+              {GENERATION_STEPS.slice(0, 6).map((step, idx) => {
+                const isActive = step.status === 'active';
+                const isDone = step.status === 'completed';
+
+                return (
+                  <div 
+                    key={step.title}
+                    className={`p-2 rounded-lg border flex items-start gap-2.5 transition-all ${
+                      isDone 
+                        ? 'bg-[#407E8C]/20 border-[#407E8C]/40 text-[#E5E1DD]' 
+                        : isActive 
+                        ? 'bg-[#A58D66]/20 border-[#A58D66]/60 text-[#E5E1DD] animate-pulse' 
+                        : 'bg-white/5 border-white/5 text-[#E5E1DD]/40 opacity-60'
+                    }`}
+                  >
+                    <div className="mt-0.5 shrink-0">
+                      {isDone ? (
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#407E8C]" />
+                      ) : isActive ? (
+                        <RefreshCw className="w-3.5 h-3.5 text-[#A58D66] animate-spin" />
+                      ) : (
+                        <span className="w-3.5 h-3.5 rounded-full border border-slate-600 block text-[9px] text-center font-mono leading-3 text-[#E5E1DD]/50">
+                          {idx + 1}
+                        </span>
+                      )}
+                    </div>
+                    <div>
+                      <div className="font-semibold text-[11px] leading-tight">{step.title}</div>
+                      <div className="text-[10px] text-[#E5E1DD]/60 line-clamp-1">{step.detail}</div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Action Bar when Complete */}
+            {isCompleted && (
+              <div className="pt-2 border-t border-[#A58D66]/20 flex flex-wrap items-center justify-between gap-3 text-xs">
+                <div className="flex items-center gap-2 text-[#407E8C] font-medium">
+                  <Check className="w-4 h-4" />
+                  <span>0 Violations detected • 8 Nets synchronized • Ready for manifestation</span>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-2">
+                  <a
+                    href="https://kitt-ai-ravi.ai.studio"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-3.5 py-1.5 rounded-lg bg-[#A58D66] hover:bg-[#b89f76] text-[#080f14] font-semibold transition-all flex items-center gap-1.5 shadow-sm"
+                  >
+                    <Layers className="w-3.5 h-3.5" />
+                    <span>Launch 3D Lab</span>
+                  </a>
+
+                  <a
+                    href="#ai-agent"
+                    className="px-3.5 py-1.5 rounded-lg bg-[#407E8C]/20 hover:bg-[#407E8C]/30 text-[#E5E1DD] border border-[#407E8C]/40 font-semibold transition-all flex items-center gap-1.5"
+                  >
+                    <Zap className="w-3.5 h-3.5 text-[#A58D66]" />
+                    <span>Oracle Console</span>
+                  </a>
+
+                  <a
+                    href="https://kitt-1-0-agent.ai.studio"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-3.5 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-[#A58D66] font-medium transition-all flex items-center gap-1"
+                  >
+                    <span>Autonomous Netlist</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+      </div>
+    </div>
+  );
+};
