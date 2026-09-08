@@ -29,28 +29,29 @@ const INITIAL_MESSAGES: ChatMessage[] = [
   {
     id: 'welcome-msg',
     role: 'assistant',
-    content: `Hello! I am **KITT org Ai -2.0**, the dedicated **Project & Organizational Intelligence Assistant** for the KITT Ecosystem.
+    content: `Welcome to the KITT Intelligence Core. I am **KITT Org AI 2.0** — your universal hardware engineering polymath, circuit architect, and ecosystem oracle.
 
-> **Important Boundary Note**: I am **completely different from the Main KITT AI** (our autonomous engineering agent). While the Main KITT AI generates live circuits, 3D breadboard wiring, firmware, and PCB manufacturing packages, I am specialized exclusively in answering questions about:
-> - **KITT Project Architecture** ("One Project. One Source of Truth. Many Views.")
-> - **The 4 Ecosystem Portals** (KITT 1.0, Ravi Workspace, DigiLogic, Hardware Labs)
-> - **Engineering Standards & Component Libraries** supported by KITT
-> - **Student-to-Pro Learning Pathways** & Virtual Instruments
-> - **Project Roadmap, Tokenomics, and Technical Documentation**
+I reason natively across **tens of thousands of electronic components, microcontrollers (ESP32, STM32, RP2040, Arduino), sensors, power topologies, and firmware code**, as well as the full **KITT Ecosystem architecture** ("Where Ideas Become Inventions").
 
-How can I assist you with the KITT Project today?`,
+Whether you want to:
+- **Architect a complete circuit** (e.g. smart IoT agriculture, solar MPPT battery management, motor drivers, drone telemetry)
+- **Get exact pin-to-pin wiring, decoupling capacitor sizing, and logic level shifting**
+- **Explore the 4 KITT Portals, roadmap, and tokenomics**
+- **Or converse on physics, math, computer science, and daily engineering ideas**
+
+I am at your command. What are we engineering or discussing today?`,
     timestamp: 'Just now',
     isInitial: true
   }
 ];
 
 const SUGGESTED_QUESTIONS = [
-  "How is KITT org Ai -2.0 different from Main KITT AI?",
-  "What is the 'One Project, Many Views' architecture?",
-  "Tell me about the 4 official KITT ecosystem portals",
-  "What component categories and virtual instruments are supported?",
-  "How does the Student-to-Pro learning journey work?",
-  "What is the philosophy behind 'Where Ideas Become Inventions'?"
+  "Design an ESP32 Smart Agriculture node with capacitive soil, BME280 & 5V pump",
+  "How do I calculate I2C pull-up resistors and decoupling capacitors?",
+  "Level-shift 5V logic to 3.3V ESP32 for ultrasonic and I2C sensors",
+  "What are the 4 official KITT Ecosystem Portals and how do they synchronize?",
+  "Explain the 'One Project, One Source of Truth, Many Views' philosophy",
+  "Architect an MPPT solar lithium battery charger circuit with telemetry"
 ];
 
 export const AiChatDemo: React.FC = () => {
@@ -255,22 +256,22 @@ export const AiChatDemo: React.FC = () => {
           </p>
         </div>
 
-        {/* Identity & Scope Distinction Card */}
+        {/* Universal Intelligence & Ecosystem Oracle Banner */}
         <div className="mb-8 p-5 rounded-2xl surreal-card flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border border-[#A58D66]/25">
           <div className="flex items-start gap-3">
             <div className="p-2.5 rounded-xl bg-[#A58D66]/15 border border-[#A58D66]/35 text-[#A58D66] shrink-0 mt-0.5">
-              <ShieldCheck className="w-4 h-4 text-[#A58D66]" />
+              <Cpu className="w-4 h-4 text-[#A58D66]" />
             </div>
             <div>
               <div className="text-xs font-bold text-[#E5E1DD] font-cinzel flex items-center gap-2">
-                <span>Scope Distinction: KITT Org AI 2.0 vs. Main KITT AI</span>
+                <span>Universal Hardware Polymath & Ecosystem Intelligence</span>
                 <span className="text-[10px] px-2 py-0.5 rounded bg-[#407E8C]/20 text-[#76B4C2] border border-[#407E8C]/35 font-mono">
-                  Project Knowledge Only
+                  Full Synthesis 2.0
                 </span>
               </div>
               <p className="text-[11px] text-[#E5E1DD]/65 mt-1 leading-relaxed font-light">
-                <strong>KITT Org AI 2.0</strong> is strictly limited to explaining the KITT Project, ecosystem architecture, and documentation. 
-                To generate interactive circuits, breadboard simulations, and firmware, use the <strong>Main KITT AI (Flagship Agent)</strong>.
+                <strong>KITT Org AI 2.0</strong> is trained on thousands of components, sensors, circuit topologies, and day-to-day discourse. 
+                For real-time 3D breadboard interaction or instant manufacturing PCB export, connect to the <strong>Main KITT AI</strong>.
               </p>
             </div>
           </div>
