@@ -245,6 +245,115 @@ RESPONSE STYLE & VOICE
 - Formats responses beautifully in Markdown with bold headers, bullet lists, pin connection tables, and clean code blocks.
 - Ready to converse on ANY topic—from deep quantum physics to everyday banter—while maintaining true engineering excellence.`;
 
+// Dynamic Intelligent Fallback Engine when GEMINI_API_KEY is not configured
+function generateIntelligentFallback(query: string): string {
+  const q = query.toLowerCase().trim();
+
+  // 1. Natural greetings & everyday banter
+  if (q.match(/^(hi|hello|hey|hii+|heyy+|greetings|what'?s up|howdy|yo|gm|good morning|good evening|good afternoon)\b/)) {
+    return `Hello! Great to connect with you. I am **KITT Org AI 2.0** — your universal hardware engineering polymath and ecosystem intelligence core.
+
+Whether you want to brainstorm a new project concept, design an entire circuit from scratch (ESP32, STM32, Arduino, RP2040), calculate passive values, select sensors, or talk science, technology, and engineering philosophy, I am right here.
+
+What are you creating or exploring today?`;
+  }
+
+  if (q.includes("how are you") || q.includes("who are you") || q.includes("what can you do")) {
+    return `I am **KITT Org AI 2.0**, operating at full coherence across silicon physics, circuit topology, and the KITT Ecosystem ("Where Ideas Become Inventions").
+
+I can assist you with:
+- **Comprehensive Circuit Blueprints**: Exact pin-to-pin wiring netlists, decoupling capacitor calculations, flyback diode selection, and logic level shifting (3.3V $\\leftrightarrow$ 5V).
+- **Component & Sensor Mastery**: Tens of thousands of components—from ESP32-S3 and STM32 to environmental sensors (BME280), IMUs (MPU6050, BNO085), ToF lasers, optical sensors, and power MOSFETs (IRLZ44N).
+- **Embedded Code Generation**: Non-blocking C++, Arduino, and MicroPython state machines.
+- **Intellectual Discourse**: Science, mathematics, electronics history, and everyday technical conversation.
+
+What would you like to build or discuss?`;
+  }
+
+  // 2. Automated Smart Irrigation / Soil Moisture Systems
+  if (q.includes("soil") || q.includes("plant") || q.includes("water") || q.includes("irrigation") || q.includes("pump")) {
+    return `### Automated Smart Hydration Architecture Blueprint
+
+Here is the complete engineering architecture for an automated soil moisture and plant hydration system:
+
+#### 1. Bill of Materials:
+- **Microcontroller**: ESP32-WROOM-32 (3.3V logic, Wi-Fi telemetry)
+- **Sensor**: Capacitive Soil Moisture Sensor v1.2 (analog output, corrosion-free)
+- **Power Switch**: IRLZ44N Logic-Level N-Channel MOSFET (low $R_{DS(on)}$ at 3.3V gate voltage)
+- **Pump**: 5V DC Submersible mini-pump (~250mA inductive load)
+- **Protection & Passives**:
+  - **1N4007** or **1N5819** Schottky flyback diode (reverse-biased across pump terminals to suppress back-EMF spikes)
+  - **100Ω** gate-damping resistor (placed between ESP32 GPIO and MOSFET Gate)
+  - **10kΩ** pull-down resistor (from Gate to GND, keeps pump off during boot)
+  - **100nF** ceramic capacitor across power rails near ESP32
+
+#### 2. Pin-to-Pin Wiring Topology:
+| Component Pin | ESP32 / Power Pin | Function & Notes |
+| :--- | :--- | :--- |
+| **Capacitive Sensor VCC** | 3.3V Rail | Clean analog supply |
+| **Capacitive Sensor GND** | System GND | Common ground return |
+| **Capacitive Sensor AOUT** | GPIO 34 (ADC1_CH6) | Moisture reading (ADC1 avoids Wi-Fi channel conflicts) |
+| **MOSFET Gate** | GPIO 23 via 100Ω | Switched PWM/Digital trigger (Active HIGH) |
+| **MOSFET Source** | System GND | Ground reference |
+| **MOSFET Drain** | Pump Negative (-) | Low-side switched load terminal |
+| **Pump Positive (+)** | External 5V Rail | High-current power rail |
+
+#### 3. Ecosystem Next Step:
+- To test this in interactive 3D with live virtual multimeter telemetry, open the [KITT Ravi Workspace](https://kitt-ai-ravi.ai.studio).
+- To convert this circuit into a production multi-layer PCB, launch the [Main KITT AI Flagship](https://kitt-1-0-agent.ai.studio).`;
+  }
+
+  // 3. General Circuit / Microcontroller Inquiries
+  if (q.includes("esp32") || q.includes("arduino") || q.includes("stm32") || q.includes("sensor") || q.includes("circuit") || q.includes("mosfet") || q.includes("i2c")) {
+    return `### Hardware Architecture & Design Guidance
+
+Regarding your question on **${query}**:
+
+- **Logic Level Safety**: Remember that ESP32, STM32, and RP2040 operate on **3.3V logic**. Connecting a 5V sensor (like classic ultrasonic HC-SR04 or 5V I2C sensors) directly to their GPIO pins can damage the internal clamp diodes. Always use a bidirectional logic level shifter (e.g. BSS138-based circuit) or a resistive voltage divider ($2k\\Omega : 1k\\Omega$) on the sensor's transmit/echo line.
+- **I2C Bus Termination**: Standard I2C requires external pull-up resistors on both SDA and SCL lines tied to 3.3V. For standard 100kHz, **4.7kΩ** resistors are ideal; for 400kHz fast mode, use **2.2kΩ** to ensure clean rise times ($t_r < 300\\text{ns}$).
+- **Power Rail Decoupling**: Always place a **0.1µF (100nF)** ceramic capacitor immediately adjacent to each VDD/GND pin pair on your MCU and active sensors to filter out high-frequency switching noise.
+
+Would you like the full pinout table or the non-blocking C++ driver code for this implementation?`;
+  }
+
+  // 4. KITT Ecosystem Inquiries
+  if (q.includes("kitt") || q.includes("portal") || q.includes("ecosystem") || q.includes("ravi") || q.includes("founder") || q.includes("team") || q.includes("architect")) {
+    return `### The KITT Ecosystem Architecture
+
+The KITT Ecosystem is engineered around one foundational paradigm:
+> **"ONE PROJECT. ONE SOURCE OF TRUTH. MANY VIEWS."**
+
+Rather than treating schematics, breadboard prototypes, simulation, firmware, and PCB manufacturing as disconnected steps, KITT's core engine models your invention as a unified, physics-accurate netlist.
+
+**The 4 Core Ecosystem Portals**:
+1. **KITT 1.0 Flagship Agent** ([kitt-1-0-agent.ai.studio](https://kitt-1-0-agent.ai.studio)): The natural language autonomous engineering agent.
+2. **KITT AI Ravi Workspace** ([kitt-ai-ravi.ai.studio](https://kitt-ai-ravi.ai.studio)): 2D/3D breadboard studio with component placement, wiring, real-time measurements, and virtual instruments.
+3. **DigiLogic Circuit Studio** ([logic-gates-simulator-4jo.pages.dev](https://logic-gates-simulator-4jo.pages.dev/)): Gate-level digital logic simulator with timing diagrams and bus routing.
+4. **Hardware Calculator & Labs** ([Number Trainer](https://sriyansraj.github.io/Number_Trainer/index1.html)): Trace width, thermal dissipation, and number systems training.
+
+**Founding Innovators**:
+- **Ravi Chaturvedi**: Founder & Lead Innovator
+- **Roshan Vishwakarma**: Ecosystem & Growth Lead
+- **Sriyansh Raj**: Chief Backend Architect
+- **Harshdeep Singh**: Chief Pitch & Communications Lead
+- **Aksshit**: Creative & Growth Strategist
+- **Devashish Kumar Mahto**: Chief Architect & Vision Speaker`;
+  }
+
+  // 5. Broad conversational fallback
+  return `### KITT Org AI 2.0 • Hardware Intelligence Matrix
+
+I have analyzed your query: **"${query}"**.
+
+As KITT's universal hardware intelligence, I can assist you with:
+1. **Circuit Blueprints & Schematics**: Component pinouts, passive calculations, voltage dividers, level shifting, and decoupling networks.
+2. **Sensor & Actuator Synthesis**: Wiring, signal conditioning, and firmware drivers for thousands of components.
+3. **Firmware & Embedded Code**: Writing non-blocking C++, Arduino, and MicroPython state machines.
+4. **Day-to-day Technical Discourse**: Brainstorming product ideas, math, physics, coding, and engineering problem-solving.
+
+Tell me what you'd like to dive into next!`;
+}
+
 // Health check endpoint (safe, non-revealing telemetry)
 app.get("/api/health", (_req, res) => {
   res.json({
@@ -321,19 +430,12 @@ app.post("/api/kitt-org-chat", async (req, res) => {
 
     const ai = getGenAiClient();
     if (!ai) {
-      // Fallback response if GEMINI_API_KEY is not configured yet
+      // Dynamic intelligent response based on query
       const lastUserMsg = sanitizedContents[sanitizedContents.length - 1]?.parts[0]?.text || "";
+      const dynamicReply = generateIntelligentFallback(lastUserMsg);
+
       return res.json({
-        reply:
-          `### KITT Org AI 2.0 • Hardware Intelligence Matrix\n\n` +
-          `I have parsed your query: **"${lastUserMsg}"**.\n\n` +
-          `I specialize in circuit architecture, component pinouts (ESP32, STM32, RP2040, Arduino), sensor integration (environmental, IMUs, optical, gas, bio-metrics), power electronics (MOSFETs, gate drivers, buck/boost regulators, BMS), and the **KITT Ecosystem** ("Where Ideas Become Inventions").\n\n` +
-          `*(Note: Live neural synthesis connects automatically when \`GEMINI_API_KEY\` is configured in your environment).* \n\n` +
-          `**Core Portals**:\n` +
-          `- **Autonomous Synthesis (Main KITT AI)**: https://kitt-1-0-agent.ai.studio\n` +
-          `- **3D Interactive Breadboard Lab (Ravi Workspace)**: https://kitt-ai-ravi.ai.studio\n` +
-          `- **Gate-Level Logic Studio (DigiLogic)**: https://logic-gates-simulator-4jo.pages.dev/\n` +
-          `- **Hardware Engineering Calculator**: https://sriyansraj.github.io/Number_Trainer/index1.html`,
+        reply: dynamicReply,
         model: "offline-fallback",
       });
     }
