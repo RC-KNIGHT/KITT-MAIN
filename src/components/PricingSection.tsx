@@ -70,10 +70,10 @@ export const PricingSection: React.FC = () => {
             return (
               <div
                 key={plan.id}
-                className={`rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 relative ${
+                className={`rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 relative transparent-glass-card backdrop-blur-[3px] ${
                   plan.isPopular
-                    ? 'surreal-card-gold border-2 border-[#A58D66] shadow-[0_20px_50px_rgba(165,141,102,0.25)] scale-[1.03]'
-                    : 'surreal-card border border-[#A58D66]/20 hover:border-[#407E8C]/40'
+                    ? 'border-2 border-[#A58D66] shadow-[0_20px_50px_rgba(165,141,102,0.25)] scale-[1.03] bg-[#0c161d]/40'
+                    : 'border border-[#A58D66]/25 hover:border-[#A58D66]/60 bg-[#080f14]/30 hover:scale-[1.01]'
                 }`}
               >
                 {/* Popular Badge */}

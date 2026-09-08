@@ -23,7 +23,11 @@ interface NavbarProps {
   onOpenProfile?: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ user = null }) => {
+export const Navbar: React.FC<NavbarProps> = ({ 
+  user = null, 
+  onOpenAuth, 
+  onOpenProfile 
+}) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isToolsOpen, setIsToolsOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

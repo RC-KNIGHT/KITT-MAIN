@@ -90,6 +90,17 @@ export const SignatureHeroK: React.FC<SignatureHeroKProps> = ({ className = '' }
       mouseRef.current.targetY = ny * 0.30;
     };
 
+    // Smooth mobile touch parallax listener
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches && e.touches[0]) {
+        const touch = e.touches[0];
+        const nx = (touch.clientX / window.innerWidth) * 2 - 1;
+        const ny = (touch.clientY / window.innerHeight) * 2 - 1;
+        mouseRef.current.targetX = nx * 0.35;
+        mouseRef.current.targetY = ny * 0.25;
+      }
+    };
+
     // Smooth scroll progress tracker
     const handleScroll = () => {
       const docHeight = Math.max(
@@ -111,6 +122,7 @@ export const SignatureHeroK: React.FC<SignatureHeroKProps> = ({ className = '' }
 
     handleScroll();
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    window.addEventListener('touchmove', handleTouchMove, { passive: true });
     window.addEventListener('scroll', handleScroll, { passive: true });
 
     // Balanced particle count: 680 on desktop, 420 on mobile
@@ -707,6 +719,7 @@ export const SignatureHeroK: React.FC<SignatureHeroKProps> = ({ className = '' }
       cancelAnimationFrame(animationFrameRef.current);
       window.removeEventListener('resize', updateDimensions);
       window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
