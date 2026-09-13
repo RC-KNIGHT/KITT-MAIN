@@ -1,22 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   Sparkles, 
-  ExternalLink, 
   Layers, 
   Cpu, 
   Calculator, 
   Activity,
-  Heart
+  Heart,
+  Mail,
+  Copy,
+  Check
 } from 'lucide-react';
-import { ECOSYSTEM_PRODUCTS } from '../data/ecosystem';
 import { KittLogo } from './KittLogo';
+import { circuitAudio } from '../utils/audio';
 
 export const Footer: React.FC = () => {
+  const [copiedEmail, setCopiedEmail] = useState(false);
+
+  const handleCopyEmail = () => {
+    circuitAudio.playClick();
+    navigator.clipboard.writeText('kitt.ai.team@gmail.com');
+    setCopiedEmail(true);
+    setTimeout(() => setCopiedEmail(false), 2000);
+  };
+
   const SOCIAL_CHANNELS = [
     {
       id: 'instagram',
       name: 'Instagram',
-      url: '#', // Ready for user's official link
+      url: 'https://www.instagram.com/kitt.ai.team/',
       icon: (
         <svg className="w-4 h-4 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
           <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
@@ -26,9 +37,19 @@ export const Footer: React.FC = () => {
       )
     },
     {
+      id: 'x',
+      name: 'X (Twitter)',
+      url: 'https://x.com/kittaiteam',
+      icon: (
+        <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+        </svg>
+      )
+    },
+    {
       id: 'youtube',
       name: 'YouTube',
-      url: '#', // Ready for user's official link
+      url: 'https://www.youtube.com/@kittaiteam',
       icon: (
         <svg className="w-4 h-4 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
           <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17" />
@@ -37,33 +58,11 @@ export const Footer: React.FC = () => {
       )
     },
     {
-      id: 'x',
-      name: 'X (Twitter)',
-      url: '#', // Ready for user's official link
+      id: 'email',
+      name: 'Email (Direct)',
+      url: 'mailto:kitt.ai.team@gmail.com',
       icon: (
-        <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
-          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-        </svg>
-      )
-    },
-    {
-      id: 'facebook',
-      name: 'Facebook',
-      url: '#', // Ready for user's official link
-      icon: (
-        <svg className="w-4 h-4 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-        </svg>
-      )
-    },
-    {
-      id: 'threads',
-      name: 'Threads',
-      url: '#', // Ready for user's official link
-      icon: (
-        <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-          <path d="M12.186 24C5.466 24 0 18.673 0 12.008 0 5.342 5.466 0 12.186 0c6.702 0 12.012 5.234 12.012 12.008 0 1.258-.194 2.502-.578 3.684l-2.072-.676c.307-.954.464-1.956.464-2.977 0-5.35-4.22-9.673-9.406-9.673-5.186 0-9.406 4.323-9.406 9.673 0 5.35 4.22 9.673 9.406 9.673 3.86 0 7.15-2.316 8.527-5.748l1.977.828C20.916 21.01 16.92 24 12.186 24zm4.455-12.723c-.225-.264-.531-.415-.862-.424l-.193-.005c-.687 0-1.28.322-1.637.884-.716 1.13-1.077 2.457-1.077 3.946 0 .428.026.837.078 1.218 1.16-.254 1.942-1.05 2.195-2.247.165-.776.015-1.574-.384-2.192l.14.07c.07.037.139.076.208.118l1.042-1.74a4.877 4.877 0 0 0-.49-.248c-.322-.138-.667-.22-1.02-.24zm-3.805 6.002c-.046-.296-.07-.63-.07-.99 0-1.238.29-2.327.863-3.238.163-.26.376-.41.606-.41.28 0 .49.208.577.568.164.678.077 1.488-.236 2.29-.33.844-.925 1.464-1.74 1.78z"/>
-        </svg>
+        <Mail className="w-4 h-4 text-current" />
       )
     }
   ];
@@ -71,7 +70,7 @@ export const Footer: React.FC = () => {
   return (
     <footer className="bg-transparent border-t border-[#A58D66]/20 text-[#E5E1DD]/70 text-xs relative z-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           
           {/* Col 1 & 2: Brand & Tagline */}
           <div className="lg:col-span-2 space-y-4">
@@ -90,37 +89,28 @@ export const Footer: React.FC = () => {
               The premier AI-native hardware creation sanctuary. Turn conversational thought into working silicon.
             </p>
 
-            <div className="flex items-center gap-3 pt-2">
-              <span className="w-2 h-2 rounded-full bg-[#407E8C] animate-pulse shadow-[0_0_8px_#407E8C]" />
-              <span className="text-[11px] font-mono text-[#407E8C]">
-                All 4 Ecosystem Portals Synchronized
-              </span>
+            <div className="flex flex-col gap-2.5 pt-2">
+              <div className="flex items-center gap-3">
+                <span className="w-2 h-2 rounded-full bg-[#407E8C] animate-pulse shadow-[0_0_8px_#407E8C]" />
+                <span className="text-[11px] font-mono text-[#407E8C]">
+                  All Ecosystem Portals Synchronized
+                </span>
+              </div>
+
+              <div className="flex items-center gap-2 pt-1">
+                <a
+                  href="mailto:kitt.ai.team@gmail.com"
+                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#0d161d] border border-[#A58D66]/30 hover:border-[#A58D66] text-[11px] font-mono text-[#DFCCA8] hover:text-[#E5E1DD] transition-all group shadow-sm"
+                  title="Official Team KITT Email"
+                >
+                  <Mail className="w-3.5 h-3.5 text-[#A58D66] group-hover:scale-110 transition-transform" />
+                  <span>kitt.ai.team@gmail.com</span>
+                </a>
+              </div>
             </div>
           </div>
 
-          {/* Col 3: Direct Ecosystem Access */}
-          <div className="space-y-3">
-            <h4 className="text-xs font-mono font-bold uppercase tracking-widest text-[#A58D66]">
-              Core Portals
-            </h4>
-            <ul className="space-y-2">
-              {ECOSYSTEM_PRODUCTS.map((prod) => (
-                <li key={prod.id}>
-                  <a
-                    href={prod.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-[#E5E1DD] transition-colors flex items-center gap-1.5 group"
-                  >
-                    <span className="group-hover:translate-x-0.5 transition-transform">{prod.name}</span>
-                    <ExternalLink className="w-3 h-3 text-[#A58D66]/50 group-hover:text-[#A58D66]" />
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Col 4: Engineering Resources */}
+          {/* Col 3: Engineering Resources */}
           <div className="space-y-3">
             <h4 className="text-xs font-mono font-bold uppercase tracking-widest text-[#A58D66]">
               Synthesis & Docs
@@ -128,9 +118,7 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2">
               <li>
                 <a 
-                  href="https://kitt-ai-ravi.ai.studio" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
+                  href="#/workspace" 
                   className="hover:text-[#E5E1DD] transition-colors"
                 >
                   3D Component Library
@@ -186,30 +174,63 @@ export const Footer: React.FC = () => {
 
         </div>
 
-        {/* Official Social Media Channels Dock */}
-        <div className="mt-12 pt-6 border-t border-[#A58D66]/20 flex flex-col sm:flex-row items-center justify-between gap-5">
-          <div className="flex items-center gap-3">
+        {/* Official Social Media Channels Dock & Direct Email Action */}
+        <div className="mt-12 pt-6 border-t border-[#A58D66]/20 flex flex-col lg:flex-row items-center justify-between gap-5">
+          <div className="flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left">
             <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#A58D66]">
               Official Channels
             </span>
-            <span className="text-[11px] font-mono text-[#E5E1DD]/50 italic">
+            <span className="text-[11px] font-mono text-[#E5E1DD]/50 italic hidden sm:inline">
               — Connect with the vanguard
             </span>
           </div>
 
-          <div className="flex items-center gap-3">
-            {SOCIAL_CHANNELS.map((item) => (
+          <div className="flex flex-wrap items-center justify-center gap-3.5">
+            {/* Direct Visible Email Button & One-Click Copy */}
+            <div className="flex items-center rounded-xl bg-[#0d161d]/90 border border-[#A58D66]/35 p-1 shadow-lg hover:border-[#A58D66] transition-all">
               <a
-                key={item.id}
-                href={item.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                title={`${item.name} (Official Channel)`}
-                className="w-9 h-9 rounded-xl bg-[#0d161d]/85 border border-[#A58D66]/30 hover:border-[#A58D66] hover:bg-[#407E8C]/20 flex items-center justify-center text-[#E5E1DD]/80 hover:text-[#A58D66] transition-all hover:scale-110 shadow-lg hover:shadow-[0_0_15px_rgba(165,141,102,0.3)]"
+                href="mailto:kitt.ai.team@gmail.com"
+                className="flex items-center gap-2 px-3 py-1.5 text-xs font-mono font-semibold text-[#DFCCA8] hover:text-[#E5E1DD] transition-colors"
+                title="Send email to Team KITT"
               >
-                {item.icon}
+                <Mail className="w-4 h-4 text-[#A58D66] shrink-0" />
+                <span className="tracking-tight">kitt.ai.team@gmail.com</span>
               </a>
-            ))}
+              <button
+                onClick={handleCopyEmail}
+                className="p-1.5 px-2 rounded-lg hover:bg-[#A58D66]/20 text-[#E5E1DD]/70 hover:text-[#DFCCA8] transition-colors cursor-pointer border-l border-[#A58D66]/20 flex items-center gap-1 text-[11px] font-mono"
+                title="Copy email to clipboard"
+              >
+                {copiedEmail ? (
+                  <span className="flex items-center gap-1 text-emerald-400 font-bold">
+                    <Check className="w-3.5 h-3.5" />
+                    <span>Copied</span>
+                  </span>
+                ) : (
+                  <span className="flex items-center gap-1">
+                    <Copy className="w-3.5 h-3.5" />
+                    <span className="hidden sm:inline">Copy</span>
+                  </span>
+                )}
+              </button>
+            </div>
+
+            {/* Social Icons Dock */}
+            <div className="flex items-center gap-2.5">
+              {SOCIAL_CHANNELS.map((item) => (
+                <a
+                  key={item.id}
+                  href={item.url}
+                  target={item.url.startsWith('mailto:') ? undefined : "_blank"}
+                  rel={item.url.startsWith('mailto:') ? undefined : "noopener noreferrer"}
+                  title={`${item.name} (Official Channel)`}
+                  onClick={() => circuitAudio.playClick()}
+                  className="w-9 h-9 rounded-xl bg-[#0d161d]/85 border border-[#A58D66]/30 hover:border-[#A58D66] hover:bg-[#407E8C]/20 flex items-center justify-center text-[#E5E1DD]/80 hover:text-[#A58D66] transition-all hover:scale-110 active:scale-95 shadow-lg hover:shadow-[0_0_15px_rgba(165,141,102,0.3)] cursor-pointer"
+                >
+                  {item.icon}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
 

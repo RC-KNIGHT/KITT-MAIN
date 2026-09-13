@@ -1,0 +1,30 @@
+﻿{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "users": {
+      "$uid": {
+        ".read": "auth != null && auth.uid === $uid",
+        ".write": "auth != null && auth.uid === $uid"
+      }
+    },
+    "circuits": {
+      "$circuitId": {
+        ".read": "auth != null",
+        ".write": "auth != null && (!data.exists() || data.child('userId').val() === auth.uid)"
+      }
+    },
+    "collaboration": {
+      "$sessionId": {
+        ".read": "auth != null",
+        ".write": "auth != null"
+      }
+    },
+    "reviews": {
+      "$reviewId": {
+        ".read": true,
+        ".write": "auth != null && (!data.exists() || data.child('userId').val() === auth.uid)"
+      }
+    }
+  }
+}

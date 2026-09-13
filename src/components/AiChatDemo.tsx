@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { motion } from 'motion/react';
 import { 
   Send, 
   Sparkles, 
@@ -13,15 +14,18 @@ import {
   ArrowRight, 
   AlertCircle,
   Terminal,
-  Activity
+  Activity,
+  ArrowUpRight
 } from 'lucide-react';
 import { KittLogo } from './KittLogo';
+import { circuitAudio } from '../utils/audio';
 
 interface ChatMessage {
   id: string;
   role: 'user' | 'assistant';
   content: string;
   timestamp: string;
+  model?: string;
   isInitial?: boolean;
 }
 
@@ -121,20 +125,22 @@ export const AiChatDemo: React.FC = () => {
       const assistantMsg: ChatMessage = {
         id: 'assistant-' + Date.now(),
         role: 'assistant',
-        content: data.reply || "I am KITT org Ai -2.0. No response was generated.",
-        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        content: data.reply || "I am KITT Org AI 2.0. No response was generated.",
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        model: data.model
       };
 
+      circuitAudio.playTone(660, 0.08, 'triangle');
       setMessages(prev => [...prev, assistantMsg]);
     } catch (err: any) {
-      console.error("Chat error with KITT org Ai -2.0:", err);
-      setErrorMessage(err?.message || "Failed to reach KITT org Ai -2.0 server endpoint.");
+      console.error("Chat error with KITT Org AI 2.0:", err);
+      setErrorMessage(err?.message || "Failed to reach KITT Org AI 2.0 server endpoint.");
       
       // Add a friendly error message to conversation
       const errorMsg: ChatMessage = {
         id: 'err-' + Date.now(),
         role: 'assistant',
-        content: `**KITT org Ai -2.0 Status Alert**: I had difficulty processing that request (${err?.message || 'Network error'}). If you are exploring the project, please feel free to ask another question or retry!`,
+        content: `**KITT Org AI 2.0 Status Alert**: I had difficulty processing that request (${err?.message || 'Network error'}). If you are exploring the project, please feel free to ask another question or retry!`,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       };
       setMessages(prev => [...prev, errorMsg]);
@@ -215,17 +221,19 @@ export const AiChatDemo: React.FC = () => {
       if (part.startsWith('[') && part.includes('](') && part.endsWith(')')) {
         const linkMatch = part.match(/\[(.*?)\]\((.*?)\)/);
         if (linkMatch) {
-          const [, label, url] = linkMatch;
+          const [, label, rawUrl] = linkMatch;
+          const trimmedUrl = (rawUrl || '').trim();
+          const isSafeUrl = /^(https?:\/\/|mailto:|#)/i.test(trimmedUrl);
+          const safeHref = isSafeUrl ? trimmedUrl : '#';
           return (
             <a
               key={index}
-              href={url}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={safeHref}
+              {...(isSafeUrl && !trimmedUrl.startsWith('#') ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               className="text-[#407E8C] hover:text-[#E5E1DD] underline underline-offset-2 font-medium inline-flex items-center gap-1"
             >
               <span>{label}</span>
-              <ExternalLink className="w-2.5 h-2.5 inline" />
+              {isSafeUrl && !trimmedUrl.startsWith('#') && <ExternalLink className="w-2.5 h-2.5 inline" />}
             </a>
           );
         }
@@ -237,7 +245,7 @@ export const AiChatDemo: React.FC = () => {
   return (
     <section id="ai-agent" className="py-20 px-4 sm:px-6 lg:px-8 bg-transparent relative z-20">
       <div className="max-w-6xl mx-auto">
-        {/* Section Header & KITT org Ai -2.0 Identity Callout */}
+        {/* Section Header & KITT Org AI 2.0 Identity Callout */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-10">
           <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#407E8C]/15 border border-[#A58D66]/40 text-[#A58D66] text-xs font-mono uppercase tracking-widest animate-ambition">
             <KittLogo size={16} showGlow={false} className="shrink-0" />
@@ -277,18 +285,23 @@ export const AiChatDemo: React.FC = () => {
           </div>
 
           <a
-            href="https://kitt-1-0-agent.ai.studio"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#/kitt-ai"
             className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#A58D66] to-[#8C7654] hover:from-[#BFA378] hover:to-[#A58D66] text-[#080f14] font-bold text-xs flex items-center gap-1.5 transition-all shrink-0 shadow-[0_0_20px_rgba(165,141,102,0.3)]"
           >
-            <span>Open Main KITT AI</span>
+            <span>Launch KITT AI Studio</span>
             <ExternalLink className="w-3.5 h-3.5" />
           </a>
         </div>
 
         {/* Main Chat Interface Container Wrapped in Ambient Halo */}
-        <div className="relative group/chat">
+        <motion.div 
+          initial={{ opacity: 0, y: 32, rotateX: 4 }}
+          whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+          className="relative group/chat"
+          style={{ transformStyle: 'preserve-3d' }}
+        >
           {/* Subtle Ambient Radial Backlight */}
           <div className="absolute -inset-1 bg-gradient-to-r from-[#A58D66]/25 via-[#407E8C]/20 to-[#A58D66]/25 rounded-3xl blur-2xl opacity-60 group-hover/chat:opacity-85 transition-opacity duration-700 pointer-events-none" />
 
@@ -307,10 +320,10 @@ export const AiChatDemo: React.FC = () => {
                     </span>
                   </div>
                   <div className="text-[10px] text-[#A58D66] flex items-center gap-1.5 font-mono mt-0.5">
-                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#A58D66] animate-pulse shadow-[0_0_6px_#A58D66]" />
                     <span>NEURAL LINK ACTIVE</span>
                     <span className="text-[#E5E1DD]/30">•</span>
-                    <span>GEMINI 3.8 FLASH CANON</span>
+                    <span>GEMINI 2.5 FLASH ORACLE</span>
                   </div>
                 </div>
               </div>
@@ -326,14 +339,12 @@ export const AiChatDemo: React.FC = () => {
                 </button>
 
                 <a
-                  href="https://kitt-1-0-agent.ai.studio"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#/kitt-ai"
                   title="Launch Main KITT AI Flagship Agent"
                   className="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-[#A58D66] to-[#8C7654] hover:from-[#BFA378] hover:to-[#A58D66] text-[#080f14] font-bold text-xs flex items-center gap-1.5 transition-all shadow-md cursor-pointer hover:scale-105"
                 >
                   <Sparkles className="w-3.5 h-3.5 text-[#080f14]" />
-                  <span>Main KITT AI</span>
+                  <span>KITT AI Studio</span>
                   <ExternalLink className="w-3 h-3 text-[#080f14]" />
                 </a>
               </div>
@@ -389,7 +400,7 @@ export const AiChatDemo: React.FC = () => {
                           </span>
                           {!isUser && (
                             <span className="text-[9px] px-1.5 py-0.2 rounded bg-[#407E8C]/25 text-[#76B4C2] border border-[#407E8C]/35 font-mono">
-                              Oracle Intel
+                              {msg.model ? (msg.model.includes('gemini') ? `⚡ ${msg.model}` : `🛡️ ${msg.model}`) : 'Oracle Intel'}
                             </span>
                           )}
                         </div>
@@ -484,7 +495,7 @@ export const AiChatDemo: React.FC = () => {
               </button>
             </form>
           </div>
-        </div>
+        </motion.div>
 
         {/* Footer Navigation Bar within Section */}
         <div className="mt-4 flex flex-wrap items-center justify-between text-xs text-[#E5E1DD]/60 px-2 font-light">
@@ -495,23 +506,19 @@ export const AiChatDemo: React.FC = () => {
 
           <div className="flex items-center gap-4 mt-2 sm:mt-0">
             <a
-              href="https://kitt-1-0-agent.ai.studio"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#/kitt-ai"
               className="hover:text-[#A58D66] transition-colors flex items-center gap-1"
             >
-              <span>Main KITT AI</span>
+              <span>KITT AI Studio</span>
               <ExternalLink className="w-3 h-3 text-[#A58D66]" />
             </a>
             <span>•</span>
             <a
-              href="https://kitt-ai-ravi.ai.studio"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#/workspace"
               className="hover:text-[#A58D66] transition-colors flex items-center gap-1"
             >
-              <span>Ravi Workspace</span>
-              <ExternalLink className="w-3 h-3 text-[#A58D66]" />
+              <span>3D Workspace</span>
+              <ArrowUpRight className="w-3 h-3 text-[#A58D66]" />
             </a>
             <span>•</span>
             <a

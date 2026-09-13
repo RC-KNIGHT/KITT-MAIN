@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
+import { motion } from 'motion/react';
 import { 
   Bot, 
   Cpu, 
@@ -16,6 +17,9 @@ import {
   X
 } from 'lucide-react';
 import { ECOSYSTEM_PRODUCTS } from '../data/ecosystem';
+import { Tilt3DCard } from './Tilt3DCard';
+import { KittLogo } from './KittLogo';
+import { circuitAudio } from '../utils/audio';
 
 export const DirectEcosystemAccess: React.FC = () => {
   const [copiedId, setCopiedId] = useState<string | null>(null);
@@ -38,7 +42,7 @@ export const DirectEcosystemAccess: React.FC = () => {
 
   const getProductIcon = (iconName: string) => {
     switch (iconName) {
-      case 'Bot': return <Bot className="w-6 h-6 text-[#76B4C2]" />;
+      case 'Bot': return <KittLogo size={28} showGlow={true} />;
       case 'Cpu': return <Cpu className="w-6 h-6 text-[#A58D66]" />;
       case 'Binary': return <Binary className="w-6 h-6 text-[#E5E1DD]" />;
       case 'Calculator': return <Calculator className="w-6 h-6 text-[#A58D66]" />;
@@ -76,11 +80,24 @@ export const DirectEcosystemAccess: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
           {ECOSYSTEM_PRODUCTS.map((product, idx) => {
             const romanNumerals = ['I', 'II', 'III', 'IV'];
+            const isInternalRoute = product.url.startsWith('#');
+
             return (
-              <div
+              <motion.div
                 key={product.id}
-                className="relative rounded-2xl surreal-card p-6 sm:p-7 flex flex-col justify-between group shadow-xl hover:shadow-2xl"
+                initial={{ opacity: 0, y: 32, rotateX: 6 }}
+                whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.65, delay: idx * 0.12, ease: [0.16, 1, 0.3, 1] }}
+                className="h-full"
+                style={{ transformStyle: 'preserve-3d' }}
               >
+                <Tilt3DCard
+                  tiltMaxAngle={3.5}
+                  scale={1.01}
+                  glareOpacity={0.16}
+                  className="h-full relative rounded-2xl surreal-card p-6 sm:p-7 flex flex-col justify-between group shadow-xl hover:shadow-2xl border border-[#A58D66]/20 hover:border-[#407E8C]/50 transition-colors"
+                >
                 {/* Top Badge & Operational Status */}
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
@@ -98,7 +115,10 @@ export const DirectEcosystemAccess: React.FC = () => {
                           </span>
                         </div>
                         <div className="flex items-center gap-1.5 mt-1 text-[11px] text-[#A58D66] font-mono">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#A58D66]" />
+                          <span className="relative flex h-2 w-2">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#A58D66] opacity-75" />
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#A58D66]" />
+                          </span>
                           <span>Operational & Resonant</span>
                         </div>
                       </div>
@@ -107,7 +127,7 @@ export const DirectEcosystemAccess: React.FC = () => {
                     {/* Copy Link Button */}
                     <button
                       onClick={() => handleCopyLink(product.url, product.id)}
-                      className="p-2 rounded-lg bg-white/5 hover:bg-[#A58D66]/20 text-[#E5E1DD]/60 hover:text-[#E5E1DD] transition-colors flex items-center gap-1 text-xs"
+                      className="p-2 rounded-lg bg-white/5 hover:bg-[#A58D66]/20 text-[#E5E1DD]/60 hover:text-[#E5E1DD] transition-colors flex items-center gap-1 text-xs cursor-pointer"
                       title="Copy URL"
                     >
                       {copiedId === product.id ? (
@@ -169,24 +189,30 @@ export const DirectEcosystemAccess: React.FC = () => {
                 <div className="pt-6 mt-4 border-t border-[#A58D66]/15 flex flex-col sm:flex-row items-center gap-3">
                   <a
                     href={product.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full sm:flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-[#A58D66] to-[#8C7654] hover:from-[#BFA378] hover:to-[#A58D66] text-[#080f14] font-bold text-xs sm:text-sm text-center shadow-[0_0_20px_rgba(165,141,102,0.35)] transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2"
+                    {...(!isInternalRoute ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                    onClick={() => circuitAudio.playClick()}
+                    className="w-full sm:flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-[#A58D66] to-[#8C7654] hover:from-[#BFA378] hover:to-[#A58D66] text-[#080f14] font-bold text-xs sm:text-sm text-center shadow-[0_0_20px_rgba(165,141,102,0.35)] transition-all hover:scale-[1.02] active:scale-[0.96] flex items-center justify-center gap-2 cursor-pointer"
                   >
                     <span>Launch {product.name}</span>
                     <ArrowUpRight className="w-4 h-4" />
                   </a>
 
-                  <button
-                    onClick={() => setPreviewUrl(product.url)}
-                    className="w-full sm:w-auto py-3 px-3.5 rounded-xl bg-[#407E8C]/15 hover:bg-[#407E8C]/25 text-[#E5E1DD] border border-[#407E8C]/35 text-xs font-medium transition-colors flex items-center justify-center gap-1.5"
-                    title="Inline Preview"
-                  >
-                    <Maximize2 className="w-3.5 h-3.5 text-[#76B4C2]" />
-                    <span>Inline Peek</span>
-                  </button>
+                  {!isInternalRoute && (
+                    <button
+                      onClick={() => {
+                        circuitAudio.playTone(480, 0.05, 'sine');
+                        setPreviewUrl(product.url);
+                      }}
+                      className="w-full sm:w-auto py-3 px-3.5 rounded-xl bg-[#407E8C]/15 hover:bg-[#407E8C]/25 active:scale-95 text-[#E5E1DD] border border-[#407E8C]/35 text-xs font-medium transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+                      title="Inline Preview"
+                    >
+                      <Maximize2 className="w-3.5 h-3.5 text-[#76B4C2]" />
+                      <span>Inline Peek</span>
+                    </button>
+                  )}
                 </div>
-              </div>
+                </Tilt3DCard>
+              </motion.div>
             );
           })}
         </div>
@@ -207,23 +233,21 @@ export const DirectEcosystemAccess: React.FC = () => {
 
           <div className="flex items-center gap-3 shrink-0">
             <a
-              href="https://kitt-1-0-agent.ai.studio"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs font-semibold px-4 py-2.5 rounded-lg bg-white/10 hover:bg-white/15 text-[#E5E1DD] border border-white/15 transition-all flex items-center gap-1.5"
+              href="#/kitt-ai"
+              onClick={() => circuitAudio.playClick()}
+              className="text-xs font-semibold px-4 py-2.5 rounded-lg bg-white/10 hover:bg-white/15 active:scale-95 text-[#E5E1DD] border border-white/15 transition-all flex items-center gap-1.5 cursor-pointer"
             >
-              <span>Visit KITT AI</span>
+              <span>Launch KITT AI Studio</span>
               <ExternalLink className="w-3.5 h-3.5 text-[#A58D66]" />
             </a>
 
             <a
-              href="https://kitt-ai-ravi.ai.studio"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs font-bold px-4 py-2.5 rounded-lg bg-gradient-to-r from-[#A58D66] to-[#8C7654] text-[#080f14] transition-all flex items-center gap-1.5 shadow-[0_0_15px_rgba(165,141,102,0.3)]"
+              href="#/workspace"
+              onClick={() => circuitAudio.playClick()}
+              className="text-xs font-bold px-4 py-2.5 rounded-lg bg-gradient-to-r from-[#A58D66] to-[#8C7654] text-[#080f14] transition-all flex items-center gap-1.5 shadow-[0_0_15px_rgba(165,141,102,0.3)] hover:scale-[1.02] active:scale-95 cursor-pointer"
             >
               <span>Visit Workspace</span>
-              <ExternalLink className="w-3.5 h-3.5" />
+              <ArrowUpRight className="w-3.5 h-3.5" />
             </a>
           </div>
         </div>

@@ -108,6 +108,10 @@ class CircuitAudioEngine {
       // Ignore
     }
   }
+
+  public playClick() {
+    this.playTone(880, 0.03, 'sine');
+  }
 }
 
 export const circuitAudio = new CircuitAudioEngine();

@@ -66,6 +66,9 @@ export interface PricingPlan {
   name: string;
   monthlyPrice: number;
   yearlyPrice: number;
+  originalMonthlyPrice?: number;
+  originalYearlyPrice?: number;
+  promoBadge?: string;
   description: string;
   badge?: string;
   isPopular?: boolean;

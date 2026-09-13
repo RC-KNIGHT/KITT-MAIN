@@ -1,5 +1,6 @@
 import React from 'react';
 import { Users, Sparkles, Terminal, Award } from 'lucide-react';
+import { KittLogo } from './KittLogo';
 
 export interface TeamMember {
   id: string;
@@ -66,7 +67,7 @@ export const TeamSection: React.FC = () => {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#A58D66]/15 border border-[#A58D66]/35 text-[#A58D66] text-xs font-mono tracking-widest uppercase animate-ambition">
-            <Users className="w-3.5 h-3.5 text-[#A58D66]" />
+            <KittLogo size={18} showGlow={false} className="shrink-0" />
             <span>THE ARCHITECTS</span>
           </div>
 
@@ -87,7 +88,7 @@ export const TeamSection: React.FC = () => {
           {/* Table Header Strip */}
           <div className="bg-black/35 px-6 py-4 border-b border-[#A58D66]/20 flex items-center justify-between backdrop-blur-[2px]">
             <div className="flex items-center gap-2.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#407E8C] animate-pulse shadow-[0_0_8px_#407E8C]" />
+              <KittLogo size={20} showGlow={true} className="shrink-0" />
               <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#A58D66]">
                 Core Innovators Roster
               </span>

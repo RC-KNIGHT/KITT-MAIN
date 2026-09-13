@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { motion } from 'motion/react';
 import { 
   Play, 
   Sparkles, 
@@ -17,6 +18,7 @@ import {
 import { getHeroVideo, saveHeroVideo } from '../utils/videoStorage';
 import { AnimatedCircuitOverlay } from './AnimatedCircuitOverlay';
 import { DynamicCircuitBackdrop } from './DynamicCircuitBackdrop';
+import { KittLogo } from './KittLogo';
 
 interface HeroVideoProps {
   onExploreEcosystem?: () => void;
@@ -35,10 +37,10 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
   const [uploadSuccessMessage, setUploadSuccessMessage] = useState<string | null>(null);
 
   const AMBITIOUS_TAGLINES = [
-    "Buy and become what you are capable of.",
-    "Stop building toys. Forge silicon.",
-    "From pure thought to physical hardware.",
-    "Command your engineering destiny."
+    "From natural language intent to verified physical hardware.",
+    "Autonomous system architecture, mixed-signal simulation & PCBA synthesis.",
+    "Master digital logic, embed firmware, and command production silicon.",
+    "Bridging mental architecture, real-time simulation, and manufactured electronics."
   ];
   const [taglineIndex, setTaglineIndex] = useState(0);
 
@@ -53,6 +55,7 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const activeBlobUrlRef = useRef<string | null>(null);
   const timeRef = useRef<number>(0);
   const lastStateUpdateTimeRef = useRef<number>(0);
   const spokenMilestonesRef = useRef<{ [key: string]: boolean }>({});
@@ -81,7 +84,9 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
   useEffect(() => {
     getHeroVideo().then((blob) => {
       if (blob) {
+        if (activeBlobUrlRef.current) URL.revokeObjectURL(activeBlobUrlRef.current);
         const objectUrl = URL.createObjectURL(blob);
+        activeBlobUrlRef.current = objectUrl;
         setVideoUrl(objectUrl);
         setVideoName('Custom KITT AI Video');
       } else {
@@ -92,6 +97,13 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
       setVideoUrl('/kitt-hero.mp4');
       setVideoName('kitt-hero.mp4');
     });
+
+    return () => {
+      if (activeBlobUrlRef.current) {
+        URL.revokeObjectURL(activeBlobUrlRef.current);
+        activeBlobUrlRef.current = null;
+      }
+    };
   }, []);
 
   // Subtle scroll-driven presence: gently scales by ~1.5% so the user feels like they reached it,
@@ -706,7 +718,7 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
         ctx.fillText('KITT AI', 0, -20);
 
         ctx.font = '500 16px "Plus Jakarta Sans", sans-serif';
-        ctx.fillStyle = '#c084fc';
+        ctx.fillStyle = '#DFCCA8';
         ctx.fillText('Where Ideas Become Inventions', 0, 20);
 
         ctx.font = '500 11px "Fira Code", monospace';
@@ -789,7 +801,11 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
   };
 
   const loadVideoFromFile = (file: File) => {
+    if (activeBlobUrlRef.current) {
+      URL.revokeObjectURL(activeBlobUrlRef.current);
+    }
     const objectUrl = URL.createObjectURL(file);
+    activeBlobUrlRef.current = objectUrl;
     setVideoUrl(objectUrl);
     setVideoName(file.name);
     saveHeroVideo(file);
@@ -843,12 +859,18 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
 
       <div className="max-w-7xl mx-auto relative">
         {/* UPPER HERO ZONE: Frames the Signature 3D Particle K positioned strictly ABOVE the video */}
-        <div className="relative max-w-4xl mx-auto min-h-[380px] sm:min-h-[440px] flex flex-col items-center justify-center">
+        <motion.div 
+          initial={{ opacity: 0, y: 36, scale: 0.96, rotateX: 6 }}
+          animate={{ opacity: 1, y: 0, scale: 1, rotateX: 0 }}
+          transition={{ duration: 0.95, ease: [0.16, 1, 0.3, 1] }}
+          className="relative max-w-4xl mx-auto min-h-[380px] sm:min-h-[440px] flex flex-col items-center justify-center will-change-transform"
+          style={{ transformStyle: 'preserve-3d' }}
+        >
           {/* Header Badges & Taglines - elevated in front of the 3D particle K */}
           <div className="text-center w-full space-y-6 relative z-20 py-4">
-            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#407E8C]/15 border border-[#A58D66]/40 text-[#E5E1DD] text-xs font-mono tracking-widest uppercase shadow-inner backdrop-blur-md animate-ambition">
-              <Sparkles className="w-3.5 h-3.5 text-[#A58D66] animate-spin" style={{ animationDuration: '6s' }} />
-              <span className="font-semibold text-[#A58D66]">SOVEREIGN HARDWARE MATRIX</span>
+            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#407E8C]/15 border border-[#A58D66]/40 text-[#E5E1DD] text-xs font-mono tracking-widest uppercase shadow-inner backdrop-blur-md">
+              <span className="w-2 h-2 rounded-full bg-[#A58D66] shadow-[0_0_8px_#A58D66]" />
+              <span className="font-semibold text-[#A58D66]">KITT AI LABS • HARDWARE SYNTHESIS MATRIX</span>
             </div>
 
             <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[#E5E1DD] font-cinzel drop-shadow-xl animate-title-breathe">
@@ -871,13 +893,11 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
             {/* Primary Action Buttons */}
             <div className="pt-2 flex flex-wrap items-center justify-center gap-4">
               <a
-                href="https://kitt-1-0-agent.ai.studio"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#/kitt-ai"
                 className="px-6 py-3.5 rounded-xl bg-gradient-to-r from-[#A58D66] via-[#BFA378] to-[#A58D66] hover:from-[#BFA378] hover:to-[#A58D66] text-[#080f14] font-bold text-sm shadow-[0_0_30px_rgba(165,141,102,0.35)] transition-all hover:scale-105 active:scale-95 flex items-center gap-2 cursor-pointer"
               >
                 <Sparkles className="w-4 h-4 text-[#080f14]" />
-                <span>Open KITT AI</span>
+                <span>Launch KITT AI Studio</span>
                 <ExternalLink className="w-3.5 h-3.5 opacity-80" />
               </a>
 
@@ -890,13 +910,13 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
               </a>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Upload Success Alert Toast */}
         {uploadSuccessMessage && (
-          <div className="mt-4 max-w-lg mx-auto p-3 rounded-xl bg-emerald-950/80 border border-emerald-500/50 text-emerald-200 text-xs flex items-center gap-2.5 shadow-xl animate-fade-in relative z-20">
-            <Check className="w-4 h-4 text-emerald-400 shrink-0" />
-            <span className="font-medium">{uploadSuccessMessage}</span>
+          <div className="mt-4 max-w-lg mx-auto p-3 rounded-xl bg-[#12202b]/90 border border-[#A58D66]/50 text-[#E5E1DD] text-xs flex items-center gap-2.5 shadow-xl animate-fade-in relative z-20">
+            <Check className="w-4 h-4 text-[#A58D66] shrink-0" />
+            <span className="font-medium text-[#E5E1DD]">{uploadSuccessMessage}</span>
           </div>
         )}
 
@@ -918,8 +938,26 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
           {/* Ambient Soft Glow behind Video */}
           <div className="absolute inset-0 bg-[#407E8C]/15 blur-[140px] rounded-full pointer-events-none -z-10" />
 
+          {/* Decorative SMD IC Lead Pins along left edge */}
+          <div className="absolute -left-2 top-1/2 -translate-y-1/2 hidden md:flex flex-col gap-3 pointer-events-none z-0 opacity-40 group-hover:opacity-75 transition-opacity">
+            {[0, 1, 2, 3, 4, 5].map((i) => (
+              <div key={`pin-l-${i}`} className="w-2.5 h-1 bg-gradient-to-r from-[#DFCCA8] to-[#A58D66] rounded-l-sm shadow-[0_0_4px_rgba(165,141,102,0.5)]" />
+            ))}
+          </div>
+          {/* Decorative SMD IC Lead Pins along right edge */}
+          <div className="absolute -right-2 top-1/2 -translate-y-1/2 hidden md:flex flex-col gap-3 pointer-events-none z-0 opacity-40 group-hover:opacity-75 transition-opacity">
+            {[0, 1, 2, 3, 4, 5].map((i) => (
+              <div key={`pin-r-${i}`} className="w-2.5 h-1 bg-gradient-to-l from-[#DFCCA8] to-[#407E8C] rounded-r-sm shadow-[0_0_4px_rgba(64,126,140,0.5)]" />
+            ))}
+          </div>
+
           {/* Borderless Seamless Mixed Video Canvas */}
-          <div className="relative rounded-3xl overflow-hidden aspect-video sm:aspect-[16/9] flex items-center justify-center bg-[#080f14] border border-[#A58D66]/20 shadow-[0_20px_50px_rgba(0,0,0,0.8)]">
+          <div className="relative rounded-3xl overflow-hidden aspect-video sm:aspect-[16/9] flex items-center justify-center bg-[#080f14] border border-[#A58D66]/25 shadow-[0_20px_50px_rgba(0,0,0,0.8),0_0_35px_rgba(64,126,140,0.18)]">
+            {/* Precision Reticle Corner Brackets */}
+            <div className="absolute top-3 left-3 w-4 h-4 border-t-2 border-l-2 border-[#A58D66]/60 rounded-tl pointer-events-none z-20" />
+            <div className="absolute top-3 right-3 w-4 h-4 border-t-2 border-r-2 border-[#A58D66]/60 rounded-tr pointer-events-none z-20" />
+            <div className="absolute bottom-3 left-3 w-4 h-4 border-b-2 border-l-2 border-[#A58D66]/60 rounded-bl pointer-events-none z-20" />
+            <div className="absolute bottom-3 right-3 w-4 h-4 border-b-2 border-r-2 border-[#A58D66]/60 rounded-br pointer-events-none z-20" />
             {videoUrl ? (
               <video
                 ref={videoRef}

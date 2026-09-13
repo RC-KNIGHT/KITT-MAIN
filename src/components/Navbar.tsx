@@ -16,6 +16,7 @@ import { ECOSYSTEM_PRODUCTS } from '../data/ecosystem';
 import { UserAccount } from '../types';
 import { KittLogo } from './KittLogo';
 import { UserDashboardModal, EcosystemUser, DEFAULT_ECOSYSTEM_USER } from './UserDashboardModal';
+import { ecosystemStore } from '../utils/ecosystemStore';
 
 interface NavbarProps {
   user?: UserAccount | EcosystemUser | null;
@@ -32,15 +33,22 @@ export const Navbar: React.FC<NavbarProps> = ({
   const [isToolsOpen, setIsToolsOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isUserDashboardOpen, setIsUserDashboardOpen] = useState(false);
-  const [currentUser, setCurrentUser] = useState<EcosystemUser>(DEFAULT_ECOSYSTEM_USER);
+  const [currentUser, setCurrentUser] = useState<EcosystemUser>(() => ecosystemStore.getUser());
 
   const handleProfileClick = () => {
     if (onOpenProfile) {
       onOpenProfile();
     } else {
-      window.open('https://kitt-1-0-agent.ai.studio', '_blank', 'noopener,noreferrer');
+      window.location.hash = '#/kitt-ai';
     }
   };
+
+  useEffect(() => {
+    const unsub = ecosystemStore.subscribe(() => {
+      setCurrentUser(ecosystemStore.getUser());
+    });
+    return () => unsub();
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -52,7 +60,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   const getProductIcon = (iconName: string) => {
     switch (iconName) {
-      case 'Bot': return <Bot className="w-4 h-4 text-[#76B4C2]" />;
+      case 'Bot': return <KittLogo size={16} showGlow={false} className="shrink-0" />;
       case 'Cpu': return <Cpu className="w-4 h-4 text-[#A58D66]" />;
       case 'Binary': return <Binary className="w-4 h-4 text-[#E5E1DD]" />;
       case 'Calculator': return <Calculator className="w-4 h-4 text-[#A58D66]" />;
@@ -114,9 +122,9 @@ export const Navbar: React.FC<NavbarProps> = ({
                     <a
                       key={prod.id}
                       href={prod.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-start gap-3 p-2.5 rounded-lg hover:bg-[#407E8C]/15 transition-colors group"
+                      {...(!prod.url.startsWith('#') ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                      onClick={() => setIsToolsOpen(false)}
+                      className="flex items-start gap-3 p-2.5 rounded-lg hover:bg-[#407E8C]/15 transition-colors group cursor-pointer"
                     >
                       <div className="mt-0.5 p-1.5 rounded-md bg-[#407E8C]/10 border border-[#407E8C]/25 group-hover:bg-[#A58D66]/20 group-hover:border-[#A58D66]/40 transition-colors">
                         {getProductIcon(prod.iconName)}
@@ -145,7 +153,12 @@ export const Navbar: React.FC<NavbarProps> = ({
           </a>
           <a href="#journey" className="hover:text-[#A58D66] transition-colors">Roadmap</a>
           <a href="#community" className="hover:text-[#A58D66] transition-colors">Exhibition</a>
-          <a href="#pricing" className="hover:text-[#A58D66] transition-colors">Editions</a>
+          <a href="#pricing" className="hover:text-[#A58D66] transition-colors flex items-center gap-1.5">
+            <span>Editions</span>
+            <span className="text-[9px] px-1.5 py-0.2 rounded-full bg-[#A58D66]/25 text-[#DFCCA8] border border-[#A58D66]/40 font-mono font-bold">
+              70% OFF
+            </span>
+          </a>
           <a href="#team" className="hover:text-[#A58D66] transition-colors">Innovators</a>
         </div>
 
@@ -162,7 +175,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 alt={currentUser.name} 
                 className="w-6 h-6 rounded-full object-cover border border-[#A58D66]/60 group-hover:border-[#A58D66] transition-colors" 
               />
-              <span className="absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-400 ring-2 ring-[#080f14]" />
+              <span className="absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full bg-[#A58D66] ring-2 ring-[#080f14]" />
             </div>
             <div className="flex flex-col text-left">
               <span className="font-semibold text-xs text-[#E5E1DD] group-hover:text-[#A58D66] transition-colors flex items-center gap-1.5">
@@ -188,7 +201,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           >
             <div className="relative">
               <img src={currentUser.avatar} alt="User" className="w-5 h-5 rounded-full object-cover" />
-              <span className="absolute -bottom-0.5 -right-0.5 w-1.5 h-1.5 rounded-full bg-emerald-400" />
+              <span className="absolute -bottom-0.5 -right-0.5 w-1.5 h-1.5 rounded-full bg-[#A58D66]" />
             </div>
             <span className="text-[11px] font-mono text-[#A58D66] font-semibold">{currentUser.creditsRemaining}cr</span>
           </button>
@@ -221,9 +234,9 @@ export const Navbar: React.FC<NavbarProps> = ({
               <a
                 key={prod.id}
                 href={prod.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-between p-2 rounded-lg hover:bg-[#407E8C]/15 text-sm text-[#E5E1DD]"
+                {...(!prod.url.startsWith('#') ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center justify-between p-2 rounded-lg hover:bg-[#407E8C]/15 text-sm text-[#E5E1DD] cursor-pointer"
               >
                 <div className="flex items-center gap-2.5">
                   {getProductIcon(prod.iconName)}
@@ -247,8 +260,8 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={() => setMobileMenuOpen(false)}
               className="block p-2 rounded-lg hover:bg-white/5 font-medium text-[#76B4C2] flex items-center gap-2"
             >
-              <Bot className="w-4 h-4 text-[#76B4C2]" />
-              <span>KITT Org AI 2.0 (Project Intel)</span>
+              <KittLogo size={16} showGlow={false} className="shrink-0" />
+              <span>KITT Oracle AI 2.0</span>
             </a>
             <a 
               href="#journey" 
@@ -291,7 +304,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <div className="flex items-center gap-2.5">
                 <div className="relative">
                   <img src={currentUser.avatar} alt={currentUser.name} className="w-7 h-7 rounded-full object-cover border border-[#A58D66]/50" />
-                  <span className="absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-400" />
+                  <span className="absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full bg-[#A58D66]" />
                 </div>
                 <div className="text-left">
                   <div className="text-xs font-bold text-[#E5E1DD]">{currentUser.name}</div>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { 
   GraduationCap, 
   Sparkles, 
@@ -11,6 +12,7 @@ import {
   Activity
 } from 'lucide-react';
 import { circuitAudio } from '../utils/audio';
+import { Tilt3DCard } from './Tilt3DCard';
 
 interface JourneyTier {
   id: string;
@@ -38,11 +40,11 @@ const JOURNEY_TIERS: JourneyTier[] = [
     skills: ['Binary ↔ Decimal ↔ Hex', 'Bitwise AND / OR / XOR', 'Two\'s Complement Arithmetic', 'Byte Alignment'],
     recommendedTool: {
       name: 'Number Trainer',
-      url: 'https://sriyansraj.github.io/Number_Trainer/index1.html',
+      url: '#/number-trainer',
       badge: 'Interactive Drills'
     },
     sampleProject: 'Mental Bit Manipulation & 8-bit Math Mastery',
-    color: '#f59e0b'
+    color: '#A58D66'
   },
   {
     id: 'beginner',
@@ -53,11 +55,11 @@ const JOURNEY_TIERS: JourneyTier[] = [
     skills: ['Truth Tables & Boolean Algebra', 'Propagation Delay Waveforms', 'LED Current Limiting', 'Switch Pull-up/down Resistors'],
     recommendedTool: {
       name: 'DigiLogic Simulator',
-      url: 'https://logic-gates-simulator-4jo.pages.dev/',
+      url: '#/digilogic',
       badge: 'Logic Synthesis'
     },
     sampleProject: '4-Bit Ripple Carry Adder & 7-Segment Decoder',
-    color: '#10b981'
+    color: '#76B4C2'
   },
   {
     id: 'intermediate',
@@ -68,11 +70,11 @@ const JOURNEY_TIERS: JourneyTier[] = [
     skills: ['MCU Pin Multiplexing & ADC', 'I2C, SPI & UART Protocol', 'MOSFET Motor Switching', 'Virtual Oscilloscope Telemetry'],
     recommendedTool: {
       name: 'KITT Engineering Workspace',
-      url: 'https://kitt-ai-ravi.ai.studio',
+      url: '#/workspace',
       badge: '3D Breadboard Lab'
     },
     sampleProject: 'Automated Plant Hydration System & Robot Telemetry',
-    color: '#3b82f6'
+    color: '#407E8C'
   },
   {
     id: 'professional',
@@ -82,12 +84,12 @@ const JOURNEY_TIERS: JourneyTier[] = [
     description: 'Describe complex systems in natural language. KITT AI synthesizes architecture, generates DRC-verified multi-layer PCBs, and exports manufacturing Gerbers.',
     skills: ['Autonomous Requirement Decomp', 'Controlled Impedance Routing', 'Design Rules Checking (DRC)', 'Gerber RS-274X & PCBA BOM'],
     recommendedTool: {
-      name: 'KITT AI Flagship',
-      url: 'https://kitt-1-0-agent.ai.studio',
-      badge: 'Engineering Agent'
+      name: 'KITT AI Studio',
+      url: '#/kitt-ai',
+      badge: 'Autonomous Agent'
     },
     sampleProject: 'Turnkey Industrial IoT Telemetry Node & Production PCBA',
-    color: '#a855f7'
+    color: '#DFCCA8'
   }
 ];
 
@@ -118,120 +120,144 @@ export const StudentJourney: React.FC = () => {
 
         {/* 4 Tier Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-10">
-          {JOURNEY_TIERS.map((tier) => {
+          {JOURNEY_TIERS.map((tier, idx) => {
             const isSelected = activeTier.id === tier.id;
 
             return (
-              <button
+              <motion.div
                 key={tier.id}
-                onClick={() => {
-                  setActiveTier(tier);
-                  circuitAudio.playTone(480, 0.05, 'triangle');
-                }}
-                className={`text-left p-5 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between ${
-                  isSelected
-                    ? 'surreal-card-gold border-2 border-[#A58D66] shadow-xl scale-[1.02]'
-                    : 'surreal-card border-[#A58D66]/20 hover:border-[#407E8C]/40 text-[#E5E1DD]'
-                }`}
+                initial={{ opacity: 0, y: 24, rotateX: 6 }}
+                whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.55, delay: idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                className="h-full"
+                style={{ transformStyle: 'preserve-3d' }}
               >
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-[10px] font-mono uppercase text-[#A58D66] font-bold">
-                      {tier.stage}
-                    </span>
-                    <span 
-                      className="w-2.5 h-2.5 rounded-full" 
-                      style={{ backgroundColor: tier.color }}
-                    />
-                  </div>
-                  <h3 className="text-base font-bold font-cinzel text-[#E5E1DD] mb-1">
-                    {tier.title}
-                  </h3>
-                  <p className="text-xs text-[#76B4C2] font-mono">
-                    {tier.tagline}
-                  </p>
-                </div>
+                <Tilt3DCard
+                  tiltMaxAngle={3.5}
+                  scale={1.01}
+                  glareOpacity={0.16}
+                  className="h-full"
+                  onClick={() => {
+                    setActiveTier(tier);
+                    circuitAudio.playTone(480, 0.05, 'triangle');
+                  }}
+                >
+                  <div
+                    className={`w-full h-full text-left p-5 rounded-2xl border transition-colors cursor-pointer flex flex-col justify-between ${
+                      isSelected
+                        ? 'surreal-card-gold border-2 border-[#A58D66] shadow-xl'
+                        : 'surreal-card border-[#A58D66]/20 hover:border-[#407E8C]/40 text-[#E5E1DD]'
+                    }`}
+                  >
+                    <div>
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-[10px] font-mono uppercase text-[#A58D66] font-bold">
+                          {tier.stage}
+                        </span>
+                        <span 
+                          className="w-2.5 h-2.5 rounded-full shadow-[0_0_8px_currentColor]" 
+                          style={{ backgroundColor: tier.color, color: tier.color }}
+                        />
+                      </div>
+                      <h3 className="text-base font-bold font-cinzel text-[#E5E1DD] mb-1">
+                        {tier.title}
+                      </h3>
+                      <p className="text-xs text-[#76B4C2] font-mono">
+                        {tier.tagline}
+                      </p>
+                    </div>
 
-                <div className="mt-4 pt-3 border-t border-[#A58D66]/15 flex items-center justify-between text-xs font-semibold">
-                  <span className="text-[#E5E1DD]/60">View Curriculum</span>
-                  <ArrowRight className="w-3.5 h-3.5 text-[#A58D66]" />
-                </div>
-              </button>
+                    <div className="mt-4 pt-3 border-t border-[#A58D66]/15 flex items-center justify-between text-xs font-semibold">
+                      <span className="text-[#E5E1DD]/60">View Curriculum</span>
+                      <ArrowRight className="w-3.5 h-3.5 text-[#A58D66]" />
+                    </div>
+                  </div>
+                </Tilt3DCard>
+              </motion.div>
             );
           })}
         </div>
 
-        {/* Active Stage Detailed Breakdown Panel */}
-        <div className="rounded-3xl surreal-card p-6 sm:p-8 shadow-2xl border border-[#A58D66]/30">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            
-            <div className="lg:col-span-7 space-y-4">
-              <div className="flex items-center gap-2">
-                <span className="text-xs font-mono px-3 py-1 rounded bg-[#407E8C]/20 text-[#76B4C2] border border-[#407E8C]/35">
-                  {activeTier.stage} Focus
-                </span>
-                <span className="text-xs text-[#A58D66] font-mono">
-                  Target: {activeTier.tagline}
-                </span>
-              </div>
+        {/* Active Stage Detailed Breakdown Panel with Smooth AnimatePresence */}
+        <div className="rounded-3xl surreal-card p-6 sm:p-8 shadow-2xl border border-[#A58D66]/30 overflow-hidden">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTier.id}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.3, ease: 'easeOut' }}
+              className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
+            >
+              <div className="lg:col-span-7 space-y-4">
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-mono px-3 py-1 rounded bg-[#407E8C]/20 text-[#76B4C2] border border-[#407E8C]/35">
+                    {activeTier.stage} Focus
+                  </span>
+                  <span className="text-xs text-[#A58D66] font-mono">
+                    Target: {activeTier.tagline}
+                  </span>
+                </div>
 
-              <h3 className="text-2xl font-bold font-cinzel text-[#E5E1DD]">
-                {activeTier.title} Curriculum
-              </h3>
+                <h3 className="text-2xl font-bold font-cinzel text-[#E5E1DD]">
+                  {activeTier.title} Curriculum
+                </h3>
 
-              <p className="text-sm text-[#E5E1DD]/80 leading-relaxed font-light">
-                {activeTier.description}
-              </p>
+                <p className="text-sm text-[#E5E1DD]/80 leading-relaxed font-light">
+                  {activeTier.description}
+                </p>
 
-              <div className="space-y-2 pt-2">
-                <span className="text-xs font-semibold text-[#A58D66] uppercase tracking-wider block font-mono">
-                  Core Competencies Mastered:
-                </span>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  {activeTier.skills.map((skill, i) => (
-                    <div key={i} className="flex items-center gap-2 text-xs text-[#E5E1DD]/90 bg-[#080f14]/60 p-2.5 rounded-lg border border-[#A58D66]/15">
-                      <Check className="w-3.5 h-3.5 text-[#A58D66] shrink-0" />
-                      <span>{skill}</span>
-                    </div>
-                  ))}
+                <div className="space-y-2 pt-2">
+                  <span className="text-xs font-semibold text-[#A58D66] uppercase tracking-wider block font-mono">
+                    Core Competencies Mastered:
+                  </span>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {activeTier.skills.map((skill, i) => (
+                      <div key={i} className="flex items-center gap-2 text-xs text-[#E5E1DD]/90 bg-[#080f14]/60 p-2.5 rounded-lg border border-[#A58D66]/15">
+                        <Check className="w-3.5 h-3.5 text-[#A58D66] shrink-0" />
+                        <span>{skill}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="pt-2 text-xs text-[#E5E1DD]/65 font-light">
+                  Capstone Project: <strong className="text-[#E5E1DD] font-semibold">{activeTier.sampleProject}</strong>
                 </div>
               </div>
 
-              <div className="pt-2 text-xs text-[#E5E1DD]/65 font-light">
-                Capstone Project: <strong className="text-[#E5E1DD] font-semibold">{activeTier.sampleProject}</strong>
+              {/* Recommended Tool Launcher Card */}
+              <div className="lg:col-span-5 bg-[#080f14]/85 border border-[#A58D66]/30 rounded-2xl p-6 flex flex-col justify-between space-y-4">
+                <div>
+                  <span className="text-[10px] font-mono uppercase font-bold text-[#A58D66] tracking-wider">
+                    Recommended Primary Platform
+                  </span>
+                  <h4 className="text-xl font-bold font-cinzel text-[#E5E1DD] mt-1">
+                    {activeTier.recommendedTool.name}
+                  </h4>
+                  <p className="text-xs text-[#E5E1DD]/70 mt-1 font-light">
+                    The ideal hands-on environment tailored for this phase of the engineering journey.
+                  </p>
+                </div>
+
+                <div className="p-3 bg-[#407E8C]/15 border border-[#407E8C]/30 rounded-xl text-xs font-mono text-[#76B4C2]">
+                  ⚡ Fully integrated with KITT account credentials & synchronization
+                </div>
+
+                <a
+                  href={activeTier.recommendedTool.url}
+                  {...(!activeTier.recommendedTool.url.startsWith('#') ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                  onClick={() => circuitAudio.playClick()}
+                  className="w-full py-3 rounded-xl bg-gradient-to-r from-[#A58D66] to-[#8C7654] hover:from-[#BFA378] hover:to-[#A58D66] text-[#080f14] font-bold text-xs text-center transition-all shadow-[0_0_20px_rgba(165,141,102,0.35)] flex items-center justify-center gap-2 cursor-pointer hover:scale-[1.02] active:scale-[0.98]"
+                >
+                  <span>Launch {activeTier.recommendedTool.name}</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
               </div>
-            </div>
 
-            {/* Recommended Tool Launcher Card */}
-            <div className="lg:col-span-5 bg-[#080f14]/85 border border-[#A58D66]/30 rounded-2xl p-6 flex flex-col justify-between space-y-4">
-              <div>
-                <span className="text-[10px] font-mono uppercase font-bold text-[#A58D66] tracking-wider">
-                  Recommended Primary Platform
-                </span>
-                <h4 className="text-xl font-bold font-cinzel text-[#E5E1DD] mt-1">
-                  {activeTier.recommendedTool.name}
-                </h4>
-                <p className="text-xs text-[#E5E1DD]/70 mt-1 font-light">
-                  The ideal hands-on environment tailored for this phase of the engineering journey.
-                </p>
-              </div>
-
-              <div className="p-3 bg-[#407E8C]/15 border border-[#407E8C]/30 rounded-xl text-xs font-mono text-[#76B4C2]">
-                ⚡ Fully integrated with KITT account credentials & synchronization
-              </div>
-
-              <a
-                href={activeTier.recommendedTool.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full py-3 rounded-xl bg-gradient-to-r from-[#A58D66] to-[#8C7654] hover:from-[#BFA378] hover:to-[#A58D66] text-[#080f14] font-bold text-xs text-center transition-all shadow-[0_0_20px_rgba(165,141,102,0.35)] flex items-center justify-center gap-2"
-              >
-                <span>Launch {activeTier.recommendedTool.name}</span>
-                <ExternalLink className="w-3.5 h-3.5" />
-              </a>
-            </div>
-
-          </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
 
       </div>

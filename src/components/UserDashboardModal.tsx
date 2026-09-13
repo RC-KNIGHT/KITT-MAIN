@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { 
   X, 
-  User, 
   Sparkles, 
   Check, 
   Copy, 
@@ -10,116 +9,34 @@ import {
   RefreshCw, 
   CreditCard, 
   History, 
-  Layers, 
+  FolderGit2,
   Cpu, 
-  Bot, 
   Binary, 
   Calculator, 
   ExternalLink,
   ShieldCheck,
-  HardDrive,
-  Zap,
   ArrowUpRight,
-  LogOut
+  Download,
+  KeyRound,
+  Radio,
+  Clock,
+  Layers
 } from 'lucide-react';
+import { 
+  ecosystemStore, 
+  EcosystemUser, 
+  EcosystemTier, 
+  ECOSYSTEM_TIERS, 
+  SyncedProject, 
+  EcosystemActivity, 
+  PortalConnectionStatus,
+  DEFAULT_ECOSYSTEM_USER 
+} from '../utils/ecosystemStore';
+import { KittLogo } from './KittLogo';
 
-export interface EcosystemUser {
-  id: string;
-  name: string;
-  email: string;
-  handle: string;
-  avatar: string;
-  apiKey: string;
-  plan: 'Free Explorer' | 'Pioneer' | 'Pro Engineer' | 'Autonomous Studio';
-  billingCycle: 'monthly' | 'annual';
-  creditsRemaining: number;
-  creditsTotal: number;
-  storageUsedGb: number;
-  storageTotalGb: number;
-  connectedPlatforms: {
-    name: string;
-    id: string;
-    status: 'connected' | 'syncing' | 'idle';
-    lastSync: string;
-  }[];
-  history: {
-    id: string;
-    title: string;
-    platform: string;
-    platformIcon: string;
-    action: string;
-    timestamp: string;
-    status: 'completed' | 'synthesized' | 'compiled' | 'exported';
-  }[];
-}
-
-export const DEFAULT_ECOSYSTEM_USER: EcosystemUser = {
-  id: 'kitt_usr_94820_live',
-  name: 'Alex Rivera',
-  email: 'alex.rivera@inventor.io',
-  handle: '@arivera_circuit',
-  avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
-  apiKey: 'kitt_live_9f82d10a9c8b74e2a101f',
-  plan: 'Pro Engineer',
-  billingCycle: 'monthly',
-  creditsRemaining: 840,
-  creditsTotal: 1000,
-  storageUsedGb: 2.4,
-  storageTotalGb: 10.0,
-  connectedPlatforms: [
-    { name: 'KITT 1.0 Autonomous Agent', id: 'kitt-agent', status: 'connected', lastSync: '12m ago' },
-    { name: 'Ravi Synthesis Workspace', id: 'ravi-workspace', status: 'connected', lastSync: '8m ago' },
-    { name: 'DigiLogic Circuit Studio', id: 'digilogic', status: 'connected', lastSync: '22m ago' },
-    { name: 'Hardware Fabrication Labs', id: 'hardware-labs', status: 'connected', lastSync: 'Just now' },
-  ],
-  history: [
-    {
-      id: 'act-1',
-      title: 'Dual-Motor Drone Flight Controller & Telemetry PCB',
-      platform: 'Hardware Fabrication Labs',
-      platformIcon: 'Cpu',
-      action: 'Schematic Routed & Gerber Exported',
-      timestamp: '2 hours ago',
-      status: 'synthesized'
-    },
-    {
-      id: 'act-2',
-      title: 'Real-Time Edge Sensor Driver & C++ Testbench',
-      platform: 'Ravi Synthesis Workspace',
-      platformIcon: 'Bot',
-      action: 'HAL Firmware Verified in Sandbox',
-      timestamp: 'Yesterday at 4:18 PM',
-      status: 'compiled'
-    },
-    {
-      id: 'act-3',
-      title: '555 Precision Astable Frequency Oscillator',
-      platform: 'DigiLogic Circuit Studio',
-      platformIcon: 'Calculator',
-      action: 'AC Waveform FFT Simulated',
-      timestamp: '3 days ago',
-      status: 'completed'
-    },
-    {
-      id: 'act-4',
-      title: 'Verilog 32-Bit Pipelined MAC Processor Core',
-      platform: 'KITT 1.0 Autonomous Agent',
-      platformIcon: 'Binary',
-      action: 'RTL Architecture Synthesized',
-      timestamp: '5 days ago',
-      status: 'exported'
-    },
-    {
-      id: 'act-5',
-      title: 'Autonomous Rover Obstacle Avoidance LIDAR Pipeline',
-      platform: 'Ravi Synthesis Workspace',
-      platformIcon: 'Bot',
-      action: 'Point Cloud Algorithm Optimized',
-      timestamp: 'Last week',
-      status: 'compiled'
-    }
-  ]
-};
+// Re-export for consuming components (e.g. Navbar)
+export type { EcosystemUser };
+export { DEFAULT_ECOSYSTEM_USER };
 
 interface UserDashboardModalProps {
   isOpen: boolean;
@@ -131,16 +48,41 @@ interface UserDashboardModalProps {
 export const UserDashboardModal: React.FC<UserDashboardModalProps> = ({
   isOpen,
   onClose,
-  user = DEFAULT_ECOSYSTEM_USER,
+  user: initialUser,
   onUpdateUser
 }) => {
-  const [activeTab, setActiveTab] = useState<'overview' | 'history' | 'databases'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'projects' | 'history' | 'databases'>('overview');
   const [historyFilter, setHistoryFilter] = useState<string>('all');
   const [copiedKey, setCopiedKey] = useState(false);
   const [isSyncing, setIsSyncing] = useState(false);
   const [syncSuccess, setSyncSuccess] = useState(false);
+  const [keyRotated, setKeyRotated] = useState(false);
+  const [downloadedNetlistId, setDownloadedNetlistId] = useState<string | null>(null);
 
-  // Close on Escape key press
+  // Reactive State directly powered by ecosystemStore
+  const [currentUser, setCurrentUser] = useState<EcosystemUser>(() => initialUser || ecosystemStore.getUser());
+  const [projects, setProjects] = useState<SyncedProject[]>(() => ecosystemStore.getProjects());
+  const [activities, setActivities] = useState<EcosystemActivity[]>(() => ecosystemStore.getActivities());
+  const [portalStatuses, setPortalStatuses] = useState<PortalConnectionStatus[]>(() => ecosystemStore.getPortalStatuses());
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const refreshFromStore = () => {
+      const u = ecosystemStore.getUser();
+      setCurrentUser(u);
+      setProjects(ecosystemStore.getProjects());
+      setActivities(ecosystemStore.getActivities());
+      setPortalStatuses(ecosystemStore.getPortalStatuses());
+      if (onUpdateUser) onUpdateUser(u);
+    };
+
+    refreshFromStore();
+    const unsub = ecosystemStore.subscribe(refreshFromStore);
+    return () => unsub();
+  }, [isOpen, onUpdateUser]);
+
+  // Close modal on Escape key press
   useEffect(() => {
     if (!isOpen) return;
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -153,50 +95,81 @@ export const UserDashboardModal: React.FC<UserDashboardModalProps> = ({
   if (!isOpen || typeof document === 'undefined') return null;
 
   const handleCopyApiKey = () => {
-    navigator.clipboard.writeText(user.apiKey);
+    navigator.clipboard.writeText(currentUser.apiKey);
     setCopiedKey(true);
     setTimeout(() => setCopiedKey(false), 2000);
+  };
+
+  const handleRegenerateKey = () => {
+    const newKey = ecosystemStore.regenerateApiKey();
+    setKeyRotated(true);
+    setTimeout(() => setKeyRotated(false), 3000);
   };
 
   const handleSyncDatabases = () => {
     setIsSyncing(true);
     setSyncSuccess(false);
     setTimeout(() => {
+      ecosystemStore.syncAcrossPortals();
       setIsSyncing(false);
       setSyncSuccess(true);
-      if (onUpdateUser) {
-        onUpdateUser({
-          ...user,
-          connectedPlatforms: user.connectedPlatforms.map((p) => ({
-            ...p,
-            lastSync: 'Just now',
-            status: 'connected'
-          }))
-        });
-      }
-      setTimeout(() => setSyncSuccess(false), 3000);
+      setTimeout(() => setSyncSuccess(false), 3500);
     }, 1200);
   };
 
-  const handleSelectPlan = (planName: EcosystemUser['plan']) => {
-    if (onUpdateUser) {
-      onUpdateUser({
-        ...user,
-        plan: planName,
-        creditsTotal: planName === 'Free Explorer' ? 100 : planName === 'Pioneer' ? 500 : planName === 'Pro Engineer' ? 1000 : 5000,
-        creditsRemaining: planName === 'Free Explorer' ? 75 : planName === 'Pioneer' ? 420 : planName === 'Pro Engineer' ? 840 : 4850
-      });
+  const handleSelectPlan = (tierName: EcosystemTier) => {
+    const targetConfig = ECOSYSTEM_TIERS.find(t => t.name === tierName);
+    if (!targetConfig) return;
+
+    ecosystemStore.updateUser({
+      plan: tierName,
+      creditsTotal: targetConfig.credits,
+      creditsRemaining: Math.min(currentUser.creditsRemaining, targetConfig.credits) || targetConfig.credits,
+      storageTotalGb: targetConfig.storageGb
+    });
+
+    ecosystemStore.addActivity({
+      title: `Ecosystem Membership Upgraded`,
+      platform: 'KITT 1.0 Autonomous Agent',
+      platformIcon: 'Bot',
+      action: `Plan adjusted to ${tierName} (${targetConfig.credits} Compute Credits)`,
+      status: 'synthesized'
+    });
+  };
+
+  const handleDownloadNetlist = (project: SyncedProject) => {
+    const netlistContent = ecosystemStore.exportProjectNetlist(project.id);
+    const blob = new Blob([netlistContent], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${project.title.toLowerCase().replace(/[^a-z0-9]+/g, '_')}_netlist.cir`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
+    setDownloadedNetlistId(project.id);
+    setTimeout(() => setDownloadedNetlistId(null), 2500);
+  };
+
+  const handleOpenPortal = (route: string) => {
+    onClose();
+    if (route.startsWith('#')) {
+      window.location.hash = route;
+    } else {
+      window.open(route, '_blank', 'noopener,noreferrer');
     }
   };
 
-  const filteredHistory = user.history.filter((item) => {
+  const filteredHistory = activities.filter((item) => {
     if (historyFilter === 'all') return true;
     return item.platform.toLowerCase().includes(historyFilter.toLowerCase());
   });
 
   const getPlatformIcon = (iconName: string) => {
     switch (iconName) {
-      case 'Bot': return <Bot className="w-3.5 h-3.5 text-[#76B4C2]" />;
+      case 'Bot': return <KittLogo size={16} showGlow={false} className="shrink-0" />;
       case 'Cpu': return <Cpu className="w-3.5 h-3.5 text-[#A58D66]" />;
       case 'Binary': return <Binary className="w-3.5 h-3.5 text-[#E5E1DD]" />;
       case 'Calculator': return <Calculator className="w-3.5 h-3.5 text-[#A58D66]" />;
@@ -211,31 +184,38 @@ export const UserDashboardModal: React.FC<UserDashboardModalProps> = ({
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div className="surreal-card rounded-2xl w-full max-w-4xl max-h-[90vh] flex flex-col shadow-2xl border border-[#A58D66]/35 bg-[#080f14]/95 overflow-hidden">
+      <div className="surreal-card rounded-2xl w-full max-w-4xl max-h-[92vh] flex flex-col shadow-2xl border border-[#A58D66]/35 bg-[#080f14]/95 overflow-hidden">
         {/* Top Header Strip */}
         <div className="px-5 py-4 border-b border-[#A58D66]/20 bg-[#091116] flex items-center justify-between shrink-0">
           <div className="flex items-center gap-3.5">
             <div className="relative">
               <img 
-                src={user.avatar} 
-                alt={user.name} 
+                src={currentUser.avatar} 
+                alt={currentUser.name} 
                 className="w-11 h-11 rounded-full object-cover border-2 border-[#A58D66] shadow-[0_0_12px_rgba(165,141,102,0.35)]" 
               />
-              <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-400 ring-2 ring-[#080f14]" title="4 Databases Online & Synced" />
+              <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-400 ring-2 ring-[#080f14]" title="4 Portals Online & Synced" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="text-base font-bold font-cinzel text-[#E5E1DD]">{user.name}</h3>
+                <h3 className="text-base font-bold font-cinzel text-[#E5E1DD] flex items-center gap-1.5">
+                  <span>{currentUser.name}</span>
+                  <KittLogo size={16} showGlow={false} />
+                </h3>
                 <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#A58D66]/20 text-[#A58D66] font-mono uppercase tracking-wider font-semibold border border-[#A58D66]/35">
-                  {user.plan}
+                  {currentUser.plan}
                 </span>
               </div>
-              <div className="flex items-center gap-2 text-xs text-[#E5E1DD]/60 font-mono mt-0.5">
-                <span>{user.email}</span>
+              <div className="flex flex-wrap items-center gap-2 text-xs text-[#E5E1DD]/60 font-mono mt-0.5">
+                <span>{currentUser.email}</span>
+                <span>•</span>
+                <span className="text-[#A58D66] font-medium truncate max-w-[240px] sm:max-w-none">
+                  {currentUser.institution}
+                </span>
                 <span>•</span>
                 <span className="text-emerald-400 font-medium flex items-center gap-1">
-                  <Database className="w-3 h-3" />
-                  <span>4/4 Platforms Synced</span>
+                  <Radio className="w-3 h-3" />
+                  <span>4/4 Portals Synced</span>
                 </span>
               </div>
             </div>
@@ -246,10 +226,10 @@ export const UserDashboardModal: React.FC<UserDashboardModalProps> = ({
               onClick={handleSyncDatabases}
               disabled={isSyncing}
               className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#407E8C]/15 hover:bg-[#407E8C]/25 text-[#E5E1DD] border border-[#407E8C]/35 text-xs font-medium transition-colors cursor-pointer disabled:opacity-50"
-              title="Sync All 4 Platform Databases"
+              title="Replicate state across all 4 platforms"
             >
               <RefreshCw className={`w-3.5 h-3.5 text-[#76B4C2] ${isSyncing ? 'animate-spin' : ''}`} />
-              <span>{isSyncing ? 'Syncing...' : syncSuccess ? 'Synced!' : 'Sync Databases'}</span>
+              <span>{isSyncing ? 'Syncing...' : syncSuccess ? '4 Portals Synced!' : 'Sync Portals'}</span>
             </button>
 
             <button
@@ -263,10 +243,10 @@ export const UserDashboardModal: React.FC<UserDashboardModalProps> = ({
         </div>
 
         {/* Tab Navigation */}
-        <div className="px-5 pt-3 border-b border-[#A58D66]/15 bg-[#080f14] flex items-center gap-6 shrink-0">
+        <div className="px-5 pt-3 border-b border-[#A58D66]/15 bg-[#080f14] flex items-center gap-4 sm:gap-6 shrink-0 overflow-x-auto">
           <button
             onClick={() => setActiveTab('overview')}
-            className={`pb-3 text-xs sm:text-sm font-semibold transition-colors relative cursor-pointer flex items-center gap-1.5 ${
+            className={`pb-3 text-xs sm:text-sm font-semibold transition-colors relative cursor-pointer flex items-center gap-1.5 whitespace-nowrap ${
               activeTab === 'overview' ? 'text-[#A58D66]' : 'text-[#E5E1DD]/60 hover:text-[#E5E1DD]'
             }`}
           >
@@ -278,15 +258,31 @@ export const UserDashboardModal: React.FC<UserDashboardModalProps> = ({
           </button>
 
           <button
+            onClick={() => setActiveTab('projects')}
+            className={`pb-3 text-xs sm:text-sm font-semibold transition-colors relative cursor-pointer flex items-center gap-1.5 whitespace-nowrap ${
+              activeTab === 'projects' ? 'text-[#A58D66]' : 'text-[#E5E1DD]/60 hover:text-[#E5E1DD]'
+            }`}
+          >
+            <FolderGit2 className="w-3.5 h-3.5" />
+            <span>Synced Projects</span>
+            <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-[#A58D66]/20 text-[#A58D66] font-mono">
+              {projects.length}
+            </span>
+            {activeTab === 'projects' && (
+              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#A58D66] rounded-full" />
+            )}
+          </button>
+
+          <button
             onClick={() => setActiveTab('history')}
-            className={`pb-3 text-xs sm:text-sm font-semibold transition-colors relative cursor-pointer flex items-center gap-1.5 ${
+            className={`pb-3 text-xs sm:text-sm font-semibold transition-colors relative cursor-pointer flex items-center gap-1.5 whitespace-nowrap ${
               activeTab === 'history' ? 'text-[#A58D66]' : 'text-[#E5E1DD]/60 hover:text-[#E5E1DD]'
             }`}
           >
             <History className="w-3.5 h-3.5" />
-            <span>Cross-Platform History</span>
-            <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-[#A58D66]/20 text-[#A58D66] font-mono">
-              {user.history.length}
+            <span>Activity Log</span>
+            <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-[#407E8C]/20 text-[#76B4C2] font-mono">
+              {activities.length}
             </span>
             {activeTab === 'history' && (
               <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#A58D66] rounded-full" />
@@ -295,12 +291,12 @@ export const UserDashboardModal: React.FC<UserDashboardModalProps> = ({
 
           <button
             onClick={() => setActiveTab('databases')}
-            className={`pb-3 text-xs sm:text-sm font-semibold transition-colors relative cursor-pointer flex items-center gap-1.5 ${
+            className={`pb-3 text-xs sm:text-sm font-semibold transition-colors relative cursor-pointer flex items-center gap-1.5 whitespace-nowrap ${
               activeTab === 'databases' ? 'text-[#A58D66]' : 'text-[#E5E1DD]/60 hover:text-[#E5E1DD]'
             }`}
           >
             <Database className="w-3.5 h-3.5" />
-            <span>Connected Databases (4)</span>
+            <span>Connected Portals (4)</span>
             {activeTab === 'databases' && (
               <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#A58D66] rounded-full" />
             )}
@@ -309,6 +305,7 @@ export const UserDashboardModal: React.FC<UserDashboardModalProps> = ({
 
         {/* Modal Scrollable Content Area */}
         <div className="flex-1 overflow-y-auto p-5 sm:p-6 space-y-6">
+          
           {/* TAB 1: OVERVIEW & SUBSCRIPTION PLANS */}
           {activeTab === 'overview' && (
             <div className="space-y-6">
@@ -321,17 +318,31 @@ export const UserDashboardModal: React.FC<UserDashboardModalProps> = ({
                       <span>CURRENT MEMBERSHIP</span>
                       <span className="w-2 h-2 rounded-full bg-emerald-400" />
                     </div>
-                    <h4 className="text-lg font-bold font-cinzel text-[#E5E1DD] mt-1">{user.plan}</h4>
-                    <p className="text-xs text-[#E5E1DD]/60 mt-0.5">Active on 4 Platforms • Renews Oct 2026</p>
+                    <h4 className="text-lg font-bold font-cinzel text-[#E5E1DD] mt-1">{currentUser.plan}</h4>
+                    <p className="text-xs text-[#E5E1DD]/60 mt-0.5">Active across all 4 portals • Auto-renews</p>
                   </div>
                   <div className="pt-3 mt-3 border-t border-[#A58D66]/20 flex items-center justify-between">
-                    <span className="text-xs font-mono text-[#A58D66]">$29 / month</span>
+                    <div className="flex items-baseline gap-1.5">
+                      <span className="text-xs font-mono font-bold text-[#A58D66]">
+                        {currentUser.plan === 'Free Explorer' ? '$0 / free' : currentUser.plan === 'Pioneer Maker' ? '$6 / mo' : currentUser.plan === 'Pro Engineer' ? '$15 / mo' : '$39 / mo'}
+                      </span>
+                      {currentUser.plan !== 'Free Explorer' && (
+                        <span className="text-[10px] text-[#E5E1DD]/40 line-through font-mono">
+                          {currentUser.plan === 'Pioneer Maker' ? '$19' : currentUser.plan === 'Pro Engineer' ? '$49' : '$129'}
+                        </span>
+                      )}
+                      {currentUser.plan !== 'Free Explorer' && (
+                        <span className="text-[9px] px-1 py-0.2 rounded bg-emerald-400/20 text-emerald-400 font-mono font-bold">
+                          70% OFF
+                        </span>
+                      )}
+                    </div>
                     <a
                       href="#pricing"
                       onClick={onClose}
                       className="text-xs text-[#E5E1DD] hover:text-[#A58D66] flex items-center gap-1 font-medium transition-colors"
                     >
-                      <span>Upgrade Plan</span>
+                      <span>Explore Pricing</span>
                       <ArrowUpRight className="w-3 h-3" />
                     </a>
                   </div>
@@ -342,41 +353,43 @@ export const UserDashboardModal: React.FC<UserDashboardModalProps> = ({
                   <div>
                     <div className="flex items-center justify-between text-xs font-mono text-[#E5E1DD]/60">
                       <span>COMPUTE CREDITS</span>
-                      <span className="text-[#A58D66] font-bold">{Math.round((user.creditsRemaining / user.creditsTotal) * 100)}%</span>
+                      <span className="text-[#A58D66] font-bold">
+                        {Math.round((currentUser.creditsRemaining / currentUser.creditsTotal) * 100)}%
+                      </span>
                     </div>
                     <div className="text-lg font-bold font-mono text-[#E5E1DD] mt-1">
-                      {user.creditsRemaining} <span className="text-xs text-[#E5E1DD]/50 font-normal">/ {user.creditsTotal} cr</span>
+                      {currentUser.creditsRemaining} <span className="text-xs text-[#E5E1DD]/50 font-normal">/ {currentUser.creditsTotal} cr</span>
                     </div>
-                    {/* Progress Bar */}
                     <div className="w-full h-1.5 rounded-full bg-white/10 mt-2 overflow-hidden">
                       <div 
                         className="h-full bg-gradient-to-r from-[#A58D66] to-[#76B4C2] rounded-full transition-all duration-500" 
-                        style={{ width: `${(user.creditsRemaining / user.creditsTotal) * 100}%` }}
+                        style={{ width: `${Math.min(100, (currentUser.creditsRemaining / currentUser.creditsTotal) * 100)}%` }}
                       />
                     </div>
                   </div>
-                  <p className="text-[11px] text-[#E5E1DD]/50 pt-2 font-mono">Shared seamlessly across all 4 platforms</p>
+                  <p className="text-[11px] text-[#E5E1DD]/50 pt-2 font-mono">Shared seamlessly across all 4 portals</p>
                 </div>
 
                 {/* Cloud Schematics Storage Meter */}
                 <div className="surreal-card rounded-xl p-4 border border-[#A58D66]/20 flex flex-col justify-between">
                   <div>
                     <div className="flex items-center justify-between text-xs font-mono text-[#E5E1DD]/60">
-                      <span>CLOUD STORAGE</span>
-                      <span className="text-[#76B4C2] font-bold">{Math.round((user.storageUsedGb / user.storageTotalGb) * 100)}%</span>
+                      <span>CLOUD SCHEMATICS & RTL</span>
+                      <span className="text-[#76B4C2] font-bold">
+                        {Math.round((currentUser.storageUsedGb / currentUser.storageTotalGb) * 100)}%
+                      </span>
                     </div>
                     <div className="text-lg font-bold font-mono text-[#E5E1DD] mt-1">
-                      {user.storageUsedGb} GB <span className="text-xs text-[#E5E1DD]/50 font-normal">/ {user.storageTotalGb} GB</span>
+                      {currentUser.storageUsedGb} GB <span className="text-xs text-[#E5E1DD]/50 font-normal">/ {currentUser.storageTotalGb} GB</span>
                     </div>
-                    {/* Progress Bar */}
                     <div className="w-full h-1.5 rounded-full bg-white/10 mt-2 overflow-hidden">
                       <div 
                         className="h-full bg-gradient-to-r from-[#407E8C] to-[#76B4C2] rounded-full transition-all duration-500" 
-                        style={{ width: `${(user.storageUsedGb / user.storageTotalGb) * 100}%` }}
+                        style={{ width: `${Math.min(100, (currentUser.storageUsedGb / currentUser.storageTotalGb) * 100)}%` }}
                       />
                     </div>
                   </div>
-                  <p className="text-[11px] text-[#E5E1DD]/50 pt-2 font-mono">Gerbers, Verilog RTL & C++ repositories</p>
+                  <p className="text-[11px] text-[#E5E1DD]/50 pt-2 font-mono">Gerbers, Verilog RTL & C++ firmware repositories</p>
                 </div>
               </div>
 
@@ -385,54 +398,72 @@ export const UserDashboardModal: React.FC<UserDashboardModalProps> = ({
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <Database className="w-4 h-4 text-[#A58D66]" />
-                    <span className="text-xs font-bold font-cinzel text-[#E5E1DD]">Unified Ecosystem Database Token</span>
+                    <span className="text-xs font-bold font-cinzel text-[#E5E1DD]">Unified Ecosystem Security Token</span>
                   </div>
                   <span className="text-[10px] font-mono text-emerald-400 bg-emerald-400/10 px-2 py-0.5 rounded border border-emerald-400/20">
-                    Live Across 4 Platforms
+                    Active Across 4 Portals
                   </span>
                 </div>
 
                 <p className="text-xs text-[#E5E1DD]/70">
-                  Use this unified secret token to authenticate and bridge databases between KITT 1.0, Ravi Workspace, DigiLogic, and Hardware Labs.
+                  This cryptographically verified token binds your session, netlists, and compute credits between KITT AI, KITT Workspace, DigiLogic, and Number Trainer.
                 </p>
 
-                <div className="flex items-center gap-2">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
                   <input
                     type="password"
                     readOnly
-                    value={user.apiKey}
+                    value={currentUser.apiKey}
                     className="flex-1 bg-[#050b0f] border border-[#A58D66]/30 rounded-lg px-3 py-2 text-xs font-mono text-[#E5E1DD] focus:outline-none select-all"
                   />
-                  <button
-                    onClick={handleCopyApiKey}
-                    className="px-3 py-2 rounded-lg bg-[#A58D66]/20 hover:bg-[#A58D66]/30 border border-[#A58D66]/40 text-xs text-[#E5E1DD] font-medium flex items-center gap-1.5 transition-colors cursor-pointer"
-                  >
-                    {copiedKey ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5 text-[#A58D66]" />}
-                    <span>{copiedKey ? 'Copied' : 'Copy Key'}</span>
-                  </button>
+                  <div className="flex items-center gap-2 shrink-0">
+                    <button
+                      onClick={handleCopyApiKey}
+                      className="flex-1 sm:flex-initial px-3 py-2 rounded-lg bg-[#A58D66]/20 hover:bg-[#A58D66]/30 border border-[#A58D66]/40 text-xs text-[#E5E1DD] font-medium flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                    >
+                      {copiedKey ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5 text-[#A58D66]" />}
+                      <span>{copiedKey ? 'Copied' : 'Copy Key'}</span>
+                    </button>
+                    <button
+                      onClick={handleRegenerateKey}
+                      className="flex-1 sm:flex-initial px-3 py-2 rounded-lg bg-[#407E8C]/20 hover:bg-[#407E8C]/30 border border-[#407E8C]/40 text-xs text-[#76B4C2] font-medium flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                      title="Rotate and regenerate your API token"
+                    >
+                      <KeyRound className="w-3.5 h-3.5 text-[#76B4C2]" />
+                      <span>{keyRotated ? 'Key Rotated!' : 'Rotate Token'}</span>
+                    </button>
+                  </div>
                 </div>
               </div>
 
-              {/* Other Available Plans (Quick Switch / Explore) */}
+              {/* Unified 4 Ecosystem Tiers */}
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <h4 className="text-xs font-bold uppercase tracking-widest font-mono text-[#A58D66]">
-                    Available Ecosystem Tiers
+                    Ecosystem Membership Tiers
                   </h4>
                   <a href="#pricing" onClick={onClose} className="text-xs text-[#76B4C2] hover:text-[#E5E1DD] flex items-center gap-1">
-                    <span>Full Plan Breakdown</span>
+                    <span>Full Feature Matrix</span>
                     <ArrowUpRight className="w-3 h-3" />
                   </a>
                 </div>
 
+                {/* Special Offer Alert Banner */}
+                <div className="p-3 rounded-xl bg-gradient-to-r from-[#A58D66]/15 via-[#407E8C]/15 to-[#A58D66]/15 border border-[#A58D66]/35 flex items-center justify-between gap-3 text-xs">
+                  <div className="flex items-center gap-2">
+                    <Sparkles className="w-4 h-4 text-[#A58D66] shrink-0" />
+                    <span className="text-[#E5E1DD]">
+                      <strong className="text-[#A58D66]">70% Welcome Subsidy Active:</strong> Promotional rates unlocked for all new registrations.
+                    </span>
+                  </div>
+                  <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-400/20 text-emerald-400 font-mono font-bold shrink-0">
+                    70% OFF
+                  </span>
+                </div>
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-                  {[
-                    { name: 'Free Explorer', price: '$0', credits: '100 cr', desc: 'Basic logic simulation & public repos' },
-                    { name: 'Pioneer', price: '$15/mo', credits: '500 cr', desc: '5 concurrent agents & Gerber exports' },
-                    { name: 'Pro Engineer', price: '$29/mo', credits: '1000 cr', desc: 'Unlimited sync across all 4 platforms' },
-                    { name: 'Autonomous Studio', price: '$79/mo', credits: '5000 cr', desc: 'Hardware lab queues & dedicated GPU' }
-                  ].map((tier) => {
-                    const isCurrent = user.plan === tier.name;
+                  {ECOSYSTEM_TIERS.map((tier) => {
+                    const isCurrent = currentUser.plan === tier.name;
                     return (
                       <div 
                         key={tier.name}
@@ -450,16 +481,30 @@ export const UserDashboardModal: React.FC<UserDashboardModalProps> = ({
                                 ACTIVE
                               </span>
                             )}
+                            {tier.badge && !isCurrent && (
+                              <span className="text-[8.5px] px-1.5 py-0.2 rounded bg-[#407E8C]/20 text-[#76B4C2] font-mono border border-[#407E8C]/30">
+                                {tier.badge}
+                              </span>
+                            )}
                           </div>
-                          <div className="text-base font-bold font-mono text-[#A58D66] mt-1">{tier.price}</div>
+                          <div className="flex items-baseline gap-1.5 mt-1 flex-wrap">
+                            <span className="text-base font-bold font-mono text-[#A58D66]">
+                              {tier.monthlyPrice === 0 ? '$0' : `$${tier.monthlyPrice}/mo`}
+                            </span>
+                            {tier.originalMonthlyPrice > 0 && (
+                              <span className="text-xs text-[#E5E1DD]/40 line-through font-mono">
+                                ${tier.originalMonthlyPrice}
+                              </span>
+                            )}
+                          </div>
                           <p className="text-[11px] text-[#E5E1DD]/60 mt-1 line-clamp-2">{tier.desc}</p>
                         </div>
 
                         <div className="mt-3 pt-2 border-t border-white/5 flex items-center justify-between">
-                          <span className="text-[10px] font-mono text-[#76B4C2]">{tier.credits}</span>
+                          <span className="text-[10px] font-mono text-[#76B4C2]">{tier.credits} cr • {tier.storageGb} GB</span>
                           {!isCurrent ? (
                             <button
-                              onClick={() => handleSelectPlan(tier.name as EcosystemUser['plan'])}
+                              onClick={() => handleSelectPlan(tier.name)}
                               className="text-[11px] px-2 py-1 rounded bg-white/10 hover:bg-[#A58D66]/20 text-[#E5E1DD] hover:text-[#A58D66] font-medium transition-colors cursor-pointer"
                             >
                               Switch Tier
@@ -476,12 +521,88 @@ export const UserDashboardModal: React.FC<UserDashboardModalProps> = ({
             </div>
           )}
 
-          {/* TAB 2: CROSS-PLATFORM HISTORY */}
+          {/* TAB 2: SYNCED PROJECTS ACROSS ALL 4 PORTALS */}
+          {activeTab === 'projects' && (
+            <div className="space-y-4">
+              <div className="p-3.5 rounded-xl bg-[#407E8C]/10 border border-[#407E8C]/25 text-xs text-[#E5E1DD]/80 flex items-center justify-between">
+                <div className="flex items-center gap-2.5">
+                  <FolderGit2 className="w-4 h-4 text-[#76B4C2] shrink-0" />
+                  <span>
+                    Your active hardware designs are canonically mapped and shared across all 4 portals. Export netlists or launch any circuit directly.
+                  </span>
+                </div>
+                <span className="hidden sm:inline text-[11px] font-mono text-[#A58D66]">
+                  {projects.length} Synced
+                </span>
+              </div>
+
+              <div className="space-y-3">
+                {projects.map((project) => (
+                  <div
+                    key={project.id}
+                    className="p-4 rounded-xl bg-[#0a1217] border border-[#A58D66]/20 hover:border-[#A58D66]/40 transition-all flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 group"
+                  >
+                    <div className="flex items-start gap-3 flex-1 min-w-0">
+                      <div className="p-2.5 rounded-lg bg-[#407E8C]/15 border border-[#407E8C]/30 text-[#A58D66] mt-0.5 shrink-0 group-hover:bg-[#A58D66]/20 transition-colors">
+                        {getPlatformIcon(project.platformIcon)}
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <h5 className="text-sm font-bold text-[#E5E1DD] font-cinzel group-hover:text-[#A58D66] transition-colors truncate">
+                            {project.title}
+                          </h5>
+                          <span className="text-[9.5px] font-mono px-2 py-0.2 rounded-full bg-emerald-400/10 text-emerald-400 border border-emerald-400/25 uppercase">
+                            {project.status}
+                          </span>
+                        </div>
+                        <p className="text-xs text-[#E5E1DD]/70 mt-1 line-clamp-2 leading-relaxed">
+                          {project.summary}
+                        </p>
+                        <div className="flex items-center gap-3 text-[11px] font-mono text-[#E5E1DD]/40 mt-1.5 flex-wrap">
+                          <span className="text-[#76B4C2] font-semibold">{project.platform}</span>
+                          <span>•</span>
+                          <span>{project.componentsCount} Components</span>
+                          <span>•</span>
+                          <span>{project.netsCount} Verified Nets</span>
+                          <span>•</span>
+                          <span className="flex items-center gap-1 text-[#A58D66]">
+                            <Clock className="w-3 h-3" />
+                            <span>{project.lastSynced}</span>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-2 shrink-0 self-end sm:self-center w-full sm:w-auto pt-2 sm:pt-0 border-t sm:border-t-0 border-white/5">
+                      <button
+                        onClick={() => handleDownloadNetlist(project)}
+                        className="flex-1 sm:flex-initial px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-[#E5E1DD] border border-white/15 text-xs font-medium flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                        title="Download standard SPICE .cir netlist"
+                      >
+                        <Download className="w-3.5 h-3.5 text-[#76B4C2]" />
+                        <span>{downloadedNetlistId === project.id ? 'Exported!' : 'Netlist'}</span>
+                      </button>
+
+                      <button
+                        onClick={() => handleOpenPortal(project.route)}
+                        className="flex-1 sm:flex-initial px-3 py-1.5 rounded-lg bg-[#A58D66]/20 hover:bg-[#A58D66]/30 text-[#DFCCA8] border border-[#A58D66]/40 text-xs font-semibold flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-sm"
+                      >
+                        <span>Open Studio</span>
+                        <ArrowUpRight className="w-3.5 h-3.5 text-[#A58D66]" />
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* TAB 3: CROSS-PLATFORM HISTORY */}
           {activeTab === 'history' && (
             <div className="space-y-4">
               {/* Filter Pills */}
               <div className="flex items-center gap-2 overflow-x-auto pb-1 text-xs font-mono">
-                {['all', 'Hardware Labs', 'Ravi Workspace', 'DigiLogic', 'KITT 1.0'].map((filter) => (
+                {['all', 'KITT 1.0', 'Ravi Synthesis', 'DigiLogic', 'Hardware Fabrication'].map((filter) => (
                   <button
                     key={filter}
                     onClick={() => setHistoryFilter(filter)}
@@ -508,11 +629,9 @@ export const UserDashboardModal: React.FC<UserDashboardModalProps> = ({
                         {getPlatformIcon(item.platformIcon)}
                       </div>
                       <div>
-                        <div className="flex items-center gap-2">
-                          <h5 className="text-xs sm:text-sm font-semibold text-[#E5E1DD] group-hover:text-[#A58D66] transition-colors">
-                            {item.title}
-                          </h5>
-                        </div>
+                        <h5 className="text-xs sm:text-sm font-semibold text-[#E5E1DD] group-hover:text-[#A58D66] transition-colors">
+                          {item.title}
+                        </h5>
                         <p className="text-xs text-[#E5E1DD]/60 mt-0.5">
                           {item.action}
                         </p>
@@ -521,6 +640,17 @@ export const UserDashboardModal: React.FC<UserDashboardModalProps> = ({
                           <span>•</span>
                           <span>{item.timestamp}</span>
                         </div>
+                        {item.route && (
+                          <div className="mt-2">
+                            <button
+                              onClick={() => handleOpenPortal(item.route!)}
+                              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#A58D66]/15 hover:bg-[#A58D66]/25 border border-[#A58D66]/30 text-[#DFCCA8] text-[11px] font-medium transition-all cursor-pointer"
+                            >
+                              <span>Open in Portal</span>
+                              <ArrowUpRight className="w-3 h-3 text-[#A58D66]" />
+                            </button>
+                          </div>
+                        )}
                       </div>
                     </div>
 
@@ -533,24 +663,29 @@ export const UserDashboardModal: React.FC<UserDashboardModalProps> = ({
             </div>
           )}
 
-          {/* TAB 3: CONNECTED DATABASES (THE 4 PLATFORMS) */}
+          {/* TAB 4: CONNECTED PORTALS (THE 4 NODES) */}
           {activeTab === 'databases' && (
             <div className="space-y-4">
               <div className="p-4 rounded-xl bg-[#407E8C]/10 border border-[#407E8C]/30 text-xs text-[#E5E1DD]/80 leading-relaxed flex items-center gap-3">
                 <ShieldCheck className="w-5 h-5 text-emerald-400 shrink-0" />
                 <span>
-                  All 4 ecosystem databases are synchronized via our unified schema. Creational state, telemetry data, and custom schematics persist across all portals automatically.
+                  All 4 ecosystem platforms share the canonical KITT netlist schema. Circuit modifications, simulation telemetry, and digital logic testbenches replicate across every portal in real time.
                 </span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                {user.connectedPlatforms.map((platform) => (
+                {portalStatuses.map((portal) => (
                   <div
-                    key={platform.id}
+                    key={portal.id}
                     className="p-4 rounded-xl bg-[#0a1217] border border-[#A58D66]/25 space-y-3"
                   >
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold font-cinzel text-[#E5E1DD]">{platform.name}</span>
+                      <div className="flex items-center gap-2">
+                        <div className="p-1 rounded bg-[#A58D66]/15 text-[#A58D66]">
+                          {getPlatformIcon(portal.icon)}
+                        </div>
+                        <span className="text-xs font-bold font-cinzel text-[#E5E1DD]">{portal.name}</span>
+                      </div>
                       <span className="flex items-center gap-1.5 text-[10px] font-mono text-emerald-400">
                         <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                         <span>Online</span>
@@ -559,17 +694,27 @@ export const UserDashboardModal: React.FC<UserDashboardModalProps> = ({
 
                     <div className="space-y-1 text-xs font-mono text-[#E5E1DD]/60">
                       <div className="flex justify-between">
-                        <span>Database Node:</span>
-                        <span className="text-[#E5E1DD] font-semibold">{platform.id}-primary</span>
+                        <span>Node Latency:</span>
+                        <span className="text-emerald-400 font-semibold">{portal.latencyMs} ms</span>
                       </div>
                       <div className="flex justify-between">
-                        <span>Last Synced:</span>
-                        <span className="text-[#A58D66]">{platform.lastSync}</span>
+                        <span>Active Projects:</span>
+                        <span className="text-[#E5E1DD] font-semibold">{portal.activeProjectsCount}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Replication Mode:</span>
+                        <span className="text-[#A58D66] truncate max-w-[160px]">{portal.lastSync}</span>
                       </div>
                     </div>
 
                     <div className="pt-2 border-t border-white/5 flex items-center justify-between text-xs">
-                      <span className="text-[11px] text-emerald-400 font-mono">Auto-Sync Active</span>
+                      <button
+                        onClick={() => handleOpenPortal(portal.route)}
+                        className="text-xs text-[#76B4C2] hover:text-[#E5E1DD] font-medium flex items-center gap-1 transition-colors cursor-pointer"
+                      >
+                        <span>Launch Portal</span>
+                        <ExternalLink className="w-3 h-3" />
+                      </button>
                       <button
                         onClick={handleSyncDatabases}
                         className="text-xs text-[#A58D66] hover:text-[#E5E1DD] font-medium transition-colors cursor-pointer"
@@ -588,7 +733,7 @@ export const UserDashboardModal: React.FC<UserDashboardModalProps> = ({
                   className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#A58D66] to-[#8C7654] hover:from-[#BFA378] hover:to-[#A58D66] text-[#080f14] font-bold text-xs flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(165,141,102,0.35)] transition-all cursor-pointer disabled:opacity-50"
                 >
                   <RefreshCw className={`w-4 h-4 ${isSyncing ? 'animate-spin' : ''}`} />
-                  <span>{isSyncing ? 'Synchronizing All 4 Nodes...' : 'Force Global Database Sync'}</span>
+                  <span>{isSyncing ? 'Replicating All 4 Portal Nodes...' : 'Force Global Database Sync'}</span>
                 </button>
               </div>
             </div>
@@ -599,7 +744,9 @@ export const UserDashboardModal: React.FC<UserDashboardModalProps> = ({
         <div className="px-5 py-3.5 bg-[#091116] border-t border-[#A58D66]/20 flex items-center justify-between shrink-0">
           <div className="flex items-center gap-2 text-xs text-[#E5E1DD]/50 font-mono">
             <span>Unified User ID:</span>
-            <span className="text-[#A58D66]">{user.id}</span>
+            <span className="text-[#A58D66]">{currentUser.id}</span>
+            <span className="hidden sm:inline text-[#E5E1DD]/30">•</span>
+            <span className="hidden sm:inline text-emerald-400 font-medium">Session Verified</span>
           </div>
 
           <button
@@ -607,7 +754,7 @@ export const UserDashboardModal: React.FC<UserDashboardModalProps> = ({
             className="px-5 py-2 rounded-xl border border-[#A58D66]/35 bg-[#121c22] hover:bg-[#1a2730] text-xs font-semibold text-[#E5E1DD] hover:text-[#A58D66] transition-colors flex items-center gap-2 cursor-pointer shadow-sm"
           >
             <X className="w-3.5 h-3.5" />
-            <span>Close & Return to Page</span>
+            <span>Close & Return</span>
           </button>
         </div>
       </div>
