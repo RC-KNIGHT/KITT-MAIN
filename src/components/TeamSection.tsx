@@ -16,9 +16,8 @@ export const TEAM_MEMBERS: TeamMember[] = [
     id: 'ravi-chaturvedi',
     name: 'Ravi Chaturvedi',
     emoji: '🚀',
-    role: 'Founder & Lead Innovator',
+    role: 'Founder & Innovator',
     intro: 'Vision, Product & Core Development',
-    isLead: true,
   },
   {
     id: 'roshan-vishwakarma',
@@ -33,6 +32,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     emoji: '⚙️',
     role: 'Chief Backend Architect',
     intro: 'Backend, Systems & Infrastructure',
+    isLead: true,
   },
   {
     id: 'harshdeep-singh',
@@ -186,7 +186,7 @@ export const TeamSection: React.FC = () => {
                   </div>
                   {member.isLead && (
                     <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-[#A58D66]/20 text-[#A58D66] border border-[#A58D66]/40">
-                      Founder
+                      Lead
                     </span>
                   )}
                 </div>
