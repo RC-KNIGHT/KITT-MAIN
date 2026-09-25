@@ -171,15 +171,37 @@ export class ElectricalPanelEngine {
 
     let totalConnectedLoadAmps = 0;
 
-    panel.breakers.forEach(breaker => {
+    const breakers = Array.isArray(panel.breakers) ? panel.breakers : [];
+    const mainRatingAmps = Number(panel.mainRatingAmps || (panel as any).mainBreakerAmps) || 100;
+    const busbarRatingAmps = Number(panel.busbarRatingAmps) || 125;
+
+    breakers.forEach(breaker => {
+      const rawBreaker = breaker as any;
+      const tripRatingAmps = Number(breaker.tripRatingAmps || rawBreaker.tripAmps || 15);
+      const breakerLabel = breaker.label || rawBreaker.description || breaker.id || 'Breaker';
+      const breakerPhase = breaker.phase || rawBreaker.phaseAssignment || 'L1';
+
+      const connectedLoads: BranchLoad[] = Array.isArray(breaker.connectedLoads) && breaker.connectedLoads.length > 0
+        ? breaker.connectedLoads
+        : (rawBreaker.conductorGaugeAwg !== undefined || rawBreaker.connectedLoadAmps !== undefined)
+          ? [{
+              loadName: rawBreaker.description || breakerLabel,
+              continuousCurrentAmps: Number(rawBreaker.connectedLoadAmps || rawBreaker.continuousAmps || 0),
+              nonContinuousCurrentAmps: Number(rawBreaker.nonContinuousCurrentAmps || 0),
+              wireGaugeAwg: Number(rawBreaker.conductorGaugeAwg || rawBreaker.wireGaugeAwg || 14),
+              cableType: rawBreaker.cableType || rawBreaker.conductorType || 'THHN',
+              powerFactor: Number(rawBreaker.powerFactor || 0.95),
+            }]
+          : [];
+
       // 1. Double-tapping check: More than 1 branch conductor on a single breaker
-      if (breaker.connectedLoads.length > 1) {
+      if (connectedLoads.length > 1) {
         violations.push({
           severity: 'ERROR',
           code: 'ERR_DOUBLE_TAPPED_BREAKER',
           breakerId: breaker.id,
           standardReference: 'NEC 110.14(A) / UL 489',
-          message: `Breaker '${breaker.label}' (ID: ${breaker.id}) has ${breaker.connectedLoads.length} branch circuits landed on its terminal lug. Double-tapping creates loose terminations and severe fire hazards.`,
+          message: `Breaker '${breakerLabel}' (ID: ${breaker.id}) has ${connectedLoads.length} branch circuits landed on its terminal lug. Double-tapping creates loose terminations and severe fire hazards.`,
           recommendation: 'Use an approved pigtail wire nut inside the enclosure or allocate an independent breaker slot for each circuit.',
         });
       }
@@ -188,33 +210,33 @@ export class ElectricalPanelEngine {
       let breakerTotalContinuousAmps = 0;
       let breakerTotalNonContinuousAmps = 0;
 
-      breaker.connectedLoads.forEach(load => {
+      connectedLoads.forEach(load => {
         breakerTotalContinuousAmps += load.continuousCurrentAmps;
         breakerTotalNonContinuousAmps += load.nonContinuousCurrentAmps;
 
         // 2. Conductor Wire Gauge Sizing vs Breaker Rating
         const maxPermittedBreakerAmps = COPPER_WIRE_AMPACITY_LIMITS[load.wireGaugeAwg] || 15;
-        if (breaker.tripRatingAmps > maxPermittedBreakerAmps) {
+        if (tripRatingAmps > maxPermittedBreakerAmps) {
           violations.push({
             severity: 'ERROR',
             code: 'ERR_CONDUCTOR_UNDERSIZED',
             breakerId: breaker.id,
             standardReference: 'NEC Table 310.16 & 240.4(D)',
-            message: `Breaker rating of ${breaker.tripRatingAmps}A exceeds the ${maxPermittedBreakerAmps}A maximum safe ampacity of the connected ${load.wireGaugeAwg} AWG conductor on '${load.loadName}'. In an overload condition, the wire will overheat and ignite before the breaker trips.`,
-            recommendation: `Upgrade the wire to at least ${this.getMinAwgForAmps(breaker.tripRatingAmps)} AWG copper, or reduce the breaker rating to ${maxPermittedBreakerAmps}A.`,
+            message: `Breaker rating of ${tripRatingAmps}A exceeds the ${maxPermittedBreakerAmps}A maximum safe ampacity of the connected ${load.wireGaugeAwg} AWG conductor on '${load.loadName}'. In an overload condition, the wire will overheat and ignite before the breaker trips.`,
+            recommendation: `Upgrade the wire to at least ${this.getMinAwgForAmps(tripRatingAmps)} AWG copper, or reduce the breaker rating to ${maxPermittedBreakerAmps}A.`,
           });
         }
       });
 
       // 3. Continuous Load 125% Rule (NEC 210.20)
       const requiredDesignAmps = breakerTotalContinuousAmps * 1.25 + breakerTotalNonContinuousAmps;
-      if (breaker.tripRatingAmps < requiredDesignAmps) {
+      if (tripRatingAmps < requiredDesignAmps) {
         violations.push({
           severity: 'ERROR',
           code: 'ERR_BREAKER_UNDERSIZED',
           breakerId: breaker.id,
           standardReference: 'NEC 210.20(A) & IEC 60898',
-          message: `Connected continuous load on breaker '${breaker.label}' requires minimum trip ampacity of ${requiredDesignAmps.toFixed(1)}A (125% of continuous load ${breakerTotalContinuousAmps}A + ${breakerTotalNonContinuousAmps}A non-continuous), but breaker is rated for only ${breaker.tripRatingAmps}A. Nuisance thermal tripping will occur.`,
+          message: `Connected continuous load on breaker '${breakerLabel}' requires minimum trip ampacity of ${requiredDesignAmps.toFixed(1)}A (125% of continuous load ${breakerTotalContinuousAmps}A + ${breakerTotalNonContinuousAmps}A non-continuous), but breaker is rated for only ${tripRatingAmps}A. Nuisance thermal tripping will occur.`,
           recommendation: `Upsize breaker to at least ${this.getNextStandardBreakerRating(requiredDesignAmps)}A and ensure wire gauge matches.`,
         });
       }
@@ -223,11 +245,11 @@ export class ElectricalPanelEngine {
       totalConnectedLoadAmps += totalLoadOnBreaker;
 
       // Accumulate phase loading
-      if (breaker.phase === 'L1') {
+      if (breakerPhase === 'L1') {
         l1_Amps += totalLoadOnBreaker;
-      } else if (breaker.phase === 'L2') {
+      } else if (breakerPhase === 'L2') {
         l2_Amps += totalLoadOnBreaker;
-      } else if (breaker.phase === 'L3') {
+      } else if (breakerPhase === 'L3') {
         l3_Amps += totalLoadOnBreaker;
       } else {
         l1_Amps += totalLoadOnBreaker / 2;
@@ -237,15 +259,15 @@ export class ElectricalPanelEngine {
 
     // 4. Panel Total Coincident Loading vs Main Breaker
     const diversifiedDemandAmps = totalConnectedLoadAmps * 0.8; // 80% diversity factor
-    const busbarUtilizationPercent = Math.round((diversifiedDemandAmps / panel.busbarRatingAmps) * 100);
-    const mainBreakerUtilizationPercent = Math.round((diversifiedDemandAmps / panel.mainRatingAmps) * 100);
+    const busbarUtilizationPercent = Math.round((diversifiedDemandAmps / busbarRatingAmps) * 100);
+    const mainBreakerUtilizationPercent = Math.round((diversifiedDemandAmps / mainRatingAmps) * 100);
 
-    if (diversifiedDemandAmps > panel.mainRatingAmps) {
+    if (diversifiedDemandAmps > mainRatingAmps) {
       violations.push({
         severity: 'ERROR',
         code: 'ERR_PANEL_MAIN_OVERLOAD',
         standardReference: 'NEC Article 220',
-        message: `Total diversified panel demand (${diversifiedDemandAmps.toFixed(1)}A) exceeds the main service disconnect rating of ${panel.mainRatingAmps}A (${mainBreakerUtilizationPercent}% capacity).`,
+        message: `Total diversified panel demand (${diversifiedDemandAmps.toFixed(1)}A) exceeds the main service disconnect rating of ${mainRatingAmps}A (${mainBreakerUtilizationPercent}% capacity).`,
         recommendation: `Upgrade main breaker/service panel to 150A or 200A, or shed non-critical branch circuits.`,
       });
     } else if (mainBreakerUtilizationPercent > 80) {
@@ -280,8 +302,11 @@ export class ElectricalPanelEngine {
     const hasErrors = violations.some(v => v.severity === 'ERROR');
     const hasWarnings = violations.some(v => v.severity === 'WARNING');
 
+    const panelModel = panel.panelId || (panel as any).id || 'MAIN_PANEL';
+    const voltageSys = panel.voltageSystem || ((panel as any).supplyVoltage ? `${(panel as any).supplyVoltage}V` : '120/240V_SPLIT');
+
     const derivationSummary = `### ⚡ Electrical Panel Engineering Telemetry & Compliance Report
-- **Panel Model**: ${panel.panelId} (${panel.voltageSystem}, Main Disconnect: **${panel.mainRatingAmps}A**, Busbar: **${panel.busbarRatingAmps}A**)
+- **Panel Model**: ${panelModel} (${voltageSys}, Main Disconnect: **${mainRatingAmps}A**, Busbar: **${busbarRatingAmps}A**)
 - **Total Connected Load**: ${totalConnectedLoadAmps.toFixed(1)}A
 - **Diversified Demand (80% factor)**: **${diversifiedDemandAmps.toFixed(1)}A** (${mainBreakerUtilizationPercent}% of main capacity)
 - **Phase Distribution**: L1: **${l1_Amps.toFixed(1)}A** | L2: **${l2_Amps.toFixed(1)}A** (Phase Delta: **${phaseImbalancePercent}%**)
