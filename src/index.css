@@ -1,0 +1,636 @@
+@import "tailwindcss";
+
+:root {
+  --color-sand: #E5E1DD;
+  --color-teal: #407E8C;
+  --color-teal-glow: rgba(64, 126, 140, 0.45);
+  --color-gold: #A58D66;
+  --color-gold-glow: rgba(165, 141, 102, 0.4);
+  --color-obsidian: #080f14;
+  --color-obsidian-card: rgba(13, 23, 30, 0.75);
+
+  /* Workspace Engineering Tokens */
+  --kit-sand: #E5E1DD;
+  --kit-teal: #407E8C;
+  --kit-gold: #A58D66;
+  --kit-navy: #083A4F;
+  --kit-navy-dark: #03141D;
+  --kit-navy-surface: #06222F;
+  --kit-navy-elevated: #0A2E3E;
+  --kit-border-subtle: rgba(64, 126, 140, 0.22);
+  --kit-border-gold: rgba(165, 141, 102, 0.35);
+}
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #080f14;
+    color: #E5E1DD;
+  }
+
+  code, pre, .font-mono {
+    font-family: 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  }
+}
+
+/* Surrealist Luxury Typography Classes */
+.font-serif-luxury {
+  font-family: 'Italiana', 'Cinzel', 'Cormorant Garamond', Georgia, serif;
+}
+
+.font-cinzel {
+  font-family: 'Cinzel', Georgia, serif;
+  letter-spacing: 0.05em;
+}
+
+.font-cormorant {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+/* Surreal Gradients & Textures */
+.text-gradient-gold {
+  background: linear-gradient(135deg, #FFF8F0 0%, #E5E1DD 25%, #A58D66 65%, #DFCCA8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-teal {
+  background: linear-gradient(135deg, #E5E1DD 0%, #76B4C2 40%, #407E8C 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-surreal {
+  background: linear-gradient(135deg, #E5E1DD 0%, #A58D66 38%, #407E8C 82%, #E5E1DD 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Highly Ambitious Animated Shimmer & Text Glow */
+@keyframes shimmer-luxury {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.animate-text-shimmer {
+  background: linear-gradient(
+    90deg, 
+    #A58D66 0%, 
+    #E5E1DD 18%, 
+    #FFFFFF 30%, 
+    #76B4C2 50%, 
+    #407E8C 68%, 
+    #A58D66 84%, 
+    #E5E1DD 100%
+  );
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer-luxury 4.5s linear infinite;
+}
+
+/* Luminous Ambient Text Glow */
+@keyframes text-glow-pulse {
+  0%, 100% {
+    text-shadow: 0 0 12px rgba(165, 141, 102, 0.35), 0 0 24px rgba(64, 126, 140, 0.2);
+  }
+  50% {
+    text-shadow: 0 0 22px rgba(165, 141, 102, 0.65), 0 0 38px rgba(64, 126, 140, 0.45);
+  }
+}
+
+.animate-text-glow {
+  animation: text-glow-pulse 3.6s ease-in-out infinite;
+}
+
+/* Hypnotic Title Breathing for Grand Architectural Headings */
+@keyframes title-breathe {
+  0%, 100% {
+    letter-spacing: 0.04em;
+    filter: drop-shadow(0 0 14px rgba(165, 141, 102, 0.2));
+  }
+  50% {
+    letter-spacing: 0.065em;
+    filter: drop-shadow(0 0 30px rgba(64, 126, 140, 0.45));
+  }
+}
+
+.animate-title-breathe {
+  animation: title-breathe 5s ease-in-out infinite;
+}
+
+/* Gold Radiance Sheen */
+@keyframes gold-radiance {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gold-radiance {
+  background: linear-gradient(
+    120deg,
+    #E5E1DD 0%,
+    #A58D66 35%,
+    #FFF8F0 50%,
+    #BFA378 70%,
+    #E5E1DD 100%
+  );
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gold-radiance 4s ease infinite;
+}
+
+@keyframes pulse-ambition {
+  0%, 100% {
+    opacity: 0.92;
+    transform: scale(1);
+    filter: drop-shadow(0 0 10px rgba(165, 141, 102, 0.3));
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.02);
+    filter: drop-shadow(0 0 26px rgba(64, 126, 140, 0.55));
+  }
+}
+
+.animate-ambition {
+  animation: pulse-ambition 3.8s ease-in-out infinite;
+}
+
+/* Crystal-clear transparent glassmorphism for bottom templates */
+.transparent-glass-card {
+  background: rgba(8, 15, 20, 0.28);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(165, 141, 102, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
+  transform-style: preserve-3d;
+}
+
+.transparent-glass-card:hover {
+  border-color: rgba(165, 141, 102, 0.45);
+  box-shadow: 0 16px 48px 0 rgba(0, 0, 0, 0.5), 0 0 20px rgba(165, 141, 102, 0.15);
+  transform: translateY(-3px);
+}
+
+/* Metaphysical Glassmorphism Cards with Optimized 3D Depth */
+.surreal-card {
+  background: linear-gradient(145deg, rgba(16, 29, 36, 0.82) 0%, rgba(9, 16, 21, 0.90) 100%);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(165, 141, 102, 0.22);
+  box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.6), inset 0 1px 0 0 rgba(229, 225, 221, 0.12);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
+  will-change: transform;
+}
+
+.surreal-card:hover {
+  border-color: rgba(165, 141, 102, 0.55);
+  transform: translateY(-4px);
+}
+
+.surreal-card-gold {
+  background: linear-gradient(145deg, rgba(24, 32, 36, 0.86) 0%, rgba(11, 17, 21, 0.94) 100%);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(165, 141, 102, 0.42);
+  box-shadow: 0 18px 40px -12px rgba(165, 141, 102, 0.2), inset 0 1px 0 0 rgba(165, 141, 102, 0.28);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
+  will-change: transform;
+}
+
+.surreal-card-gold:hover {
+  border-color: rgba(165, 141, 102, 0.75);
+  transform: translateY(-5px);
+}
+
+/* Surreal Atmospheric Grid & Ambient Lighting */
+.bg-surreal-grid {
+  background-size: 40px 40px;
+  background-image: 
+    radial-gradient(circle, rgba(165, 141, 102, 0.14) 1px, transparent 1px);
+}
+
+.bg-teal-haze {
+  background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(64, 126, 140, 0.24), transparent 75%);
+}
+
+.bg-gold-haze {
+  background: radial-gradient(ellipse 65% 45% at 50% 100%, rgba(165, 141, 102, 0.18), transparent 70%);
+}
+
+/* Surrealist Dream Keyframes */
+@keyframes float-ethereal {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-9px) rotate(0.4deg);
+  }
+}
+
+@keyframes pulse-halo {
+  0%, 100% {
+    opacity: 0.35;
+    filter: drop-shadow(0 0 16px rgba(64, 126, 140, 0.35));
+  }
+  50% {
+    opacity: 0.85;
+    filter: drop-shadow(0 0 32px rgba(165, 141, 102, 0.55));
+  }
+}
+
+.animate-float {
+  animation: float-ethereal 6s ease-in-out infinite;
+}
+
+.animate-halo {
+  animation: pulse-halo 4s ease-in-out infinite;
+}
+
+/* Custom minimal luxury scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #080f14;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e333d;
+  border-radius: 3px;
+  border: 1px solid rgba(165, 141, 102, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #407E8C;
+}
+
+/* ============================================================
+   SMOOTH SYNCHRONIZED ANIMATIONS & MICRO-INTERACTIONS
+   ============================================================ */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+/* Offscreen Paint Containment for locked 60-120fps scrolling */
+.section-contain {
+  contain: layout style;
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 700px;
+}
+
+/* Global Hardware Accelerated Smooth Transitions */
+.smooth-spring {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hover-lift {
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.28s ease;
+  will-change: transform;
+}
+.hover-lift:hover {
+  transform: translateY(-4px);
+}
+
+/* Synchronized Ambient Pulses */
+@keyframes sync-pulse-gold {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(165, 141, 102, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(165, 141, 102, 0);
+  }
+}
+
+.animate-pulse-sync {
+  animation: sync-pulse-gold 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+@keyframes sync-pulse-teal {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(64, 126, 140, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(64, 126, 140, 0);
+  }
+}
+
+.animate-pulse-teal {
+  animation: sync-pulse-teal 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+/* Subtle Gold Border Sheen */
+@keyframes border-sheen {
+  0%, 100% {
+    border-color: rgba(165, 141, 102, 0.22);
+  }
+  50% {
+    border-color: rgba(165, 141, 102, 0.55);
+  }
+}
+
+.animate-border-sheen {
+  animation: border-sheen 3s ease-in-out infinite;
+}
+
+/* ============================================================
+   3D WORLD PERSPECTIVE & BUTTER-SMOOTH DEPTH UTILITIES
+   ============================================================ */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.perspective-1400 {
+  perspective: 1400px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.gpu-accelerated {
+  transform: translate3d(0, 0, 0);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+/* Smooth 3D Hover Float */
+.hover-float-3d {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-style: preserve-3d;
+}
+
+.hover-float-3d:hover {
+  transform: translate3d(0, -6px, 12px);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7), 0 0 25px rgba(165, 141, 102, 0.25);
+}
+
+/* ============================================================
+   KITT WORKSPACE INDUSTRIAL UTILITIES & KEYFRAMES
+   ============================================================ */
+.font-serif-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+.font-display-matrix {
+  font-family: 'Cinzel', 'Plus Jakarta Sans', serif;
+}
+
+.font-mono-code {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+@keyframes flowCurrent {
+  from {
+    stroke-dashoffset: 24;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes pulseWireGlow {
+  0%, 100% {
+    opacity: 0.9;
+    filter: drop-shadow(0 0 6px rgba(165, 141, 102, 0.8));
+  }
+  50% {
+    opacity: 0.6;
+    filter: drop-shadow(0 0 2px rgba(165, 141, 102, 0.3));
+  }
+}
+
+@keyframes pulseGold {
+  0%, 100% {
+    opacity: 0.95;
+    filter: drop-shadow(0 0 6px rgba(165, 141, 102, 0.7));
+  }
+  50% {
+    opacity: 0.65;
+    filter: drop-shadow(0 0 2px rgba(165, 141, 102, 0.25));
+  }
+}
+
+@keyframes pulseTeal {
+  0%, 100% {
+    opacity: 0.95;
+    filter: drop-shadow(0 0 8px rgba(64, 126, 140, 0.7));
+  }
+  50% {
+    opacity: 0.65;
+    filter: drop-shadow(0 0 2px rgba(64, 126, 140, 0.25));
+  }
+}
+
+.wire-flow-active,
+.animate-wire-flow {
+  stroke-dasharray: 6 6;
+  animation: flowCurrent 0.65s linear infinite;
+}
+
+.wire-flow-fast {
+  stroke-dasharray: 4 4;
+  animation: flowCurrent 0.35s linear infinite;
+}
+
+.wire-glow-pulse {
+  animation: pulseWireGlow 1.8s ease-in-out infinite;
+}
+
+.glow-active-led {
+  animation: pulseTeal 1.5s ease-in-out infinite;
+}
+
+.glow-active-gold {
+  animation: pulseGold 1.5s ease-in-out infinite;
+}
+
+/* Industrial Grid & Precision Surfaces */
+.immersive-grid {
+  background-image: radial-gradient(rgba(64, 126, 140, 0.15) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.circuit-pcb-grid {
+  background-image: linear-gradient(to right, rgba(64, 126, 140, 0.08) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(64, 126, 140, 0.08) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.card-navy-panel {
+  background: rgba(8, 58, 79, 0.45);
+  border: 1px solid rgba(64, 126, 140, 0.25);
+  box-shadow: 0 4px 20px rgba(3, 20, 29, 0.6);
+}
+
+.card-navy-elevated {
+  background: rgba(6, 34, 47, 0.85);
+  border: 1px solid rgba(64, 126, 140, 0.35);
+  box-shadow: 0 10px 30px rgba(2, 14, 21, 0.7);
+}
+
+.btn-gold-primary {
+  background-color: #A58D66;
+  color: #03141D;
+  font-weight: 700;
+  transition: all 0.15s ease-in-out;
+}
+
+.btn-gold-primary:hover {
+  background-color: #BBA47E;
+  box-shadow: 0 0 16px rgba(165, 141, 102, 0.3);
+}
+
+.btn-teal-secondary {
+  background: rgba(8, 58, 79, 0.6);
+  border: 1px solid rgba(64, 126, 140, 0.4);
+  color: #E5E1DD;
+  transition: all 0.15s ease-in-out;
+}
+
+.btn-teal-secondary:hover {
+  border-color: #407E8C;
+  background: rgba(64, 126, 140, 0.25);
+  color: #FFFFFF;
+}
+
+/* ============================================================
+   CIRCUIT OVERLAY & EDA LAB OSCILLOSCOPE KEYFRAMES
+   ============================================================ */
+@keyframes scan-line-sweep {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.9;
+  }
+  80% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(800px);
+    opacity: 0;
+  }
+}
+
+.animate-scan-line {
+  animation: scan-line-sweep 7s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes scan-line-reverse {
+  0% {
+    transform: translateY(800px);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.7;
+  }
+  80% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+
+.animate-scan-line-reverse {
+  animation: scan-line-reverse 10s cubic-bezier(0.4, 0, 0.2, 1) infinite 2s;
+}
+
+@keyframes circuit-flow-kf {
+  from {
+    stroke-dashoffset: 240;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-circuit-fast {
+  stroke-dasharray: 24 96;
+  animation: circuit-flow-kf 2.8s linear infinite;
+}
+
+.animate-circuit-slow {
+  stroke-dasharray: 18 140;
+  animation: circuit-flow-kf 5.6s linear infinite;
+}
+
+@keyframes node-pulse-kf {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 2px rgba(165, 141, 102, 0.3));
+  }
+  50% {
+    transform: scale(1.18);
+    filter: drop-shadow(0 0 10px rgba(118, 180, 194, 0.9));
+  }
+}
+
+.animate-node-pulse {
+  transform-origin: center;
+  animation: node-pulse-kf 2.2s ease-in-out infinite;
+}
+
+@keyframes circuit-breathe-kf {
+  0%, 100% {
+    opacity: 0.75;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.animate-circuit-breathe {
+  animation: circuit-breathe-kf 4s ease-in-out infinite;
+}
+
+@keyframes oscilloscope-flow-kf {
+  0% {
+    stroke-dashoffset: 0;
+    filter: drop-shadow(0 0 4px rgba(64, 126, 140, 0.5));
+  }
+  50% {
+    filter: drop-shadow(0 0 12px rgba(223, 204, 168, 0.8));
+  }
+  100% {
+    stroke-dashoffset: -180;
+    filter: drop-shadow(0 0 4px rgba(64, 126, 140, 0.5));
+  }
+}
+
+.animate-oscilloscope-trace {
+  stroke-dasharray: 60 15;
+  animation: oscilloscope-flow-kf 3.5s linear infinite;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .animate-scan-line,
+  .animate-scan-line-reverse,
+  .animate-circuit-fast,
+  .animate-circuit-slow,
+  .animate-node-pulse,
+  .animate-circuit-breathe,
+  .animate-oscilloscope-trace {
+    animation: none !important;
+  }
+}
+
+
+

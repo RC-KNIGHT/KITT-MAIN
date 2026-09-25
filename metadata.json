@@ -1,0 +1,7 @@
+{
+  "name": "KITT — AI-Native Electronics Ecosystem",
+  "description": "Where Ideas Become Inventions. An AI-native electronics and engineering ecosystem to learn, design, simulate, experiment, and build real hardware.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
