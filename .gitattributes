@@ -1,0 +1,21 @@
+# Normalize all text files to LF in the repository and in the working tree.
+# Without this, Windows checkouts store CRLF and produce whole-file diffs
+# that hide real changes on every commit.
+* text=auto eol=lf
+
+# Explicitly binary — never touched, never diffed as text.
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.ico  binary
+*.webp binary
+*.mp4  binary
+*.woff binary
+*.woff2 binary
+*.ttf  binary
+*.eot  binary
+*.pdf  binary
+
+# Lock files should not be merged or word-diffed meaningfully.
+package-lock.json -diff
