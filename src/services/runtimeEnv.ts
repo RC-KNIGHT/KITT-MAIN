@@ -69,3 +69,22 @@ export function resolveGeminiApiKey(): string | undefined {
   }
   return undefined;
 }
+
+/**
+ * NVIDIA NIM API key (`nvapi-...`).
+ * Accepts the common variable spellings so secrets can be supplied under
+ * whichever name the deployment already uses.
+ */
+export function resolveNvidiaApiKey(): string | undefined {
+  const candidates = [
+    'NVIDIA_API_KEY',
+    'NVIDIA_NIM_API_KEY',
+    'NIM_API_KEY',
+    'NVIDIA_API_KEY_CORE',
+  ];
+  for (const name of candidates) {
+    const value = readEnv(name);
+    if (value && value.trim().length > 0) return value.trim();
+  }
+  return undefined;
+}

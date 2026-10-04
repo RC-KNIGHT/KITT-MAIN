@@ -10,6 +10,8 @@ import { firmwareSandbox } from '../src/services/firmwareSandbox';
 import { costBomEngine } from '../src/services/costBomEngine';
 import { intentRouter } from '../src/services/intentRouter';
 import { kittOrchestrator } from '../src/services/orchestrator';
+import { extractJsonDetailed } from '../src/services/nimClient';
+import { HARDWARE_CONTRACT_TEXT } from '../src/services/schemas/hardwareResponseSchema';
 
 let passedTests = 0;
 let totalTests = 0;
@@ -272,6 +274,58 @@ async function runAllTests() {
   });
   assert(panelOrchResult.panelReport !== undefined, 'Orchestrator generates electrical panel report');
   assert(panelOrchResult.reply.includes('Electrical Panel Engineering Telemetry'), 'Response includes electrical panel telemetry');
+
+  // -------------------------------------------------------------
+  // TEST SUITE 8: LLM JSON EXTRACTION & REPAIR
+  // -------------------------------------------------------------
+  // These cases reproduce real NVIDIA NIM replies that previously produced an
+  // empty circuit: raw newlines inside JSON strings, a code fence nested inside
+  // a string value (firmware source), and a reply truncated at the token limit.
+  console.log('\n--- Suite 8: LLM JSON Extraction & Repair ---');
+
+  const plain = extractJsonDetailed('{"intent":"TECHNICAL_QNA","explanation":"ok","actions":[]}');
+  assert(plain.value?.intent === 'TECHNICAL_QNA', 'Extracts a plain JSON object');
+
+  // Raw newline inside a string value (illegal JSON, emitted constantly by chat models)
+  const rawNewlines = '{\n  "intent": "DIGITAL_LOGIC_CIRCUIT",\n  "explanation": "line one\nline two",\n  "actions": []\n}';
+  const repairedNewlines = extractJsonDetailed(rawNewlines);
+  assert(repairedNewlines.value !== null, 'Repairs raw newlines inside string values');
+  assert(repairedNewlines.value?.explanation === 'line one\nline two', 'Preserves the newline content after repair');
+
+  // A code fence appearing INSIDE a string value must not truncate the payload
+  const fenceInsideString =
+    '{"intent":"DIGITAL_LOGIC_CIRCUIT","explanation":"Use this:\n```cpp\nvoid setup(){}\n```\ndone","actions":[{"actionType":"create_component","payload":{"id":"a"}}]}';
+  const fenceParsed = extractJsonDetailed(fenceInsideString);
+  assert(fenceParsed.value !== null, 'Handles a markdown fence nested inside a string value');
+  assert(fenceParsed.value?.actions?.length === 1, 'Retains actions after nested-fence repair');
+
+  // Trailing comma before a closing token
+  const trailingComma = '{"intent":"TECHNICAL_QNA","actions":[{"actionType":"create_component","payload":{"id":"a"},}],}';
+  assert(extractJsonDetailed(trailingComma).value !== null, 'Removes trailing commas');
+
+  // Genuinely wrapped markdown fence
+  const wrapped = '```json\n{"intent":"TECHNICAL_QNA","explanation":"x","actions":[]}\n```';
+  assert(extractJsonDetailed(wrapped).value?.intent === 'TECHNICAL_QNA', 'Unwraps a wrapping markdown fence');
+
+  // Truncated at the token limit -> must be reported as truncated, not silently null
+  const truncated = '{"intent":"DIGITAL_LOGIC_CIRCUIT","explanation":"This design uses an ESP32","actions":[{"actionType":"create_comp';
+  const truncatedResult = extractJsonDetailed(truncated);
+  assert(truncatedResult.value === null, 'Rejects a truncated JSON payload');
+  assert(truncatedResult.truncated === true, 'Flags a truncated payload as truncated (retryable)');
+
+  // Leading prose before the JSON
+  const withProse = 'Sure! Here is the design:\n{"intent":"TECHNICAL_QNA","explanation":"x","actions":[]}';
+  assert(extractJsonDetailed(withProse).value?.intent === 'TECHNICAL_QNA', 'Skips leading prose before the JSON');
+
+  // The contract must actually be wired into what the model receives
+  assert(
+    HARDWARE_CONTRACT_TEXT.includes('"actionType"') && HARDWARE_CONTRACT_TEXT.includes('"payload"'),
+    'Hardware contract documents the {actionType, payload} shape the validator requires'
+  );
+  assert(
+    HARDWARE_CONTRACT_TEXT.includes('connect_pins') && HARDWARE_CONTRACT_TEXT.includes('create_breaker'),
+    'Hardware contract enumerates digital and panel action types'
+  );
 
   console.log('\n======================================================');
   console.log(`📊 FINAL RESULTS: ${passedTests}/${totalTests} TESTS PASSED (${Math.round((passedTests / totalTests) * 100)}%)`);

@@ -12,13 +12,13 @@
  * service modules.
  */
 
-import { GoogleGenAI } from '@google/genai';
-import { kittOrchestrator, createEdgeOrchestrator } from './orchestrator';
+import { createEdgeOrchestrator } from './orchestrator';
 import { edgeFirmwareCompiler } from './firmwareCompiler';
 import { analyzeStatically, scanCodeSecurity, validateHardwarePins } from './firmwareAnalyzer';
 import { electricalPanelEngine } from './electricalPanelEngine';
 import { inspectPayloadSecurity, redactSensitiveOutput, SlidingWindowLimiter } from './security';
-import { setRuntimeEnv, resolveGeminiApiKey } from './runtimeEnv';
+import { setRuntimeEnv } from './runtimeEnv';
+import { resolveLlmProvider, describeLlmConfiguration, resolveStructuredClient } from './llmProvider';
 import {
   KITT_ORG_AI_SYSTEM_INSTRUCTION,
   generateIntelligentFallback,
@@ -26,7 +26,8 @@ import {
 
 const limiter = new SlidingWindowLimiter();
 
-const CANDIDATE_MODELS = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash'];
+// Gemini model preference list is now owned by the provider layer
+// (src/services/llmProvider.ts), which also supports NVIDIA NIM.
 
 export interface EdgeApiResponse {
   status: number;
@@ -151,48 +152,30 @@ export async function handleKittOrgChat(
     }
 
     const lastUserMsg = sanitized[sanitized.length - 1]?.parts[0]?.text || '';
-    const apiKey = resolveGeminiApiKey();
+    const provider = resolveLlmProvider();
 
-    if (!apiKey) {
+    if (!provider) {
       return json(200, { reply: generateIntelligentFallback(lastUserMsg), model: 'offline-fallback' });
     }
 
-    const ai = new GoogleGenAI({ apiKey, httpOptions: { headers: { 'User-Agent': 'kitt-edge-landing' } } });
+    try {
+      const result = await provider.generateText({
+        systemInstruction: KITT_ORG_AI_SYSTEM_INSTRUCTION,
+        contents: sanitized,
+        temperature: 0.7,
+        topP: 0.95,
+        maxOutputTokens: 4096,
+      });
 
-    let response: any = null;
-    let modelUsed = CANDIDATE_MODELS[0];
-    let lastError: any = null;
-
-    for (const model of CANDIDATE_MODELS) {
-      try {
-        response = await ai.models.generateContent({
-          model,
-          contents: sanitized,
-          config: {
-            systemInstruction: KITT_ORG_AI_SYSTEM_INSTRUCTION,
-            temperature: 0.7,
-            topP: 0.95,
-          },
-        });
-        if (response && response.text) {
-          modelUsed = model;
-          break;
-        }
-      } catch (modelErr: any) {
-        lastError = modelErr;
-        console.warn(`[GEMINI] Model ${model} failed: ${modelErr?.message}`);
-      }
-    }
-
-    if (!response || !response.text) {
-      console.warn(`[GEMINI] All models failed (${lastError?.message}); using local fallback.`);
+      return json(200, {
+        reply: redactSensitiveOutput(result.text),
+        model: result.model,
+        provider: provider.name,
+      });
+    } catch (providerErr: any) {
+      console.warn(`[LLM] ${provider.name} failed: ${providerErr?.message}; using local fallback.`);
       return json(200, { reply: generateIntelligentFallback(lastUserMsg), model: 'offline-fallback-degraded' });
     }
-
-    return json(200, {
-      reply: redactSensitiveOutput(response.text),
-      model: modelUsed,
-    });
   } catch (error: any) {
     console.error(`[SECURITY] Error in /api/kitt-org-chat: ${error?.message}`);
     const lastUserMsg = Array.isArray(body?.messages)
@@ -244,8 +227,9 @@ export async function handleKittCoreChat(
     const requestId = `core_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`;
 
     // Edge runtime cannot spawn a compiler, so inject the analysis-only strategy.
-    const hasKey = Boolean(resolveGeminiApiKey());
-    const orchestrator = hasKey ? createEdgeOrchestrator(edgeFirmwareCompiler) : kittOrchestrator;
+    // The structured client is resolved lazily inside the orchestrator, after
+    // applyEnv() has populated the request-scoped bindings.
+    const orchestrator = createEdgeOrchestrator(edgeFirmwareCompiler);
 
     const result = await orchestrator.handleCoreChatRequest({ messages, circuit, telemetry, requestId });
 
@@ -370,12 +354,14 @@ export async function handleValidatePanel(
  */
 export async function handleHealth(env?: Record<string, unknown>): Promise<EdgeApiResponse> {
   applyEnv(env);
-  const keyPresent = Boolean(resolveGeminiApiKey());
+  const { provider, model } = describeLlmConfiguration();
   return json(200, {
     status: 'ok',
     service: 'KITT Edge AI (Cloudflare Pages Functions)',
-    aiConfigured: keyPresent,
-    mode: keyPresent ? 'live-gemini' : 'offline-fallback',
+    aiConfigured: provider !== 'offline',
+    provider,
+    model,
+    mode: provider === 'offline' ? 'offline-fallback' : 'live',
     timestamp: new Date().toISOString(),
   });
 }

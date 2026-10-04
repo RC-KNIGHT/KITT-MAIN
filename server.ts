@@ -16,6 +16,7 @@ import {
   generateIntelligentFallback,
 } from "./src/services/apiPrompts";
 import { readEnv } from "./src/services/runtimeEnv";
+import { resolveLlmProvider } from "./src/services/llmProvider";
 
 dotenv.config();
 
@@ -576,8 +577,8 @@ app.post("/api/kitt-org-chat", async (req, res) => {
       });
     }
 
-    const ai = getGenAiClient();
-    if (!ai) {
+    const provider = resolveLlmProvider();
+    if (!provider) {
       const lastUserMsg = sanitizedContents[sanitizedContents.length - 1]?.parts[0]?.text || "";
       const dynamicReply = generateIntelligentFallback(lastUserMsg);
 
@@ -587,35 +588,26 @@ app.post("/api/kitt-org-chat", async (req, res) => {
       });
     }
 
-    const candidateModels = ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash"];
-    let response: any = null;
-    let modelUsed = candidateModels[0];
+    let response: { text: string; model: string } | null = null;
+    let modelUsed = "";
     let lastError: any = null;
 
-    for (const model of candidateModels) {
-      try {
-        response = await ai.models.generateContent({
-          model,
-          contents: sanitizedContents,
-          config: {
-            systemInstruction: KITT_ORG_AI_SYSTEM_INSTRUCTION,
-            temperature: 0.7,
-            topP: 0.95,
-          },
-        });
-
-        if (response && response.text) {
-          modelUsed = model;
-          break;
-        }
-      } catch (modelErr: any) {
-        lastError = modelErr;
-        console.warn(`[GEMINI] Model ${model} generation attempt failed: ${modelErr?.message}. Falling back to next...`);
-      }
+    try {
+      response = await provider.generateText({
+        systemInstruction: KITT_ORG_AI_SYSTEM_INSTRUCTION,
+        contents: sanitizedContents,
+        temperature: 0.7,
+        topP: 0.95,
+        maxOutputTokens: 4096,
+      });
+      modelUsed = response.model;
+    } catch (providerErr: any) {
+      lastError = providerErr;
+      console.warn(`[LLM] ${provider.name} generation failed: ${providerErr?.message}. Using local fallback.`);
     }
 
     if (!response || !response.text) {
-      console.warn(`[GEMINI] All remote Gemini model attempts failed or timed out (${lastError?.message}). Activating local intelligent fallback.`);
+      console.warn(`[LLM] All ${provider.name} attempts failed or timed out (${lastError?.message}). Activating local intelligent fallback.`);
       const lastUserMsg = sanitizedContents[sanitizedContents.length - 1]?.parts[0]?.text || "";
       const dynamicReply = generateIntelligentFallback(lastUserMsg);
 
@@ -625,15 +617,12 @@ app.post("/api/kitt-org-chat", async (req, res) => {
       });
     }
 
-    const rawReply =
-      response.text ||
-      "I am KITT Org AI 2.0. I could not generate a response for this query.";
-
-    const safeReply = redactSensitiveOutput(rawReply);
+    const safeReply = redactSensitiveOutput(response.text);
 
     return res.json({
       reply: safeReply,
       model: modelUsed,
+      provider: provider.name,
     });
   } catch (error: any) {
     console.error(`[SECURITY] Error processing /api/kitt-org-chat from IP ${ip}:`, error?.message);

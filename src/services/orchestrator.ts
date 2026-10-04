@@ -5,7 +5,8 @@
  */
 
 import { intentRouter } from './intentRouter';
-import { getGeminiClient, IGeminiClient } from './geminiClient';
+import { IGeminiClient, GenerateOptions, GenerationResult } from './geminiClient';
+import { resolveStructuredClient } from './llmProvider';
 import { validateAndRepairHardwareResponse, StructuredHardwareResponse, HardwareAction } from './schemas/actionSchema';
 import { simulationEngine, SimulationGateResult } from './simulationEngine';
 import { electricalPanelEngine, PanelValidationResult } from './electricalPanelEngine';
@@ -104,12 +105,37 @@ class LazyNodeFirmwareCompiler implements IFirmwareCompiler {
   }
 }
 
+/**
+ * Defers client selection until the first request.
+ *
+ * The module-level `kittOrchestrator` singleton is constructed during import,
+ * which on the Node server happens *before* `dotenv.config()` runs. Resolving
+ * the provider there would permanently pick the mock client. Resolving lazily
+ * means the environment is fully loaded by the time a request arrives.
+ */
+class LazyStructuredClient implements IGeminiClient {
+  private resolved: IGeminiClient | null = null;
+
+  private client(): IGeminiClient {
+    if (!this.resolved) {
+      this.resolved = resolveStructuredClient();
+    }
+    return this.resolved;
+  }
+
+  public generateStructuredContent<T = StructuredHardwareResponse>(
+    options: GenerateOptions
+  ): Promise<GenerationResult<T>> {
+    return this.client().generateStructuredContent<T>(options);
+  }
+}
+
 export class KittOrchestrator {
   private geminiClient: IGeminiClient;
   private firmwareCompiler: IFirmwareCompiler;
 
   constructor(customClient?: IGeminiClient, firmwareCompiler?: IFirmwareCompiler) {
-    this.geminiClient = customClient || getGeminiClient();
+    this.geminiClient = customClient || new LazyStructuredClient();
     this.firmwareCompiler = firmwareCompiler ?? new LazyNodeFirmwareCompiler();
   }
 
@@ -158,6 +184,9 @@ export class KittOrchestrator {
       systemInstruction,
       contents,
       requestId,
+      // Hardware replies include a full netlist plus firmware; a low ceiling
+      // truncates the JSON mid-string.
+      maxOutputTokens: 8192,
     });
 
     // 5. Schema Validation & Automated Repair Gate
@@ -403,5 +432,8 @@ export const kittOrchestrator = new KittOrchestrator();
  * the firmware compilation strategy differs.
  */
 export function createEdgeOrchestrator(compiler: IFirmwareCompiler, client?: IGeminiClient): KittOrchestrator {
+  // When no client is supplied the orchestrator builds a lazy one, which reads
+  // the environment at request time. That matters on the edge because request
+  // bindings are only populated once the Pages Function runs `applyEnv`.
   return new KittOrchestrator(client, compiler);
 }
