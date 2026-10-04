@@ -3,6 +3,8 @@
  * Provides request ID tracing, credential redaction, timing metrics, and structured log events.
  */
 
+import { readEnv } from './runtimeEnv';
+
 export type LogLevel = 'DEBUG' | 'INFO' | 'WARN' | 'ERROR';
 
 export interface LogEntry {
@@ -19,9 +21,9 @@ function sanitizeLogData(data: any): any {
   if (typeof data === 'string') {
     let sanitized = data;
     const keys = [
-      process.env.GEMINI_API_KEY,
-      process.env.GEMINI_API_KEY_LANDING,
-      process.env.GEMINI_API_KEY_CORE,
+      readEnv('GEMINI_API_KEY'),
+      readEnv('GEMINI_API_KEY_LANDING'),
+      readEnv('GEMINI_API_KEY_CORE'),
     ].filter(Boolean) as string[];
 
     for (const key of keys) {
@@ -82,7 +84,7 @@ export class Logger {
         console.warn(formatted, entry.metadata ? JSON.stringify(entry.metadata) : '');
         break;
       case 'DEBUG':
-        if (process.env.NODE_ENV !== 'production') {
+        if (readEnv('NODE_ENV') !== 'production') {
           console.debug(formatted, entry.metadata ? JSON.stringify(entry.metadata) : '');
         }
         break;

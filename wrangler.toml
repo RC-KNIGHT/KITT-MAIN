@@ -1,0 +1,15 @@
+# Cloudflare Pages configuration for the KITT Ecosystem.
+#
+# The deployed site is served as static assets from `dist/`, with the AI
+# endpoints handled by the Pages Functions in `functions/`. Without these
+# functions, `/api/*` falls through to the SPA and returns index.html, which is
+# why the live AI chat previously failed with a 405.
+name = "kitt-main"
+compatibility_date = "2026-10-01"
+
+# `@google/genai` references Node builtins (buffer/stream) internally. The
+# Workers runtime shims them under this flag. The AI service modules themselves
+# avoid Node APIs entirely so the containers/Docker path is never reached here.
+compatibility_flags = ["nodejs_compat"]
+
+pages_build_output_dir = "dist"

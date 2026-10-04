@@ -7,3 +7,7 @@ coverage/
 .env*
 !.env.example
 .build-temp/
+.wrangler-temp/
+.wrangler-state/
+.wrangler/
+.dev.vars

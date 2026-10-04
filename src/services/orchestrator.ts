@@ -9,7 +9,8 @@ import { getGeminiClient, IGeminiClient } from './geminiClient';
 import { validateAndRepairHardwareResponse, StructuredHardwareResponse, HardwareAction } from './schemas/actionSchema';
 import { simulationEngine, SimulationGateResult } from './simulationEngine';
 import { electricalPanelEngine, PanelValidationResult } from './electricalPanelEngine';
-import { firmwareSandbox, CompileResult } from './firmwareSandbox';
+import { CompileResult } from './firmwareAnalyzer';
+import { IFirmwareCompiler, createFirmwareCompiler } from './firmwareCompiler';
 import { costBomEngine, BomSummary } from './costBomEngine';
 import { componentRegistry } from './componentRegistry';
 import { Logger } from './logger';
@@ -76,11 +77,40 @@ CORE DIRECTIVES:
    - NEVER double-tap a breaker terminal lug (one branch conductor per breaker).
    - Balance loads between Phase L1 and Phase L2 (or L3) to keep phase delta under 15%.`;
 
+/**
+ * Default Node compiler: resolves the Docker-isolated sandbox on first use.
+ *
+ * The dynamic import keeps `fs`/`path`/`child_process` out of any bundle that
+ * imports the orchestrator, so this same class graph can be loaded on the edge.
+ */
+class LazyNodeFirmwareCompiler implements IFirmwareCompiler {
+  private resolved: IFirmwareCompiler | null = null;
+
+  private async resolveCompiler(): Promise<IFirmwareCompiler> {
+    if (!this.resolved) {
+      this.resolved = await createFirmwareCompiler();
+    }
+    return this.resolved;
+  }
+
+  public async compileWithSelfCorrectionLoop(
+    initialCode: string,
+    targetMcu: string,
+    geminiClient: IGeminiClient,
+    maxAttempts: number = 3
+  ): Promise<CompileResult> {
+    const compiler = await this.resolveCompiler();
+    return compiler.compileWithSelfCorrectionLoop(initialCode, targetMcu, geminiClient, maxAttempts);
+  }
+}
+
 export class KittOrchestrator {
   private geminiClient: IGeminiClient;
+  private firmwareCompiler: IFirmwareCompiler;
 
-  constructor(customClient?: IGeminiClient) {
+  constructor(customClient?: IGeminiClient, firmwareCompiler?: IFirmwareCompiler) {
     this.geminiClient = customClient || getGeminiClient();
+    this.firmwareCompiler = firmwareCompiler ?? new LazyNodeFirmwareCompiler();
   }
 
   public async handleCoreChatRequest(payload: CoreChatRequestPayload): Promise<CoreChatResponsePayload> {
@@ -279,7 +309,7 @@ export class KittOrchestrator {
       const targetMcu = structuredData.firmware.targetMcu || route.suggestedMcu || 'arduino:avr:uno';
       logger.info(`Entering firmware compilation sandbox for ${targetMcu}`, { requestId });
 
-      compileResult = await firmwareSandbox.compileWithSelfCorrectionLoop(
+      compileResult = await this.firmwareCompiler.compileWithSelfCorrectionLoop(
         structuredData.firmware.sourceCode,
         targetMcu,
         this.geminiClient,
@@ -366,3 +396,12 @@ export class KittOrchestrator {
 }
 
 export const kittOrchestrator = new KittOrchestrator();
+
+/**
+ * Builds an orchestrator for a runtime without Node builtins (Cloudflare
+ * Workers). Used by the Pages Functions; the same orchestrator logic runs, only
+ * the firmware compilation strategy differs.
+ */
+export function createEdgeOrchestrator(compiler: IFirmwareCompiler, client?: IGeminiClient): KittOrchestrator {
+  return new KittOrchestrator(client, compiler);
+}

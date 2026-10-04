@@ -7,6 +7,7 @@
 import { GoogleGenAI, Type } from '@google/genai';
 import { Logger } from './logger';
 import { StructuredHardwareResponse } from './schemas/actionSchema';
+import { resolveGeminiApiKey } from './runtimeEnv';
 
 const logger = new Logger('GeminiClient');
 
@@ -288,10 +289,7 @@ export class MockGeminiClient implements IGeminiClient {
  * Factory to get appropriate Gemini client
  */
 export function getGeminiClient(customApiKey?: string): IGeminiClient {
-  const apiKey =
-    customApiKey ||
-    process.env.GEMINI_API_KEY_CORE ||
-    process.env.GEMINI_API_KEY;
+  const apiKey = customApiKey || resolveGeminiApiKey();
 
   if (apiKey && apiKey.trim().length > 0) {
     return new RealGeminiClient(apiKey.trim());
