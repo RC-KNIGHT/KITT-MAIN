@@ -17,6 +17,7 @@ import {
 } from "./src/services/apiPrompts";
 import { readEnv } from "./src/services/runtimeEnv";
 import { resolveLlmProvider, describeLlmConfiguration, resolveStructuredClient } from "./src/services/llmProvider";
+import { sanitizeMessages, isSanitizeFailure, lastUserMessage } from "./src/services/chatValidation";
 
 dotenv.config();
 
@@ -517,47 +518,14 @@ app.post("/api/kitt-org-chat", async (req, res) => {
       return res.status(400).json({ error: "Security alert: Illegal payload patterns detected." });
     }
 
-    // 2. Strict Schema Validation
-    const { messages } = req.body;
-    if (!Array.isArray(messages) || messages.length === 0 || messages.length > 20) {
-      return res.status(400).json({
-        error: "Invalid 'messages' field: Must be an array containing between 1 and 20 items.",
-      });
+    // 2. Strict Schema Validation + 3. Per-message sanitization
+    // Rules live in src/services/chatValidation.ts and are shared with the
+    // Cloudflare Pages Functions so the two cannot drift apart.
+    const sanitized = sanitizeMessages(req.body.messages);
+    if (isSanitizeFailure(sanitized)) {
+      return res.status(400).json({ error: sanitized.error });
     }
-
-    // 3. Per-message sanitization
-    const sanitizedContents: { role: string; parts: { text: string }[] }[] = [];
-
-    for (let i = 0; i < messages.length; i++) {
-      const msg = messages[i];
-      if (typeof msg !== "object" || msg === null) {
-        return res.status(400).json({ error: `Message at index ${i} is malformed.` });
-      }
-
-      const { role, content } = msg;
-
-      if (typeof role !== "string" || !["user", "assistant", "model"].includes(role)) {
-        return res.status(400).json({
-          error: `Message at index ${i} has an invalid role. Allowed: 'user', 'assistant', 'model'.`,
-        });
-      }
-
-      if (typeof content !== "string" || content.trim().length === 0 || content.length > 3000) {
-        return res.status(400).json({
-          error: `Message at index ${i} must have content between 1 and 3000 characters.`,
-        });
-      }
-
-      // Strip non-printable control characters
-      const cleanText = content
-        .replace(/[\u0000-\u0008\u000B-\u000C\u000E-\u001F\u007F]/g, "")
-        .trim();
-
-      sanitizedContents.push({
-        role: role === "assistant" || role === "model" ? "model" : "user",
-        parts: [{ text: cleanText }],
-      });
-    }
+    const sanitizedContents = sanitized.contents;
 
     const provider = resolveLlmProvider();
     if (!provider) {

@@ -18,6 +18,7 @@ import { analyzeStatically, scanCodeSecurity, validateHardwarePins } from './fir
 import { electricalPanelEngine } from './electricalPanelEngine';
 import { inspectPayloadSecurity, redactSensitiveOutput, SlidingWindowLimiter } from './security';
 import { setRuntimeEnv, readEnv } from './runtimeEnv';
+import { sanitizeMessages, clientIpFromHeaders, lastUserMessage, isSanitizeFailure } from './chatValidation';
 import { resolveLlmProvider, describeLlmConfiguration, resolveStructuredClient } from './llmProvider';
 import {
   KITT_ORG_AI_SYSTEM_INSTRUCTION,
@@ -53,11 +54,7 @@ function json(status: number, body: unknown, headers?: Record<string, string>): 
 
 /** Best-effort client identity; Cloudflare always supplies CF-Connecting-IP. */
 function clientIp(headers: Record<string, string>): string {
-  return (
-    headers['cf-connecting-ip'] ||
-    (headers['x-forwarded-for'] || '').split(',')[0].trim() ||
-    'unknown'
-  );
+  return clientIpFromHeaders(headers);
 }
 
 /** Same-origin check mirroring the Express `isAllowedOrigin` shield. */
@@ -81,30 +78,6 @@ function isAllowedOrigin(origin: string | undefined, host: string | undefined): 
     return false;
   }
   return false;
-}
-
-function sanitizeContents(messages: any[]): { role: string; parts: { text: string }[] }[] | { error: string } {
-  const out: { role: string; parts: { text: string }[] }[] = [];
-
-  for (let i = 0; i < messages.length; i++) {
-    const msg = messages[i];
-    if (typeof msg !== 'object' || msg === null) {
-      return { error: `Message at index ${i} is malformed.` };
-    }
-    const { role, content } = msg;
-    if (typeof role !== 'string' || !['user', 'assistant', 'model'].includes(role)) {
-      return { error: `Message at index ${i} has an invalid role. Allowed: 'user', 'assistant', 'model'.` };
-    }
-    if (typeof content !== 'string' || content.trim().length === 0 || content.length > 3000) {
-      return { error: `Message at index ${i} must have content between 1 and 3000 characters.` };
-    }
-    const cleanText = content
-      .replace(/[\u0000-\u0008\u000B-\u000C\u000E-\u001F\u007F]/g, '')
-      .trim();
-    out.push({ role: role === 'assistant' || role === 'model' ? 'model' : 'user', parts: [{ text: cleanText }] });
-  }
-
-  return out;
 }
 
 /**
@@ -140,19 +113,12 @@ export async function handleKittOrgChat(
       return json(400, { error: 'Security alert: Illegal payload patterns detected.' });
     }
 
-    const { messages } = body;
-    if (!Array.isArray(messages) || messages.length === 0 || messages.length > 20) {
-      return json(400, {
-        error: "Invalid 'messages' field: Must be an array containing between 1 and 20 items.",
-      });
-    }
-
-    const sanitized = sanitizeContents(messages);
-    if ('error' in sanitized) {
+    const sanitized = sanitizeMessages(body.messages);
+    if (isSanitizeFailure(sanitized)) {
       return json(400, { error: sanitized.error });
     }
 
-    const lastUserMsg = sanitized[sanitized.length - 1]?.parts[0]?.text || '';
+    const lastUserMsg = lastUserMessage(sanitized.contents);
     const provider = resolveLlmProvider();
 
     if (!provider) {
@@ -162,7 +128,7 @@ export async function handleKittOrgChat(
     try {
       const result = await provider.generateText({
         systemInstruction: KITT_ORG_AI_SYSTEM_INSTRUCTION,
-        contents: sanitized,
+        contents: sanitized.contents,
         temperature: 0.7,
         topP: 0.95,
         maxOutputTokens: 4096,
