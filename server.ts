@@ -5,7 +5,7 @@ import crypto from "crypto";
 import zlib from "zlib";
 import http from "http";
 import dotenv from "dotenv";
-import { GoogleGenAI, Type } from "@google/genai";
+import { Type } from "@google/genai";
 import { createServer as createViteServer } from "vite";
 import { kittOrchestrator } from "./src/services/orchestrator";
 import { firmwareSandbox } from "./src/services/firmwareSandbox";
@@ -16,7 +16,7 @@ import {
   generateIntelligentFallback,
 } from "./src/services/apiPrompts";
 import { readEnv } from "./src/services/runtimeEnv";
-import { resolveLlmProvider } from "./src/services/llmProvider";
+import { resolveLlmProvider, describeLlmConfiguration, resolveStructuredClient } from "./src/services/llmProvider";
 
 dotenv.config();
 
@@ -414,38 +414,12 @@ function serveCachedAsset(
 }
 
 // ============================================================
-// 7. GEMINI CLIENT & REPUTATION SHIELD
+// 7. LLM PROVIDER & REPUTATION SHIELD
 // ============================================================
-let landingAiClient: GoogleGenAI | null = null;
-let coreAiClient: GoogleGenAI | null = null;
-
-function getLandingAiClient(): GoogleGenAI | null {
-  const apiKey = readEnv("GEMINI_API_KEY_LANDING") || readEnv("GEMINI_API_KEY");
-  if (!apiKey) return null;
-  if (!landingAiClient) {
-    landingAiClient = new GoogleGenAI({
-      apiKey,
-      httpOptions: { headers: { "User-Agent": "kitt-landing-agent" } },
-    });
-  }
-  return landingAiClient;
-}
-
-function getCoreAiClient(): GoogleGenAI | null {
-  const apiKey = readEnv("GEMINI_API_KEY_CORE") || readEnv("GEMINI_API_KEY");
-  if (!apiKey) return null;
-  if (!coreAiClient) {
-    coreAiClient = new GoogleGenAI({
-      apiKey,
-      httpOptions: { headers: { "User-Agent": "kitt-core-hardware-agent" } },
-    });
-  }
-  return coreAiClient;
-}
-
-function getGenAiClient(): GoogleGenAI | null {
-  return getCoreAiClient() || getLandingAiClient();
-}
+// Client construction moved to src/services/llmProvider.ts, which resolves
+// NVIDIA NIM or Gemini from the configured credentials. The previous
+// Gemini-only helpers here became dead once the endpoints were made
+// provider-agnostic.
 
 // Credential redaction shared with the edge runtime (src/services/security.ts).
 
@@ -453,9 +427,16 @@ function getGenAiClient(): GoogleGenAI | null {
 // 8. TELEMETRY & HEALTH ENDPOINTS
 // ============================================================
 app.get("/api/health", (_req, res) => {
+  // Mirror the edge health payload so a missing/misconfigured API key is just
+  // as visible locally as it is in production.
+  const { provider, model } = describeLlmConfiguration();
   res.json({
     status: "ok",
     service: "KITT Org AI 2.0 Hardened Architecture",
+    aiConfigured: provider !== "offline",
+    provider,
+    model,
+    mode: provider === "offline" ? "offline-fallback" : "live",
     uptimeSec: Math.floor((Date.now() - metrics.startTime) / 1000),
     timestamp: new Date().toISOString(),
   });
@@ -480,7 +461,8 @@ function isAllowedOrigin(req: express.Request): boolean {
     if (!IS_PROD && (originUrl.hostname === "localhost" || originUrl.hostname === "127.0.0.1")) {
       return true;
     }
-    const whitelist = process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(",").map(s => s.trim()) : [];
+    const allowedOrigins = readEnv("ALLOWED_ORIGINS");
+    const whitelist = allowedOrigins ? allowedOrigins.split(",").map(s => s.trim()).filter(Boolean) : [];
     if (whitelist.includes(origin) || whitelist.includes(originUrl.hostname)) {
       return true;
     }
@@ -642,91 +624,6 @@ app.post("/api/kitt-org-chat", async (req, res) => {
 // ============================================================
 // 9b. KITT CORE HARDWARE & SILICON AGENT (MAIN KITT AI STUDIO)
 // ============================================================
-const KITT_CORE_HARDWARE_SYSTEM_INSTRUCTION = `You are KITT Core (KITT 1.0 Autonomous Hardware Agent) — the senior electronics design, circuit simulation, and silicon systems engineering intelligence.
-
-CORE RESPONSIBILITIES & HARDWARE MASTERY:
-1. PHYSICAL ELECTRICAL ACCURACY & REAL-TIME GROUNDING:
-   - You are directly wired into the active circuit simulation engine.
-   - When telemetry is provided (supply voltage, node voltages, total current, power dissipation, active components, netlist connections, and DRC violations), you MUST ground your reasoning in these physical measurements.
-   - Reference exact node voltages (e.g., 5.00V on VCC, 3.30V on ESP32 3V3 rail, specific GPIO levels, and 0.00V on GND) and loop currents in your explanations.
-   - Perform real calculations using Ohm's law (V = I * R), Joule's heating law (P = V * I = I^2 * R), voltage dividers (V_out = V_in * (R2 / (R1 + R2))), and RC time constants (tau = R * C).
-   - If DRC violations or design flaws exist (e.g., LED directly across 5V without series resistor, reverse polarity diode, floating high-impedance inputs, short circuits), diagnose them immediately with precise technical solutions.
-
-2. COMPONENT & MCU ARCHITECTURES:
-   - Microcontrollers: ESP32 (dual-core Xtensa, 3.3V logic, capacitive touch, ADC, DAC, SPI, I2C, UART), ATmega328P (5V TTL, 16MHz, 10-bit ADC, timers), Raspberry Pi Pico / RP2040, STM32.
-   - Discrete Components: BJTs (2N2222, 2N3904), MOSFETs (2N7000, IRLZ44N logic-level, IRFZ44N), diodes (1N4148 signal, 1N4007 rectifier, 1N5819 Schottky flyback), LEDs with forward voltage drops (Red ~1.8V-2.0V, Green ~2.1V-2.4V, Blue/White ~3.0V-3.3V).
-   - Digital Logic ICs: 7400 NAND, 7402 NOR, 7404 NOT, 7408 AND, 7432 OR, 7486 XOR, 7474 D Flip-Flop, 74161 Counter, 74138 Decoder, 74151 MUX, 74181 ALU.
-
-3. DYNAMIC SYNTHESIS & INVENTIONS:
-   - When a user asks to build, add, wire, create, or modify a circuit:
-     Provide clear, step-by-step pin-to-pin wiring lists, component sizing rationale, and explain how the signal flows through each stage.
-   - Deliver ready-to-use C++ / Arduino / ESP-IDF or MicroPython code whenever microcontrollers are involved.
-
-4. VOICE & STYLE:
-   - Confident, authoritative, ultra-sharp senior hardware engineer.
-   - NEVER robotic, NEVER generic. Use precise engineering metrics (mA, mV, mW, kHz, ohms, Farads).
-   - Format responses in clean GitHub-style Markdown with tables, calculation blocks, and bullet points.`;
-
-function generateCoreHardwareFallback(query: string, circuit?: any, telemetry?: any): string {
-  const q = query.toLowerCase().trim();
-  const vcc = telemetry?.supplyVoltage || 5.0;
-  const current_mA = telemetry?.currentDraw_mA || (circuit?.components?.length ? circuit.components.length * 15 : 25);
-  const power_mW = telemetry?.powerConsumption_mW || (vcc * current_mA);
-  const compCount = circuit?.components?.length || 0;
-  const wireCount = circuit?.wires?.length || 0;
-
-  // 1. Current / Voltage / Power readings inquiry
-  if (q.includes("current") || q.includes("voltage") || q.includes("power") || q.includes("reading") || q.includes("telemetry") || q.includes("draw")) {
-    return `### ⚡ Live Physics & Electrical Telemetry Analysis
-
-Based on real-time mixed-signal MNA simulation of the active canvas:
-
-| Parameter | Measured Value | Operating Margin | Status |
-| :--- | :--- | :--- | :--- |
-| **Supply Voltage ($V_{CC}$)** | **${vcc.toFixed(2)} V** | Nominal ±5% | ✅ Regulated |
-| **Total Current Draw ($I_{tot}$)** | **${current_mA.toFixed(1)} mA** | Max Budget: 500 mA | ✅ Safe Operating Area |
-| **Power Dissipation ($P_{tot}$)** | **${power_mW.toFixed(1)} mW** | Safe Thermal Limit | ✅ Normal (< 2.5W) |
-| **Active Components** | **${compCount} Parts** | Component Netlist | ✅ Synchronized |
-| **Active Wire Traces** | **${wireCount} Nets** | Signal Routing | ✅ Verified |
-
-**Physics Verification:**
-$$\\begin{aligned}
-P &= V_{CC} \\times I_{tot} = ${vcc.toFixed(2)}\\text{V} \\times ${(current_mA / 1000).toFixed(4)}\\text{A} = ${(power_mW / 1000).toFixed(4)}\\text{W} \\approx ${power_mW.toFixed(1)}\\text{mW}
-\\end{aligned}$$
-
-All component junctions are within standard safe operating areas (SOA).`;
-  }
-
-  // 2. Ohm's Law / Resistor calculation
-  if (q.includes("resistor") || q.includes("ohm") || q.includes("calculate") || q.includes("drop") || q.includes("value")) {
-    return `### 📐 Precision Component Value Calculation
-
-For a standard LED circuit operating on a **${vcc.toFixed(1)}V rail**:
-- **Target LED Forward Voltage ($V_f$):** ~2.0V (Standard Red/Amber LED)
-- **Target Forward Current ($I_f$):** 18mA (Optimal luminous efficiency)
-
-**Ohm's Law Derivation:**
-$$R = \\frac{V_{CC} - V_f}{I_f} = \\frac{${vcc.toFixed(1)}\\text{V} - 2.0\\text{V}}{0.018\\text{A}} = \\frac{${(vcc - 2.0).toFixed(1)}\\text{V}}{0.018\\text{A}} \\approx ${((vcc - 2.0) / 0.018).toFixed(1)}\\,\\Omega$$
-
-- **Standard E24 Resistor Recommendation:** **$220\\,\\Omega$** (1/4W resistor)
-- **Resulting Current:** $I = \\frac{${(vcc - 2.0).toFixed(1)}}{220} = ${(((vcc - 2.0)/220)*1000).toFixed(1)}\\text{ mA}$
-- **Resistor Power Dissipation:** $P_R = I^2 R \\approx 41\\text{ mW}$ (Well below 250mW rating).`;
-  }
-
-  // 3. General hardware engineering assistance
-  return `### 🛠️ KITT Hardware Engineering Core Analysis
-
-I am actively connected to your circuit simulation canvas (**${compCount} components**, **${wireCount} wires**, **${current_mA.toFixed(1)}mA** @ **${vcc.toFixed(2)}V**).
-
-**Available Real-Time Capabilities:**
-1. **Live Diagnostics**: Ask *"Is my circuit safe?"* or *"What is my power consumption?"*
-2. **Circuit Synthesis**: Ask *"Build an ultrasonic distance parking sensor"*, *"Synthesize a 4-bit binary counter"*, or *"Add a low-pass filter"*.
-3. **Firmware Generation**: Ask for C++ / Arduino code with non-blocking timers and GPIO interrupt handlers.
-4. **Component Sizing**: Calculate pull-ups, transistor base resistors, and decoupling capacitors.
-
-What would you like to build, inspect, or calculate next?`;
-}
-
 app.post("/api/kitt-core-chat", async (req, res) => {
   const ip = getClientIp(req);
 
@@ -769,13 +666,16 @@ app.post("/api/kitt-core-chat", async (req, res) => {
 
     const safeReply = redactSensitiveOutput(result.reply);
 
-    return res.json({
+    // 502 tells the caller the model failed, rather than returning 200 with an
+    // empty circuit that looks like a successful synthesis.
+    return res.status(result.modelError ? 502 : 200).json({
       reply: safeReply,
       proposedPatch: result.proposedPatch,
       panelReport: result.panelReport,
       simulationReport: result.simulationReport,
       compileResult: result.compileResult,
       bom: result.bom,
+      modelError: result.modelError,
       model: result.model,
       isMock: result.isMock,
     });
@@ -1075,76 +975,93 @@ function generateCopilotFallback(prompt: string, currentProject: any) {
 app.post("/api/ai/copilot", async (req, res) => {
   try {
     const { prompt, currentProject, mode, taskType } = req.body || {};
-    const ai = getGenAiClient();
+    // Provider-agnostic: resolves NVIDIA NIM or Gemini, and falls back to the
+    // mock client when no key is configured.
+    const ai = resolveStructuredClient();
 
-    if (!ai) {
-      const fallback = generateCopilotFallback(prompt, currentProject);
-      return res.json(fallback);
+    if (!prompt || typeof prompt !== "string") {
+      return res.status(400).json({ error: "Missing required 'prompt' field." });
+    }
+
+    // Inspect the payload before dispatching to the model (parity with the
+    // other AI endpoints, which all guard here).
+    if (inspectPayloadSecurity(req.body)) {
+      metrics.quarantinedThreats++;
+      return res.status(400).json({ error: "Security alert: Illegal payload patterns detected." });
     }
 
     try {
-      const response = await ai.models.generateContent({
-        model: "gemini-2.5-flash",
-        contents: JSON.stringify({
-          userPrompt: prompt,
-          taskType: taskType || "GENERAL_ASSIST",
-          currentMode: mode || "INTERMEDIATE",
-          circuitContext: {
-            componentCount: currentProject?.components?.length || 0,
-            connectionCount: currentProject?.connections?.length || 0,
-            components: currentProject?.components?.map((c: any) => ({
-              id: c.id,
-              type: c.type,
-              label: c.label,
-              position: c.position,
-            })),
-            connections: currentProject?.connections?.map((n: any) => ({
-              id: n.id,
-              source: `${n.source?.componentId}:${n.source?.pinId}`,
-              targets: n.targets?.map((t: any) => `${t.componentId}:${t.pinId}`) || [],
-            })),
+      const response = await ai.generateStructuredContent<any>({
+        systemInstruction: KITT_COPILOT_SYSTEM_INSTRUCTION,
+        contents: [
+          {
+            role: "user",
+            parts: [
+              {
+                text: JSON.stringify({
+                  userPrompt: prompt,
+                  taskType: taskType || "GENERAL_ASSIST",
+                  currentMode: mode || "INTERMEDIATE",
+                  circuitContext: {
+                    componentCount: currentProject?.components?.length || 0,
+                    connectionCount: currentProject?.connections?.length || 0,
+                    components: currentProject?.components?.map((c: any) => ({
+                      id: c.id,
+                      type: c.type,
+                      label: c.label,
+                      position: c.position,
+                    })),
+                    connections: currentProject?.connections?.map((n: any) => ({
+                      id: n.id,
+                      source: `${n.source?.componentId}:${n.source?.pinId}`,
+                      targets: n.targets?.map((t: any) => `${t.componentId}:${t.pinId}`) || [],
+                    })),
+                  },
+                }),
+              },
+            ],
           },
-        }),
-        config: {
-          systemInstruction: KITT_COPILOT_SYSTEM_INSTRUCTION,
-          responseMimeType: "application/json",
-          responseSchema: {
-            type: Type.OBJECT,
-            properties: {
-              message: { type: Type.STRING },
-              hasProposal: { type: Type.BOOLEAN },
-              proposal: {
-                type: Type.OBJECT,
-                properties: {
-                  title: { type: Type.STRING },
-                  description: { type: Type.STRING },
-                  actions: {
-                    type: Type.ARRAY,
-                    items: {
-                      type: Type.OBJECT,
-                      properties: {
-                        actionType: { type: Type.STRING },
-                        payload: { type: Type.OBJECT },
-                      },
-                      required: ["actionType"],
+        ],
+        responseSchema: {
+          type: Type.OBJECT,
+          properties: {
+            message: { type: Type.STRING },
+            hasProposal: { type: Type.BOOLEAN },
+            proposal: {
+              type: Type.OBJECT,
+              properties: {
+                title: { type: Type.STRING },
+                description: { type: Type.STRING },
+                actions: {
+                  type: Type.ARRAY,
+                  items: {
+                    type: Type.OBJECT,
+                    properties: {
+                      actionType: { type: Type.STRING },
+                      payload: { type: Type.OBJECT },
                     },
+                    required: ["actionType"],
                   },
                 },
               },
-              educationalNotes: {
-                type: Type.ARRAY,
-                items: { type: Type.STRING },
-              },
             },
-            required: ["message", "hasProposal"],
+            educationalNotes: {
+              type: Type.ARRAY,
+              items: { type: Type.STRING },
+            },
           },
+          required: ["message", "hasProposal"],
         },
       });
 
-      const parsed = JSON.parse(response.text || "{}");
-      return res.json(parsed);
+      if (response.success && response.data) {
+        return res.json(response.data);
+      }
+
+      console.warn("[COPILOT] Model returned no usable structured payload, using intelligent fallback.");
+      return res.json(generateCopilotFallback(prompt, currentProject));
     } catch (aiErr: any) {
-      console.warn("[COPILOT] Gemini call failed, returning intelligent fallback:", aiErr?.message);
+      console.warn("[COPILOT] AI call failed, returning intelligent fallback:", aiErr?.message);
       const fallback = generateCopilotFallback(prompt, currentProject);
       return res.json(fallback);
     }
@@ -1359,31 +1276,32 @@ function generateInventionFallback(prompt: string, mode: string = 'INTERMEDIATE'
 app.post("/api/ai/invent", async (req, res) => {
   try {
     const { prompt, mode } = req.body || {};
-    const ai = getGenAiClient();
+    // Provider-agnostic (NVIDIA NIM or Gemini).
+    const ai = resolveStructuredClient();
 
-    if (!ai) {
-      const fallback = generateInventionFallback(prompt, mode);
-      return res.json(fallback);
+    if (!prompt || typeof prompt !== "string") {
+      return res.status(400).json({ error: "Missing required 'prompt' field." });
+    }
+
+    if (inspectPayloadSecurity(req.body)) {
+      metrics.quarantinedThreats++;
+      return res.status(400).json({ error: "Security alert: Illegal payload patterns detected." });
     }
 
     try {
-      const response = await ai.models.generateContent({
-        model: "gemini-2.5-flash",
-        contents: JSON.stringify({ prompt, mode }),
-        config: {
-          systemInstruction: KITT_INVENT_SYSTEM_INSTRUCTION,
-          responseMimeType: "application/json",
-        },
+      const response = await ai.generateStructuredContent<any>({
+        systemInstruction: KITT_INVENT_SYSTEM_INSTRUCTION,
+        contents: [{ role: "user", parts: [{ text: JSON.stringify({ prompt, mode }) }] }],
       });
 
-      const parsed = JSON.parse(response.text || "{}");
-      if (parsed && parsed.project) {
-        return res.json(parsed);
+      if (response.success && response.data && response.data.project) {
+        return res.json(response.data);
       }
-      const fallback = generateInventionFallback(prompt, mode);
-      return res.json(fallback);
+
+      console.warn("[INVENT] Model returned no usable structured payload, using intelligent fallback.");
+      return res.json(generateInventionFallback(prompt, mode));
     } catch (aiErr: any) {
-      console.warn("[INVENT] Gemini call failed, returning intelligent fallback:", aiErr?.message);
+      console.warn("[INVENT] AI call failed, returning intelligent fallback:", aiErr?.message);
       const fallback = generateInventionFallback(prompt, mode);
       return res.json(fallback);
     }
@@ -1452,7 +1370,11 @@ async function startServer() {
   server.keepAliveTimeout = 65000;
   server.headersTimeout = 66000;
   server.maxHeadersCount = 100;
-  server.requestTimeout = 30000;
+  // Whole-request wall-clock ceiling. NVIDIA NIM generations measured 19-31s
+  // (nemotron-3-super-120b) and up to ~55s (gpt-oss-20b). At the previous 30s
+  // this destroyed the socket mid-generation, so the client saw a dropped
+  // connection instead of a reply.
+  server.requestTimeout = 120000;
 
   server.on("connection", (socket) => {
     metrics.activeConnections++;

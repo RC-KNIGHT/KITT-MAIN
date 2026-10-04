@@ -1,5 +1,5 @@
 import { handleKittOrgChat } from '../../src/services/edgeApi';
-import { toResponse, readJson, headerRecord } from './_shared';
+import { toResponse, parseJsonBody, headerRecord } from './_shared';
 
 interface PagesContext {
   request: Request;
@@ -7,13 +7,9 @@ interface PagesContext {
 }
 
 export const onRequestPost = async (context: PagesContext): Promise<Response> => {
-  const body = await readJson(context.request);
-  if (body === null) {
-    return new Response(JSON.stringify({ error: 'Malformed JSON payload.' }), {
-      status: 400,
-      headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' },
-    });
-  }
 
-  return toResponse(await handleKittOrgChat(body, headerRecord(context.request), context.env));
+  const parsed = await parseJsonBody(context.request);
+  if ('error' in parsed) return parsed.error;
+
+return toResponse(await handleKittOrgChat(parsed.body, headerRecord(context.request), context.env));
 };

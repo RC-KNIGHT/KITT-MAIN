@@ -41,6 +41,8 @@ export interface CoreChatResponsePayload {
   simulationReport?: SimulationGateResult;
   compileResult?: CompileResult;
   bom?: BomSummary;
+  /** Set when generation failed outright, so callers can report a real error. */
+  modelError?: string;
   model: string;
   isMock: boolean;
 }
@@ -179,7 +181,7 @@ export class KittOrchestrator {
       });
     });
 
-    // 4. Call Gemini Model (or Mock Fallback)
+    // 4. Call the configured model (NVIDIA NIM or Gemini)
     const aiResult = await this.geminiClient.generateStructuredContent<StructuredHardwareResponse>({
       systemInstruction,
       contents,
@@ -189,6 +191,38 @@ export class KittOrchestrator {
       maxOutputTokens: 8192,
     });
 
+    // 4b. Surface total model failure honestly.
+    //
+    // Previously this was not checked: `validateAndRepairHardwareResponse`
+    // ALWAYS returns a repairedResponse, so a failed call produced an empty
+    // action list, a benign "Hardware action set generated" reply, HTTP 200,
+    // and a log line reading "VALID". A missing or expired API key therefore
+    // looked like a working-but-empty product, sending the user to debug their
+    // prompt instead of their credentials.
+    if (!aiResult.success) {
+      const reason = aiResult.errorMessage || 'The language model returned no usable structured output.';
+      logger.error(`Model generation failed: ${reason}`, { requestId, model: aiResult.modelUsed });
+
+      return {
+        reply: [
+          '### ⚠️ KITT Core could not reach its language model',
+          '',
+          `**Reason:** ${reason}`,
+          '',
+          'No circuit was synthesised, because guessing a design without the model would be worse than failing.',
+          '',
+          '**What to check:**',
+          '- The API key is configured and not expired (`NVIDIA_API_KEY` or `GEMINI_API_KEY_CORE`).',
+          '- `GET /api/health` reports `aiConfigured: true` and the expected `provider`.',
+          '- The model name in `NVIDIA_MODEL` exists for your account.',
+        ].join('\n'),
+        proposedPatch: undefined,
+        modelError: reason,
+        model: aiResult.modelUsed,
+        isMock: aiResult.isMock,
+      };
+    }
+
     // 5. Schema Validation & Automated Repair Gate
     const validated = validateAndRepairHardwareResponse(aiResult.data || {});
     const structuredData = validated.repairedResponse || {
@@ -197,10 +231,22 @@ export class KittOrchestrator {
       actions: [],
     };
 
-    logger.info(`Schema validation outcome: ${validated.valid ? 'VALID' : 'REPAIRED'}`, {
-      actionCount: structuredData.actions.length,
-      requestId,
-    });
+    logger.info(
+      `Schema validation outcome: ${validated.valid ? 'VALID' : 'REPAIRED'}`,
+      {
+        actionCount: structuredData.actions.length,
+        requestId,
+      }
+    );
+
+    // A response that parsed but yielded no actions is worth flagging: it is the
+    // signature of the model ignoring the action contract.
+    if (structuredData.actions.length === 0) {
+      logger.warn('Model returned a well-formed response with zero hardware actions', {
+        intent: structuredData.intent,
+        requestId,
+      });
+    }
 
     let panelReport: PanelValidationResult | undefined;
     let simulationReport: SimulationGateResult | undefined;

@@ -16,6 +16,12 @@
 import { GoogleGenAI } from '@google/genai';
 import { getGeminiClient, IGeminiClient, RealGeminiClient } from './geminiClient';
 import { NimGeminiClient } from './nimClient';
+import {
+  NIM_CHAT_URL,
+  NIM_FALLBACK_MODELS,
+  resolveNimModel,
+  resolveNimTimeoutMs,
+} from './nimConfig';
 import { readEnv, resolveGeminiApiKey, resolveNvidiaApiKey } from './runtimeEnv';
 
 export type LlmProviderName = 'nvidia-nim' | 'gemini' | 'offline';
@@ -41,15 +47,7 @@ export interface ILlmProvider {
 }
 
 /** Default NVIDIA NIM model, overridable by env. */
-export function resolveNimModel(): string {
-  return readEnv('NVIDIA_MODEL') || 'nvidia/nemotron-3-super-120b-a12b';
-}
-
-const NIM_CHAT_URL = 'https://integrate.api.nvidia.com/v1/chat/completions';
-const NIM_FALLBACK_MODELS = [
-  'nvidia/nemotron-3-super-120b-a12b',
-  'openai/gpt-oss-20b',
-];
+export { resolveNimModel };
 
 /**
  * NVIDIA NIM provider. Uses the OpenAI-compatible chat completions endpoint.
@@ -76,9 +74,12 @@ export class NimLlmProvider implements ILlmProvider {
     let lastError: any = null;
 
     for (const model of models) {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), resolveNimTimeoutMs());
       try {
         const res = await fetch(NIM_CHAT_URL, {
           method: 'POST',
+          signal: controller.signal,
           headers: {
             Authorization: `Bearer ${this.apiKey}`,
             'Content-Type': 'application/json',
@@ -107,6 +108,8 @@ export class NimLlmProvider implements ILlmProvider {
         lastError = new Error(`NIM ${model} returned an empty completion`);
       } catch (err: any) {
         lastError = err;
+      } finally {
+        clearTimeout(timer);
       }
     }
 
@@ -191,14 +194,34 @@ export function describeLlmConfiguration(): { provider: LlmProviderName; model: 
 
 /**
  * Structured-generation client for the orchestrator.
- * Returns the NVIDIA adapter when NIM is configured, otherwise the existing
- * Gemini client (which itself falls back to the mock client without a key).
+ *
+ * Honours `KITT_LLM_PROVIDER` symmetrically. Previously `forced === 'gemini'`
+ * with only an NVIDIA key fell through to `getGeminiClient()`, which returns the
+ * *mock* client when no Gemini key exists -- so an operator's explicit choice
+ * silently produced canned demo content instead of a real error.
  */
 export function resolveStructuredClient(): IGeminiClient {
   const forced = (readEnv('KITT_LLM_PROVIDER') || '').toLowerCase();
   const nvidiaKey = resolveNvidiaApiKey();
+  const geminiKey = resolveGeminiApiKey();
 
-  if (nvidiaKey && forced !== 'gemini') {
+  if (forced === 'gemini') {
+    if (!geminiKey) {
+      console.warn('[LLM] KITT_LLM_PROVIDER=gemini but no Gemini key is configured; using mock client.');
+    }
+    return getGeminiClient();
+  }
+
+  if (forced === 'nvidia' || forced === 'nim') {
+    if (!nvidiaKey) {
+      console.warn('[LLM] KITT_LLM_PROVIDER=nvidia but NVIDIA_API_KEY is not set; using mock client.');
+      return getGeminiClient();
+    }
+    return new NimGeminiClient(nvidiaKey, resolveNimModel());
+  }
+
+  // Auto: prefer whichever credential actually exists.
+  if (nvidiaKey) {
     return new NimGeminiClient(nvidiaKey, resolveNimModel());
   }
   return getGeminiClient();

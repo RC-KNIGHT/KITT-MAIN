@@ -303,6 +303,32 @@ async function runAllTests() {
   const trailingComma = '{"intent":"TECHNICAL_QNA","actions":[{"actionType":"create_component","payload":{"id":"a"},}],}';
   assert(extractJsonDetailed(trailingComma).value !== null, 'Removes trailing commas');
 
+  // Regression: a *legitimate* comma inside a string value must survive repair.
+  // An earlier string-unaware /,(\s*[}\]])/ rewrite deleted it, corrupting the
+  // explanation in exactly the replies that needed repair.
+  const commaInString =
+    '{"intent":"TECHNICAL_QNA","explanation":"Wire the pull-up across\nVCC and pin 1, }","actions":[]}';
+  const commaResult = extractJsonDetailed(commaInString);
+  assert(commaResult.value !== null, 'Repairs while preserving commas inside string values');
+  assert(
+    commaResult.value?.explanation === 'Wire the pull-up across\nVCC and pin 1, }',
+    'Keeps a comma that precedes a closing brace inside a string',
+    `got: ${JSON.stringify(commaResult.value?.explanation)}`
+  );
+
+  // Regression: a reply with no JSON structure at all is retryable, not malformed.
+  const proseOnly = extractJsonDetailed('Hello, I cannot help with that request.');
+  assert(proseOnly.value === null, 'Rejects a prose-only reply');
+  assert(proseOnly.truncated === true, 'Flags a brace-less reply as truncatable (retryable)');
+
+  // Braces in prose before the real object must not defeat the scan.
+  const proseThenJson =
+    'Note {not json} then the answer:\n{"intent":"TECHNICAL_QNA","explanation":"real","actions":[]}';
+  assert(
+    extractJsonDetailed(proseThenJson).value?.explanation === 'real',
+    'Skips an invalid brace-balanced slice and finds the real JSON object'
+  );
+
   // Genuinely wrapped markdown fence
   const wrapped = '```json\n{"intent":"TECHNICAL_QNA","explanation":"x","actions":[]}\n```';
   assert(extractJsonDetailed(wrapped).value?.intent === 'TECHNICAL_QNA', 'Unwraps a wrapping markdown fence');

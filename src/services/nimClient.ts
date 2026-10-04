@@ -17,21 +17,28 @@ import { IGeminiClient, GenerateOptions, GenerationResult } from './geminiClient
 import { Logger } from './logger';
 import { StructuredHardwareResponse } from './schemas/actionSchema';
 import { HARDWARE_CONTRACT_TEXT } from './schemas/hardwareResponseSchema';
+import {
+  NIM_CHAT_URL,
+  NIM_FALLBACK_MODELS as FALLBACK_MODELS,
+  resolveNimTimeoutMs,
+} from './nimConfig';
 
 const logger = new Logger('NimClient');
-const NIM_CHAT_URL = 'https://integrate.api.nvidia.com/v1/chat/completions';
 
-/**
- * Model preference order, verified against the orchestrator's schema.
- *
- * Only models that reliably return the `{actionType, payload}` contract are
- * listed. `nvidia/nemotron-3.5-lightning-30b-a3b` was measured at 126s and
- * returned zero valid actions, so it is deliberately excluded.
- */
-const FALLBACK_MODELS = [
-  'nvidia/nemotron-3-super-120b-a12b',
-  'openai/gpt-oss-20b',
-];
+/** fetch with an abort deadline, so a hang always resolves into our error path. */
+async function fetchWithTimeout(
+  input: string,
+  init: RequestInit,
+  timeoutMs: number = resolveNimTimeoutMs()
+): Promise<Response> {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    return await fetch(input, { ...init, signal: controller.signal });
+  } finally {
+    clearTimeout(timer);
+  }
+}
 
 /** Recursively converts a Gemini `Type`-annotated schema into plain JSON Schema. */
 function normalizeSchema(node: any): any {
@@ -58,8 +65,10 @@ function normalizeSchema(node: any): any {
  *      illegal in JSON but extremely common in multi-line explanations.
  *   2. Trailing commas before a closing brace/bracket.
  *
- * Both are fixed only outside/inside strings correctly, so escaped sequences in
- * valid JSON are left untouched.
+ * Both repairs are string-aware. A naive /,(\s*[}\]])/ replacement would also
+ * delete a legitimate comma that happens to sit inside a string value just
+ * before a closing character (e.g. "across VCC and pin 1, }"), silently
+ * corrupting content in exactly the replies that needed repair.
  */
 function repairJsonText(text: string): string {
   let out = '';
@@ -69,49 +78,65 @@ function repairJsonText(text: string): string {
   for (let i = 0; i < text.length; i++) {
     const ch = text[i];
 
+    if (!inString) {
+      // A comma is only a candidate for removal; we keep it until we know the
+      // next non-whitespace character actually closes the structure.
+      if (ch === ',') {
+        out += ch;
+        let j = i + 1;
+        while (j < text.length && /\s/.test(text[j])) j++;
+        if (j < text.length && (text[j] === '}' || text[j] === ']')) {
+          // Drop the comma; the buffer keeps its whitespace/newlines.
+          out = out.slice(0, -1);
+        }
+        continue;
+      }
+      if (ch === '"') {
+        inString = true;
+      }
+      out += ch;
+      continue;
+    }
+
+    // Inside a string
     if (escaped) {
       out += ch;
       escaped = false;
       continue;
     }
-
     if (ch === '\\') {
       out += ch;
       escaped = true;
       continue;
     }
-
     if (ch === '"') {
-      inString = !inString;
+      inString = false;
       out += ch;
       continue;
     }
 
-    if (inString) {
-      // Escape raw control characters that would invalidate the JSON.
-      if (ch === '\n') {
-        out += '\\n';
-        continue;
-      }
-      if (ch === '\r') {
-        out += '\\r';
-        continue;
-      }
-      if (ch === '\t') {
-        out += '\\t';
-        continue;
-      }
-      if (ch < ' ') {
-        out += '\\u' + ch.charCodeAt(0).toString(16).padStart(4, '0');
-        continue;
-      }
+    // Escape raw control characters that would invalidate the JSON.
+    if (ch === '\n') {
+      out += '\\n';
+      continue;
+    }
+    if (ch === '\r') {
+      out += '\\r';
+      continue;
+    }
+    if (ch === '\t') {
+      out += '\\t';
+      continue;
+    }
+    if (ch < ' ') {
+      out += '\\u' + ch.charCodeAt(0).toString(16).padStart(4, '0');
+      continue;
     }
 
     out += ch;
   }
 
-  // Remove trailing commas before a closing token.
-  return out.replace(/,(\s*[}\]])/g, '$1');
+  return out;
 }
 
 /**
@@ -165,15 +190,21 @@ export function extractJsonDetailed(text: string): { value: any | null; truncate
     }
   }
 
-  // 4. Scan for the first balanced object/array, repairing as we go
+  // 4. Scan for balanced object/array candidates, repairing as we go
   const startIdx = repaired.search(/[{[]/);
-  if (startIdx === -1) return { value: null, truncated: false };
+  if (startIdx === -1) {
+    // No structure at all. This is usually a reply cut off before the first
+    // brace (or a prose refusal), so treat it as retryable rather than
+    // permanently malformed.
+    return { value: null, truncated: true };
+  }
 
-  const openChar = repaired[startIdx];
-  const closeChar = openChar === '{' ? '}' : ']';
-  let depth = 0;
   let inString = false;
   let escaped = false;
+  let depth = 0;
+  let candidateStart = startIdx;
+  const openChar = repaired[startIdx];
+  const closeChar = openChar === '{' ? '}' : ']';
 
   for (let i = startIdx; i < repaired.length; i++) {
     const ch = repaired[i];
@@ -182,7 +213,9 @@ export function extractJsonDetailed(text: string): { value: any | null; truncate
       escaped = false;
       continue;
     }
-    if (ch === '\\') {
+    // A backslash only escapes inside a string; outside one it is already
+    // invalid JSON and must not desync the depth scan.
+    if (ch === '\\' && inString) {
       escaped = true;
       continue;
     }
@@ -192,16 +225,25 @@ export function extractJsonDetailed(text: string): { value: any | null; truncate
     }
     if (inString) continue;
 
-    if (ch === openChar) depth++;
-    else if (ch === closeChar) {
+    if (ch === openChar) {
+      if (depth === 0) candidateStart = i;
+      depth++;
+    } else if (ch === closeChar) {
       depth--;
       if (depth === 0) {
-        const candidate = repaired.slice(startIdx, i + 1);
+        const candidate = repaired.slice(candidateStart, i + 1);
         try {
           return { value: JSON.parse(candidate), truncated: false };
         } catch {
-          return { value: null, truncated: false };
+          // This balanced slice was not valid JSON (e.g. prose containing
+          // braces before the real object). Keep scanning for the next one.
+          depth = 0;
+          continue;
         }
+      }
+      if (depth < 0) {
+        // Unbalanced closer; restart the search from the next opener.
+        depth = 0;
       }
     }
   }
@@ -240,7 +282,7 @@ export class NimGeminiClient implements IGeminiClient {
       try {
         logger.debug(`Calling NIM model ${model}`, { requestId: options.requestId });
 
-        const res = await fetch(NIM_CHAT_URL, {
+        const res = await fetchWithTimeout(NIM_CHAT_URL, {
           method: 'POST',
           headers: {
             Authorization: `Bearer ${this.apiKey}`,

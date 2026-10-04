@@ -17,7 +17,7 @@ import { edgeFirmwareCompiler } from './firmwareCompiler';
 import { analyzeStatically, scanCodeSecurity, validateHardwarePins } from './firmwareAnalyzer';
 import { electricalPanelEngine } from './electricalPanelEngine';
 import { inspectPayloadSecurity, redactSensitiveOutput, SlidingWindowLimiter } from './security';
-import { setRuntimeEnv } from './runtimeEnv';
+import { setRuntimeEnv, readEnv } from './runtimeEnv';
 import { resolveLlmProvider, describeLlmConfiguration, resolveStructuredClient } from './llmProvider';
 import {
   KITT_ORG_AI_SYSTEM_INSTRUCTION,
@@ -69,9 +69,10 @@ function isAllowedOrigin(origin: string | undefined, host: string | undefined): 
       const hostname = host.split(':')[0];
       if (originUrl.hostname === hostname || originUrl.host === host) return true;
     }
-    // Cloudflare Pages preview + production domains
-    if (originUrl.hostname.endsWith('.pages.dev')) return true;
-    const whitelist = (process.env?.ALLOWED_ORIGINS || '')
+    // Same-origin is already covered by the host comparison above. Trusting
+    // every *.pages.dev host would let any other Cloudflare Pages site call
+    // these endpoints from a browser and spend the project's API quota.
+    const whitelist = (readEnv('ALLOWED_ORIGINS') || '')
       .split(',')
       .map((s: string) => s.trim())
       .filter(Boolean);
@@ -233,13 +234,17 @@ export async function handleKittCoreChat(
 
     const result = await orchestrator.handleCoreChatRequest({ messages, circuit, telemetry, requestId });
 
-    return json(200, {
+    // A total model failure must not masquerade as a successful empty design.
+    const status = result.modelError ? 502 : 200;
+
+    return json(status, {
       reply: redactSensitiveOutput(result.reply),
       proposedPatch: result.proposedPatch,
       panelReport: result.panelReport,
       simulationReport: result.simulationReport,
       compileResult: result.compileResult,
       bom: result.bom,
+      modelError: result.modelError,
       model: result.model,
       isMock: result.isMock,
     });
