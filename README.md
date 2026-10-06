@@ -4,6 +4,12 @@
 >
 > The KITT landing page is the cinematic public-facing shell for the KITT ecosystem: a high-end engineering website that introduces the platform, demonstrates its AI capabilities, explains the student-to-hardware workflow, surfaces community work, and launches users directly into the ecosystem's interactive tools.
 
+## 🚀 Live Demo
+
+**[Visit KITT AI →](https://kitt-main.pages.dev/)**
+
+Experience the KITT AI interface and explore the vision behind AI-powered digital circuit engineering.
+
 ## What this project is
 
 This repository is the **KITT ecosystem landing page plus its connected interactive experiences**. The landing page is not a static marketing site only; it is the entry point to several lazy-loaded product surfaces and a small runtime API layer.
