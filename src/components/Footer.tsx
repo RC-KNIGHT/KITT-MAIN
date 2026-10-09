@@ -68,7 +68,7 @@ export const Footer: React.FC = () => {
   ];
 
   return (
-    <footer className="bg-transparent border-t border-[#A58D66]/20 text-[#E5E1DD]/70 text-xs relative z-20">
+    <footer className="bg-transparent border-t border-[#FFFFFF]/20 text-[#F5F5F5]/70 text-xs relative z-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           
@@ -76,8 +76,8 @@ export const Footer: React.FC = () => {
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
               <KittLogo size={36} showGlow={true} />
-              <span className="text-xl font-bold tracking-widest text-[#E5E1DD] font-mono">
-                KITT <span className="text-[#A58D66] font-serif italic">ECOSYSTEM</span>
+              <span className="text-xl font-bold tracking-widest text-[#F5F5F5] font-mono">
+                KITT <span className="text-[#FFFFFF] font-serif italic">ECOSYSTEM</span>
               </span>
             </div>
 
@@ -85,14 +85,14 @@ export const Footer: React.FC = () => {
               "Where Ideas Become Inventions."
             </p>
 
-            <p className="text-xs text-[#E5E1DD]/65 max-w-sm leading-relaxed">
+            <p className="text-xs text-[#F5F5F5]/65 max-w-sm leading-relaxed">
               The premier AI-native hardware creation sanctuary. Turn conversational thought into working silicon.
             </p>
 
             <div className="flex flex-col gap-2.5 pt-2">
               <div className="flex items-center gap-3">
-                <span className="w-2 h-2 rounded-full bg-[#407E8C] animate-pulse shadow-[0_0_8px_#407E8C]" />
-                <span className="text-[11px] font-mono text-[#407E8C]">
+                <span className="w-2 h-2 rounded-full bg-[#8F8F8F] animate-pulse shadow-[0_0_8px_#8F8F8F]" />
+                <span className="text-[11px] font-mono text-[#8F8F8F]">
                   All Ecosystem Portals Synchronized
                 </span>
               </div>
@@ -100,10 +100,10 @@ export const Footer: React.FC = () => {
               <div className="flex items-center gap-2 pt-1">
                 <a
                   href="mailto:kitt.ai.team@gmail.com"
-                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#0d161d] border border-[#A58D66]/30 hover:border-[#A58D66] text-[11px] font-mono text-[#DFCCA8] hover:text-[#E5E1DD] transition-all group shadow-sm"
+                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#141415] border border-[#FFFFFF]/30 hover:border-[#FFFFFF] text-[11px] font-mono text-[#E8E8E8] hover:text-[#F5F5F5] transition-all group shadow-sm"
                   title="Official Team KITT Email"
                 >
-                  <Mail className="w-3.5 h-3.5 text-[#A58D66] group-hover:scale-110 transition-transform" />
+                  <Mail className="w-3.5 h-3.5 text-[#FFFFFF] group-hover:scale-110 transition-transform" />
                   <span>kitt.ai.team@gmail.com</span>
                 </a>
               </div>
@@ -112,30 +112,30 @@ export const Footer: React.FC = () => {
 
           {/* Col 3: Engineering Resources */}
           <div className="space-y-3">
-            <h4 className="text-xs font-mono font-bold uppercase tracking-widest text-[#A58D66]">
+            <h4 className="text-xs font-mono font-bold uppercase tracking-widest text-[#FFFFFF]">
               Synthesis & Docs
             </h4>
             <ul className="space-y-2">
               <li>
                 <a 
                   href="#/workspace" 
-                  className="hover:text-[#E5E1DD] transition-colors"
+                  className="hover:text-[#F5F5F5] transition-colors"
                 >
                   3D Component Library
                 </a>
               </li>
               <li>
-                <a href="#ai-agent" className="hover:text-[#E5E1DD] transition-colors">
+                <a href="#ai-agent" className="hover:text-[#F5F5F5] transition-colors">
                   Autonomous Synthesis Engine
                 </a>
               </li>
               <li>
-                <a href="#journey" className="hover:text-[#E5E1DD] transition-colors">
+                <a href="#journey" className="hover:text-[#F5F5F5] transition-colors">
                   Student to Pro Learning Path
                 </a>
               </li>
               <li>
-                <a href="#community" className="hover:text-[#E5E1DD] transition-colors">
+                <a href="#community" className="hover:text-[#F5F5F5] transition-colors">
                   Salon of Open Hardware
                 </a>
               </li>
@@ -144,30 +144,30 @@ export const Footer: React.FC = () => {
 
           {/* Col 5: Company & Legal */}
           <div className="space-y-3">
-            <h4 className="text-xs font-mono font-bold uppercase tracking-widest text-[#A58D66]">
+            <h4 className="text-xs font-mono font-bold uppercase tracking-widest text-[#FFFFFF]">
               Collective & Governance
             </h4>
             <ul className="space-y-2">
               <li>
-                <a href="#team" className="hover:text-[#E5E1DD] text-[#A58D66] font-medium transition-colors flex items-center gap-1">
+                <a href="#team" className="hover:text-[#F5F5F5] text-[#FFFFFF] font-medium transition-colors flex items-center gap-1">
                   <span>Core Team & Architects</span>
                 </a>
               </li>
               <li>
-                <a href="#pricing" className="hover:text-[#E5E1DD] transition-colors">
+                <a href="#pricing" className="hover:text-[#F5F5F5] transition-colors">
                   Pricing & Synthesis Units
                 </a>
               </li>
               <li>
-                <a href="#journey" className="hover:text-[#E5E1DD] transition-colors">
+                <a href="#journey" className="hover:text-[#F5F5F5] transition-colors">
                   Academic Classrooms
                 </a>
               </li>
               <li>
-                <span className="text-[#E5E1DD]/40">Security & DRC Sandbox</span>
+                <span className="text-[#F5F5F5]/40">Security & DRC Sandbox</span>
               </li>
               <li>
-                <span className="text-[#E5E1DD]/40">Privacy & Sovereign IP Terms</span>
+                <span className="text-[#F5F5F5]/40">Privacy & Sovereign IP Terms</span>
               </li>
             </ul>
           </div>
@@ -175,34 +175,34 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Official Social Media Channels Dock & Direct Email Action */}
-        <div className="mt-12 pt-6 border-t border-[#A58D66]/20 flex flex-col lg:flex-row items-center justify-between gap-5">
+        <div className="mt-12 pt-6 border-t border-[#FFFFFF]/20 flex flex-col lg:flex-row items-center justify-between gap-5">
           <div className="flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left">
-            <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#A58D66]">
+            <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#FFFFFF]">
               Official Channels
             </span>
-            <span className="text-[11px] font-mono text-[#E5E1DD]/50 italic hidden sm:inline">
+            <span className="text-[11px] font-mono text-[#F5F5F5]/50 italic hidden sm:inline">
               — Connect with the vanguard
             </span>
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-3.5">
             {/* Direct Visible Email Button & One-Click Copy */}
-            <div className="flex items-center rounded-xl bg-[#0d161d]/90 border border-[#A58D66]/35 p-1 shadow-lg hover:border-[#A58D66] transition-all">
+            <div className="flex items-center rounded-xl bg-[#141415]/90 border border-[#FFFFFF]/35 p-1 shadow-lg hover:border-[#FFFFFF] transition-all">
               <a
                 href="mailto:kitt.ai.team@gmail.com"
-                className="flex items-center gap-2 px-3 py-1.5 text-xs font-mono font-semibold text-[#DFCCA8] hover:text-[#E5E1DD] transition-colors"
+                className="flex items-center gap-2 px-3 py-1.5 text-xs font-mono font-semibold text-[#E8E8E8] hover:text-[#F5F5F5] transition-colors"
                 title="Send email to Team KITT"
               >
-                <Mail className="w-4 h-4 text-[#A58D66] shrink-0" />
+                <Mail className="w-4 h-4 text-[#FFFFFF] shrink-0" />
                 <span className="tracking-tight">kitt.ai.team@gmail.com</span>
               </a>
               <button
                 onClick={handleCopyEmail}
-                className="p-1.5 px-2 rounded-lg hover:bg-[#A58D66]/20 text-[#E5E1DD]/70 hover:text-[#DFCCA8] transition-colors cursor-pointer border-l border-[#A58D66]/20 flex items-center gap-1 text-[11px] font-mono"
+                className="p-1.5 px-2 rounded-lg hover:bg-[#FFFFFF]/20 text-[#F5F5F5]/70 hover:text-[#E8E8E8] transition-colors cursor-pointer border-l border-[#FFFFFF]/20 flex items-center gap-1 text-[11px] font-mono"
                 title="Copy email to clipboard"
               >
                 {copiedEmail ? (
-                  <span className="flex items-center gap-1 text-emerald-400 font-bold">
+                  <span className="flex items-center gap-1 text-zinc-400 font-bold">
                     <Check className="w-3.5 h-3.5" />
                     <span>Copied</span>
                   </span>
@@ -225,7 +225,7 @@ export const Footer: React.FC = () => {
                   rel={item.url.startsWith('mailto:') ? undefined : "noopener noreferrer"}
                   title={`${item.name} (Official Channel)`}
                   onClick={() => circuitAudio.playClick()}
-                  className="w-9 h-9 rounded-xl bg-[#0d161d]/85 border border-[#A58D66]/30 hover:border-[#A58D66] hover:bg-[#407E8C]/20 flex items-center justify-center text-[#E5E1DD]/80 hover:text-[#A58D66] transition-all hover:scale-110 active:scale-95 shadow-lg hover:shadow-[0_0_15px_rgba(165,141,102,0.3)] cursor-pointer"
+                  className="w-9 h-9 rounded-xl bg-[#141415]/85 border border-[#FFFFFF]/30 hover:border-[#FFFFFF] hover:bg-[#8F8F8F]/20 flex items-center justify-center text-[#F5F5F5]/80 hover:text-[#FFFFFF] transition-all hover:scale-110 active:scale-95 shadow-lg hover:shadow-[0_0_15px_rgba(255,255,255,0.3)] cursor-pointer"
                 >
                   {item.icon}
                 </a>
@@ -235,13 +235,13 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Copyright Strip */}
-        <div className="mt-8 pt-6 border-t border-[#A58D66]/15 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-[#E5E1DD]/50 font-mono">
+        <div className="mt-8 pt-6 border-t border-[#FFFFFF]/15 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-[#F5F5F5]/50 font-mono">
           <div>
             © {new Date().getFullYear()} KITT ECOSYSTEM. Synthesized for innovators, electrical engineers, and students of creation.
           </div>
           <div className="flex items-center gap-2 text-right">
-            <span className="text-[#A58D66] animate-pulse">✦</span>
-            <span className="text-[#E5E1DD]/80 font-serif italic text-xs tracking-wide">
+            <span className="text-[#FFFFFF] animate-pulse">✦</span>
+            <span className="text-[#F5F5F5]/80 font-serif italic text-xs tracking-wide">
               Engineered for the vanguard of builders who forge hardware that endures.
             </span>
           </div>

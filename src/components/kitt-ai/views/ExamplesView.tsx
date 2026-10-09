@@ -55,8 +55,8 @@ export const ExamplesView: React.FC<ExamplesViewProps> = ({
       {/* Header */}
       <div className="pb-4 border-b border-white/5">
         <div className="flex items-center gap-2.5">
-          <h1 className="text-xl sm:text-2xl font-bold font-mono text-[#E5E1DD]">Example Circuits</h1>
-          <span className="text-xs font-mono px-2 py-0.5 rounded bg-[#A58D66]/20 text-[#DFCCA8] border border-[#A58D66]/30">
+          <h1 className="text-xl sm:text-2xl font-bold font-mono text-[#F5F5F5]">Example Circuits</h1>
+          <span className="text-xs font-mono px-2 py-0.5 rounded bg-[#FFFFFF]/20 text-[#E8E8E8] border border-[#353536]">
             {KITT_EXAMPLE_TEMPLATES.length} Verified Presets
           </span>
         </div>
@@ -66,7 +66,7 @@ export const ExamplesView: React.FC<ExamplesViewProps> = ({
       </div>
 
       {/* Filter Bar */}
-      <div className="space-y-3 bg-[#0c161d] p-3 rounded-xl border border-[#A58D66]/20">
+      <div className="space-y-3 bg-[#141415] p-3 rounded-[12px] border border-[#353536]">
         <div className="flex flex-col sm:flex-row gap-3 items-center justify-between">
           {/* Search input */}
           <div className="relative w-full sm:max-w-md">
@@ -76,7 +76,7 @@ export const ExamplesView: React.FC<ExamplesViewProps> = ({
               value={searchTerm}
               onChange={e => setSearchTerm(e.target.value)}
               placeholder="Search templates by name, IC, or function..."
-              className="w-full pl-9 pr-3 py-1.5 rounded-lg bg-[#080f14] border border-white/10 text-xs font-mono text-[#E5E1DD] placeholder:text-slate-500 focus:outline-none focus:border-[#A58D66]"
+              className="w-full pl-9 pr-3 py-1.5 rounded-[12px] bg-[#000000] border border-[#29292A] text-xs font-mono text-[#F5F5F5] placeholder:text-slate-500 focus:outline-none focus:border-[#FFFFFF]"
             />
           </div>
 
@@ -91,10 +91,10 @@ export const ExamplesView: React.FC<ExamplesViewProps> = ({
             <button
               key={cat.id}
               onClick={() => setSelectedCategory(cat.id)}
-              className={`px-3 py-1 rounded-lg text-xs font-mono transition-colors cursor-pointer ${
+              className={`px-3 py-1 rounded-[12px] text-xs font-mono transition-colors cursor-pointer ${
                 selectedCategory === cat.id
-                  ? 'bg-[#A58D66] text-[#080f14] font-bold shadow-sm'
-                  : 'bg-[#080f14] text-slate-400 hover:text-white border border-white/5 hover:border-white/15'
+                  ? 'bg-[#FFFFFF] text-[#000000] font-bold shadow-sm'
+                  : 'bg-[#000000] text-slate-400 hover:text-white border border-white/5 hover:border-[#353536]'
               }`}
             >
               {cat.label}
@@ -108,24 +108,24 @@ export const ExamplesView: React.FC<ExamplesViewProps> = ({
         {filteredTemplates.map(tpl => (
           <div
             key={tpl.id}
-            className="group rounded-xl bg-[#0c161d] hover:bg-[#111d24] border border-[#A58D66]/25 hover:border-[#A58D66]/60 p-5 transition-all duration-200 flex flex-col justify-between shadow-lg"
+            className="group rounded-[12px] bg-[#141415] hover:bg-[#1D1D1E] border border-[#353536] hover:border-[#8F8F8F] p-5 transition-all duration-200 flex flex-col justify-between"
           >
             <div>
               {/* Circuit Preview Visual */}
               <div 
                 onClick={() => onOpenExample(tpl)}
-                className="w-full h-32 rounded-lg bg-[#080f14] border border-white/5 mb-3.5 flex items-center justify-center p-3 relative overflow-hidden group-hover:border-[#A58D66]/30 transition-colors cursor-pointer"
+                className="w-full h-32 rounded-[12px] bg-[#000000] border border-white/5 mb-3.5 flex items-center justify-center p-3 relative overflow-hidden group-hover:border-[#353536] transition-colors cursor-pointer"
               >
                 <div 
                   className="absolute inset-0 opacity-15"
                   style={{
-                    backgroundImage: 'radial-gradient(#A58D66 1px, transparent 1px)',
+                    backgroundImage: 'radial-gradient(#FFFFFF 1px, transparent 1px)',
                     backgroundSize: '12px 12px'
                   }}
                 />
 
                 <div className="relative z-10 text-center">
-                  <div className="w-12 h-12 mx-auto rounded-xl bg-[#A58D66]/15 border border-[#A58D66]/30 flex items-center justify-center text-[#DFCCA8] group-hover:scale-110 transition-transform shadow-inner">
+                  <div className="w-12 h-12 mx-auto rounded-[12px] bg-[#FFFFFF]/15 border border-[#353536] flex items-center justify-center text-[#E8E8E8] group-hover:scale-110 transition-transform">
                     {tpl.svgIconType === 'timer' && <Clock className="w-6 h-6" />}
                     {tpl.svgIconType === 'radar' && <Radio className="w-6 h-6" />}
                     {tpl.svgIconType === 'irrigation' && <Cpu className="w-6 h-6" />}
@@ -133,9 +133,9 @@ export const ExamplesView: React.FC<ExamplesViewProps> = ({
                     {tpl.svgIconType === 'traffic' && <Layers className="w-6 h-6" />}
                     {tpl.svgIconType === 'opamp' && <Zap className="w-6 h-6" />}
                     {tpl.svgIconType === 'flipflop' && <SlidersHorizontal className="w-6 h-6" />}
-                    {tpl.svgIconType === 'regulator' && <Zap className="w-6 h-6 text-[#10b981]" />}
-                    {tpl.svgIconType === 'hbridge' && <Activity className="w-6 h-6 text-[#22d3ee]" />}
-                    {tpl.svgIconType === 'filter' && <Radio className="w-6 h-6 text-[#DFCCA8]" />}
+                    {tpl.svgIconType === 'regulator' && <Zap className="w-6 h-6 text-[#F5F5F5]" />}
+                    {tpl.svgIconType === 'hbridge' && <Activity className="w-6 h-6 text-[#B4B4B4]" />}
+                    {tpl.svgIconType === 'filter' && <Radio className="w-6 h-6 text-[#E8E8E8]" />}
                   </div>
 
                   <span className="text-[11px] font-mono text-slate-400 mt-2 block font-medium">
@@ -146,7 +146,7 @@ export const ExamplesView: React.FC<ExamplesViewProps> = ({
 
               {/* Category & Difficulty Badge */}
               <div className="flex items-center justify-between gap-2 mb-2">
-                <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[#A58D66]/15 text-[#DFCCA8] border border-[#A58D66]/25">
+                <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[#FFFFFF]/15 text-[#E8E8E8] border border-[#353536]">
                   {tpl.category}
                 </span>
                 <span className="text-[10px] font-mono text-slate-400">
@@ -157,7 +157,7 @@ export const ExamplesView: React.FC<ExamplesViewProps> = ({
               {/* Title & Short Description */}
               <h3 
                 onClick={() => onOpenExample(tpl)}
-                className="text-sm font-bold font-mono text-[#E5E1DD] group-hover:text-[#DFCCA8] transition-colors cursor-pointer"
+                className="text-sm font-bold font-mono text-[#F5F5F5] group-hover:text-[#E8E8E8] transition-colors cursor-pointer"
               >
                 {tpl.title}
               </h3>
@@ -170,16 +170,16 @@ export const ExamplesView: React.FC<ExamplesViewProps> = ({
             <div className="pt-4 mt-3 border-t border-white/5 flex items-center justify-between gap-2">
               <button
                 onClick={() => onCloneExample(tpl)}
-                className="px-2.5 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white text-xs font-mono flex items-center gap-1.5 transition-colors cursor-pointer"
+                className="px-2.5 py-1.5 rounded-[12px] bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white text-xs font-mono flex items-center gap-1.5 transition-colors cursor-pointer"
                 title="Create a copy in your workspace"
               >
-                <Plus className="w-3.5 h-3.5 text-[#A58D66]" />
+                <Plus className="w-3.5 h-3.5 text-[#FFFFFF]" />
                 <span>Clone</span>
               </button>
 
               <button
                 onClick={() => onOpenExample(tpl)}
-                className="px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-[#A58D66] to-[#8C7654] hover:from-[#bfa378] hover:to-[#A58D66] text-[#080f14] text-xs font-mono font-bold flex items-center gap-1.5 shadow-[0_0_10px_rgba(165,141,102,0.2)] transition-all cursor-pointer"
+                className="px-3.5 py-1.5 rounded-[12px] bg-[#FFFFFF] hover:bg-[#E8E8E8] text-[#000000] text-xs font-mono font-bold flex items-center gap-1.5 transition-all cursor-pointer"
               >
                 <span>Open in Studio</span>
                 <ArrowRight className="w-3.5 h-3.5" />

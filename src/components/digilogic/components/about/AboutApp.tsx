@@ -78,7 +78,7 @@ const AboutContent: React.FC<AboutAppProps> = ({ isModal = false, onClose }) => 
   }
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-[#080f14] text-[#E5E1DD] flex flex-col selection:bg-[#407E8C]/30 selection:text-[#E5E1DD]">
+    <div ref={containerRef} className="min-h-screen bg-[#000000] text-[#F5F5F5] flex flex-col selection:bg-[#8F8F8F]/30 selection:text-[#F5F5F5]">
       {/* Sticky Header Navigation */}
       <AboutNavbar activeSection={activeSection} onNavigate={scrollToSection} onBackToStudio={onClose} />
 
@@ -98,7 +98,7 @@ const AboutContent: React.FC<AboutAppProps> = ({ isModal = false, onClose }) => 
         {showScrollTop && (
           <button
             onClick={scrollToTop}
-            className="w-11 h-11 rounded-2xl bg-[#080f14]/90 border border-[#A58D66]/30 hover:border-[#A58D66]/60 text-[#DFCCA8] hover:text-[#E5E1DD] flex items-center justify-center shadow-xl backdrop-blur transition-all active:scale-95 cursor-pointer"
+            className="w-11 h-11 rounded-2xl bg-[#000000]/90 border border-[#FFFFFF]/30 hover:border-[#FFFFFF]/60 text-[#E8E8E8] hover:text-[#F5F5F5] flex items-center justify-center shadow-xl backdrop-blur transition-all active:scale-95 cursor-pointer"
             title="Scroll to top"
             aria-label="Scroll to top"
           >
@@ -109,7 +109,7 @@ const AboutContent: React.FC<AboutAppProps> = ({ isModal = false, onClose }) => 
         {!isModal && (
           <a
             href="./"
-            className="flex items-center gap-2 px-4 py-3 rounded-2xl bg-[#A58D66] hover:bg-[#DFCCA8] text-[#080f14] font-bold text-xs sm:text-sm shadow-xl shadow-[#A58D66]/25 transition-all active:scale-95"
+            className="flex items-center gap-2 px-4 py-3 rounded-2xl bg-[#FFFFFF] hover:bg-[#E8E8E8] text-[#000000] font-bold text-xs sm:text-sm shadow-xl shadow-[#FFFFFF]/25 transition-all active:scale-95"
             title="Return to DigiLogic Circuit Studio"
           >
             <ArrowLeft className="w-4 h-4" />

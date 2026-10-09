@@ -77,7 +77,7 @@ export const EditorView: React.FC<EditorViewProps> = ({
   const [showBoardModal, setShowBoardModal] = useState(false);
   
   // Wire Styling & Selection
-  const [wireColor, setWireColor] = useState('#10b981');
+  const [wireColor, setWireColor] = useState('#F5F5F5');
   const [wireStyle, setWireStyle] = useState<WireRoutingStyle>('orthogonal');
   const [canvasZoom, setCanvasZoom] = useState(0.84);
   const [selectedComponent, setSelectedComponent] = useState<CIRComponent | null>(null);
@@ -300,7 +300,7 @@ export const EditorView: React.FC<EditorViewProps> = ({
   };
 
   return (
-    <div className="w-full h-full flex flex-col bg-[#080f14] text-[#E5E1DD] overflow-hidden select-none font-sans relative">
+    <div className="w-full h-full flex flex-col bg-[#000000] text-[#F5F5F5] overflow-hidden select-none font-sans relative">
       {/* 1. TOP GLOBAL EDITOR BAR */}
       <EditorTopBar
         projectName={projectName}
@@ -328,7 +328,7 @@ export const EditorView: React.FC<EditorViewProps> = ({
         />
 
         {/* Center Pane: Canvas Area */}
-        <div className="flex-1 flex flex-col overflow-hidden relative bg-[#060a0e]">
+        <div className="flex-1 flex flex-col overflow-hidden relative bg-[#0B0B0C]">
           {/* Top Canvas Toolbar (Visible in Breadboard & Schematic modes) */}
           {canvasMode !== 'pcb' && (
             <CanvasToolbar
@@ -448,7 +448,7 @@ export const EditorView: React.FC<EditorViewProps> = ({
             <button
               id="floating-kitt-copilot-btn"
               onClick={() => setIsCopilotOpen(o => !o)}
-              className="px-3.5 py-2 rounded-full bg-gradient-to-r from-[#A58D66] to-[#8C7654] hover:from-[#bfa378] hover:to-[#A58D66] text-[#080f14] font-mono font-bold text-xs flex items-center gap-2 shadow-[0_0_20px_rgba(165,141,102,0.4)] transition-all cursor-pointer group hover:scale-105"
+              className="px-3.5 py-2 rounded-full bg-[#FFFFFF] hover:bg-[#E8E8E8] text-[#000000] font-mono font-bold text-xs flex items-center gap-2 transition-all cursor-pointer group hover:scale-105"
             >
               <KittLogo size={16} showGlow={false} />
               <span>KITT Copilot</span>

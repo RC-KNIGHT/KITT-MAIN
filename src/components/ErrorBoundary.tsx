@@ -42,9 +42,9 @@ export class RootErrorBoundary extends Component<Props, State> {
   public render() {
     if (this.state.hasError) {
       return (
-        <div className="min-h-screen w-full bg-[#080f14] text-[#E5E1DD] flex items-center justify-center p-4 selection:bg-[#407E8C]/40">
-          <div className="max-w-md w-full bg-[#0c161d] border border-[#A58D66]/40 rounded-2xl p-6 shadow-2xl space-y-5 text-center">
-            <div className="mx-auto w-16 h-16 rounded-2xl bg-[#A58D66]/15 border border-[#A58D66]/40 flex items-center justify-center text-[#A58D66]">
+        <div className="min-h-screen w-full bg-[#000000] text-[#F5F5F5] flex items-center justify-center p-4 selection:bg-[#8F8F8F]/40">
+          <div className="max-w-md w-full bg-[#141415] border border-[#FFFFFF]/40 rounded-2xl p-6 shadow-2xl space-y-5 text-center">
+            <div className="mx-auto w-16 h-16 rounded-2xl bg-[#FFFFFF]/15 border border-[#FFFFFF]/40 flex items-center justify-center text-[#FFFFFF]">
               <KittLogo size={36} showGlow={true} />
             </div>
 
@@ -53,10 +53,10 @@ export class RootErrorBoundary extends Component<Props, State> {
                 <AlertTriangle className="w-3 h-3" />
                 <span>Safety Guard Intercepted</span>
               </div>
-              <h2 className="text-xl font-bold font-cinzel text-[#E5E1DD]">
+              <h2 className="text-xl font-bold font-cinzel text-[#F5F5F5]">
                 Session State Preserved
               </h2>
-              <p className="text-xs text-[#E5E1DD]/70 font-light leading-relaxed">
+              <p className="text-xs text-[#F5F5F5]/70 font-light leading-relaxed">
                 An unexpected view state was intercepted by KITT's resilience layer. Your project data and circuit states remain safely preserved.
               </p>
               {this.state.error?.message && (
@@ -69,7 +69,7 @@ export class RootErrorBoundary extends Component<Props, State> {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
               <button
                 onClick={this.handleReset}
-                className="w-full sm:w-auto px-4 py-2 rounded-xl bg-[#A58D66] hover:bg-[#bfa378] text-[#080f14] font-bold text-xs flex items-center justify-center gap-2 transition-all cursor-pointer shadow-md"
+                className="w-full sm:w-auto px-4 py-2 rounded-xl bg-[#FFFFFF] hover:bg-[#CCCCCC] text-[#000000] font-bold text-xs flex items-center justify-center gap-2 transition-all cursor-pointer shadow-md"
               >
                 <Home className="w-3.5 h-3.5" />
                 <span>Return to Ecosystem</span>
@@ -77,9 +77,9 @@ export class RootErrorBoundary extends Component<Props, State> {
 
               <button
                 onClick={this.handleReload}
-                className="w-full sm:w-auto px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-[#E5E1DD] border border-white/10 font-medium text-xs flex items-center justify-center gap-2 transition-all cursor-pointer"
+                className="w-full sm:w-auto px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-[#F5F5F5] border border-white/10 font-medium text-xs flex items-center justify-center gap-2 transition-all cursor-pointer"
               >
-                <RefreshCw className="w-3.5 h-3.5 text-[#407E8C]" />
+                <RefreshCw className="w-3.5 h-3.5 text-[#8F8F8F]" />
                 <span>Reload Page</span>
               </button>
             </div>

@@ -104,18 +104,18 @@ export const WireRenderer: React.FC<WireRendererProps> = React.memo(({
   const pathD = generatePath();
 
   // Color coding based on digital state and active theme
-  let strokeColor = activeTheme.wireLowColor || '#1d2c38'; // 0 / Low: theme low color
+  let strokeColor = activeTheme.wireLowColor || '#29292A'; // 0 / Low: theme low color
   let glowColor = 'none';
 
   // Determine base colors from logical wire types
   const customColorType = wire.color || 'default';
   
   if (customColorType === 'power') {
-    strokeColor = state === 1 ? '#A58D66' : '#1d2c38';
-    glowColor = state === 1 ? 'rgba(165, 141, 102, 0.45)' : 'none';
+    strokeColor = state === 1 ? '#FFFFFF' : '#29292A';
+    glowColor = state === 1 ? 'rgba(255, 255, 255, 0.45)' : 'none';
   } else if (customColorType === 'ground') {
-    strokeColor = state === 1 ? (isLight ? '#334155' : '#76B4C2') : (isLight ? '#64748b' : '#1d2c38'); // Sovereign ground
-    glowColor = state === 1 ? (isLight ? 'rgba(51, 65, 85, 0.25)' : 'rgba(118, 180, 194, 0.3)') : 'none';
+    strokeColor = state === 1 ? (isLight ? '#334155' : '#B4B4B4') : (isLight ? '#64748b' : '#29292A'); // Sovereign ground
+    glowColor = state === 1 ? (isLight ? 'rgba(53, 53, 54, 0.25)' : 'rgba(180, 180, 180, 0.3)') : 'none';
   } else if (customColorType === 'signal') {
     strokeColor = state === 1 ? activeTheme.secondaryColor : activeTheme.wireLowColor;
     glowColor = state === 1 ? activeTheme.wireGlowColor : 'none';
@@ -128,15 +128,15 @@ export const WireRenderer: React.FC<WireRendererProps> = React.memo(({
   }
 
   if (state === 'Z') {
-    strokeColor = '#DFCCA8'; // High-Z: soft sand gold
+    strokeColor = '#E8E8E8'; // High-Z: soft sand gold
   } else if (state === 'X') {
-    strokeColor = '#A58D66'; // Error / Conflict: antique gold
-    glowColor = 'rgba(165, 141, 102, 0.5)';
+    strokeColor = '#FFFFFF'; // Error / Conflict: antique gold
+    glowColor = 'rgba(255, 255, 255, 0.5)';
   }
 
   if (isSelected) {
-    strokeColor = activeTheme.secondaryColor || '#DFCCA8'; // Light Gold selection
-    glowColor = activeTheme.wireGlowColor || 'rgba(165, 141, 102, 0.4)';
+    strokeColor = activeTheme.secondaryColor || '#E8E8E8'; // Light Gold selection
+    glowColor = activeTheme.wireGlowColor || 'rgba(255, 255, 255, 0.4)';
   } else if (primarySelectingUser) {
     strokeColor = primarySelectingUser.color; // Collaborator selection color
   }
@@ -244,7 +244,7 @@ export const WireRenderer: React.FC<WireRendererProps> = React.memo(({
                 cy={0}
                 r={9}
                 fill={user.color}
-                stroke={isLight ? '#ffffff' : '#080f14'}
+                stroke={isLight ? '#ffffff' : '#000000'}
                 strokeWidth={1.8}
                 className="shadow-lg"
               />
@@ -268,7 +268,7 @@ export const WireRenderer: React.FC<WireRendererProps> = React.memo(({
                   width={Math.max(28, user.name.length * 6.4 + 10)}
                   height={12}
                   rx={3}
-                  fill={isLight ? '#ffffff' : '#080f14'}
+                  fill={isLight ? '#ffffff' : '#000000'}
                   stroke={user.color}
                   strokeWidth={0.8}
                 />
@@ -277,7 +277,7 @@ export const WireRenderer: React.FC<WireRendererProps> = React.memo(({
                   y={0}
                   dominantBaseline="central"
                   textAnchor="middle"
-                  fill={isLight ? '#0d171f' : '#E5E1DD'}
+                  fill={isLight ? '#141415' : '#F5F5F5'}
                   fontSize={7.5}
                   fontWeight="bold"
                 >
@@ -295,7 +295,7 @@ export const WireRenderer: React.FC<WireRendererProps> = React.memo(({
           cx={midPoint.x}
           cy={midPoint.y}
           r={5}
-          fill={activeTheme.primaryColor || '#A58D66'}
+          fill={activeTheme.primaryColor || '#FFFFFF'}
           stroke="#ffffff"
           strokeWidth={1.5}
         />

@@ -954,7 +954,7 @@ export const Canvas: React.FC = () => {
                     : `M ${wireDraft.startPos.x} ${wireDraft.startPos.y} L ${(wireDraft.startPos.x + wireDraft.currentX) / 2} ${wireDraft.startPos.y} L ${(wireDraft.startPos.x + wireDraft.currentX) / 2} ${wireDraft.currentY} L ${wireDraft.currentX} ${wireDraft.currentY}`
                 }
                 fill="none"
-                stroke={activeTheme.primaryColor || '#A58D66'}
+                stroke={activeTheme.primaryColor || '#FFFFFF'}
                 strokeWidth={3}
                 strokeDasharray="4, 4"
                 className="pointer-events-none"
@@ -966,7 +966,7 @@ export const Canvas: React.FC = () => {
                   y1={wireDraft.branchStartPos.y + 4.5}
                   x2={wireDraft.branchStartPos.x + 4.5}
                   y2={wireDraft.branchStartPos.y - 4.5}
-                  stroke={activeTheme.primaryColor || '#A58D66'}
+                  stroke={activeTheme.primaryColor || '#FFFFFF'}
                   strokeWidth={1.5}
                   strokeLinecap="round"
                   className="pointer-events-none"
@@ -1011,8 +1011,8 @@ export const Canvas: React.FC = () => {
               y={Math.min(boxStart.y, boxCurrent.y)}
               width={Math.abs(boxCurrent.x - boxStart.x)}
               height={Math.abs(boxCurrent.y - boxStart.y)}
-              fill="rgba(165, 141, 102, 0.15)"
-              stroke={activeTheme.primaryColor || '#A58D66'}
+              fill="rgba(255, 255, 255, 0.15)"
+              stroke={activeTheme.primaryColor || '#FFFFFF'}
               strokeWidth={1.5}
               strokeDasharray="4, 4"
               className="pointer-events-none"
@@ -1069,7 +1069,7 @@ export const Canvas: React.FC = () => {
                       x={21}
                       y={0}
                       dominantBaseline="central"
-                      fill={isLight ? '#080f14' : '#E5E1DD'}
+                      fill={isLight ? '#000000' : '#F5F5F5'}
                       fontSize={9.5}
                       fontWeight="bold"
                       fontFamily="sans-serif"
@@ -1088,30 +1088,30 @@ export const Canvas: React.FC = () => {
         className={`hidden md:flex absolute bottom-4 left-4 z-20 items-center gap-1.5 backdrop-blur-md border p-1.5 rounded-xl shadow-2xl transition-colors ${
           isLight
             ? 'bg-white/95 border-slate-300 shadow-[0_8px_30px_rgba(0,0,0,0.12)]'
-            : 'bg-[#0d171f]/95 border-[#A58D66]/25'
+            : 'bg-[#141415]/95 border-[#FFFFFF]/25'
         }`}
       >
         {/* Toggle Library Drawer Button on Mobile/Tablet */}
         {!sidebarOpen && (
           <button
             onClick={toggleSidebar}
-            className="flex items-center gap-1.5 px-2.5 py-1.5 bg-[#A58D66]/15 hover:bg-[#A58D66]/25 text-[#DFCCA8] border border-[#A58D66]/40 rounded-lg text-xs font-bold transition-all shadow-sm cursor-pointer"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 bg-[#FFFFFF]/15 hover:bg-[#FFFFFF]/25 text-[#E8E8E8] border border-[#FFFFFF]/40 rounded-lg text-xs font-bold transition-all shadow-sm cursor-pointer"
             title="Open Component Library"
           >
-            <Plus className="w-4 h-4 text-[#A58D66]" />
+            <Plus className="w-4 h-4 text-[#FFFFFF]" />
             <span className="hidden sm:inline">Add Gate</span>
           </button>
         )}
 
         <div
           className={`flex items-center rounded-lg p-0.5 border ${
-            isLight ? 'bg-slate-100 border-slate-200' : 'bg-[#080f14] border-[#A58D66]/20'
+            isLight ? 'bg-slate-100 border-slate-200' : 'bg-[#000000] border-[#FFFFFF]/20'
           }`}
         >
           <button
             onClick={() => handleZoom('in')}
             className={`p-2 rounded-md transition-colors ${
-              isLight ? 'text-slate-700 hover:text-slate-900 hover:bg-slate-200' : 'text-[#DFCCA8] hover:text-[#E5E1DD] hover:bg-[#0d171f]'
+              isLight ? 'text-slate-700 hover:text-slate-900 hover:bg-slate-200' : 'text-[#E8E8E8] hover:text-[#F5F5F5] hover:bg-[#141415]'
             }`}
             title="Zoom In"
           >
@@ -1119,7 +1119,7 @@ export const Canvas: React.FC = () => {
           </button>
           <span
             className={`text-[11px] font-mono px-1.5 font-bold min-w-10 text-center ${
-              isLight ? 'text-slate-700' : 'text-[#E5E1DD]/80'
+              isLight ? 'text-slate-700' : 'text-[#F5F5F5]/80'
             }`}
           >
             {Math.round(camera.zoom * 100)}%
@@ -1127,7 +1127,7 @@ export const Canvas: React.FC = () => {
           <button
             onClick={() => handleZoom('out')}
             className={`p-2 rounded-md transition-colors ${
-              isLight ? 'text-slate-700 hover:text-slate-900 hover:bg-slate-200' : 'text-[#DFCCA8] hover:text-[#E5E1DD] hover:bg-[#0d171f]'
+              isLight ? 'text-slate-700 hover:text-slate-900 hover:bg-slate-200' : 'text-[#E8E8E8] hover:text-[#F5F5F5] hover:bg-[#141415]'
             }`}
             title="Zoom Out"
           >
@@ -1136,7 +1136,7 @@ export const Canvas: React.FC = () => {
           <button
             onClick={() => handleZoom('reset')}
             className={`p-2 rounded-md transition-colors ${
-              isLight ? 'text-slate-700 hover:text-slate-900 hover:bg-slate-200' : 'text-[#DFCCA8] hover:text-[#E5E1DD] hover:bg-[#0d171f]'
+              isLight ? 'text-slate-700 hover:text-slate-900 hover:bg-slate-200' : 'text-[#E8E8E8] hover:text-[#F5F5F5] hover:bg-[#141415]'
             }`}
             title="Fit to Screen"
           >
@@ -1149,10 +1149,10 @@ export const Canvas: React.FC = () => {
           onClick={() => setSnapToGrid(!snapToGrid)}
           className={`p-2 rounded-lg border transition-colors ${
             snapToGrid
-              ? 'bg-[#A58D66]/20 border-[#A58D66]/50 text-[#DFCCA8]'
+              ? 'bg-[#FFFFFF]/20 border-[#FFFFFF]/50 text-[#E8E8E8]'
               : isLight
               ? 'bg-slate-100 border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-200'
-              : 'bg-[#080f14] border-[#A58D66]/20 text-[#E5E1DD]/70 hover:text-[#E5E1DD]'
+              : 'bg-[#000000] border-[#FFFFFF]/20 text-[#F5F5F5]/70 hover:text-[#F5F5F5]'
           }`}
           title="Toggle Grid Snapping"
         >
@@ -1162,14 +1162,14 @@ export const Canvas: React.FC = () => {
         {/* Undo / Redo Touch Buttons */}
         <div
           className={`flex items-center rounded-lg p-0.5 border ${
-            isLight ? 'bg-slate-100 border-slate-200' : 'bg-[#080f14] border-[#A58D66]/20'
+            isLight ? 'bg-slate-100 border-slate-200' : 'bg-[#000000] border-[#FFFFFF]/20'
           }`}
         >
           <button
             onClick={undo}
             disabled={!canUndo}
             className={`p-2 disabled:opacity-30 rounded-md transition-colors ${
-              isLight ? 'text-slate-700 hover:text-slate-900 hover:bg-slate-200' : 'text-[#DFCCA8] hover:text-[#E5E1DD] hover:bg-[#0d171f]'
+              isLight ? 'text-slate-700 hover:text-slate-900 hover:bg-slate-200' : 'text-[#E8E8E8] hover:text-[#F5F5F5] hover:bg-[#141415]'
             }`}
             title="Undo"
           >
@@ -1179,7 +1179,7 @@ export const Canvas: React.FC = () => {
             onClick={redo}
             disabled={!canRedo}
             className={`p-2 disabled:opacity-30 rounded-md transition-colors ${
-              isLight ? 'text-slate-700 hover:text-slate-900 hover:bg-slate-200' : 'text-[#DFCCA8] hover:text-[#E5E1DD] hover:bg-[#0d171f]'
+              isLight ? 'text-slate-700 hover:text-slate-900 hover:bg-slate-200' : 'text-[#E8E8E8] hover:text-[#F5F5F5] hover:bg-[#141415]'
             }`}
             title="Redo"
           >
@@ -1194,7 +1194,7 @@ export const Canvas: React.FC = () => {
             className={`p-2 border rounded-lg transition-colors ${
               isLight
                 ? 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-700 hover:text-slate-900'
-                : 'bg-[#080f14] hover:bg-[#0d171f] border-[#A58D66]/25 text-[#DFCCA8] hover:text-[#E5E1DD]'
+                : 'bg-[#000000] hover:bg-[#141415] border-[#FFFFFF]/25 text-[#E8E8E8] hover:text-[#F5F5F5]'
             }`}
             title="Open Inspector Properties"
           >
@@ -1208,11 +1208,11 @@ export const Canvas: React.FC = () => {
           className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border text-xs font-mono transition-colors ${
             isLight
               ? 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-700 hover:text-slate-900'
-              : 'bg-[#080f14] hover:bg-[#0d171f] border-[#A58D66]/25 text-[#DFCCA8] hover:text-[#E5E1DD]'
+              : 'bg-[#000000] hover:bg-[#141415] border-[#FFFFFF]/25 text-[#E8E8E8] hover:text-[#F5F5F5]'
           }`}
           title="About DigiLogic Lab"
         >
-          <Info className={`w-3.5 h-3.5 ${isLight ? 'text-slate-500' : 'text-[#A58D66]'}`} />
+          <Info className={`w-3.5 h-3.5 ${isLight ? 'text-slate-500' : 'text-[#FFFFFF]'}`} />
           <span>About</span>
         </button>
       </div>
@@ -1223,14 +1223,14 @@ export const Canvas: React.FC = () => {
           className={`fixed z-50 rounded-lg shadow-xl p-1 text-sm border ${
             isLight
               ? 'bg-white border-slate-200 text-slate-800 shadow-[0_10px_25px_rgba(0,0,0,0.15)]'
-              : 'bg-[#0d171f] border-[#A58D66]/30 text-[#E5E1DD]'
+              : 'bg-[#141415] border-[#FFFFFF]/30 text-[#F5F5F5]'
           }`}
           style={{ top: contextMenu.y, left: contextMenu.x }}
           onClick={(e) => e.stopPropagation()}
         >
           <div
             className={`px-3 py-1.5 text-xs font-semibold border-b ${
-              isLight ? 'text-slate-500 border-slate-200' : 'text-[#DFCCA8] border-[#A58D66]/20'
+              isLight ? 'text-slate-500 border-slate-200' : 'text-[#E8E8E8] border-[#FFFFFF]/20'
             }`}
           >
             Configure Gate
@@ -1246,7 +1246,7 @@ export const Canvas: React.FC = () => {
                 className={`w-full text-left px-3 py-1.5 rounded transition-colors flex items-center justify-between ${
                   isLight
                     ? 'hover:bg-slate-100 hover:text-slate-900 text-slate-700'
-                    : 'hover:bg-[#A58D66]/20 hover:text-[#DFCCA8] text-[#E5E1DD]'
+                    : 'hover:bg-[#FFFFFF]/20 hover:text-[#E8E8E8] text-[#F5F5F5]'
                 }`}
               >
                 <span>{num} Inputs</span>

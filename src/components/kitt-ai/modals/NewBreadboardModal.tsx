@@ -55,25 +55,25 @@ export const NewBreadboardModal: React.FC<NewBreadboardModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm animate-in fade-in duration-150">
       <div 
-        className="w-full max-w-2xl bg-[#0c161d] border border-[#A58D66]/35 rounded-2xl shadow-2xl overflow-hidden flex flex-col font-sans"
+        className="w-full max-w-2xl bg-[#141415] border border-[#353536] rounded-[24px] overflow-hidden flex flex-col font-sans"
         onClick={e => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="px-6 py-4 border-b border-white/10 flex items-center justify-between bg-[#080f14]/80">
+        <div className="px-6 py-4 border-b border-[#29292A] flex items-center justify-between bg-[#000000]/80">
           <div>
-            <h3 className="text-base font-bold text-[#E5E1DD]">New breadboard</h3>
+            <h3 className="text-base font-bold text-[#F5F5F5]">New breadboard</h3>
             <p className="text-xs text-slate-400 mt-0.5">Choose a size</p>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+            className="p-1.5 rounded-[12px] text-slate-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
         {/* 3 Size Cards */}
-        <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-4 bg-[#080f14]/40">
+        <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-4 bg-[#000000]/40">
           {boardOptions.map(board => {
             const isSelected = currentSize === board.id;
 
@@ -84,14 +84,14 @@ export const NewBreadboardModal: React.FC<NewBreadboardModalProps> = ({
                   onSelectSize(board.id);
                   onClose();
                 }}
-                className={`group relative rounded-xl border p-4 flex flex-col items-center text-center cursor-pointer transition-all duration-200 ${
+                className={`group relative rounded-[12px] border p-4 flex flex-col items-center text-center cursor-pointer transition-all duration-200 ${
                   isSelected
-                    ? 'border-[#A58D66] bg-[#A58D66]/10 shadow-[0_0_20px_rgba(165,141,102,0.15)]'
-                    : 'border-white/10 bg-[#0c161d] hover:border-[#A58D66]/60 hover:bg-[#121f28]'
+                    ? 'border-[#FFFFFF] bg-[#FFFFFF]/10'
+                    : 'border-[#29292A] bg-[#141415] hover:border-[#8F8F8F] hover:bg-[#141415]'
                 }`}
               >
                 {/* SVG Breadboard Illustration */}
-                <div className="w-full h-32 mb-3 bg-[#080f14] rounded-lg border border-white/5 p-2 flex items-center justify-center overflow-hidden">
+                <div className="w-full h-32 mb-3 bg-[#000000] rounded-[12px] border border-white/5 p-2 flex items-center justify-center overflow-hidden">
                   <svg
                     viewBox="0 0 160 90"
                     className="w-full h-full text-slate-400 transition-transform group-hover:scale-105"
@@ -116,10 +116,10 @@ export const NewBreadboardModal: React.FC<NewBreadboardModalProps> = ({
                       <>
                         {/* Top Rails: Red (+) & Blue (-) */}
                         <line x1="16" y1="16" x2="144" y2="16" stroke="#ef4444" strokeWidth="1" strokeDasharray="2, 2" />
-                        <line x1="16" y1="22" x2="144" y2="22" stroke="#3b82f6" strokeWidth="1" strokeDasharray="2, 2" />
+                        <line x1="16" y1="22" x2="144" y2="22" stroke="#B4B4B4" strokeWidth="1" strokeDasharray="2, 2" />
 
                         {/* Bottom Rails: Blue (-) & Red (+) */}
-                        <line x1="16" y1="68" x2="144" y2="68" stroke="#3b82f6" strokeWidth="1" strokeDasharray="2, 2" />
+                        <line x1="16" y1="68" x2="144" y2="68" stroke="#B4B4B4" strokeWidth="1" strokeDasharray="2, 2" />
                         <line x1="16" y1="74" x2="144" y2="74" stroke="#ef4444" strokeWidth="1" strokeDasharray="2, 2" />
                       </>
                     )}
@@ -152,7 +152,7 @@ export const NewBreadboardModal: React.FC<NewBreadboardModalProps> = ({
                 </div>
 
                 {/* Title & Specs */}
-                <h4 className="text-sm font-bold text-[#E5E1DD] group-hover:text-[#DFCCA8] transition-colors">
+                <h4 className="text-sm font-bold text-[#F5F5F5] group-hover:text-[#E8E8E8] transition-colors">
                   {board.name}
                 </h4>
                 <p className="text-xs text-slate-300 font-mono mt-0.5">
@@ -165,10 +165,10 @@ export const NewBreadboardModal: React.FC<NewBreadboardModalProps> = ({
                 {/* Action Button */}
                 <button
                   type="button"
-                  className={`mt-4 w-full py-1.5 px-3 rounded-lg text-xs font-mono font-bold transition-all cursor-pointer ${
+                  className={`mt-4 w-full py-1.5 px-3 rounded-[12px] text-xs font-mono font-bold transition-all cursor-pointer ${
                     isSelected
-                      ? 'bg-[#A58D66] text-[#080f14]'
-                      : 'bg-white/5 hover:bg-[#A58D66] text-slate-300 hover:text-[#080f14] border border-white/10'
+                      ? 'bg-[#FFFFFF] text-[#000000]'
+                      : 'bg-white/5 hover:bg-[#FFFFFF] text-slate-300 hover:text-[#000000] border border-[#29292A]'
                   }`}
                 >
                   {isSelected ? 'Selected' : 'Create'}
@@ -179,7 +179,7 @@ export const NewBreadboardModal: React.FC<NewBreadboardModalProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="px-6 py-3 border-t border-white/10 bg-[#080f14] flex justify-between items-center text-xs text-slate-500 font-mono">
+        <div className="px-6 py-3 border-t border-[#29292A] bg-[#000000] flex justify-between items-center text-xs text-slate-500 font-mono">
           <span>Standard 2.54mm (0.1 in) pitch standard</span>
           <button
             onClick={onClose}

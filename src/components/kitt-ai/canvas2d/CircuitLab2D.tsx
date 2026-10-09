@@ -114,7 +114,7 @@ export const CircuitLab2D: React.FC<CircuitLab2DProps> = ({
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-full bg-[#080f14] overflow-hidden select-none cursor-grab active:cursor-grabbing"
+      className="relative w-full h-full bg-[#000000] overflow-hidden select-none cursor-grab active:cursor-grabbing"
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
@@ -126,9 +126,9 @@ export const CircuitLab2D: React.FC<CircuitLab2DProps> = ({
         className="absolute inset-0 pointer-events-none opacity-20"
         style={{
           backgroundImage: `
-            radial-gradient(circle at 1px 1px, #A58D66 1px, transparent 0),
-            linear-gradient(to right, rgba(64,126,140,0.08) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(64,126,140,0.08) 1px, transparent 1px)
+            radial-gradient(circle at 1px 1px, #FFFFFF 1px, transparent 0),
+            linear-gradient(to right, rgba(143,143,143,0.08) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(143,143,143,0.08) 1px, transparent 1px)
           `,
           backgroundSize: '24px 24px, 120px 120px, 120px 120px'
         }}
@@ -201,7 +201,7 @@ export const CircuitLab2D: React.FC<CircuitLab2DProps> = ({
                   strokeWidth={isPower ? "2.6" : "1.8"}
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="transition-all duration-200 group-hover/wire:stroke-[#76B4C2] group-hover/wire:stroke-[3.5]"
+                  className="transition-all duration-200 group-hover/wire:stroke-[#B4B4B4] group-hover/wire:stroke-[3.5]"
                   filter="url(#circuit-wire-glow)"
                   opacity={0.92}
                 />
@@ -220,7 +220,7 @@ export const CircuitLab2D: React.FC<CircuitLab2DProps> = ({
                 {/* End Terminals */}
                 <circle cx={start.x} cy={start.y} r="3" fill={wire.color} />
                 <circle cx={end.x} cy={end.y} r="3" fill={wire.color} />
-                <circle cx={midX} cy={start.y} r="2" fill="#A58D66" opacity={0.6} />
+                <circle cx={midX} cy={start.y} r="2" fill="#FFFFFF" opacity={0.6} />
               </g>
             );
           })}
@@ -249,21 +249,21 @@ export const CircuitLab2D: React.FC<CircuitLab2DProps> = ({
                   width={width}
                   height={height}
                   rx="8"
-                  fill="#0c161d"
-                  stroke={isSelected ? '#A58D66' : '#407E8C'}
+                  fill="#141415"
+                  stroke={isSelected ? '#FFFFFF' : '#8F8F8F'}
                   strokeWidth={isSelected ? "2.5" : "1.25"}
-                  className="transition-all duration-200 hover:stroke-[#76B4C2] shadow-2xl"
+                  className="transition-all duration-200 hover:stroke-[#B4B4B4]"
                 />
 
                 {/* Header Strip */}
-                <rect x="0" y="0" width={width} height="26" rx="8" fill="#12222b" />
-                <rect x="0" y="20" width={width} height="6" fill="#12222b" />
+                <rect x="0" y="0" width={width} height="26" rx="8" fill="#1D1D1E" />
+                <rect x="0" y="20" width={width} height="6" fill="#1D1D1E" />
 
                 {/* Component Name */}
                 <text
                   x="10"
                   y="17"
-                  fill="#E5E1DD"
+                  fill="#F5F5F5"
                   fontSize="11"
                   fontFamily="monospace"
                   fontWeight="bold"
@@ -284,15 +284,15 @@ export const CircuitLab2D: React.FC<CircuitLab2DProps> = ({
                         y1={pin.relativeY}
                         x2={isLeft ? pin.relativeX + 10 : pin.relativeX - 10}
                         y2={pin.relativeY}
-                        stroke="#407E8C"
+                        stroke="#8F8F8F"
                         strokeWidth="1.5"
                       />
                       <circle
                         cx={pin.relativeX}
                         cy={pin.relativeY}
                         r="3.5"
-                        fill={pin.type === 'ground' ? '#1e293b' : pin.type === 'power' ? '#ef4444' : '#A58D66'}
-                        stroke="#080f14"
+                        fill={pin.type === 'ground' ? '#1e293b' : pin.type === 'power' ? '#ef4444' : '#FFFFFF'}
+                        stroke="#000000"
                         strokeWidth="1.5"
                       />
                       <text
@@ -318,28 +318,28 @@ export const CircuitLab2D: React.FC<CircuitLab2DProps> = ({
       {/* Floating Node Telemetry Probe */}
       {hoveredNode && (
         <div 
-          className="absolute z-30 pointer-events-none bg-[#0c161d]/95 border border-[#A58D66]/60 rounded-lg p-2.5 shadow-2xl backdrop-blur-md transform -translate-x-1/2 -translate-y-full"
+          className="absolute z-30 pointer-events-none bg-[#141415]/95 border border-[#8F8F8F] rounded-[12px] p-2.5 backdrop-blur-md transform -translate-x-1/2 -translate-y-full"
           style={{
             left: `${pan.x + hoveredNode.x * zoom}px`,
             top: `${pan.y + hoveredNode.y * zoom - 10}px`
           }}
         >
-          <div className="flex items-center gap-1.5 text-[11px] font-mono text-[#A58D66] font-bold">
-            <Activity className="w-3 h-3 text-[#76B4C2] animate-pulse" />
+          <div className="flex items-center gap-1.5 text-[11px] font-mono text-[#FFFFFF] font-bold">
+            <Activity className="w-3 h-3 text-[#B4B4B4] animate-pulse" />
             <span>PROBED NET VALUE</span>
           </div>
-          <div className="text-xs text-[#E5E1DD] font-medium mt-0.5">{hoveredNode.name}</div>
-          <div className="text-sm font-bold text-[#10b981] font-mono mt-1">
+          <div className="text-xs text-[#F5F5F5] font-medium mt-0.5">{hoveredNode.name}</div>
+          <div className="text-sm font-bold text-[#F5F5F5] font-mono mt-1">
             {hoveredNode.voltage.toFixed(2)} V
           </div>
         </div>
       )}
 
       {/* Top Left Title Bar */}
-      <div className="absolute top-4 left-4 flex items-center gap-2 bg-[#0c161c]/85 border border-[#407E8C]/35 px-3 py-1.5 rounded-lg shadow-xl backdrop-blur-md pointer-events-none">
-        <Zap className="w-3.5 h-3.5 text-[#A58D66]" />
-        <span className="text-xs font-mono font-bold text-[#E5E1DD]">2D Verified Schematic Canvas</span>
-        <span className="text-[10px] text-[#76B4C2] font-mono">
+      <div className="absolute top-4 left-4 flex items-center gap-2 bg-[#141415]/85 border border-[#8F8F8F]/35 px-3 py-1.5 rounded-[12px] backdrop-blur-md pointer-events-none">
+        <Zap className="w-3.5 h-3.5 text-[#FFFFFF]" />
+        <span className="text-xs font-mono font-bold text-[#F5F5F5]">2D Verified Schematic Canvas</span>
+        <span className="text-[10px] text-[#B4B4B4] font-mono">
           ({circuit.components.length} parts, {circuit.wires.length} nets)
         </span>
       </div>
@@ -348,7 +348,7 @@ export const CircuitLab2D: React.FC<CircuitLab2DProps> = ({
       <div className="absolute top-4 right-4 flex items-center gap-2">
         <button
           onClick={() => setShowPalette(p => !p)}
-          className="px-3 py-1.5 rounded-lg bg-[#A58D66]/20 border border-[#A58D66]/40 hover:bg-[#A58D66]/30 text-xs font-mono font-bold text-[#A58D66] flex items-center gap-1.5 transition-colors cursor-pointer"
+          className="px-3 py-1.5 rounded-[12px] bg-[#FFFFFF]/20 border border-[#8F8F8F] hover:bg-[#FFFFFF]/30 text-xs font-mono font-bold text-[#FFFFFF] flex items-center gap-1.5 transition-colors cursor-pointer"
         >
           <Plus className="w-3.5 h-3.5" />
           <span>Add Component</span>
@@ -357,15 +357,15 @@ export const CircuitLab2D: React.FC<CircuitLab2DProps> = ({
 
       {/* Component Palette Modal Dropdown */}
       {showPalette && (
-        <div className="absolute top-16 right-4 w-80 bg-[#0c161d]/95 border border-[#A58D66]/40 rounded-xl shadow-2xl backdrop-blur-md z-40 p-3">
-          <div className="flex items-center gap-2 pb-2 border-b border-[#A58D66]/20">
-            <Search className="w-3.5 h-3.5 text-[#A58D66]" />
+        <div className="absolute top-16 right-4 w-80 bg-[#141415]/95 border border-[#8F8F8F] rounded-[12px] backdrop-blur-md z-40 p-3">
+          <div className="flex items-center gap-2 pb-2 border-b border-[#353536]">
+            <Search className="w-3.5 h-3.5 text-[#FFFFFF]" />
             <input
               type="text"
               placeholder="Search components, sensors..."
               value={paletteSearch}
               onChange={e => setPaletteSearch(e.target.value)}
-              className="w-full bg-transparent text-xs font-mono text-[#E5E1DD] outline-none"
+              className="w-full bg-transparent text-xs font-mono text-[#F5F5F5] outline-none"
             />
           </div>
           <div className="max-h-60 overflow-y-auto space-y-1.5 mt-2">
@@ -376,10 +376,10 @@ export const CircuitLab2D: React.FC<CircuitLab2DProps> = ({
                   if (onAddComponent) onAddComponent(item.catalogKey);
                   setShowPalette(false);
                 }}
-                className="p-2 rounded-lg bg-white/5 hover:bg-[#A58D66]/20 border border-transparent hover:border-[#A58D66]/30 cursor-pointer transition-colors"
+                className="p-2 rounded-[12px] bg-white/5 hover:bg-[#FFFFFF]/20 border border-transparent hover:border-[#353536] cursor-pointer transition-colors"
               >
-                <div className="text-xs font-bold text-[#E5E1DD] font-mono">{item.displayName}</div>
-                <div className="text-[10px] text-[#76B4C2] font-mono">{item.partNumber} • {item.package}</div>
+                <div className="text-xs font-bold text-[#F5F5F5] font-mono">{item.displayName}</div>
+                <div className="text-[10px] text-[#B4B4B4] font-mono">{item.partNumber} • {item.package}</div>
               </div>
             ))}
           </div>

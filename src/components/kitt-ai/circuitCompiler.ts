@@ -91,9 +91,9 @@ export function buildPlantWateringCircuit(): CanonicalCircuit {
     { id: 'c1', fromComponentId: 'esp32_1', fromPinId: '3v3', toComponentId: 'sensor_1', toPinId: 'vcc', signalType: 'POWER_VCC', wireColor: '#ef4444', label: '3.3V Power' },
     { id: 'c2', fromComponentId: 'esp32_1', fromPinId: 'gnd_1', toComponentId: 'sensor_1', toPinId: 'gnd', signalType: 'GROUND', wireColor: '#1e293b', label: 'GND' },
     // Sensor Analog Out to ESP32 ADC
-    { id: 'c3', fromComponentId: 'sensor_1', fromPinId: 'aout', toComponentId: 'esp32_1', toPinId: 'gpio34', signalType: 'ANALOG', wireColor: '#10b981', label: 'Soil ADC (GPIO34)' },
+    { id: 'c3', fromComponentId: 'sensor_1', fromPinId: 'aout', toComponentId: 'esp32_1', toPinId: 'gpio34', signalType: 'ANALOG', wireColor: '#F5F5F5', label: 'Soil ADC (GPIO34)' },
     // ESP32 GPIO26 to Gate Resistor
-    { id: 'c4', fromComponentId: 'esp32_1', fromPinId: 'gpio26', toComponentId: 'resistor_1', toPinId: 'p1', signalType: 'PWM', wireColor: '#f97316', label: 'Gate Drive (GPIO26)' },
+    { id: 'c4', fromComponentId: 'esp32_1', fromPinId: 'gpio26', toComponentId: 'resistor_1', toPinId: 'p1', signalType: 'PWM', wireColor: '#CCCCCC', label: 'Gate Drive (GPIO26)' },
     // Resistor to MOSFET Gate
     { id: 'c5', fromComponentId: 'resistor_1', fromPinId: 'p2', toComponentId: 'mosfet_1', toPinId: 'gate', signalType: 'DIGITAL', wireColor: '#f59e0b', label: 'Gate' },
     // MOSFET Source to GND
@@ -101,7 +101,7 @@ export function buildPlantWateringCircuit(): CanonicalCircuit {
     // 5V Rail to Pump +
     { id: 'c7', fromComponentId: 'esp32_1', fromPinId: 'vin_5v', toComponentId: 'pump_1', toPinId: 'pos', signalType: 'POWER_VCC', wireColor: '#dc2626', label: '+5V Pump Supply' },
     // Pump - to MOSFET Drain
-    { id: 'c8', fromComponentId: 'pump_1', fromPinId: 'neg', toComponentId: 'mosfet_1', toPinId: 'drain', signalType: 'DIGITAL', wireColor: '#0ea5e9', label: 'Switched Low-Side' },
+    { id: 'c8', fromComponentId: 'pump_1', fromPinId: 'neg', toComponentId: 'mosfet_1', toPinId: 'drain', signalType: 'DIGITAL', wireColor: '#8F8F8F', label: 'Switched Low-Side' },
     // Flyback Diode across Pump (Cathode to 5V, Anode to Drain)
     { id: 'c9', fromComponentId: 'pump_1', fromPinId: 'pos', toComponentId: 'diode_1', toPinId: 'cathode', signalType: 'POWER_VCC', wireColor: '#dc2626', label: 'Clamp High' },
     { id: 'c10', fromComponentId: 'pump_1', fromPinId: 'neg', toComponentId: 'diode_1', toPinId: 'anode', signalType: 'DIGITAL', wireColor: '#64748b', label: 'Clamp Low' },
@@ -248,12 +248,12 @@ export function buildUltrasonicRadarCircuit(): CanonicalCircuit {
   const connections: CircuitConnection[] = [
     { id: 'w1', fromComponentId: 'uno_1', fromPinId: '5v', toComponentId: 'ultrasonic_1', toPinId: 'vcc', signalType: 'POWER_VCC', wireColor: '#ef4444', label: '+5V Rail' },
     { id: 'w2', fromComponentId: 'uno_1', fromPinId: 'gnd_1', toComponentId: 'ultrasonic_1', toPinId: 'gnd', signalType: 'GROUND', wireColor: '#1e293b', label: 'GND' },
-    { id: 'w3', fromComponentId: 'uno_1', fromPinId: 'd9_pwm', toComponentId: 'ultrasonic_1', toPinId: 'trig', signalType: 'DIGITAL', wireColor: '#06b6d4', label: 'Trig (D9)' },
-    { id: 'w4', fromComponentId: 'uno_1', fromPinId: 'd10_pwm', toComponentId: 'ultrasonic_1', toPinId: 'echo', signalType: 'DIGITAL', wireColor: '#3b82f6', label: 'Echo (D10)' },
+    { id: 'w3', fromComponentId: 'uno_1', fromPinId: 'd9_pwm', toComponentId: 'ultrasonic_1', toPinId: 'trig', signalType: 'DIGITAL', wireColor: '#8F8F8F', label: 'Trig (D9)' },
+    { id: 'w4', fromComponentId: 'uno_1', fromPinId: 'd10_pwm', toComponentId: 'ultrasonic_1', toPinId: 'echo', signalType: 'DIGITAL', wireColor: '#B4B4B4', label: 'Echo (D10)' },
     { id: 'w5', fromComponentId: 'uno_1', fromPinId: '5v', toComponentId: 'servo_1', toPinId: 'vcc', signalType: 'POWER_VCC', wireColor: '#ef4444', label: 'Servo VCC' },
     { id: 'w6', fromComponentId: 'uno_1', fromPinId: 'gnd_1', toComponentId: 'servo_1', toPinId: 'gnd', signalType: 'GROUND', wireColor: '#1e293b', label: 'Servo GND' },
-    { id: 'w7', fromComponentId: 'uno_1', fromPinId: 'd3_pwm', toComponentId: 'servo_1', toPinId: 'pwm', signalType: 'PWM', wireColor: '#f97316', label: 'Servo PWM (D3)' },
-    { id: 'w8', fromComponentId: 'uno_1', fromPinId: 'd2', toComponentId: 'resistor_1', toPinId: 'p1', signalType: 'DIGITAL', wireColor: '#a855f7', label: 'LED Alert (D2)' },
+    { id: 'w7', fromComponentId: 'uno_1', fromPinId: 'd3_pwm', toComponentId: 'servo_1', toPinId: 'pwm', signalType: 'PWM', wireColor: '#CCCCCC', label: 'Servo PWM (D3)' },
+    { id: 'w8', fromComponentId: 'uno_1', fromPinId: 'd2', toComponentId: 'resistor_1', toPinId: 'p1', signalType: 'DIGITAL', wireColor: '#CCCCCC', label: 'LED Alert (D2)' },
     { id: 'w9', fromComponentId: 'resistor_1', fromPinId: 'p2', toComponentId: 'led_1', toPinId: 'anode', signalType: 'DIGITAL', wireColor: '#ef4444', label: 'Resistor to Anode' },
     { id: 'w10', fromComponentId: 'led_1', fromPinId: 'cathode', toComponentId: 'uno_1', toPinId: 'gnd_2', signalType: 'GROUND', wireColor: '#1e293b', label: 'LED Cathode GND' },
   ];
@@ -411,14 +411,14 @@ export function buildWeatherStationCircuit(): CanonicalCircuit {
     { id: 'w1', fromComponentId: 'esp32_1', fromPinId: '3v3', toComponentId: 'dht22_1', toPinId: 'vcc', signalType: 'POWER_VCC', wireColor: '#ef4444', label: '3.3V Sensor Power' },
     { id: 'w2', fromComponentId: 'esp32_1', fromPinId: 'gnd_1', toComponentId: 'dht22_1', toPinId: 'gnd', signalType: 'GROUND', wireColor: '#1e293b', label: 'GND' },
     // DHT22 Data to ESP32 GPIO4
-    { id: 'w3', fromComponentId: 'dht22_1', fromPinId: 'data', toComponentId: 'esp32_1', toPinId: 'gpio4', signalType: 'DIGITAL', wireColor: '#06b6d4', label: 'DHT Data (GPIO4)' },
+    { id: 'w3', fromComponentId: 'dht22_1', fromPinId: 'data', toComponentId: 'esp32_1', toPinId: 'gpio4', signalType: 'DIGITAL', wireColor: '#8F8F8F', label: 'DHT Data (GPIO4)' },
     // Pull-up resistor from 3.3V to DHT22 Data
     { id: 'w4', fromComponentId: 'esp32_1', fromPinId: '3v3', toComponentId: 'resistor_pullup', toPinId: 'p1', signalType: 'POWER_VCC', wireColor: '#ef4444', label: 'Pull-up 3.3V' },
-    { id: 'w5', fromComponentId: 'resistor_pullup', fromPinId: 'p2', toComponentId: 'dht22_1', toPinId: 'data', signalType: 'DIGITAL', wireColor: '#06b6d4', label: 'Pull-up Tie' },
+    { id: 'w5', fromComponentId: 'resistor_pullup', fromPinId: 'p2', toComponentId: 'dht22_1', toPinId: 'data', signalType: 'DIGITAL', wireColor: '#8F8F8F', label: 'Pull-up Tie' },
     // ESP32 to OLED I2C Bus (GPIO21=SDA, GPIO22=SCL)
     { id: 'w6', fromComponentId: 'esp32_1', fromPinId: '3v3', toComponentId: 'oled_1', toPinId: 'vcc', signalType: 'POWER_VCC', wireColor: '#ef4444', label: '3.3V OLED' },
     { id: 'w7', fromComponentId: 'esp32_1', fromPinId: 'gnd_2', toComponentId: 'oled_1', toPinId: 'gnd', signalType: 'GROUND', wireColor: '#1e293b', label: 'OLED GND' },
-    { id: 'w8', fromComponentId: 'esp32_1', fromPinId: 'gpio21', toComponentId: 'oled_1', toPinId: 'sda', signalType: 'I2C_SDA', wireColor: '#a855f7', label: 'I2C SDA (GPIO21)' },
+    { id: 'w8', fromComponentId: 'esp32_1', fromPinId: 'gpio21', toComponentId: 'oled_1', toPinId: 'sda', signalType: 'I2C_SDA', wireColor: '#CCCCCC', label: 'I2C SDA (GPIO21)' },
     { id: 'w9', fromComponentId: 'esp32_1', fromPinId: 'gpio22', toComponentId: 'oled_1', toPinId: 'scl', signalType: 'I2C_SCL', wireColor: '#f59e0b', label: 'I2C SCL (GPIO22)' },
   ];
 

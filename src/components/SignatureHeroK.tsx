@@ -161,19 +161,19 @@ export const SignatureHeroK: React.FC<SignatureHeroKProps> = ({ className = '' }
       const typeRoll = Math.random();
       let type: Particle['type'] = 'node';
       let size = rand(1.6, 2.5);
-      let color = '#E5E1DD'; // Warm Sand
-      let glowColor = 'rgba(229, 225, 221, 0.38)';
+      let color = '#F5F5F5'; // Warm Sand
+      let glowColor = 'rgba(245, 245, 245, 0.38)';
 
       if (typeRoll < 0.30) {
         type = 'chip'; // Micro SMD chip: Gold body with platinum contacts
         size = rand(2.0, 2.8);
-        color = '#A58D66'; // Antique Gold
-        glowColor = 'rgba(165, 141, 102, 0.45)';
+        color = '#FFFFFF'; // Antique Gold
+        glowColor = 'rgba(255, 255, 255, 0.45)';
       } else if (typeRoll < 0.56) {
         type = 'via'; // Oceanic Teal circuit via ring with center drill
         size = rand(1.8, 2.6);
-        color = '#407E8C'; // Deep Oceanic Teal
-        glowColor = 'rgba(64, 126, 140, 0.45)';
+        color = '#8F8F8F'; // Deep Oceanic Teal
+        glowColor = 'rgba(143, 143, 143, 0.45)';
       } else if (typeRoll < 0.74) {
         type = 'specular'; // Twinkling diamond specular glint
         size = rand(1.3, 2.2);
@@ -402,8 +402,8 @@ export const SignatureHeroK: React.FC<SignatureHeroKProps> = ({ className = '' }
         duration: 9999,
         size: rand(1.2, 2.0),
         alpha: rand(0.40, 0.65),
-        color: Math.random() > 0.5 ? '#A58D66' : '#407E8C',
-        glowColor: 'rgba(165, 141, 102, 0.40)',
+        color: Math.random() > 0.5 ? '#FFFFFF' : '#8F8F8F',
+        glowColor: 'rgba(255, 255, 255, 0.40)',
         rotation: 0,
         rotationSpeed: rand(-0.01, 0.01),
         pulsePhase: rand(0, Math.PI * 2),
@@ -580,7 +580,7 @@ export const SignatureHeroK: React.FC<SignatureHeroKProps> = ({ className = '' }
 
             if (distSq < 2800 * dpr * dpr) {
               const alpha = traceAlpha * Math.min(a.currentAlpha, b.currentAlpha);
-              ctx.strokeStyle = `rgba(165, 141, 102, ${alpha})`;
+              ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
               ctx.beginPath();
               ctx.moveTo(a.projX, a.projY);
 
@@ -607,7 +607,7 @@ export const SignatureHeroK: React.FC<SignatureHeroKProps> = ({ className = '' }
 
           if (distSq < 2400 * dpr * dpr) {
             const alpha = threadAlpha * Math.min(a.currentAlpha, b.currentAlpha);
-            ctx.strokeStyle = `rgba(64, 126, 140, ${alpha})`;
+            ctx.strokeStyle = `rgba(143, 143, 143, ${alpha})`;
             ctx.beginPath();
             ctx.moveTo(a.projX, a.projY);
             ctx.lineTo(b.projX, b.projY);
@@ -648,7 +648,7 @@ export const SignatureHeroK: React.FC<SignatureHeroKProps> = ({ className = '' }
           ctx.fillRect(-w / 2, -h / 2, w, h);
 
           // Metallic gold terminal caps
-          ctx.fillStyle = '#A58D66';
+          ctx.fillStyle = '#FFFFFF';
           const capW = Math.max(1.2, w * 0.24);
           ctx.fillRect(-w / 2, -h / 2, capW, h);
           ctx.fillRect(w / 2 - capW, -h / 2, capW, h);
@@ -660,13 +660,13 @@ export const SignatureHeroK: React.FC<SignatureHeroKProps> = ({ className = '' }
           // Circular circuit via with dark central drill hole
           ctx.beginPath();
           ctx.arc(px, py, Math.max(1.5, pSize * 1.3), 0, Math.PI * 2);
-          ctx.strokeStyle = '#407E8C';
+          ctx.strokeStyle = '#8F8F8F';
           ctx.lineWidth = 1.3 * dpr;
           ctx.stroke();
 
           ctx.beginPath();
           ctx.arc(px, py, Math.max(0.6, pSize * 0.45), 0, Math.PI * 2);
-          ctx.fillStyle = '#080f14';
+          ctx.fillStyle = '#000000';
           ctx.fill();
         } else if (p.type === 'specular') {
           // Twinkling diamond specular glint
@@ -697,7 +697,7 @@ export const SignatureHeroK: React.FC<SignatureHeroKProps> = ({ className = '' }
       if (scatterAmount < 0.12) {
         ctx.save();
         ctx.globalAlpha = (1 - scatterAmount / 0.12) * 0.08;
-        ctx.strokeStyle = '#A58D66';
+        ctx.strokeStyle = '#FFFFFF';
         ctx.lineWidth = 0.6 * dpr;
         ctx.setLineDash([3 * dpr, 5 * dpr]);
 

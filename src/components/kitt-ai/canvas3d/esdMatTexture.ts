@@ -28,7 +28,7 @@ export function createEsdMatTexture(): THREE.CanvasTexture {
   // 1. Antistatic Matte Silicone Base (Iconic Workshop ESD Blue)
   const baseGrad = ctx.createLinearGradient(0, 0, w, h);
   baseGrad.addColorStop(0, '#0369a1'); // Deep industrial blue
-  baseGrad.addColorStop(0.5, '#0284c7'); // Electric cyan/blue
+  baseGrad.addColorStop(0.5, '#8F8F8F'); // Electric cyan/blue
   baseGrad.addColorStop(1, '#075985');
   ctx.fillStyle = baseGrad;
   ctx.fillRect(0, 0, w, h);

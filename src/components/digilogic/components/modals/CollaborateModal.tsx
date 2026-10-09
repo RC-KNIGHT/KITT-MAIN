@@ -174,7 +174,7 @@ export const CollaborateModal: React.FC = () => {
     <div
       id="collaborate-modal-backdrop"
       className={`fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 animate-fade-in ${
-        isLight ? 'bg-[#080f14]/40 backdrop-blur-xs' : 'bg-[#080f14]/80 backdrop-blur-md'
+        isLight ? 'bg-[#000000]/40 backdrop-blur-xs' : 'bg-[#000000]/80 backdrop-blur-md'
       }`}
       onClick={() => setActiveModal('none')}
     >
@@ -183,7 +183,7 @@ export const CollaborateModal: React.FC = () => {
         className={`modal-overlay-container relative w-full max-w-xl border rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh] transition-colors ${
           isLight
             ? 'bg-white border-slate-300 text-slate-800'
-            : 'bg-[#0d171f] border-[#A58D66]/20 text-[#E5E1DD]'
+            : 'bg-[#141415] border-[#FFFFFF]/20 text-[#F5F5F5]'
         }`}
         onClick={(e) => e.stopPropagation()}
       >
@@ -191,25 +191,25 @@ export const CollaborateModal: React.FC = () => {
         <div className={`flex items-center justify-between px-5 sm:px-6 py-4 border-b ${
           isLight
             ? 'bg-slate-50 border-slate-200'
-            : 'bg-[#0d171f] border-[#A58D66]/20'
+            : 'bg-[#141415] border-[#FFFFFF]/20'
         }`}>
           <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-xl bg-[#A58D66]/15 border border-[#A58D66]/40 text-[#DFCCA8]">
+            <div className="p-2.5 rounded-xl bg-[#FFFFFF]/15 border border-[#FFFFFF]/40 text-[#E8E8E8]">
               <Server className="w-5 h-5" />
             </div>
             <div>
               <h2 className={`text-base sm:text-lg font-bold flex items-center gap-2 ${
-                isLight ? 'text-slate-900' : 'text-[#E5E1DD]'
+                isLight ? 'text-slate-900' : 'text-[#F5F5F5]'
               }`}>
                 Live Sync Collaborative Server
                 {isCollaborating && (
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#407E8C]/20 text-[#76B4C2] border border-[#407E8C]/40 shadow-xs">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#76B4C2] animate-pulse" />
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#8F8F8F]/20 text-[#B4B4B4] border border-[#8F8F8F]/40 shadow-xs">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#B4B4B4] animate-pulse" />
                     LIVE
                   </span>
                 )}
               </h2>
-              <p className={`text-xs ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>
+              <p className={`text-xs ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>
                 Ultra-fast real-time synchronization with persistent session restore
               </p>
             </div>
@@ -219,8 +219,8 @@ export const CollaborateModal: React.FC = () => {
             onClick={() => setActiveModal('none')}
             className={`p-2 rounded-lg transition-colors cursor-pointer ${
               isLight
-                ? 'text-[#E5E1DD]/60 hover:text-slate-700 hover:bg-slate-100'
-                : 'text-[#E5E1DD]/60 hover:text-[#E5E1DD] hover:bg-[#0d171f]'
+                ? 'text-[#F5F5F5]/60 hover:text-slate-700 hover:bg-slate-100'
+                : 'text-[#F5F5F5]/60 hover:text-[#F5F5F5] hover:bg-[#141415]'
             }`}
           >
             <X className="w-5 h-5" />
@@ -231,8 +231,8 @@ export const CollaborateModal: React.FC = () => {
         <div className="p-5 sm:p-6 overflow-y-auto space-y-5">
           {/* Error Banner */}
           {(errorMessage || localError) && (
-            <div className="flex items-start gap-3 p-3.5 bg-[#A58D66]/10 border border-[#A58D66]/30 rounded-xl text-[#DFCCA8] text-xs leading-relaxed">
-              <AlertCircle className="w-4 h-4 mt-0.5 shrink-0 text-[#A58D66]" />
+            <div className="flex items-start gap-3 p-3.5 bg-[#FFFFFF]/10 border border-[#FFFFFF]/30 rounded-xl text-[#E8E8E8] text-xs leading-relaxed">
+              <AlertCircle className="w-4 h-4 mt-0.5 shrink-0 text-[#FFFFFF]" />
               <span>{localError || errorMessage}</span>
             </div>
           )}
@@ -244,11 +244,11 @@ export const CollaborateModal: React.FC = () => {
               <div className={`p-4 sm:p-5 rounded-xl space-y-3.5 shadow-md border ${
                 isLight
                   ? 'bg-slate-50 border-slate-200'
-                  : 'bg-[#080f14] border-[#A58D66]/30 shadow-lg'
+                  : 'bg-[#000000] border-[#FFFFFF]/30 shadow-lg'
               }`}>
                 {/* Editable Server Name */}
                 <div className={`flex items-center justify-between gap-2 border-b pb-3 ${
-                  isLight ? 'border-slate-200' : 'border-[#A58D66]/20'
+                  isLight ? 'border-slate-200' : 'border-[#FFFFFF]/20'
                 }`}>
                   {isEditingServerName ? (
                     <div className="flex items-center gap-2 flex-1">
@@ -257,17 +257,17 @@ export const CollaborateModal: React.FC = () => {
                         value={editServerNameValue}
                         onChange={(e) => setEditServerNameValue(e.target.value)}
                         placeholder="Server Name"
-                        className={`flex-1 rounded-lg px-3 py-1.5 text-sm font-bold border focus:outline-none focus:ring-1 focus:ring-[#A58D66] ${
+                        className={`flex-1 rounded-lg px-3 py-1.5 text-sm font-bold border focus:outline-none focus:ring-1 focus:ring-[#FFFFFF] ${
                           isLight
                             ? 'bg-white border-slate-300 text-slate-900'
-                            : 'bg-[#080f14] border-[#A58D66]/40 text-[#E5E1DD]'
+                            : 'bg-[#000000] border-[#FFFFFF]/40 text-[#F5F5F5]'
                         }`}
                         autoFocus
                       />
                       <button
                         onClick={handleSaveRenamedServer}
                         disabled={isSavingServerName}
-                        className="px-3 py-1.5 bg-[#A58D66] hover:bg-[#DFCCA8] text-[#080f14] text-xs font-bold rounded-lg transition-colors cursor-pointer"
+                        className="px-3 py-1.5 bg-[#FFFFFF] hover:bg-[#E8E8E8] text-[#000000] text-xs font-bold rounded-lg transition-colors cursor-pointer"
                       >
                         {isSavingServerName ? 'Saving...' : 'Save'}
                       </button>
@@ -279,7 +279,7 @@ export const CollaborateModal: React.FC = () => {
                         className={`px-2.5 py-1.5 text-xs rounded-lg transition-colors cursor-pointer ${
                           isLight
                             ? 'bg-slate-200 hover:bg-slate-300 text-slate-700'
-                            : 'bg-[#0d171f] hover:bg-[#0d171f] text-[#E5E1DD]/60'
+                            : 'bg-[#141415] hover:bg-[#141415] text-[#F5F5F5]/60'
                         }`}
                       >
                         Cancel
@@ -288,9 +288,9 @@ export const CollaborateModal: React.FC = () => {
                   ) : (
                     <div className="flex items-center justify-between w-full">
                       <div className="flex items-center gap-2 min-w-0">
-                        <Server className="w-4 h-4 text-[#A58D66] shrink-0" />
+                        <Server className="w-4 h-4 text-[#FFFFFF] shrink-0" />
                         <span className={`font-bold text-sm sm:text-base truncate ${
-                          isLight ? 'text-slate-900' : 'text-[#E5E1DD]'
+                          isLight ? 'text-slate-900' : 'text-[#F5F5F5]'
                         }`}>
                           {room?.name || 'Live Circuit Server'}
                         </span>
@@ -301,15 +301,15 @@ export const CollaborateModal: React.FC = () => {
                           }}
                           className={`p-1 rounded-md transition-colors cursor-pointer ${
                             isLight
-                              ? 'text-[#E5E1DD]/60 hover:text-[#A58D66]'
-                              : 'text-[#E5E1DD]/60 hover:text-[#DFCCA8]'
+                              ? 'text-[#F5F5F5]/60 hover:text-[#FFFFFF]'
+                              : 'text-[#F5F5F5]/60 hover:text-[#E8E8E8]'
                           }`}
                           title="Rename Live Server"
                         >
                           <Edit2 className="w-3.5 h-3.5" />
                         </button>
                       </div>
-                      <span className="text-xs text-[#76B4C2] font-medium flex items-center gap-1 shrink-0 bg-[#407E8C]/15 px-2 py-0.5 rounded-full border border-[#407E8C]/30">
+                      <span className="text-xs text-[#B4B4B4] font-medium flex items-center gap-1 shrink-0 bg-[#8F8F8F]/15 px-2 py-0.5 rounded-full border border-[#8F8F8F]/30">
                         <Wifi className="w-3.5 h-3.5" />
                         Connected
                       </span>
@@ -321,11 +321,11 @@ export const CollaborateModal: React.FC = () => {
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1">
                   <div>
                     <span className={`text-[11px] font-bold uppercase tracking-wider block mb-0.5 ${
-                      isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'
+                      isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'
                     }`}>
                       Server Room Code
                     </span>
-                    <span className="text-2xl sm:text-3xl font-mono font-black tracking-widest text-[#DFCCA8]">
+                    <span className="text-2xl sm:text-3xl font-mono font-black tracking-widest text-[#E8E8E8]">
                       {roomCode}
                     </span>
                   </div>
@@ -335,17 +335,17 @@ export const CollaborateModal: React.FC = () => {
                       className={`flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-xl border transition-all min-h-[44px] cursor-pointer ${
                         isLight
                           ? 'bg-white hover:bg-slate-100 text-slate-800 border-slate-300 shadow-2xs'
-                          : 'bg-[#0d171f] hover:bg-[#0d171f] text-[#E5E1DD] border-[#A58D66]/20'
+                          : 'bg-[#141415] hover:bg-[#141415] text-[#F5F5F5] border-[#FFFFFF]/20'
                       }`}
                     >
-                      {copiedCode ? <Check className="w-3.5 h-3.5 text-[#A58D66]" /> : <Copy className="w-3.5 h-3.5" />}
+                      {copiedCode ? <Check className="w-3.5 h-3.5 text-[#FFFFFF]" /> : <Copy className="w-3.5 h-3.5" />}
                       {copiedCode ? 'Copied' : 'Copy Code'}
                     </button>
                     <button
                       onClick={handleCopyLink}
-                      className="flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-3.5 py-2 bg-[#A58D66] hover:bg-[#DFCCA8] text-[#080f14] text-xs font-bold rounded-xl transition-all shadow-md min-h-[44px] cursor-pointer"
+                      className="flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-3.5 py-2 bg-[#FFFFFF] hover:bg-[#E8E8E8] text-[#000000] text-xs font-bold rounded-xl transition-all shadow-md min-h-[44px] cursor-pointer"
                     >
-                      {copiedLink ? <Check className="w-3.5 h-3.5 text-[#080f14]" /> : <Share2 className="w-3.5 h-3.5" />}
+                      {copiedLink ? <Check className="w-3.5 h-3.5 text-[#000000]" /> : <Share2 className="w-3.5 h-3.5" />}
                       {copiedLink ? 'Link Copied' : 'Share Link'}
                     </button>
                   </div>
@@ -353,7 +353,7 @@ export const CollaborateModal: React.FC = () => {
 
                 {/* Persistence Notice */}
                 <div className={`flex items-center gap-2 pt-2 border-t text-[11px] font-medium ${
-                  isLight ? 'border-slate-200 text-slate-700' : 'border-[#A58D66]/20 text-[#DFCCA8]'
+                  isLight ? 'border-slate-200 text-slate-700' : 'border-[#FFFFFF]/20 text-[#E8E8E8]'
                 }`}>
                   <Shield className="w-3.5 h-3.5 shrink-0" />
                   <span>Session Protected: Closing Chrome will not lose your server. You will auto-reconnect upon return.</span>
@@ -364,9 +364,9 @@ export const CollaborateModal: React.FC = () => {
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <h3 className={`text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 ${
-                    isLight ? 'text-slate-700' : 'text-[#DFCCA8]'
+                    isLight ? 'text-slate-700' : 'text-[#E8E8E8]'
                   }`}>
-                    <Users className="w-3.5 h-3.5 text-[#A58D66]" />
+                    <Users className="w-3.5 h-3.5 text-[#FFFFFF]" />
                     Online Collaborators ({collaborators.length + 1})
                   </h3>
                 </div>
@@ -375,12 +375,12 @@ export const CollaborateModal: React.FC = () => {
                   {/* Current User */}
                   <div
                     className={`flex items-center gap-3 p-3 rounded-xl border shadow-xs ${
-                      isLight ? 'bg-white' : 'bg-[#080f14]'
+                      isLight ? 'bg-white' : 'bg-[#000000]'
                     }`}
                     style={{ borderColor: `${currentUser.color}70` }}
                   >
                     <div
-                      className="w-9 h-9 rounded-full flex items-center justify-center font-bold text-[#E5E1DD] shadow-md text-sm shrink-0"
+                      className="w-9 h-9 rounded-full flex items-center justify-center font-bold text-[#F5F5F5] shadow-md text-sm shrink-0"
                       style={{ backgroundColor: currentUser.color }}
                     >
                       {currentUser.initial}
@@ -388,17 +388,17 @@ export const CollaborateModal: React.FC = () => {
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-1.5">
                         <span className={`text-sm font-bold truncate ${
-                          isLight ? 'text-slate-900' : 'text-[#E5E1DD]'
+                          isLight ? 'text-slate-900' : 'text-[#F5F5F5]'
                         }`}>
                           {currentUser.name}
                         </span>
                         <span className={`text-[10px] px-1.5 py-0.2 rounded font-mono font-bold ${
-                          isLight ? 'bg-slate-100 text-[#A58D66]' : 'bg-[#080f14] text-[#DFCCA8]'
+                          isLight ? 'bg-slate-100 text-[#FFFFFF]' : 'bg-[#000000] text-[#E8E8E8]'
                         }`}>
                           YOU
                         </span>
                       </div>
-                      <span className={`text-xs ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>
+                      <span className={`text-xs ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>
                         {currentUser.isHost ? 'Server Host' : 'Collaborator'}
                       </span>
                     </div>
@@ -409,24 +409,24 @@ export const CollaborateModal: React.FC = () => {
                     <div
                       key={user.id}
                       className={`flex items-center gap-3 p-3 rounded-xl border shadow-xs ${
-                        isLight ? 'bg-white' : 'bg-[#080f14]'
+                        isLight ? 'bg-white' : 'bg-[#000000]'
                       }`}
                       style={{ borderColor: `${user.color}40` }}
                     >
                       <div
-                        className="w-9 h-9 rounded-full flex items-center justify-center font-bold text-[#E5E1DD] shadow-md text-sm shrink-0"
+                        className="w-9 h-9 rounded-full flex items-center justify-center font-bold text-[#F5F5F5] shadow-md text-sm shrink-0"
                         style={{ backgroundColor: user.color }}
                       >
                         {user.initial}
                       </div>
                       <div className="min-w-0 flex-1">
                         <span className={`text-sm font-bold truncate block ${
-                          isLight ? 'text-slate-900' : 'text-[#E5E1DD]'
+                          isLight ? 'text-slate-900' : 'text-[#F5F5F5]'
                         }`}>
                           {user.name}
                         </span>
-                        <span className="text-xs text-[#76B4C2] flex items-center gap-1">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#76B4C2]" />
+                        <span className="text-xs text-[#B4B4B4] flex items-center gap-1">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#B4B4B4]" />
                           Online & Syncing
                         </span>
                       </div>
@@ -439,30 +439,30 @@ export const CollaborateModal: React.FC = () => {
               <div className={`p-3.5 rounded-xl space-y-2 text-xs border ${
                 isLight
                   ? 'bg-slate-50 border-slate-200 text-slate-700'
-                  : 'bg-[#080f14]/80 border-[#A58D66]/20 text-[#DFCCA8]'
+                  : 'bg-[#000000]/80 border-[#FFFFFF]/20 text-[#E8E8E8]'
               }`}>
-                <div className="flex items-center gap-2 font-semibold text-[#DFCCA8]">
+                <div className="flex items-center gap-2 font-semibold text-[#E8E8E8]">
                   <Sparkles className="w-4 h-4" />
                   Real-Time Canvas Interaction
                 </div>
-                <p className={`leading-relaxed ${isLight ? 'text-slate-600' : 'text-[#E5E1DD]/60'}`}>
+                <p className={`leading-relaxed ${isLight ? 'text-slate-600' : 'text-[#F5F5F5]/60'}`}>
                   • <strong>Seamless Wire & Gate Sync</strong>: All wire connections, gate movements, input pin changes, switch toggles, and component renames sync instantaneously.
                 </p>
-                <p className={`leading-relaxed ${isLight ? 'text-slate-600' : 'text-[#E5E1DD]/60'}`}>
+                <p className={`leading-relaxed ${isLight ? 'text-slate-600' : 'text-[#F5F5F5]/60'}`}>
                   • <strong>Asset Highlight Badges & Cursors</strong>: Collaborators' initials appear directly on gates they select with live mouse/touch pointer tags.
                 </p>
               </div>
 
               {/* Bottom Actions */}
               <div className={`flex items-center justify-between pt-2 border-t ${
-                isLight ? 'border-slate-200' : 'border-[#A58D66]/20'
+                isLight ? 'border-slate-200' : 'border-[#FFFFFF]/20'
               }`}>
-                <span className={`text-xs ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>
-                  Room Host: <strong className={isLight ? 'text-slate-800' : 'text-[#E5E1DD]'}>{room?.hostName || currentUser.name}</strong>
+                <span className={`text-xs ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>
+                  Room Host: <strong className={isLight ? 'text-slate-800' : 'text-[#F5F5F5]'}>{room?.hostName || currentUser.name}</strong>
                 </span>
                 <button
                   onClick={leaveRoom}
-                  className="flex items-center gap-1.5 px-4 py-2.5 bg-[#A58D66]/10 hover:bg-[#A58D66]/20 text-[#DFCCA8] border border-[#A58D66]/30 text-xs font-bold rounded-xl transition-all min-h-[44px] cursor-pointer"
+                  className="flex items-center gap-1.5 px-4 py-2.5 bg-[#FFFFFF]/10 hover:bg-[#FFFFFF]/20 text-[#E8E8E8] border border-[#FFFFFF]/30 text-xs font-bold rounded-xl transition-all min-h-[44px] cursor-pointer"
                 >
                   <LogOut className="w-3.5 h-3.5" />
                   Leave Server
@@ -474,16 +474,16 @@ export const CollaborateModal: React.FC = () => {
             <div className="space-y-5">
               {/* Tab Selector */}
               <div className={`grid grid-cols-3 p-1 rounded-xl border ${
-                isLight ? 'bg-slate-100 border-slate-300' : 'bg-[#080f14] border-[#A58D66]/20'
+                isLight ? 'bg-slate-100 border-slate-300' : 'bg-[#000000] border-[#FFFFFF]/20'
               }`}>
                 <button
                   onClick={() => setActiveTab('create')}
                   className={`flex items-center justify-center gap-1.5 py-2.5 rounded-lg text-xs font-bold transition-all min-h-[44px] cursor-pointer ${
                     activeTab === 'create'
-                      ? 'bg-[#A58D66] text-[#080f14] shadow-md'
+                      ? 'bg-[#FFFFFF] text-[#000000] shadow-md'
                       : isLight
                       ? 'text-slate-600 hover:text-slate-900'
-                      : 'text-[#E5E1DD]/60 hover:text-[#DFCCA8]'
+                      : 'text-[#F5F5F5]/60 hover:text-[#E8E8E8]'
                   }`}
                 >
                   <PlusCircle className="w-4 h-4" />
@@ -494,10 +494,10 @@ export const CollaborateModal: React.FC = () => {
                   onClick={() => setActiveTab('join')}
                   className={`flex items-center justify-center gap-1.5 py-2.5 rounded-lg text-xs font-bold transition-all min-h-[44px] cursor-pointer ${
                     activeTab === 'join'
-                      ? 'bg-[#A58D66] text-[#080f14] shadow-md'
+                      ? 'bg-[#FFFFFF] text-[#000000] shadow-md'
                       : isLight
                       ? 'text-slate-600 hover:text-slate-900'
-                      : 'text-[#E5E1DD]/60 hover:text-[#DFCCA8]'
+                      : 'text-[#F5F5F5]/60 hover:text-[#E8E8E8]'
                   }`}
                 >
                   <LogIn className="w-4 h-4" />
@@ -508,10 +508,10 @@ export const CollaborateModal: React.FC = () => {
                   onClick={() => setActiveTab('recent')}
                   className={`flex items-center justify-center gap-1.5 py-2.5 rounded-lg text-xs font-bold transition-all min-h-[44px] cursor-pointer ${
                     activeTab === 'recent'
-                      ? 'bg-[#A58D66] text-[#080f14] shadow-md'
+                      ? 'bg-[#FFFFFF] text-[#000000] shadow-md'
                       : isLight
                       ? 'text-slate-600 hover:text-slate-900'
-                      : 'text-[#E5E1DD]/60 hover:text-[#DFCCA8]'
+                      : 'text-[#F5F5F5]/60 hover:text-[#E8E8E8]'
                   }`}
                 >
                   <History className="w-4 h-4" />
@@ -525,7 +525,7 @@ export const CollaborateModal: React.FC = () => {
                 <div className="space-y-4">
                   <div>
                     <label className={`block text-xs font-bold uppercase tracking-wider mb-1.5 ${
-                      isLight ? 'text-slate-700' : 'text-[#DFCCA8]'
+                      isLight ? 'text-slate-700' : 'text-[#E8E8E8]'
                     }`}>
                       Live Server Name
                     </label>
@@ -534,17 +534,17 @@ export const CollaborateModal: React.FC = () => {
                       value={createServerName}
                       onChange={(e) => setCreateServerName(e.target.value)}
                       placeholder="e.g. Team KITT Logic Lab, 4-Bit ALU Lab"
-                      className={`w-full rounded-xl px-3.5 py-2.5 text-sm font-semibold border focus:outline-none focus:border-[#A58D66] focus:ring-1 focus:ring-[#A58D66] min-h-[44px] ${
+                      className={`w-full rounded-xl px-3.5 py-2.5 text-sm font-semibold border focus:outline-none focus:border-[#FFFFFF] focus:ring-1 focus:ring-[#FFFFFF] min-h-[44px] ${
                         isLight
                           ? 'bg-white border-slate-300 text-slate-900 placeholder-slate-400'
-                          : 'bg-[#080f14] border-[#A58D66]/30 text-[#E5E1DD] placeholder-[#E5E1DD]/40'
+                          : 'bg-[#000000] border-[#FFFFFF]/30 text-[#F5F5F5] placeholder-[#F5F5F5]/40'
                       }`}
                     />
                   </div>
 
                   <div>
                     <label className={`block text-xs font-bold uppercase tracking-wider mb-1.5 ${
-                      isLight ? 'text-slate-700' : 'text-[#DFCCA8]'
+                      isLight ? 'text-slate-700' : 'text-[#E8E8E8]'
                     }`}>
                       Your Host Nickname
                     </label>
@@ -554,10 +554,10 @@ export const CollaborateModal: React.FC = () => {
                         value={createHostName}
                         onChange={(e) => setCreateHostName(e.target.value)}
                         placeholder="e.g. Volt Fox"
-                        className={`flex-1 rounded-xl px-3.5 py-2.5 text-sm border focus:outline-none focus:border-[#A58D66] focus:ring-1 focus:ring-[#A58D66] min-h-[44px] ${
+                        className={`flex-1 rounded-xl px-3.5 py-2.5 text-sm border focus:outline-none focus:border-[#FFFFFF] focus:ring-1 focus:ring-[#FFFFFF] min-h-[44px] ${
                           isLight
                             ? 'bg-white border-slate-300 text-slate-900 placeholder-slate-400'
-                            : 'bg-[#080f14] border-[#A58D66]/30 text-[#E5E1DD] placeholder-[#E5E1DD]/40'
+                            : 'bg-[#000000] border-[#FFFFFF]/30 text-[#F5F5F5] placeholder-[#F5F5F5]/40'
                         }`}
                       />
                       <button
@@ -565,7 +565,7 @@ export const CollaborateModal: React.FC = () => {
                         className={`p-2.5 rounded-xl border transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center cursor-pointer ${
                           isLight
                             ? 'bg-white hover:bg-slate-100 text-slate-700 border-slate-300 shadow-2xs'
-                            : 'bg-[#0d171f] hover:bg-[#080f14] text-[#DFCCA8] border-[#A58D66]/20'
+                            : 'bg-[#141415] hover:bg-[#000000] text-[#E8E8E8] border-[#FFFFFF]/20'
                         }`}
                         title="Generate Random Nickname"
                       >
@@ -577,12 +577,12 @@ export const CollaborateModal: React.FC = () => {
                   <div className={`p-3.5 rounded-xl space-y-2 text-xs border ${
                     isLight
                       ? 'bg-slate-50 border-slate-200 text-slate-600'
-                      : 'bg-[#080f14]/80 border-[#A58D66]/20 text-[#E5E1DD]/70'
+                      : 'bg-[#000000]/80 border-[#FFFFFF]/20 text-[#F5F5F5]/70'
                   }`}>
                     <p className={`flex items-center gap-1.5 font-semibold ${
-                      isLight ? 'text-slate-900' : 'text-[#E5E1DD]'
+                      isLight ? 'text-slate-900' : 'text-[#F5F5F5]'
                     }`}>
-                      <Zap className="w-4 h-4 text-[#A58D66]" />
+                      <Zap className="w-4 h-4 text-[#FFFFFF]" />
                       Instant Zero-Lag Collaborative Server
                     </p>
                     <p>
@@ -593,7 +593,7 @@ export const CollaborateModal: React.FC = () => {
                   <button
                     onClick={handleCreateRoom}
                     disabled={loading}
-                    className="w-full py-3 bg-[#A58D66] hover:bg-[#DFCCA8] disabled:opacity-50 text-[#080f14] font-bold text-sm rounded-xl transition-all shadow-md shadow-[#A58D66]/20 flex items-center justify-center gap-2 min-h-[48px] cursor-pointer"
+                    className="w-full py-3 bg-[#FFFFFF] hover:bg-[#E8E8E8] disabled:opacity-50 text-[#000000] font-bold text-sm rounded-xl transition-all shadow-md shadow-[#FFFFFF]/20 flex items-center justify-center gap-2 min-h-[48px] cursor-pointer"
                   >
                     {loading ? (
                       <RefreshCw className="w-4 h-4 animate-spin" />
@@ -610,7 +610,7 @@ export const CollaborateModal: React.FC = () => {
                 <div className="space-y-4">
                   <div>
                     <label className={`block text-xs font-bold uppercase tracking-wider mb-1.5 ${
-                      isLight ? 'text-slate-700' : 'text-[#DFCCA8]'
+                      isLight ? 'text-slate-700' : 'text-[#E8E8E8]'
                     }`}>
                       6-Character Server Code
                     </label>
@@ -620,17 +620,17 @@ export const CollaborateModal: React.FC = () => {
                       value={inputCode}
                       onChange={(e) => setInputCode(e.target.value.toUpperCase())}
                       placeholder="e.g. X7K2P9"
-                      className={`w-full rounded-xl px-3.5 py-2.5 text-lg font-mono font-bold tracking-widest text-[#DFCCA8] uppercase min-h-[44px] border focus:outline-none focus:border-[#A58D66] focus:ring-1 focus:ring-[#A58D66] ${
+                      className={`w-full rounded-xl px-3.5 py-2.5 text-lg font-mono font-bold tracking-widest text-[#E8E8E8] uppercase min-h-[44px] border focus:outline-none focus:border-[#FFFFFF] focus:ring-1 focus:ring-[#FFFFFF] ${
                         isLight
                           ? 'bg-white border-slate-300 placeholder-slate-400'
-                          : 'bg-[#080f14] border-[#A58D66]/30 placeholder-[#E5E1DD]/40'
+                          : 'bg-[#000000] border-[#FFFFFF]/30 placeholder-[#F5F5F5]/40'
                       }`}
                     />
                   </div>
 
                   <div>
                     <label className={`block text-xs font-bold uppercase tracking-wider mb-1.5 ${
-                      isLight ? 'text-slate-700' : 'text-[#DFCCA8]'
+                      isLight ? 'text-slate-700' : 'text-[#E8E8E8]'
                     }`}>
                       Your Nickname
                     </label>
@@ -640,10 +640,10 @@ export const CollaborateModal: React.FC = () => {
                         value={joinName}
                         onChange={(e) => setJoinName(e.target.value)}
                         placeholder="e.g. Logic Lynx"
-                        className={`flex-1 rounded-xl px-3.5 py-2.5 text-sm min-h-[44px] border focus:outline-none focus:border-[#A58D66] focus:ring-1 focus:ring-[#A58D66] ${
+                        className={`flex-1 rounded-xl px-3.5 py-2.5 text-sm min-h-[44px] border focus:outline-none focus:border-[#FFFFFF] focus:ring-1 focus:ring-[#FFFFFF] ${
                           isLight
                             ? 'bg-white border-slate-300 text-slate-900 placeholder-slate-400'
-                            : 'bg-[#080f14] border-[#A58D66]/30 text-[#E5E1DD] placeholder-[#E5E1DD]/40'
+                            : 'bg-[#000000] border-[#FFFFFF]/30 text-[#F5F5F5] placeholder-[#F5F5F5]/40'
                         }`}
                       />
                       <button
@@ -651,7 +651,7 @@ export const CollaborateModal: React.FC = () => {
                         className={`p-2.5 rounded-xl border transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center cursor-pointer ${
                           isLight
                             ? 'bg-white hover:bg-slate-100 text-slate-700 border-slate-300 shadow-2xs'
-                            : 'bg-[#0d171f] hover:bg-[#080f14] text-[#DFCCA8] border-[#A58D66]/20'
+                            : 'bg-[#141415] hover:bg-[#000000] text-[#E8E8E8] border-[#FFFFFF]/20'
                         }`}
                         title="Generate Random Nickname"
                       >
@@ -663,7 +663,7 @@ export const CollaborateModal: React.FC = () => {
                   <button
                     onClick={() => handleJoinRoom()}
                     disabled={loading || !inputCode.trim()}
-                    className="w-full py-3 bg-[#A58D66] hover:bg-[#DFCCA8] disabled:opacity-50 text-[#080f14] font-bold text-sm rounded-xl transition-all shadow-md shadow-[#A58D66]/20 flex items-center justify-center gap-2 min-h-[48px] cursor-pointer"
+                    className="w-full py-3 bg-[#FFFFFF] hover:bg-[#E8E8E8] disabled:opacity-50 text-[#000000] font-bold text-sm rounded-xl transition-all shadow-md shadow-[#FFFFFF]/20 flex items-center justify-center gap-2 min-h-[48px] cursor-pointer"
                   >
                     {loading ? (
                       <RefreshCw className="w-4 h-4 animate-spin" />
@@ -678,17 +678,17 @@ export const CollaborateModal: React.FC = () => {
               {/* Tab 3: Recent & Saved Servers */}
               {activeTab === 'recent' && (
                 <div className="space-y-4">
-                  <div className={`text-xs ${isLight ? 'text-slate-600' : 'text-[#E5E1DD]/60'}`}>
+                  <div className={`text-xs ${isLight ? 'text-slate-600' : 'text-[#F5F5F5]/60'}`}>
                     Quickly reconnect to your previous live collaboration servers without re-entering the code:
                   </div>
 
                   {recentServers.length === 0 ? (
                     <div className={`p-6 text-center rounded-xl space-y-2 border ${
-                      isLight ? 'bg-slate-50 border-slate-200' : 'bg-[#080f14] border-[#A58D66]/20'
+                      isLight ? 'bg-slate-50 border-slate-200' : 'bg-[#000000] border-[#FFFFFF]/20'
                     }`}>
-                      <Server className={`w-8 h-8 mx-auto mb-1 ${isLight ? 'text-[#E5E1DD]/60' : 'text-[#A58D66]/40'}`} />
-                      <p className={`text-sm font-semibold ${isLight ? 'text-slate-800' : 'text-[#DFCCA8]'}`}>No Recent Servers</p>
-                      <p className={`text-xs ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/45'}`}>
+                      <Server className={`w-8 h-8 mx-auto mb-1 ${isLight ? 'text-[#F5F5F5]/60' : 'text-[#FFFFFF]/40'}`} />
+                      <p className={`text-sm font-semibold ${isLight ? 'text-slate-800' : 'text-[#E8E8E8]'}`}>No Recent Servers</p>
+                      <p className={`text-xs ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/45'}`}>
                         Create or join a server to save it here for instant 1-click reconnect.
                       </p>
                     </div>
@@ -699,28 +699,28 @@ export const CollaborateModal: React.FC = () => {
                           key={srv.roomCode}
                           className={`flex items-center justify-between p-3.5 rounded-xl transition-all group border ${
                             isLight
-                              ? 'bg-white hover:bg-slate-50 border-slate-200 hover:border-[#A58D66]/40 shadow-2xs'
-                              : 'bg-[#080f14] hover:bg-[#0d171f] border-[#A58D66]/20 hover:border-[#A58D66]/50'
+                              ? 'bg-white hover:bg-slate-50 border-slate-200 hover:border-[#FFFFFF]/40 shadow-2xs'
+                              : 'bg-[#000000] hover:bg-[#141415] border-[#FFFFFF]/20 hover:border-[#FFFFFF]/50'
                           }`}
                         >
                           <div className="min-w-0 flex-1 pr-3">
                             <div className="flex items-center gap-2">
                               <span className={`font-bold text-sm truncate ${
-                                isLight ? 'text-slate-900' : 'text-[#E5E1DD]'
+                                isLight ? 'text-slate-900' : 'text-[#F5F5F5]'
                               }`}>
                                 {srv.serverName || 'Circuit Server'}
                               </span>
                               {srv.isHost && (
-                                <span className="text-[10px] px-1.5 py-0.2 rounded bg-[#A58D66]/20 text-[#DFCCA8] font-bold border border-[#A58D66]/30">
+                                <span className="text-[10px] px-1.5 py-0.2 rounded bg-[#FFFFFF]/20 text-[#E8E8E8] font-bold border border-[#FFFFFF]/30">
                                   HOST
                                 </span>
                               )}
                             </div>
-                            <div className={`flex items-center gap-3 text-xs mt-1 ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>
-                              <span className="font-mono font-bold text-[#DFCCA8]">
+                            <div className={`flex items-center gap-3 text-xs mt-1 ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>
+                              <span className="font-mono font-bold text-[#E8E8E8]">
                                 Code: {srv.roomCode}
                               </span>
-                              <span className={`flex items-center gap-1 text-[11px] ${isLight ? 'text-[#E5E1DD]/60' : 'text-[#E5E1DD]/45'}`}>
+                              <span className={`flex items-center gap-1 text-[11px] ${isLight ? 'text-[#F5F5F5]/60' : 'text-[#F5F5F5]/45'}`}>
                                 <Clock className="w-3 h-3" />
                                 {new Date(srv.lastJoinedAt).toLocaleDateString()}
                               </span>
@@ -731,7 +731,7 @@ export const CollaborateModal: React.FC = () => {
                             <button
                               onClick={() => handleJoinRoom(srv.roomCode)}
                               disabled={loading}
-                              className="flex items-center gap-1.5 px-3 py-1.5 bg-[#A58D66] hover:bg-[#DFCCA8] text-[#080f14] text-xs font-bold rounded-lg transition-all min-h-[36px] cursor-pointer"
+                              className="flex items-center gap-1.5 px-3 py-1.5 bg-[#FFFFFF] hover:bg-[#E8E8E8] text-[#000000] text-xs font-bold rounded-lg transition-all min-h-[36px] cursor-pointer"
                               title={`Reconnect to ${srv.serverName || srv.roomCode}`}
                             >
                               <span>Reconnect</span>
@@ -740,7 +740,7 @@ export const CollaborateModal: React.FC = () => {
                             <button
                               onClick={() => deleteRecentServer(srv.roomCode)}
                               className={`p-1.5 rounded-lg transition-colors cursor-pointer ${
-                                isLight ? 'text-[#E5E1DD]/60 hover:text-[#DFCCA8]' : 'text-[#E5E1DD]/45 hover:text-[#DFCCA8]'
+                                isLight ? 'text-[#F5F5F5]/60 hover:text-[#E8E8E8]' : 'text-[#F5F5F5]/45 hover:text-[#E8E8E8]'
                               }`}
                               title="Remove from recent servers"
                             >

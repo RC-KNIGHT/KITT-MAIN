@@ -382,7 +382,7 @@ export const TutorialModal: React.FC = () => {
 
   return (
     <div className={`fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 select-none animate-fade-in ${
-      isLight ? 'bg-[#080f14]/40 backdrop-blur-xs' : 'bg-[#080f14]/85 backdrop-blur-md'
+      isLight ? 'bg-[#000000]/40 backdrop-blur-xs' : 'bg-[#000000]/85 backdrop-blur-md'
     }`}>
       <div
         style={{
@@ -390,7 +390,7 @@ export const TutorialModal: React.FC = () => {
           borderColor: isLight ? '#cbd5e1' : currentTheme.borderTone,
         }}
         className={`border rounded-2xl w-full max-w-3xl max-h-[92vh] flex flex-col shadow-2xl overflow-hidden transition-all duration-200 ${
-          isLight ? 'text-slate-800' : 'text-[#E5E1DD]'
+          isLight ? 'text-slate-800' : 'text-[#F5F5F5]'
         }`}
       >
         {/* Header */}
@@ -415,7 +415,7 @@ export const TutorialModal: React.FC = () => {
             <div>
               <div className="flex items-center gap-2">
                 <h2 className={`font-bold text-sm sm:text-base tracking-wide ${
-                  isLight ? 'text-slate-900' : 'text-[#E5E1DD]'
+                  isLight ? 'text-slate-900' : 'text-[#F5F5F5]'
                 }`}>
                   Welcome to DigiLogic Studio
                 </h2>
@@ -430,7 +430,7 @@ export const TutorialModal: React.FC = () => {
                   Quick Start Guide
                 </span>
               </div>
-              <p className={`text-xs ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>
+              <p className={`text-xs ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>
                 Master circuit design on PC, Tablet touchscreens, and mobile devices
               </p>
             </div>
@@ -442,19 +442,19 @@ export const TutorialModal: React.FC = () => {
               className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg border text-xs font-mono transition-colors cursor-pointer ${
                 isLight
                   ? 'bg-white hover:bg-slate-100 border-slate-300 text-slate-700 hover:text-slate-900 shadow-2xs'
-                  : 'bg-[#080f14]/80 hover:bg-[#0d171f] border-[#A58D66]/20/80 text-[#DFCCA8] hover:text-[#E5E1DD]'
+                  : 'bg-[#000000]/80 hover:bg-[#141415] border-[#FFFFFF]/20/80 text-[#E8E8E8] hover:text-[#F5F5F5]'
               }`}
               title="About Founders & Lab Guide"
             >
-              <Info className={`w-3.5 h-3.5 ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`} />
+              <Info className={`w-3.5 h-3.5 ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`} />
               <span>About</span>
             </button>
             <button
               onClick={handleClose}
               className={`p-1.5 rounded-lg transition-colors cursor-pointer ${
                 isLight
-                  ? 'text-[#E5E1DD]/60 hover:text-slate-700 hover:bg-slate-100'
-                  : 'text-[#E5E1DD]/60 hover:text-[#E5E1DD] hover:bg-[#0d171f]'
+                  ? 'text-[#F5F5F5]/60 hover:text-slate-700 hover:bg-slate-100'
+                  : 'text-[#F5F5F5]/60 hover:text-[#F5F5F5] hover:bg-[#141415]'
               }`}
               title="Close Tutorial (Esc)"
             >
@@ -467,7 +467,7 @@ export const TutorialModal: React.FC = () => {
         <div
           style={{ borderColor: isLight ? '#e2e8f0' : currentTheme.borderTone }}
           className={`px-4 sm:px-6 py-2.5 border-b flex items-center justify-between gap-2 overflow-x-auto shrink-0 ${
-            isLight ? 'bg-slate-50' : 'bg-[#080f14]'
+            isLight ? 'bg-slate-50' : 'bg-[#000000]'
           }`}
         >
           <div className="flex items-center gap-1 sm:gap-2">
@@ -484,9 +484,9 @@ export const TutorialModal: React.FC = () => {
                       }
                     : idx < currentStepIndex
                     ? {
-                        backgroundColor: isLight ? '#ecfdf5' : '#407E8C20',
-                        borderColor: isLight ? '#a7f3d0' : '#407E8C50',
-                        color: isLight ? '#059669' : '#76B4C2',
+                        backgroundColor: isLight ? '#ecfdf5' : '#8F8F8F20',
+                        borderColor: isLight ? '#a7f3d0' : '#8F8F8F50',
+                        color: isLight ? '#E8E8E8' : '#B4B4B4',
                       }
                     : {}
                 }
@@ -496,8 +496,8 @@ export const TutorialModal: React.FC = () => {
                     : idx < currentStepIndex
                     ? 'border'
                     : isLight
-                    ? 'bg-white border-slate-200 text-[#E5E1DD]/45 hover:text-slate-800 hover:bg-slate-100 shadow-2xs'
-                    : 'bg-[#080f14]/60 border-[#A58D66]/20 text-[#E5E1DD]/60 hover:text-[#E5E1DD]'
+                    ? 'bg-white border-slate-200 text-[#F5F5F5]/45 hover:text-slate-800 hover:bg-slate-100 shadow-2xs'
+                    : 'bg-[#000000]/60 border-[#FFFFFF]/20 text-[#F5F5F5]/60 hover:text-[#F5F5F5]'
                 }`}
               >
                 {idx < currentStepIndex ? (
@@ -512,7 +512,7 @@ export const TutorialModal: React.FC = () => {
 
           {/* Device Perspective Switcher */}
           <div className={`flex items-center gap-1 p-0.5 rounded-lg border text-[11px] shrink-0 ${
-            isLight ? 'bg-slate-200/80 border-slate-300' : 'bg-[#080f14]/90 border-[#A58D66]/20'
+            isLight ? 'bg-slate-200/80 border-slate-300' : 'bg-[#000000]/90 border-[#FFFFFF]/20'
           }`}>
             <button
               onClick={() => setActiveDeviceView('all')}
@@ -520,10 +520,10 @@ export const TutorialModal: React.FC = () => {
                 activeDeviceView === 'all'
                   ? isLight
                     ? 'bg-white text-slate-900 shadow-2xs'
-                    : 'bg-[#080f14] text-[#E5E1DD]'
+                    : 'bg-[#000000] text-[#F5F5F5]'
                   : isLight
                   ? 'text-slate-600 hover:text-slate-900'
-                  : 'text-[#E5E1DD]/60 hover:text-[#E5E1DD]'
+                  : 'text-[#F5F5F5]/60 hover:text-[#F5F5F5]'
               }`}
             >
               All
@@ -533,11 +533,11 @@ export const TutorialModal: React.FC = () => {
               className={`flex items-center gap-1 px-2 py-0.5 rounded font-semibold transition-colors cursor-pointer ${
                 activeDeviceView === 'pc'
                   ? isLight
-                    ? 'bg-white text-cyan-700 shadow-2xs'
-                    : 'bg-[#080f14] text-[#76B4C2]'
+                    ? 'bg-white text-zinc-700 shadow-2xs'
+                    : 'bg-[#000000] text-[#B4B4B4]'
                   : isLight
                   ? 'text-slate-600 hover:text-slate-900'
-                  : 'text-[#E5E1DD]/60 hover:text-[#E5E1DD]'
+                  : 'text-[#F5F5F5]/60 hover:text-[#F5F5F5]'
               }`}
             >
               <Monitor className="w-3 h-3" /> PC
@@ -547,11 +547,11 @@ export const TutorialModal: React.FC = () => {
               className={`flex items-center gap-1 px-2 py-0.5 rounded font-semibold transition-colors cursor-pointer ${
                 activeDeviceView === 'tablet'
                   ? isLight
-                    ? 'bg-white text-teal-700 shadow-2xs'
-                    : 'bg-[#080f14] text-[#76B4C2]'
+                    ? 'bg-white text-zinc-700 shadow-2xs'
+                    : 'bg-[#000000] text-[#B4B4B4]'
                   : isLight
                   ? 'text-slate-600 hover:text-slate-900'
-                  : 'text-[#E5E1DD]/60 hover:text-[#E5E1DD]'
+                  : 'text-[#F5F5F5]/60 hover:text-[#F5F5F5]'
               }`}
             >
               <Tablet className="w-3 h-3" /> Touch
@@ -580,7 +580,7 @@ export const TutorialModal: React.FC = () => {
               >
                 {currentStep.badge}
               </span>
-              <span className={`text-[11px] font-mono ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>
+              <span className={`text-[11px] font-mono ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>
                 {currentStepIndex + 1} / {tutorialSteps.length}
               </span>
             </div>
@@ -596,10 +596,10 @@ export const TutorialModal: React.FC = () => {
                 <currentStep.icon className="w-6 h-6" />
               </div>
               <div className="space-y-0.5">
-                <h3 className={`font-bold text-sm sm:text-base ${isLight ? 'text-slate-900' : 'text-[#E5E1DD]'}`}>
+                <h3 className={`font-bold text-sm sm:text-base ${isLight ? 'text-slate-900' : 'text-[#F5F5F5]'}`}>
                   {currentStep.title}
                 </h3>
-                <p className={`text-xs leading-relaxed ${isLight ? 'text-slate-600' : 'text-[#E5E1DD]/60'}`}>
+                <p className={`text-xs leading-relaxed ${isLight ? 'text-slate-600' : 'text-[#F5F5F5]/60'}`}>
                   {currentStep.subtitle}
                 </p>
               </div>
@@ -611,18 +611,18 @@ export const TutorialModal: React.FC = () => {
             {/* PC Instructions */}
             {(activeDeviceView === 'all' || activeDeviceView === 'pc') && (
               <div className={`p-3.5 rounded-xl space-y-2.5 border ${
-                isLight ? 'bg-white border-slate-200 shadow-2xs' : 'bg-[#080f14]/80 border-[#A58D66]/20'
+                isLight ? 'bg-white border-slate-200 shadow-2xs' : 'bg-[#000000]/80 border-[#FFFFFF]/20'
               }`}>
                 <div className={`flex items-center gap-2 font-bold text-xs pb-1 border-b ${
-                  isLight ? 'text-cyan-700 border-slate-200' : 'text-[#76B4C2] border-[#A58D66]/20'
+                  isLight ? 'text-zinc-700 border-slate-200' : 'text-[#B4B4B4] border-[#FFFFFF]/20'
                 }`}>
                   <Monitor className="w-4 h-4" />
                   <span>On Desktop & Laptop (Mouse / Keyboard)</span>
                 </div>
-                <ul className={`space-y-2 ${isLight ? 'text-slate-700' : 'text-[#DFCCA8]'}`}>
+                <ul className={`space-y-2 ${isLight ? 'text-slate-700' : 'text-[#E8E8E8]'}`}>
                   {currentStep.pcTips.map((tip, idx) => (
                     <li key={idx} className="flex items-start gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#76B4C2] shrink-0 mt-1.5" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#B4B4B4] shrink-0 mt-1.5" />
                       <span className="leading-relaxed">{tip}</span>
                     </li>
                   ))}
@@ -633,18 +633,18 @@ export const TutorialModal: React.FC = () => {
             {/* Tablet & Touch Instructions */}
             {(activeDeviceView === 'all' || activeDeviceView === 'tablet') && (
               <div className={`p-3.5 rounded-xl space-y-2.5 border ${
-                isLight ? 'bg-white border-slate-200 shadow-2xs' : 'bg-[#080f14]/80 border-[#A58D66]/20'
+                isLight ? 'bg-white border-slate-200 shadow-2xs' : 'bg-[#000000]/80 border-[#FFFFFF]/20'
               }`}>
                 <div className={`flex items-center gap-2 font-bold text-xs pb-1 border-b ${
-                  isLight ? 'text-teal-700 border-slate-200' : 'text-[#76B4C2] border-[#A58D66]/20'
+                  isLight ? 'text-zinc-700 border-slate-200' : 'text-[#B4B4B4] border-[#FFFFFF]/20'
                 }`}>
                   <Tablet className="w-4 h-4" />
                   <span>On Tablets & Mobile (Touchscreens)</span>
                 </div>
-                <ul className={`space-y-2 ${isLight ? 'text-slate-700' : 'text-[#DFCCA8]'}`}>
+                <ul className={`space-y-2 ${isLight ? 'text-slate-700' : 'text-[#E8E8E8]'}`}>
                   {currentStep.tabletTips.map((tip, idx) => (
                     <li key={idx} className="flex items-start gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#76B4C2] shrink-0 mt-1.5" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#B4B4B4] shrink-0 mt-1.5" />
                       <span className="leading-relaxed">{tip}</span>
                     </li>
                   ))}
@@ -659,7 +659,7 @@ export const TutorialModal: React.FC = () => {
               <div
                 key={idx}
                 className={`p-3 rounded-xl space-y-1 border ${
-                  isLight ? 'bg-slate-50 border-slate-200 shadow-2xs' : 'bg-[#080f14]/80 border-[#A58D66]/20'
+                  isLight ? 'bg-slate-50 border-slate-200 shadow-2xs' : 'bg-[#000000]/80 border-[#FFFFFF]/20'
                 }`}
               >
                 <div className="flex items-center gap-2">
@@ -670,7 +670,7 @@ export const TutorialModal: React.FC = () => {
                     {hf.label}
                   </span>
                 </div>
-                <p className={`text-[11px] leading-normal ${isLight ? 'text-slate-600' : 'text-[#E5E1DD]/60'}`}>
+                <p className={`text-[11px] leading-normal ${isLight ? 'text-slate-600' : 'text-[#F5F5F5]/60'}`}>
                   {hf.desc}
                 </p>
               </div>
@@ -682,25 +682,25 @@ export const TutorialModal: React.FC = () => {
             <div className={`p-3 rounded-xl flex flex-wrap items-center justify-between gap-2 text-xs border ${
               isLight
                 ? 'bg-amber-50/70 border-amber-200 text-slate-800'
-                : 'bg-[#A58D66]/15 border-[#A58D66]/30'
+                : 'bg-[#FFFFFF]/15 border-[#FFFFFF]/30'
             }`}>
               <div className="space-y-0.5">
-                <span className="font-bold text-[#A58D66]">Try Interactive Demo:</span>
-                <p className={`text-[11px] ${isLight ? 'text-slate-600' : 'text-[#DFCCA8]'}`}>{currentStep.demoAction.description}</p>
+                <span className="font-bold text-[#FFFFFF]">Try Interactive Demo:</span>
+                <p className={`text-[11px] ${isLight ? 'text-slate-600' : 'text-[#E8E8E8]'}`}>{currentStep.demoAction.description}</p>
               </div>
               <button
                 onClick={handleLoadDemoCircuit}
-                className="px-3 py-1.5 bg-[#A58D66] hover:bg-[#DFCCA8] text-[#080f14] font-bold rounded-lg transition-colors shadow-xs flex items-center gap-1.5 shrink-0 cursor-pointer"
+                className="px-3 py-1.5 bg-[#FFFFFF] hover:bg-[#E8E8E8] text-[#000000] font-bold rounded-lg transition-colors shadow-xs flex items-center gap-1.5 shrink-0 cursor-pointer"
               >
-                <Zap className="w-3.5 h-3.5 fill-[#080f14]" />
+                <Zap className="w-3.5 h-3.5 fill-[#000000]" />
                 <span>{currentStep.demoAction.label}</span>
               </button>
             </div>
           )}
 
           {demoLoadedMessage && (
-            <div className="p-2.5 rounded-lg bg-[#A58D66]/20 border border-[#A58D66]/50 text-[#DFCCA8] font-semibold text-center flex items-center justify-center gap-2 animate-fade-in">
-              <CheckCircle2 className="w-4 h-4 text-[#A58D66]" />
+            <div className="p-2.5 rounded-lg bg-[#FFFFFF]/20 border border-[#FFFFFF]/50 text-[#E8E8E8] font-semibold text-center flex items-center justify-center gap-2 animate-fade-in">
+              <CheckCircle2 className="w-4 h-4 text-[#FFFFFF]" />
               <span>{demoLoadedMessage}</span>
             </div>
           )}
@@ -716,14 +716,14 @@ export const TutorialModal: React.FC = () => {
         >
           {/* Don't show again toggle */}
           <label className={`flex items-center gap-2 cursor-pointer text-xs ${
-            isLight ? 'text-slate-600 hover:text-slate-900' : 'text-[#E5E1DD]/60 hover:text-[#E5E1DD]'
+            isLight ? 'text-slate-600 hover:text-slate-900' : 'text-[#F5F5F5]/60 hover:text-[#F5F5F5]'
           }`}>
             <input
               type="checkbox"
               checked={dontShowAgain}
               onChange={(e) => setDontShowAgain(e.target.checked)}
-              className={`rounded text-[#A58D66] focus:ring-0 cursor-pointer ${
-                isLight ? 'bg-white border-slate-300' : 'bg-[#080f14] border-[#A58D66]/20'
+              className={`rounded text-[#FFFFFF] focus:ring-0 cursor-pointer ${
+                isLight ? 'bg-white border-slate-300' : 'bg-[#000000] border-[#FFFFFF]/20'
               }`}
             />
             <span>Don't auto-open on startup</span>
@@ -737,7 +737,7 @@ export const TutorialModal: React.FC = () => {
               className={`flex items-center gap-1 px-3 py-1.5 rounded-lg disabled:opacity-30 text-xs font-semibold border transition-colors cursor-pointer ${
                 isLight
                   ? 'bg-white hover:bg-slate-100 text-slate-700 border-slate-300 shadow-2xs'
-                  : 'bg-[#080f14] hover:bg-[#0d171f] text-[#E5E1DD] border-[#A58D66]/20'
+                  : 'bg-[#000000] hover:bg-[#141415] text-[#F5F5F5] border-[#FFFFFF]/20'
               }`}
             >
               <ChevronLeft className="w-4 h-4" />
@@ -749,7 +749,7 @@ export const TutorialModal: React.FC = () => {
                 onClick={() => setCurrentStepIndex((prev) => prev + 1)}
                 style={{
                   backgroundColor: currentTheme.primaryColor,
-                  color: '#080f14',
+                  color: '#000000',
                 }}
                 className="flex items-center gap-1 px-4 py-1.5 rounded-lg font-bold text-xs transition-all shadow-xs active:scale-95 cursor-pointer"
               >
@@ -761,7 +761,7 @@ export const TutorialModal: React.FC = () => {
                 onClick={handleClose}
                 style={{
                   backgroundColor: currentTheme.primaryColor,
-                  color: '#080f14',
+                  color: '#000000',
                 }}
                 className="flex items-center gap-1.5 px-4 py-1.5 rounded-lg font-bold text-xs transition-all shadow-xs active:scale-95 cursor-pointer"
               >

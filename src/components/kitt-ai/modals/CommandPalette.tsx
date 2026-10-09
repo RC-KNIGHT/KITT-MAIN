@@ -144,12 +144,12 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center pt-24 px-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-100">
       <div 
-        className="w-full max-w-2xl bg-[#0c161d] border border-[#A58D66]/40 rounded-2xl shadow-2xl overflow-hidden flex flex-col font-sans"
+        className="w-full max-w-2xl bg-[#141415] border border-[#8F8F8F] rounded-[24px] overflow-hidden flex flex-col font-sans"
         onClick={e => e.stopPropagation()}
       >
         {/* Search Header */}
-        <div className="flex items-center px-4 py-3.5 border-b border-[#A58D66]/20 bg-[#080f14]/80">
-          <Search className="w-5 h-5 text-[#A58D66] shrink-0 mr-3" />
+        <div className="flex items-center px-4 py-3.5 border-b border-[#353536] bg-[#000000]/80">
+          <Search className="w-5 h-5 text-[#FFFFFF] shrink-0 mr-3" />
           <input
             ref={inputRef}
             type="text"
@@ -160,7 +160,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
             }}
             onKeyDown={handleKeyDownList}
             placeholder="Type a command or search circuits, components, templates..."
-            className="flex-1 bg-transparent text-[#E5E1DD] text-sm font-mono placeholder:text-slate-500 focus:outline-none"
+            className="flex-1 bg-transparent text-[#F5F5F5] text-sm font-mono placeholder:text-slate-500 focus:outline-none"
           />
           <kbd className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/10 text-slate-400 border border-white/5">
             ESC
@@ -182,18 +182,18 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                   key={item.id}
                   onClick={item.action}
                   onMouseEnter={() => setSelectedIndex(index)}
-                  className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-left transition-colors cursor-pointer ${
+                  className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-[12px] text-left transition-colors cursor-pointer ${
                     isSelected
-                      ? 'bg-[#A58D66]/15 text-[#DFCCA8] border border-[#A58D66]/35'
+                      ? 'bg-[#FFFFFF]/15 text-[#E8E8E8] border border-[#353536]'
                       : 'text-slate-300 hover:bg-white/5 border border-transparent'
                   }`}
                 >
                   <div className="flex items-center gap-3 min-w-0">
-                    <div className={`p-2 rounded-lg shrink-0 ${isSelected ? 'bg-[#A58D66]/25 text-[#A58D66]' : 'bg-white/5 text-slate-400'}`}>
+                    <div className={`p-2 rounded-[12px] shrink-0 ${isSelected ? 'bg-[#FFFFFF]/25 text-[#FFFFFF]' : 'bg-white/5 text-slate-400'}`}>
                       <Icon className="w-4 h-4" />
                     </div>
                     <div className="min-w-0">
-                      <div className="text-xs font-mono font-bold truncate text-[#E5E1DD]">{item.title}</div>
+                      <div className="text-xs font-mono font-bold truncate text-[#F5F5F5]">{item.title}</div>
                       <div className="text-[11px] text-slate-400 truncate">{item.subtitle}</div>
                     </div>
                   </div>
@@ -202,7 +202,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                     <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 px-2 py-0.5 rounded bg-white/5">
                       {item.category}
                     </span>
-                    {isSelected && <ArrowRight className="w-3.5 h-3.5 text-[#A58D66]" />}
+                    {isSelected && <ArrowRight className="w-3.5 h-3.5 text-[#FFFFFF]" />}
                   </div>
                 </button>
               );
@@ -211,13 +211,13 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         </div>
 
         {/* Footer info */}
-        <div className="px-4 py-2 bg-[#080f14] border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-slate-500">
+        <div className="px-4 py-2 bg-[#000000] border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-slate-500">
           <div className="flex items-center gap-3">
             <span>↑↓ Navigate</span>
             <span>↵ Select</span>
             <span>ESC Close</span>
           </div>
-          <div className="text-[#A58D66]">KITT Copilot Engine</div>
+          <div className="text-[#FFFFFF]">KITT Copilot Engine</div>
         </div>
       </div>
     </div>

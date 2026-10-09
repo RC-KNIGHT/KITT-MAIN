@@ -47,8 +47,8 @@ export const ComponentRenderer: React.FC<ComponentRendererProps> = React.memo(({
   const activeTheme = THEME_PRESETS[theme as keyof typeof THEME_PRESETS] || THEME_PRESETS.kitt_sovereign;
   const isLight = activeTheme.id.endsWith('_light') || activeTheme.id === 'light' || colorMode === 'light';
   const primarySelectingUser = selectingUsers[0];
-  const selectionStroke = activeTheme.secondaryColor || '#A58D66';
-  const selectionText = activeTheme.signalPulseColor || '#DFCCA8';
+  const selectionStroke = activeTheme.secondaryColor || '#FFFFFF';
+  const selectionText = activeTheme.signalPulseColor || '#E8E8E8';
 
   const meta = COMPONENT_METADATA[component.type] || COMPONENT_METADATA.AND;
   const width = meta.width;
@@ -264,8 +264,8 @@ export const ComponentRenderer: React.FC<ComponentRendererProps> = React.memo(({
               width={width - 6}
               height={height - 12}
               rx={12}
-              fill={isLight ? '#F1F5F9' : '#080f14'}
-              stroke={isSelected ? selectionStroke : isOn ? activeTheme.inputActiveStroke : isLight ? '#CBD5E1' : 'rgba(165, 141, 102, 0.3)'}
+              fill={isLight ? '#F1F5F9' : '#000000'}
+              stroke={isSelected ? selectionStroke : isOn ? activeTheme.inputActiveStroke : isLight ? '#CBD5E1' : 'rgba(255, 255, 255, 0.3)'}
               strokeWidth={isSelected ? 2 : 1.5}
             />
             {/* Inner Recessed Switch Track */}
@@ -275,8 +275,8 @@ export const ComponentRenderer: React.FC<ComponentRendererProps> = React.memo(({
               width={width - 12}
               height={height - 18}
               rx={9}
-              fill={isOn ? activeTheme.inputActiveFill : isLight ? '#E2E8F0' : '#080f14'}
-              stroke={isOn ? activeTheme.inputActiveStroke : isLight ? '#CBD5E1' : '#1d2c38'}
+              fill={isOn ? activeTheme.inputActiveFill : isLight ? '#E2E8F0' : '#000000'}
+              stroke={isOn ? activeTheme.inputActiveStroke : isLight ? '#CBD5E1' : '#29292A'}
               strokeWidth={1}
             />
             {/* Binary State Text (0 / 1) cleanly positioned on non-knob side */}
@@ -285,7 +285,7 @@ export const ComponentRenderer: React.FC<ComponentRendererProps> = React.memo(({
               y={height / 2}
               dominantBaseline="central"
               textAnchor="middle"
-              fill={isOn ? activeTheme.secondaryColor : isLight ? '#334155' : '#DFCCA8'}
+              fill={isOn ? activeTheme.secondaryColor : isLight ? '#334155' : '#E8E8E8'}
               fontSize={11}
               fontWeight="bold"
               fontFamily="monospace"
@@ -303,14 +303,14 @@ export const ComponentRenderer: React.FC<ComponentRendererProps> = React.memo(({
                 width={14}
                 height={height - 22}
                 rx={6}
-                fill={isOn ? activeTheme.inputKnobActive : isLight ? '#FFFFFF' : '#A58D66'}
-                stroke={isLight ? '#94A3B8' : '#DFCCA8'}
+                fill={isOn ? activeTheme.inputKnobActive : isLight ? '#FFFFFF' : '#FFFFFF'}
+                stroke={isLight ? '#94A3B8' : '#E8E8E8'}
                 strokeWidth={1.5}
                 className="shadow-md"
               />
               {/* Tactile Grip Lines */}
-              <line x1={4.5} y1={6} x2={4.5} y2={height - 28} stroke={isOn ? '#080f14' : isLight ? '#94A3B8' : '#080f14'} strokeWidth={1} strokeLinecap="round" />
-              <line x1={8.5} y1={6} x2={8.5} y2={height - 28} stroke={isOn ? '#080f14' : isLight ? '#94A3B8' : '#080f14'} strokeWidth={1} strokeLinecap="round" />
+              <line x1={4.5} y1={6} x2={4.5} y2={height - 28} stroke={isOn ? '#000000' : isLight ? '#94A3B8' : '#000000'} strokeWidth={1} strokeLinecap="round" />
+              <line x1={8.5} y1={6} x2={8.5} y2={height - 28} stroke={isOn ? '#000000' : isLight ? '#94A3B8' : '#000000'} strokeWidth={1} strokeLinecap="round" />
             </g>
           </g>
         );
@@ -340,8 +340,8 @@ export const ComponentRenderer: React.FC<ComponentRendererProps> = React.memo(({
               width={width - 6}
               height={height - 10}
               rx={12}
-              fill={isLight ? '#F1F5F9' : '#080f14'}
-              stroke={isSelected ? selectionStroke : pressed ? activeTheme.inputActiveStroke : isLight ? '#CBD5E1' : 'rgba(165, 141, 102, 0.3)'}
+              fill={isLight ? '#F1F5F9' : '#000000'}
+              stroke={isSelected ? selectionStroke : pressed ? activeTheme.inputActiveStroke : isLight ? '#CBD5E1' : 'rgba(255, 255, 255, 0.3)'}
               strokeWidth={isSelected ? 2 : 1.5}
               className="transition-colors duration-150"
             />
@@ -350,8 +350,8 @@ export const ComponentRenderer: React.FC<ComponentRendererProps> = React.memo(({
               cx={width / 2}
               cy={height / 2}
               r={17}
-              fill={isLight ? '#E2E8F0' : '#080f14'}
-              stroke={isLight ? '#CBD5E1' : '#1d2c38'}
+              fill={isLight ? '#E2E8F0' : '#000000'}
+              stroke={isLight ? '#CBD5E1' : '#29292A'}
               strokeWidth={1.5}
             />
             {/* Push Button Center Actuator with Tactile Feedback */}
@@ -359,8 +359,8 @@ export const ComponentRenderer: React.FC<ComponentRendererProps> = React.memo(({
               cx={width / 2}
               cy={height / 2}
               r={pressed ? 12 : 14}
-              fill={pressed ? activeTheme.inputKnobActive : '#A58D66'}
-              stroke={pressed ? activeTheme.inputActiveStroke : '#DFCCA8'}
+              fill={pressed ? activeTheme.inputKnobActive : '#FFFFFF'}
+              stroke={pressed ? activeTheme.inputActiveStroke : '#E8E8E8'}
               strokeWidth={2}
               className="transition-all duration-75 shadow-lg"
             />
@@ -489,7 +489,7 @@ export const ComponentRenderer: React.FC<ComponentRendererProps> = React.memo(({
               cx={width / 2}
               cy={height / 2}
               r={18}
-              fill={isLight ? '#F1F5F9' : '#080f14'}
+              fill={isLight ? '#F1F5F9' : '#000000'}
               stroke={isSelected ? selectionStroke : activeTheme.gateInactiveStroke}
               strokeWidth={2}
             />
@@ -500,7 +500,7 @@ export const ComponentRenderer: React.FC<ComponentRendererProps> = React.memo(({
               cy={height / 2}
               r={14}
               fill={isOn ? activeTheme.ledActiveFill : activeTheme.gateInactiveFill}
-              stroke={isOn ? activeTheme.ledActiveStroke : isLight ? '#CBD5E1' : '#1d2c38'}
+              stroke={isOn ? activeTheme.ledActiveStroke : isLight ? '#CBD5E1' : '#29292A'}
               strokeWidth={1.5}
               className="transition-colors duration-200"
             />
@@ -510,7 +510,7 @@ export const ComponentRenderer: React.FC<ComponentRendererProps> = React.memo(({
               cx={width / 2}
               cy={height / 2}
               r={8}
-              fill={isOn ? activeTheme.inputKnobActive : isLight ? '#CBD5E1' : '#1d2c38'}
+              fill={isOn ? activeTheme.inputKnobActive : isLight ? '#CBD5E1' : '#29292A'}
               className="transition-colors duration-200"
               opacity={isOn ? 1 : 0.4}
             />
@@ -532,7 +532,7 @@ export const ComponentRenderer: React.FC<ComponentRendererProps> = React.memo(({
         const inPort = component.ports[0]?.id || 'in_0';
         const inVal = portValues[inPort] ?? component.internalState?.currentValue ?? 0;
         let badgeColor = activeTheme.gateInactiveFill;
-        let textColor = isLight ? '#334155' : '#DFCCA8';
+        let textColor = isLight ? '#334155' : '#E8E8E8';
         let strokeColor = activeTheme.gateInactiveStroke;
         
         if (inVal === 1 || inVal === '1') {
@@ -540,17 +540,17 @@ export const ComponentRenderer: React.FC<ComponentRendererProps> = React.memo(({
           textColor = activeTheme.probeActiveText;
           strokeColor = activeTheme.inputActiveStroke;
         } else if (inVal === 'Z') {
-          badgeColor = isLight ? '#FEF3C7' : 'rgba(165, 141, 102, 0.15)';
-          textColor = isLight ? '#B45309' : '#DFCCA8';
-          strokeColor = '#A58D66';
+          badgeColor = isLight ? '#FEF3C7' : 'rgba(255, 255, 255, 0.15)';
+          textColor = isLight ? '#B45309' : '#E8E8E8';
+          strokeColor = '#FFFFFF';
         } else if (inVal === 'X') {
-          badgeColor = 'rgba(165, 141, 102, 0.25)';
-          textColor = '#DFCCA8';
-          strokeColor = '#A58D66';
+          badgeColor = 'rgba(255, 255, 255, 0.25)';
+          textColor = '#E8E8E8';
+          strokeColor = '#FFFFFF';
         } else {
-          badgeColor = isLight ? '#F1F5F9' : '#0d171f';
-          textColor = isLight ? '#334155' : '#E5E1DD';
-          strokeColor = isLight ? '#CBD5E1' : 'rgba(165, 141, 102, 0.3)';
+          badgeColor = isLight ? '#F1F5F9' : '#141415';
+          textColor = isLight ? '#334155' : '#F5F5F5';
+          strokeColor = isLight ? '#CBD5E1' : 'rgba(255, 255, 255, 0.3)';
         }
 
         return (
@@ -604,9 +604,9 @@ export const ComponentRenderer: React.FC<ComponentRendererProps> = React.memo(({
           dp: (portValues['in_dp'] ?? component.internalState?.segments?.dp) === 1,
         };
 
-        const onFill = activeTheme.inputKnobActive || '#76B4C2';
-        const offFill = '#1d2c38';
-        const offStroke = '#080f14';
+        const onFill = activeTheme.inputKnobActive || '#B4B4B4';
+        const offFill = '#29292A';
+        const offStroke = '#000000';
 
         return (
           <g>
@@ -617,8 +617,8 @@ export const ComponentRenderer: React.FC<ComponentRendererProps> = React.memo(({
               width={width - 20}
               height={height - 10}
               rx={6}
-              fill="#080f14"
-              stroke={isSelected ? selectionStroke : 'rgba(165, 141, 102, 0.3)'}
+              fill="#000000"
+              stroke={isSelected ? selectionStroke : 'rgba(255, 255, 255, 0.3)'}
               strokeWidth={2}
             />
 
@@ -702,15 +702,15 @@ export const ComponentRenderer: React.FC<ComponentRendererProps> = React.memo(({
               width={width - 20}
               height={height - 10}
               rx={8}
-              fill="#080f14"
-              stroke={isSelected ? selectionStroke : 'rgba(165, 141, 102, 0.3)'}
+              fill="#000000"
+              stroke={isSelected ? selectionStroke : 'rgba(255, 255, 255, 0.3)'}
               strokeWidth={2}
             />
             <text
               x={(width + 12) / 2}
               y={height / 2 + 10}
               textAnchor="middle"
-              fill={activeTheme.displayDigitColor || '#76B4C2'}
+              fill={activeTheme.displayDigitColor || '#B4B4B4'}
               fontSize={32}
               fontFamily="monospace"
               fontWeight="bold"
@@ -722,7 +722,7 @@ export const ComponentRenderer: React.FC<ComponentRendererProps> = React.memo(({
               x={(width + 12) / 2}
               y={height - 8}
               textAnchor="middle"
-              fill="#DFCCA8"
+              fill="#E8E8E8"
               fontSize={7.5}
               fontWeight="bold"
               fontFamily="monospace"
@@ -749,15 +749,15 @@ export const ComponentRenderer: React.FC<ComponentRendererProps> = React.memo(({
               width={width - 20}
               height={height - 10}
               rx={8}
-              fill="#080f14"
-              stroke={isSelected ? selectionStroke : 'rgba(165, 141, 102, 0.3)'}
+              fill="#000000"
+              stroke={isSelected ? selectionStroke : 'rgba(255, 255, 255, 0.3)'}
               strokeWidth={2}
             />
             <text
               x={(width + 12) / 2}
               y={height / 2 + 10}
               textAnchor="middle"
-              fill={activeTheme.displayDigitColor || '#76B4C2'}
+              fill={activeTheme.displayDigitColor || '#B4B4B4'}
               fontSize={decStr.length > 1 ? 26 : 32}
               fontFamily="monospace"
               fontWeight="bold"
@@ -769,7 +769,7 @@ export const ComponentRenderer: React.FC<ComponentRendererProps> = React.memo(({
               x={(width + 12) / 2}
               y={height - 8}
               textAnchor="middle"
-              fill="#DFCCA8"
+              fill="#E8E8E8"
               fontSize={7.5}
               fontWeight="bold"
               fontFamily="monospace"
@@ -787,7 +787,7 @@ export const ComponentRenderer: React.FC<ComponentRendererProps> = React.memo(({
           portValues['in_1'] === 1 ? 1 : 0,
           portValues['in_0'] === 1 ? 1 : 0,
         ];
-        const onFill = activeTheme.inputKnobActive || '#76B4C2';
+        const onFill = activeTheme.inputKnobActive || '#B4B4B4';
 
         return (
           <g>
@@ -797,8 +797,8 @@ export const ComponentRenderer: React.FC<ComponentRendererProps> = React.memo(({
               width={width - 20}
               height={height - 10}
               rx={6}
-              fill="#080f14"
-              stroke={isSelected ? selectionStroke : 'rgba(165, 141, 102, 0.3)'}
+              fill="#000000"
+              stroke={isSelected ? selectionStroke : 'rgba(255, 255, 255, 0.3)'}
               strokeWidth={2}
             />
             {bits.map((bit, idx) => {
@@ -809,8 +809,8 @@ export const ComponentRenderer: React.FC<ComponentRendererProps> = React.memo(({
                     cx={cx}
                     cy={height / 2 - 4}
                     r={4.5}
-                    fill={bit === 1 ? onFill : '#1d2c38'}
-                    stroke={bit === 1 ? '#ffffff' : '#080f14'}
+                    fill={bit === 1 ? onFill : '#29292A'}
+                    stroke={bit === 1 ? '#ffffff' : '#000000'}
                     strokeWidth={1}
                   />
                   <text
@@ -865,7 +865,7 @@ export const ComponentRenderer: React.FC<ComponentRendererProps> = React.memo(({
               x={width / 2}
               y={height / 2 + 4}
               textAnchor="middle"
-              fill={isSelfActive ? activeTheme.primaryColor : isLight ? '#080f14' : '#E5E1DD'}
+              fill={isSelfActive ? activeTheme.primaryColor : isLight ? '#000000' : '#F5F5F5'}
               fontSize={10}
               fontWeight="bold"
               fontFamily="monospace"
@@ -962,7 +962,7 @@ export const ComponentRenderer: React.FC<ComponentRendererProps> = React.memo(({
                 cy={0}
                 r={10}
                 fill={user.color}
-                stroke="#080f14"
+                stroke="#000000"
                 strokeWidth={1.8}
                 className="shadow-lg"
               />
@@ -987,7 +987,7 @@ export const ComponentRenderer: React.FC<ComponentRendererProps> = React.memo(({
                   width={Math.max(32, user.name.length * 6.8 + 12)}
                   height={14}
                   rx={4}
-                  fill="#080f14"
+                  fill="#000000"
                   stroke={user.color}
                   strokeWidth={1}
                 />
@@ -1027,7 +1027,7 @@ export const ComponentRenderer: React.FC<ComponentRendererProps> = React.memo(({
             y={0}
             dominantBaseline="central"
             textAnchor="middle"
-            fill={isSelfActive ? activeTheme.badgeActiveText : isLight ? '#080f14' : '#E5E1DD'}
+            fill={isSelfActive ? activeTheme.badgeActiveText : isLight ? '#000000' : '#F5F5F5'}
             fontSize={9.5}
             fontWeight="600"
             fontFamily="sans-serif"
@@ -1044,7 +1044,7 @@ export const ComponentRenderer: React.FC<ComponentRendererProps> = React.memo(({
         let portColor = activeTheme.portInactiveColor;
         if (val === 1) portColor = activeTheme.portActiveColor;
         else if (val === 'Z') portColor = '#d97706';
-        else if (val === 'X') portColor = '#A58D66';
+        else if (val === 'X') portColor = '#FFFFFF';
 
         const px = port.relativePosition?.x ?? (port.type === 'output' ? width : 0);
         const py = port.relativePosition?.y ?? (height / 2);

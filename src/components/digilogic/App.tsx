@@ -81,7 +81,7 @@ const CircuitAppContent: React.FC = () => {
   }
 
   return (
-    <div className="flex flex-col w-screen h-screen overflow-hidden antialiased font-sans touch-none bg-[#080f14] text-[#E5E1DD]">
+    <div className="flex flex-col w-screen h-screen overflow-hidden antialiased font-sans touch-none bg-[#000000] text-[#F5F5F5]">
       {/* Top Navigation & Simulation Toolbar */}
       <Toolbar />
 
@@ -93,7 +93,7 @@ const CircuitAppContent: React.FC = () => {
         {/* Backdrop for Mobile/Tablet when Sidebar Drawer is open */}
         {sidebarOpen && (
           <div
-            className="fixed inset-0 top-14 bg-[#080f14]/60 backdrop-blur-xs z-30 lg:hidden"
+            className="fixed inset-0 top-14 bg-[#000000]/60 backdrop-blur-xs z-30 lg:hidden"
             onClick={() => setSidebarOpen(false)}
           />
         )}
@@ -108,7 +108,7 @@ const CircuitAppContent: React.FC = () => {
         {/* Backdrop for Mobile/Tablet when Inspector Drawer is open */}
         {inspectorOpen && (
           <div
-            className="fixed inset-0 top-14 bg-[#080f14]/60 backdrop-blur-xs z-30 xl:hidden"
+            className="fixed inset-0 top-14 bg-[#000000]/60 backdrop-blur-xs z-30 xl:hidden"
             onClick={() => setInspectorOpen(false)}
           />
         )}
@@ -145,15 +145,15 @@ const AppGate: React.FC = () => {
   // Loading initial auth state
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center w-screen h-screen bg-[#080f14] text-[#E5E1DD] font-mono select-none">
-        <div className="relative flex items-center justify-center w-16 h-16 rounded-2xl bg-[#A58D66]/10 border border-[#A58D66]/40 text-[#A58D66] mb-4 shadow-[0_0_30px_rgba(165,141,102,0.25)]">
-          <Cpu className="w-8 h-8 animate-pulse text-[#A58D66]" />
+      <div className="flex flex-col items-center justify-center w-screen h-screen bg-[#000000] text-[#F5F5F5] font-mono select-none">
+        <div className="relative flex items-center justify-center w-16 h-16 rounded-2xl bg-[#FFFFFF]/10 border border-[#FFFFFF]/40 text-[#FFFFFF] mb-4 shadow-[0_0_30px_rgba(255,255,255,0.25)]">
+          <Cpu className="w-8 h-8 animate-pulse text-[#FFFFFF]" />
         </div>
-        <div className="flex items-center gap-2.5 text-sm text-[#E5E1DD] font-semibold tracking-wider">
-          <RefreshCw className="w-4 h-4 animate-spin text-[#A58D66]" />
+        <div className="flex items-center gap-2.5 text-sm text-[#F5F5F5] font-semibold tracking-wider">
+          <RefreshCw className="w-4 h-4 animate-spin text-[#FFFFFF]" />
           <span>INITIALIZING SOVEREIGN EDA WORKSPACE</span>
         </div>
-        <p className="text-xs text-[#A58D66]/70 mt-2">Connecting High-Speed Sovereign Canvas...</p>
+        <p className="text-xs text-[#FFFFFF]/70 mt-2">Connecting High-Speed Sovereign Canvas...</p>
       </div>
     );
   }

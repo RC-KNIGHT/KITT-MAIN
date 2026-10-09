@@ -44,7 +44,7 @@ const JOURNEY_TIERS: JourneyTier[] = [
       badge: 'Interactive Drills'
     },
     sampleProject: 'Mental Bit Manipulation & 8-bit Math Mastery',
-    color: '#A58D66'
+    color: '#FFFFFF'
   },
   {
     id: 'beginner',
@@ -59,7 +59,7 @@ const JOURNEY_TIERS: JourneyTier[] = [
       badge: 'Logic Synthesis'
     },
     sampleProject: '4-Bit Ripple Carry Adder & 7-Segment Decoder',
-    color: '#76B4C2'
+    color: '#B4B4B4'
   },
   {
     id: 'intermediate',
@@ -74,7 +74,7 @@ const JOURNEY_TIERS: JourneyTier[] = [
       badge: '3D Breadboard Lab'
     },
     sampleProject: 'Automated Plant Hydration System & Robot Telemetry',
-    color: '#407E8C'
+    color: '#8F8F8F'
   },
   {
     id: 'professional',
@@ -89,7 +89,7 @@ const JOURNEY_TIERS: JourneyTier[] = [
       badge: 'Autonomous Agent'
     },
     sampleProject: 'Turnkey Industrial IoT Telemetry Node & Production PCBA',
-    color: '#DFCCA8'
+    color: '#E8E8E8'
   }
 ];
 
@@ -97,23 +97,23 @@ export const StudentJourney: React.FC = () => {
   const [activeTier, setActiveTier] = useState<JourneyTier>(JOURNEY_TIERS[0]);
 
   return (
-    <section id="journey" className="py-24 px-4 sm:px-6 lg:px-8 bg-transparent relative border-t border-[#A58D66]/15">
+    <section id="journey" className="py-24 px-4 sm:px-6 lg:px-8 bg-transparent relative border-t border-[#FFFFFF]/15">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-14">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#A58D66]/15 border border-[#A58D66]/35 text-[#A58D66] text-xs font-mono uppercase tracking-widest animate-ambition">
-            <GraduationCap className="w-3.5 h-3.5 text-[#A58D66]" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FFFFFF]/15 border border-[#FFFFFF]/35 text-[#FFFFFF] text-xs font-mono uppercase tracking-widest animate-ambition">
+            <GraduationCap className="w-3.5 h-3.5 text-[#FFFFFF]" />
             <span>THE ASCENDANCY CURRICULUM</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold font-cinzel text-[#E5E1DD] tracking-tight leading-tight">
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold font-cinzel text-[#F5F5F5] tracking-tight leading-tight">
             First Logic Gate <br />
             <span className="animate-text-shimmer italic font-cormorant font-normal block mt-1">
               To Commercial Silicon.
             </span>
           </h2>
 
-          <p className="text-base sm:text-lg text-[#E5E1DD] font-serif italic max-w-lg mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg text-[#F5F5F5] font-serif italic max-w-lg mx-auto leading-relaxed">
             "Learn, simulate, fabricate, command."
           </p>
         </div>
@@ -146,13 +146,13 @@ export const StudentJourney: React.FC = () => {
                   <div
                     className={`w-full h-full text-left p-5 rounded-2xl border transition-colors cursor-pointer flex flex-col justify-between ${
                       isSelected
-                        ? 'surreal-card-gold border-2 border-[#A58D66] shadow-xl'
-                        : 'surreal-card border-[#A58D66]/20 hover:border-[#407E8C]/40 text-[#E5E1DD]'
+                        ? 'surreal-card-gold border-2 border-[#FFFFFF] shadow-xl'
+                        : 'surreal-card border-[#FFFFFF]/20 hover:border-[#8F8F8F]/40 text-[#F5F5F5]'
                     }`}
                   >
                     <div>
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-[10px] font-mono uppercase text-[#A58D66] font-bold">
+                        <span className="text-[10px] font-mono uppercase text-[#FFFFFF] font-bold">
                           {tier.stage}
                         </span>
                         <span 
@@ -160,17 +160,17 @@ export const StudentJourney: React.FC = () => {
                           style={{ backgroundColor: tier.color, color: tier.color }}
                         />
                       </div>
-                      <h3 className="text-base font-bold font-cinzel text-[#E5E1DD] mb-1">
+                      <h3 className="text-base font-bold font-cinzel text-[#F5F5F5] mb-1">
                         {tier.title}
                       </h3>
-                      <p className="text-xs text-[#76B4C2] font-mono">
+                      <p className="text-xs text-[#B4B4B4] font-mono">
                         {tier.tagline}
                       </p>
                     </div>
 
-                    <div className="mt-4 pt-3 border-t border-[#A58D66]/15 flex items-center justify-between text-xs font-semibold">
-                      <span className="text-[#E5E1DD]/60">View Curriculum</span>
-                      <ArrowRight className="w-3.5 h-3.5 text-[#A58D66]" />
+                    <div className="mt-4 pt-3 border-t border-[#FFFFFF]/15 flex items-center justify-between text-xs font-semibold">
+                      <span className="text-[#F5F5F5]/60">View Curriculum</span>
+                      <ArrowRight className="w-3.5 h-3.5 text-[#FFFFFF]" />
                     </div>
                   </div>
                 </Tilt3DCard>
@@ -180,7 +180,7 @@ export const StudentJourney: React.FC = () => {
         </div>
 
         {/* Active Stage Detailed Breakdown Panel with Smooth AnimatePresence */}
-        <div className="rounded-3xl surreal-card p-6 sm:p-8 shadow-2xl border border-[#A58D66]/30 overflow-hidden">
+        <div className="rounded-3xl surreal-card p-6 sm:p-8 shadow-2xl border border-[#FFFFFF]/30 overflow-hidden">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTier.id}
@@ -192,56 +192,56 @@ export const StudentJourney: React.FC = () => {
             >
               <div className="lg:col-span-7 space-y-4">
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-mono px-3 py-1 rounded bg-[#407E8C]/20 text-[#76B4C2] border border-[#407E8C]/35">
+                  <span className="text-xs font-mono px-3 py-1 rounded bg-[#8F8F8F]/20 text-[#B4B4B4] border border-[#8F8F8F]/35">
                     {activeTier.stage} Focus
                   </span>
-                  <span className="text-xs text-[#A58D66] font-mono">
+                  <span className="text-xs text-[#FFFFFF] font-mono">
                     Target: {activeTier.tagline}
                   </span>
                 </div>
 
-                <h3 className="text-2xl font-bold font-cinzel text-[#E5E1DD]">
+                <h3 className="text-2xl font-bold font-cinzel text-[#F5F5F5]">
                   {activeTier.title} Curriculum
                 </h3>
 
-                <p className="text-sm text-[#E5E1DD]/80 leading-relaxed font-light">
+                <p className="text-sm text-[#F5F5F5]/80 leading-relaxed font-light">
                   {activeTier.description}
                 </p>
 
                 <div className="space-y-2 pt-2">
-                  <span className="text-xs font-semibold text-[#A58D66] uppercase tracking-wider block font-mono">
+                  <span className="text-xs font-semibold text-[#FFFFFF] uppercase tracking-wider block font-mono">
                     Core Competencies Mastered:
                   </span>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {activeTier.skills.map((skill, i) => (
-                      <div key={i} className="flex items-center gap-2 text-xs text-[#E5E1DD]/90 bg-[#080f14]/60 p-2.5 rounded-lg border border-[#A58D66]/15">
-                        <Check className="w-3.5 h-3.5 text-[#A58D66] shrink-0" />
+                      <div key={i} className="flex items-center gap-2 text-xs text-[#F5F5F5]/90 bg-[#000000]/60 p-2.5 rounded-lg border border-[#FFFFFF]/15">
+                        <Check className="w-3.5 h-3.5 text-[#FFFFFF] shrink-0" />
                         <span>{skill}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                <div className="pt-2 text-xs text-[#E5E1DD]/65 font-light">
-                  Capstone Project: <strong className="text-[#E5E1DD] font-semibold">{activeTier.sampleProject}</strong>
+                <div className="pt-2 text-xs text-[#F5F5F5]/65 font-light">
+                  Capstone Project: <strong className="text-[#F5F5F5] font-semibold">{activeTier.sampleProject}</strong>
                 </div>
               </div>
 
               {/* Recommended Tool Launcher Card */}
-              <div className="lg:col-span-5 bg-[#080f14]/85 border border-[#A58D66]/30 rounded-2xl p-6 flex flex-col justify-between space-y-4">
+              <div className="lg:col-span-5 bg-[#000000]/85 border border-[#FFFFFF]/30 rounded-2xl p-6 flex flex-col justify-between space-y-4">
                 <div>
-                  <span className="text-[10px] font-mono uppercase font-bold text-[#A58D66] tracking-wider">
+                  <span className="text-[10px] font-mono uppercase font-bold text-[#FFFFFF] tracking-wider">
                     Recommended Primary Platform
                   </span>
-                  <h4 className="text-xl font-bold font-cinzel text-[#E5E1DD] mt-1">
+                  <h4 className="text-xl font-bold font-cinzel text-[#F5F5F5] mt-1">
                     {activeTier.recommendedTool.name}
                   </h4>
-                  <p className="text-xs text-[#E5E1DD]/70 mt-1 font-light">
+                  <p className="text-xs text-[#F5F5F5]/70 mt-1 font-light">
                     The ideal hands-on environment tailored for this phase of the engineering journey.
                   </p>
                 </div>
 
-                <div className="p-3 bg-[#407E8C]/15 border border-[#407E8C]/30 rounded-xl text-xs font-mono text-[#76B4C2]">
+                <div className="p-3 bg-[#8F8F8F]/15 border border-[#8F8F8F]/30 rounded-xl text-xs font-mono text-[#B4B4B4]">
                   ⚡ Fully integrated with KITT account credentials & synchronization
                 </div>
 
@@ -249,7 +249,7 @@ export const StudentJourney: React.FC = () => {
                   href={activeTier.recommendedTool.url}
                   {...(!activeTier.recommendedTool.url.startsWith('#') ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                   onClick={() => circuitAudio.playClick()}
-                  className="w-full py-3 rounded-xl bg-gradient-to-r from-[#A58D66] to-[#8C7654] hover:from-[#BFA378] hover:to-[#A58D66] text-[#080f14] font-bold text-xs text-center transition-all shadow-[0_0_20px_rgba(165,141,102,0.35)] flex items-center justify-center gap-2 cursor-pointer hover:scale-[1.02] active:scale-[0.98]"
+                  className="w-full py-3 rounded-xl bg-gradient-to-r from-[#FFFFFF] to-[#737373] hover:from-[#CCCCCC] hover:to-[#FFFFFF] text-[#000000] font-bold text-xs text-center transition-all shadow-[0_0_20px_rgba(255,255,255,0.35)] flex items-center justify-center gap-2 cursor-pointer hover:scale-[1.02] active:scale-[0.98]"
                 >
                   <span>Launch {activeTier.recommendedTool.name}</span>
                   <ExternalLink className="w-3.5 h-3.5" />

@@ -12,7 +12,7 @@ export const ECOSYSTEM_PRODUCTS: EcosystemProduct[] = [
     status: 'Live',
     badge: 'Flagship Agent',
     iconName: 'Bot',
-    accentColor: '#A58D66', // Antique Gold
+    accentColor: '#FFFFFF', // Antique Gold
     capabilities: [
       'Natural Language Requirement Extraction',
       'Automated Bill-of-Materials (BOM) Synthesis',
@@ -39,7 +39,7 @@ export const ECOSYSTEM_PRODUCTS: EcosystemProduct[] = [
     status: 'Live',
     badge: 'Core Lab',
     iconName: 'Cpu',
-    accentColor: '#407E8C', // Oceanic Teal
+    accentColor: '#8F8F8F', // Oceanic Teal
     capabilities: [
       'Bidirectional 2D Schematic & 3D Breadboard Sync',
       'Deterministic Mixed-Signal Simulation',
@@ -66,7 +66,7 @@ export const ECOSYSTEM_PRODUCTS: EcosystemProduct[] = [
     status: 'Live',
     badge: 'Logic Engine',
     iconName: 'Binary',
-    accentColor: '#E5E1DD', // Alabaster Sand
+    accentColor: '#F5F5F5', // Alabaster Sand
     capabilities: [
       '7 Primary Logic Gates + Complex IC Blocks',
       'Dynamic Truth Table Auto-Generation',
@@ -93,7 +93,7 @@ export const ECOSYSTEM_PRODUCTS: EcosystemProduct[] = [
     status: 'Live',
     badge: 'Foundations',
     iconName: 'Calculator',
-    accentColor: '#A58D66', // Antique Gold
+    accentColor: '#FFFFFF', // Antique Gold
     capabilities: [
       'Binary ↔ Decimal ↔ Hex ↔ Octal Instant Drills',
       'Bitwise Logic Operations (Masking, Bit Shifts)',
@@ -223,7 +223,7 @@ export const COMMUNITY_PROJECTS: CommunityProject[] = [
     views: 5340,
     forkCount: 128,
     hardwareList: ['ESP32 DevKit v1', 'Semtech SX1262 LoRa', 'Capacitive Moisture Probe v2.0', 'CN3791 MPPT Solar Charger', '18650 LiFePO4 Cell'],
-    previewGradient: 'from-[#407E8C]/25 via-[#12202b] to-[#080f14]',
+    previewGradient: 'from-[#8F8F8F]/25 via-[#1D1D1E] to-[#000000]',
     comments: [
       {
         id: 'c1',
@@ -261,7 +261,7 @@ export const COMMUNITY_PROJECTS: CommunityProject[] = [
     views: 4890,
     forkCount: 147,
     hardwareList: ['STM32G431KB Nucleo', 'TI DRV8301 Gate Driver', '6x NTMFS5C612N MOSFETs', 'Isolated ISO1050 CAN', '0.005Ω Shunts'],
-    previewGradient: 'from-[#A58D66]/25 via-[#12202b] to-[#080f14]',
+    previewGradient: 'from-[#FFFFFF]/25 via-[#1D1D1E] to-[#000000]',
     comments: [
       {
         id: 'c3',
@@ -291,7 +291,7 @@ export const COMMUNITY_PROJECTS: CommunityProject[] = [
     views: 7420,
     forkCount: 182,
     hardwareList: ['DigiLogic ALU Macro Blocks', 'Booth Radix-4 Multiplier', '32-Bit CLA', 'Bypass Forwarding Mux'],
-    previewGradient: 'from-[#76B4C2]/20 via-[#0d171f] to-[#080f14]',
+    previewGradient: 'from-[#B4B4B4]/20 via-[#141415] to-[#000000]',
     comments: [
       {
         id: 'c4',
@@ -321,7 +321,7 @@ export const COMMUNITY_PROJECTS: CommunityProject[] = [
     views: 3950,
     forkCount: 96,
     hardwareList: ['ADS1298 24-Bit ADC', 'ESP32-S3-WROOM-1', 'AD8606 Precision Op-Amps', 'BAV99 Diode Clamps', 'Medical Isolation Barrier'],
-    previewGradient: 'from-[#407E8C]/20 via-[#12202b] to-[#080f14]',
+    previewGradient: 'from-[#8F8F8F]/20 via-[#1D1D1E] to-[#000000]',
     comments: []
   },
   {
@@ -342,7 +342,7 @@ export const COMMUNITY_PROJECTS: CommunityProject[] = [
     views: 3620,
     forkCount: 84,
     hardwareList: ['NavIC / GPS Dual-Band Module', 'STM32F405 Autopilot', 'BNO085 9-DOF IMU', 'Dual Helical Patch Antenna'],
-    previewGradient: 'from-[#A58D66]/20 via-[#12202b] to-[#080f14]',
+    previewGradient: 'from-[#FFFFFF]/20 via-[#1D1D1E] to-[#000000]',
     comments: []
   },
   {
@@ -363,7 +363,7 @@ export const COMMUNITY_PROJECTS: CommunityProject[] = [
     views: 4100,
     forkCount: 77,
     hardwareList: ['74HC283 4-Bit Adders', '74HC85 Comparators', 'Multiplexed Bus Transceivers', 'Number Trainer Testbench'],
-    previewGradient: 'from-[#DFCCA8]/15 via-[#0d171f] to-[#080f14]',
+    previewGradient: 'from-[#E8E8E8]/15 via-[#141415] to-[#000000]',
     comments: []
   }
 ];

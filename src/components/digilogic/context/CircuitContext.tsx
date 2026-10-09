@@ -1276,7 +1276,7 @@ export const CircuitProvider: React.FC<{ children: React.ReactNode }> = ({ child
         name,
         category: 'CUSTOM',
         description: description || 'Custom Modular IC Subcircuit',
-        color: color || '#407E8C',
+        color: color || '#8F8F8F',
         inputPorts: inputNodes.map((inp, idx) => ({
           id: `in_${idx}`,
           name: inp.label || inp.name || `In${idx}`,

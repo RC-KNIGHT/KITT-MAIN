@@ -79,30 +79,30 @@ export const ExportModal: React.FC<ExportModalProps> = ({
 
   return (
     <div className="fixed inset-0 bg-black/85 backdrop-blur-md z-[9999] flex items-center justify-center p-4">
-      <div className="bg-[#0a1116] border border-[#A58D66]/40 rounded-2xl w-full max-w-4xl h-[80vh] flex flex-col overflow-hidden shadow-2xl">
+      <div className="bg-[#0B0B0C] border border-[#8F8F8F] rounded-[24px] w-full max-w-4xl h-[80vh] flex flex-col overflow-hidden">
         {/* Header */}
-        <div className="px-6 py-4 border-b border-[#A58D66]/20 flex items-center justify-between bg-[#080f14]">
+        <div className="px-6 py-4 border-b border-[#353536] flex items-center justify-between bg-[#000000]">
           <div className="flex items-center gap-2.5">
-            <Download className="w-5 h-5 text-[#A58D66]" />
+            <Download className="w-5 h-5 text-[#FFFFFF]" />
             <div>
-              <h3 className="text-base font-bold font-mono text-[#E5E1DD]">Export Engineering Package</h3>
-              <p className="text-xs text-[#76B4C2] font-mono">{circuit.title} (CIR v{circuit.version})</p>
+              <h3 className="text-base font-bold font-mono text-[#F5F5F5]">Export Engineering Package</h3>
+              <p className="text-xs text-[#B4B4B4] font-mono">{circuit.title} (CIR v{circuit.version})</p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
+            className="p-1.5 rounded-[12px] text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Tab Navigation */}
-        <div className="px-6 py-2.5 border-b border-[#A58D66]/15 bg-[#091014] flex items-center gap-2">
+        <div className="px-6 py-2.5 border-b border-[#29292A] bg-[#0B0B0C] flex items-center gap-2">
           <button
             onClick={() => setActiveTab('bom')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-mono flex items-center gap-1.5 transition-colors cursor-pointer ${
-              activeTab === 'bom' ? 'bg-[#A58D66] text-[#080f14] font-bold' : 'text-slate-400 hover:text-white'
+            className={`px-3 py-1.5 rounded-[12px] text-xs font-mono flex items-center gap-1.5 transition-colors cursor-pointer ${
+              activeTab === 'bom' ? 'bg-[#FFFFFF] text-[#000000] font-bold' : 'text-slate-400 hover:text-white'
             }`}
           >
             <ListOrdered className="w-3.5 h-3.5" />
@@ -111,8 +111,8 @@ export const ExportModal: React.FC<ExportModalProps> = ({
 
           <button
             onClick={() => setActiveTab('cir')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-mono flex items-center gap-1.5 transition-colors cursor-pointer ${
-              activeTab === 'cir' ? 'bg-[#A58D66] text-[#080f14] font-bold' : 'text-slate-400 hover:text-white'
+            className={`px-3 py-1.5 rounded-[12px] text-xs font-mono flex items-center gap-1.5 transition-colors cursor-pointer ${
+              activeTab === 'cir' ? 'bg-[#FFFFFF] text-[#000000] font-bold' : 'text-slate-400 hover:text-white'
             }`}
           >
             <FileJson className="w-3.5 h-3.5" />
@@ -121,8 +121,8 @@ export const ExportModal: React.FC<ExportModalProps> = ({
 
           <button
             onClick={() => setActiveTab('firmware')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-mono flex items-center gap-1.5 transition-colors cursor-pointer ${
-              activeTab === 'firmware' ? 'bg-[#A58D66] text-[#080f14] font-bold' : 'text-slate-400 hover:text-white'
+            className={`px-3 py-1.5 rounded-[12px] text-xs font-mono flex items-center gap-1.5 transition-colors cursor-pointer ${
+              activeTab === 'firmware' ? 'bg-[#FFFFFF] text-[#000000] font-bold' : 'text-slate-400 hover:text-white'
             }`}
           >
             <FileCode className="w-3.5 h-3.5" />
@@ -131,8 +131,8 @@ export const ExportModal: React.FC<ExportModalProps> = ({
 
           <button
             onClick={() => setActiveTab('wiring')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-mono flex items-center gap-1.5 transition-colors cursor-pointer ${
-              activeTab === 'wiring' ? 'bg-[#A58D66] text-[#080f14] font-bold' : 'text-slate-400 hover:text-white'
+            className={`px-3 py-1.5 rounded-[12px] text-xs font-mono flex items-center gap-1.5 transition-colors cursor-pointer ${
+              activeTab === 'wiring' ? 'bg-[#FFFFFF] text-[#000000] font-bold' : 'text-slate-400 hover:text-white'
             }`}
           >
             <Table className="w-3.5 h-3.5" />
@@ -141,8 +141,8 @@ export const ExportModal: React.FC<ExportModalProps> = ({
 
           <button
             onClick={() => setActiveTab('report')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-mono flex items-center gap-1.5 transition-colors cursor-pointer ${
-              activeTab === 'report' ? 'bg-[#A58D66] text-[#080f14] font-bold' : 'text-slate-400 hover:text-white'
+            className={`px-3 py-1.5 rounded-[12px] text-xs font-mono flex items-center gap-1.5 transition-colors cursor-pointer ${
+              activeTab === 'report' ? 'bg-[#FFFFFF] text-[#000000] font-bold' : 'text-slate-400 hover:text-white'
             }`}
           >
             <ShieldCheck className="w-3.5 h-3.5" />
@@ -151,16 +151,16 @@ export const ExportModal: React.FC<ExportModalProps> = ({
         </div>
 
         {/* Tab Content Body */}
-        <div className="flex-1 p-6 overflow-y-auto bg-[#070c10] text-xs font-mono text-slate-300">
+        <div className="flex-1 p-6 overflow-y-auto bg-[#0B0B0C] text-xs font-mono text-slate-300">
           {activeTab === 'bom' && (
             <div className="space-y-4">
               <div className="text-xs text-slate-400 mb-2">
                 Standardized Bill of Materials with electrical classification and component substitution compatibility.
               </div>
-              <div className="border border-white/10 rounded-xl overflow-hidden">
+              <div className="border border-[#29292A] rounded-[12px] overflow-hidden">
                 <table className="w-full text-left border-collapse">
                   <thead>
-                    <tr className="bg-[#121c22] text-[#A58D66] border-b border-white/10 text-[11px]">
+                    <tr className="bg-[#1D1D1E] text-[#FFFFFF] border-b border-[#29292A] text-[11px]">
                       <th className="p-2.5">#</th>
                       <th className="p-2.5">Component</th>
                       <th className="p-2.5">Part Number</th>
@@ -173,14 +173,14 @@ export const ExportModal: React.FC<ExportModalProps> = ({
                     {bomList.map(item => (
                       <tr key={item.index} className="border-b border-white/5 hover:bg-white/5">
                         <td className="p-2.5 text-slate-500">{item.index}</td>
-                        <td className="p-2.5 font-bold text-[#E5E1DD]">{item.name}</td>
-                        <td className="p-2.5 text-[#76B4C2]">{item.partNumber}</td>
+                        <td className="p-2.5 font-bold text-[#F5F5F5]">{item.name}</td>
+                        <td className="p-2.5 text-[#B4B4B4]">{item.partNumber}</td>
                         <td className="p-2.5 text-slate-400">{item.package}</td>
                         <td className="p-2.5">
                           <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
                             item.classification === 'Required' ? 'bg-red-500/20 text-red-400' :
                             item.classification === 'Recommended' ? 'bg-amber-500/20 text-amber-400' :
-                            'bg-blue-500/20 text-blue-400'
+                            'bg-zinc-500/20 text-zinc-400'
                           }`}>
                             {item.classification}
                           </span>
@@ -195,13 +195,13 @@ export const ExportModal: React.FC<ExportModalProps> = ({
           )}
 
           {activeTab === 'cir' && (
-            <pre className="p-4 bg-black/60 rounded-xl border border-white/10 overflow-x-auto text-[11px] text-[#10b981]">
+            <pre className="p-4 bg-black/60 rounded-[12px] border border-[#29292A] overflow-x-auto text-[11px] text-[#F5F5F5]">
               {JSON.stringify(circuit, null, 2)}
             </pre>
           )}
 
           {activeTab === 'firmware' && (
-            <pre className="p-4 bg-black/60 rounded-xl border border-white/10 overflow-x-auto text-[11px] text-slate-200">
+            <pre className="p-4 bg-black/60 rounded-[12px] border border-[#29292A] overflow-x-auto text-[11px] text-slate-200">
               {circuit.firmware.sourceCode}
             </pre>
           )}
@@ -209,7 +209,7 @@ export const ExportModal: React.FC<ExportModalProps> = ({
           {activeTab === 'wiring' && (
             <div className="space-y-3">
               <div className="text-xs text-slate-400">Point-to-point netlist pin connection index:</div>
-              <pre className="p-4 bg-black/60 rounded-xl border border-white/10 overflow-x-auto text-[11px] text-[#76B4C2] leading-relaxed">
+              <pre className="p-4 bg-black/60 rounded-[12px] border border-[#29292A] overflow-x-auto text-[11px] text-[#B4B4B4] leading-relaxed">
                 {wiringTableText}
               </pre>
             </div>
@@ -217,20 +217,20 @@ export const ExportModal: React.FC<ExportModalProps> = ({
 
           {activeTab === 'report' && (
             <div className="space-y-4">
-              <div className="flex items-center justify-between p-3 rounded-xl bg-[#121c22] border border-[#A58D66]/30">
+              <div className="flex items-center justify-between p-3 rounded-[12px] bg-[#1D1D1E] border border-[#353536]">
                 <div>
                   <span className="text-xs text-slate-400">Overall Verification Verdict: </span>
-                  <span className="text-sm font-bold text-[#10b981]">{circuit.verificationReport.overallStatus}</span>
+                  <span className="text-sm font-bold text-[#F5F5F5]">{circuit.verificationReport.overallStatus}</span>
                 </div>
                 <div className="text-[10px] text-slate-500">{circuit.verificationReport.timestamp}</div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {Object.entries(circuit.verificationReport.stageResults).map(([key, res]) => (
-                  <div key={key} className="p-3 rounded-xl bg-white/5 border border-white/10">
-                    <div className="text-[11px] font-bold text-[#A58D66] uppercase">{key.replace('stage', 'Stage ')}</div>
-                    <div className="text-xs text-[#E5E1DD] mt-1">{res.message}</div>
-                    <div className="text-[10px] text-[#10b981] mt-1 uppercase font-bold">Status: {res.status}</div>
+                  <div key={key} className="p-3 rounded-[12px] bg-white/5 border border-[#29292A]">
+                    <div className="text-[11px] font-bold text-[#FFFFFF] uppercase">{key.replace('stage', 'Stage ')}</div>
+                    <div className="text-xs text-[#F5F5F5] mt-1">{res.message}</div>
+                    <div className="text-[10px] text-[#F5F5F5] mt-1 uppercase font-bold">Status: {res.status}</div>
                   </div>
                 ))}
               </div>
@@ -239,7 +239,7 @@ export const ExportModal: React.FC<ExportModalProps> = ({
         </div>
 
         {/* Footer Actions */}
-        <div className="px-6 py-3.5 border-t border-[#A58D66]/20 bg-[#080f14] flex items-center justify-between">
+        <div className="px-6 py-3.5 border-t border-[#353536] bg-[#000000] flex items-center justify-between">
           <div className="text-[11px] font-mono text-slate-400">
             Export ready for KiCad, Arduino IDE, or PCBA procurement.
           </div>
@@ -251,9 +251,9 @@ export const ExportModal: React.FC<ExportModalProps> = ({
                 else if (activeTab === 'wiring') handleCopy(wiringTableText);
                 else handleCopy(JSON.stringify(bomList, null, 2));
               }}
-              className="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 text-xs font-mono text-white flex items-center gap-1.5 transition-colors cursor-pointer"
+              className="px-3 py-1.5 rounded-[12px] bg-white/10 hover:bg-white/15 text-xs font-mono text-white flex items-center gap-1.5 transition-colors cursor-pointer"
             >
-              {copied ? <Check className="w-3.5 h-3.5 text-[#10b981]" /> : <Copy className="w-3.5 h-3.5" />}
+              {copied ? <Check className="w-3.5 h-3.5 text-[#F5F5F5]" /> : <Copy className="w-3.5 h-3.5" />}
               <span>{copied ? 'Copied' : 'Copy Content'}</span>
             </button>
 
@@ -263,7 +263,7 @@ export const ExportModal: React.FC<ExportModalProps> = ({
                 else if (activeTab === 'firmware') handleDownloadFile(`${circuit.id}.ino`, circuit.firmware.sourceCode, 'text/plain');
                 else handleDownloadFile(`${circuit.id}_bom.json`, JSON.stringify(bomList, null, 2), 'application/json');
               }}
-              className="px-4 py-1.5 rounded-lg bg-[#A58D66] hover:bg-[#bfa378] text-[#080f14] font-bold text-xs font-mono flex items-center gap-1.5 transition-colors cursor-pointer"
+              className="px-4 py-1.5 rounded-[12px] bg-[#FFFFFF] hover:bg-[#CCCCCC] text-[#000000] font-bold text-xs font-mono flex items-center gap-1.5 transition-colors cursor-pointer"
             >
               <Download className="w-3.5 h-3.5" />
               <span>Download File</span>

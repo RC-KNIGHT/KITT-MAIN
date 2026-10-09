@@ -59,11 +59,11 @@ export const DynamicCircuitBackdrop: React.FC = () => {
           { x: 0.24, y: 0.22 },
           { x: 0.36, y: 0.22 }
         ],
-        color: 'rgba(165, 141, 102, 0.22)',
+        color: 'rgba(255, 255, 255, 0.22)',
         pulseSpeed: 0.002,
         pulseOffset: 0.1,
         pulseLength: 0.25,
-        pulseColor: '#DFCCA8',
+        pulseColor: '#E8E8E8',
         label: 'SPI_MOSI // 40MHz'
       },
       {
@@ -73,11 +73,11 @@ export const DynamicCircuitBackdrop: React.FC = () => {
           { x: 0.235, y: 0.25 },
           { x: 0.36, y: 0.25 }
         ],
-        color: 'rgba(64, 126, 140, 0.24)',
+        color: 'rgba(143, 143, 143, 0.24)',
         pulseSpeed: 0.0025,
         pulseOffset: 0.4,
         pulseLength: 0.22,
-        pulseColor: '#76B4C2',
+        pulseColor: '#B4B4B4',
         label: 'SPI_CLK // 80MHz'
       },
       // Top Right Power & Sensor Rail
@@ -88,11 +88,11 @@ export const DynamicCircuitBackdrop: React.FC = () => {
           { x: 0.76, y: 0.24 },
           { x: 0.64, y: 0.24 }
         ],
-        color: 'rgba(229, 225, 221, 0.2)',
+        color: 'rgba(245, 245, 245, 0.2)',
         pulseSpeed: 0.0018,
         pulseOffset: 0.7,
         pulseLength: 0.24,
-        pulseColor: '#E5E1DD',
+        pulseColor: '#F5F5F5',
         label: 'I2C_SDA // VDD_3V3'
       },
       {
@@ -102,11 +102,11 @@ export const DynamicCircuitBackdrop: React.FC = () => {
           { x: 0.765, y: 0.27 },
           { x: 0.64, y: 0.27 }
         ],
-        color: 'rgba(165, 141, 102, 0.2)',
+        color: 'rgba(255, 255, 255, 0.2)',
         pulseSpeed: 0.0022,
         pulseOffset: 0.25,
         pulseLength: 0.2,
-        pulseColor: '#A58D66',
+        pulseColor: '#FFFFFF',
         label: 'I2C_SCL // 400kHz'
       },
       // Bottom Left Analog Probe to ADC
@@ -117,11 +117,11 @@ export const DynamicCircuitBackdrop: React.FC = () => {
           { x: 0.26, y: 0.76 },
           { x: 0.42, y: 0.76 }
         ],
-        color: 'rgba(64, 126, 140, 0.22)',
+        color: 'rgba(143, 143, 143, 0.22)',
         pulseSpeed: 0.0016,
         pulseOffset: 0.5,
         pulseLength: 0.25,
-        pulseColor: '#407E8C',
+        pulseColor: '#8F8F8F',
         label: 'ADC_CH0 // 12-BIT'
       },
       // Bottom Right PWM MOSFET Gate Driver
@@ -132,11 +132,11 @@ export const DynamicCircuitBackdrop: React.FC = () => {
           { x: 0.74, y: 0.76 },
           { x: 0.58, y: 0.76 }
         ],
-        color: 'rgba(165, 141, 102, 0.22)',
+        color: 'rgba(255, 255, 255, 0.22)',
         pulseSpeed: 0.0028,
         pulseOffset: 0.85,
         pulseLength: 0.2,
-        pulseColor: '#A58D66',
+        pulseColor: '#FFFFFF',
         label: 'GATE_PWM // IRLZ44N'
       }
     ];
@@ -152,11 +152,11 @@ export const DynamicCircuitBackdrop: React.FC = () => {
 
       // 1. Precision EDA Reticle Grid with Micro Crosshairs
       const gridSpacing = 48 * dpr;
-      ctx.strokeStyle = 'rgba(64, 126, 140, 0.08)';
+      ctx.strokeStyle = 'rgba(143, 143, 143, 0.08)';
       ctx.lineWidth = 0.5 * dpr;
 
       const crossSize = 2.5 * dpr;
-      ctx.strokeStyle = 'rgba(165, 141, 102, 0.14)';
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.14)';
       ctx.lineWidth = 0.8 * dpr;
 
       for (let x = gridSpacing; x < w; x += gridSpacing) {
@@ -225,9 +225,9 @@ export const DynamicCircuitBackdrop: React.FC = () => {
       };
 
       // Upper oscilloscope channel: 3.3V Logic Bus (Oceanic Teal)
-      renderOscilloscopeWaveform(0.08, 'rgba(64, 126, 140, 0.4)', 'rgba(118, 180, 194, 0.35)', 1.2, 5.0, 12, true);
+      renderOscilloscopeWaveform(0.08, 'rgba(143, 143, 143, 0.4)', 'rgba(180, 180, 180, 0.35)', 1.2, 5.0, 12, true);
       // Lower oscilloscope channel: Analog Sensor Wave (Antique Gold)
-      renderOscilloscopeWaveform(0.92, 'rgba(165, 141, 102, 0.4)', 'rgba(223, 204, 168, 0.35)', -0.8, 3.5, 16, false);
+      renderOscilloscopeWaveform(0.92, 'rgba(255, 255, 255, 0.4)', 'rgba(232, 232, 232, 0.35)', -0.8, 3.5, 16, false);
 
       // 3. Render High-Speed Circuit Traces & Dynamic Phosphor Pulse Tails
       traces.forEach((trace) => {
@@ -266,7 +266,7 @@ export const DynamicCircuitBackdrop: React.FC = () => {
 
           // Terminal pinout label
           if (pIdx === 0 && trace.label) {
-            ctx.fillStyle = 'rgba(229, 225, 221, 0.45)';
+            ctx.fillStyle = 'rgba(245, 245, 245, 0.45)';
             ctx.font = `${8 * dpr}px monospace`;
             ctx.textAlign = pt.x < w / 2 ? 'left' : 'right';
             const textX = pt.x < w / 2 ? pt.x + 8 * dpr : pt.x - 8 * dpr;

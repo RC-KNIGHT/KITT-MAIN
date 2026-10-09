@@ -27,27 +27,27 @@ export const OscilloscopeModal: React.FC = () => {
   return (
     <div
       className={`fixed inset-0 z-50 flex items-center justify-center p-4 animate-fade-in ${
-        isLight ? 'bg-[#080f14]/40 backdrop-blur-xs' : 'bg-[#080f14]/70 backdrop-blur-sm'
+        isLight ? 'bg-[#000000]/40 backdrop-blur-xs' : 'bg-[#000000]/70 backdrop-blur-sm'
       }`}
       onClick={() => setActiveModal('none')}
     >
       <div
         className={`rounded-2xl w-full max-w-4xl flex flex-col shadow-2xl overflow-hidden max-h-[85vh] border transition-colors ${
-          isLight ? 'bg-white border-slate-300 text-slate-800' : 'bg-[#0d171f] border-[#A58D66]/30 text-[#E5E1DD]'
+          isLight ? 'bg-white border-slate-300 text-slate-800' : 'bg-[#141415] border-[#FFFFFF]/30 text-[#F5F5F5]'
         }`}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
         <div className={`flex items-center justify-between px-5 py-4 border-b ${
-          isLight ? 'bg-slate-50 border-slate-200' : 'bg-[#080f14] border-[#A58D66]/20'
+          isLight ? 'bg-slate-50 border-slate-200' : 'bg-[#000000] border-[#FFFFFF]/20'
         }`}>
           <div className="flex items-center gap-2.5">
-            <div className="p-2 bg-[#A58D66]/20 text-[#A58D66] rounded-lg">
+            <div className="p-2 bg-[#FFFFFF]/20 text-[#FFFFFF] rounded-lg">
               <Activity className="w-5 h-5" />
             </div>
             <div>
-              <h2 className={`font-bold text-sm ${isLight ? 'text-slate-900' : 'text-[#E5E1DD]'}`}>Digital Logic Analyzer & Oscilloscope</h2>
-              <p className={`text-xs ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>Real-time multi-channel digital waveform timing diagram</p>
+              <h2 className={`font-bold text-sm ${isLight ? 'text-slate-900' : 'text-[#F5F5F5]'}`}>Digital Logic Analyzer & Oscilloscope</h2>
+              <p className={`text-xs ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>Real-time multi-channel digital waveform timing diagram</p>
             </div>
           </div>
 
@@ -55,7 +55,7 @@ export const OscilloscopeModal: React.FC = () => {
             <button
               onClick={() => setZoomScale((z) => Math.max(0.5, z * 0.8))}
               className={`p-1.5 rounded-lg transition-colors cursor-pointer ${
-                isLight ? 'text-[#E5E1DD]/45 hover:text-slate-800 hover:bg-slate-200' : 'text-[#E5E1DD]/60 hover:text-[#E5E1DD] hover:bg-[#080f14]'
+                isLight ? 'text-[#F5F5F5]/45 hover:text-slate-800 hover:bg-slate-200' : 'text-[#F5F5F5]/60 hover:text-[#F5F5F5] hover:bg-[#000000]'
               }`}
               title="Zoom Out Time"
             >
@@ -64,7 +64,7 @@ export const OscilloscopeModal: React.FC = () => {
             <button
               onClick={() => setZoomScale((z) => Math.min(3, z * 1.25))}
               className={`p-1.5 rounded-lg transition-colors cursor-pointer ${
-                isLight ? 'text-[#E5E1DD]/45 hover:text-slate-800 hover:bg-slate-200' : 'text-[#E5E1DD]/60 hover:text-[#E5E1DD] hover:bg-[#080f14]'
+                isLight ? 'text-[#F5F5F5]/45 hover:text-slate-800 hover:bg-slate-200' : 'text-[#F5F5F5]/60 hover:text-[#F5F5F5] hover:bg-[#000000]'
               }`}
               title="Zoom In Time"
             >
@@ -73,7 +73,7 @@ export const OscilloscopeModal: React.FC = () => {
             <button
               onClick={() => setActiveModal('none')}
               className={`p-1.5 rounded-lg transition-colors cursor-pointer ${
-                isLight ? 'text-[#E5E1DD]/60 hover:text-slate-700 hover:bg-slate-200' : 'text-[#E5E1DD]/60 hover:text-[#E5E1DD] hover:bg-[#080f14]'
+                isLight ? 'text-[#F5F5F5]/60 hover:text-slate-700 hover:bg-slate-200' : 'text-[#F5F5F5]/60 hover:text-[#F5F5F5] hover:bg-[#000000]'
               }`}
             >
               <X className="w-5 h-5" />
@@ -82,27 +82,27 @@ export const OscilloscopeModal: React.FC = () => {
         </div>
 
         {/* Waveform Canvas View */}
-        <div ref={containerRef} className={`flex-1 overflow-auto p-4 ${isLight ? 'bg-slate-100' : 'bg-[#080f14]'}`}>
+        <div ref={containerRef} className={`flex-1 overflow-auto p-4 ${isLight ? 'bg-slate-100' : 'bg-[#000000]'}`}>
           {signalNames.length === 0 ? (
             <div className={`h-48 flex flex-col items-center justify-center text-xs text-center space-y-2 ${
-              isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'
+              isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'
             }`}>
               <p className="font-semibold">No active probe or switch signals recorded yet.</p>
-              <p className={isLight ? 'text-[#E5E1DD]/60' : 'text-[#E5E1DD]/45'}>Run the simulation to capture clock transitions and state changes.</p>
+              <p className={isLight ? 'text-[#F5F5F5]/60' : 'text-[#F5F5F5]/45'}>Run the simulation to capture clock transitions and state changes.</p>
             </div>
           ) : (
             <div className="space-y-4">
               <svg width={width * zoomScale} height={totalHeight} className={`rounded-xl border ${
-                isLight ? 'bg-white border-slate-300 shadow-2xs' : 'bg-[#0d171f] border-[#A58D66]/20'
+                isLight ? 'bg-white border-slate-300 shadow-2xs' : 'bg-[#141415] border-[#FFFFFF]/20'
               }`}>
                 {/* Horizontal Channel Guidelines */}
                 {signalNames.map((name, idx) => {
                   const y = idx * channelHeight + 30;
                   return (
                     <g key={name}>
-                      <line x1={0} y1={y + 24} x2={width * zoomScale} y2={y + 24} stroke={isLight ? '#e2e8f0' : 'rgba(165, 141, 102, 0.15)'} strokeDasharray="2, 4" />
+                      <line x1={0} y1={y + 24} x2={width * zoomScale} y2={y + 24} stroke={isLight ? '#e2e8f0' : 'rgba(255, 255, 255, 0.15)'} strokeDasharray="2, 4" />
                       {/* Channel Label */}
-                      <text x={10} y={y + 16} fill={isLight ? '#0284c7' : '#DFCCA8'} fontSize={11} fontWeight="bold" fontFamily="monospace">
+                      <text x={10} y={y + 16} fill={isLight ? '#8F8F8F' : '#E8E8E8'} fontSize={11} fontWeight="bold" fontFamily="monospace">
                         {name}
                       </text>
                     </g>
@@ -141,7 +141,7 @@ export const OscilloscopeModal: React.FC = () => {
                       <path
                         d={d}
                         fill="none"
-                        stroke={isLight ? '#059669' : '#76B4C2'}
+                        stroke={isLight ? '#E8E8E8' : '#B4B4B4'}
                         strokeWidth={2}
                         strokeLinecap="round"
                         strokeLinejoin="round"

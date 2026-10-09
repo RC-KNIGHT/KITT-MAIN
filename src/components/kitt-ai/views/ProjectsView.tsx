@@ -64,8 +64,8 @@ export const ProjectsView: React.FC<ProjectsViewProps> = ({
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/5">
         <div>
           <div className="flex items-center gap-2.5">
-            <h1 className="text-xl sm:text-2xl font-bold font-mono text-[#E5E1DD]">Projects</h1>
-            <span className="text-xs font-mono px-2 py-0.5 rounded bg-[#A58D66]/20 text-[#DFCCA8] border border-[#A58D66]/30">
+            <h1 className="text-xl sm:text-2xl font-bold font-mono text-[#F5F5F5]">Projects</h1>
+            <span className="text-xs font-mono px-2 py-0.5 rounded bg-[#FFFFFF]/20 text-[#E8E8E8] border border-[#353536]">
               {projects.length} Total
             </span>
           </div>
@@ -76,7 +76,7 @@ export const ProjectsView: React.FC<ProjectsViewProps> = ({
 
         <button
           onClick={onNewProject}
-          className="px-4 py-2 rounded-lg bg-gradient-to-r from-[#A58D66] to-[#8C7654] hover:from-[#bfa378] hover:to-[#A58D66] text-[#080f14] font-mono font-bold text-xs flex items-center gap-2 shadow-[0_0_15px_rgba(165,141,102,0.3)] transition-all cursor-pointer self-start sm:self-auto"
+          className="px-4 py-2 rounded-[12px] bg-[#FFFFFF] hover:bg-[#E8E8E8] text-[#000000] font-mono font-bold text-xs flex items-center gap-2 transition-all cursor-pointer self-start sm:self-auto"
         >
           <Plus className="w-4 h-4" />
           <span>New project</span>
@@ -84,7 +84,7 @@ export const ProjectsView: React.FC<ProjectsViewProps> = ({
       </div>
 
       {/* Filter & Search Bar */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 bg-[#0c161d] p-3 rounded-xl border border-[#A58D66]/20">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 bg-[#141415] p-3 rounded-[12px] border border-[#353536]">
         {/* Search */}
         <div className="relative flex-1 max-w-md">
           <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
@@ -93,18 +93,18 @@ export const ProjectsView: React.FC<ProjectsViewProps> = ({
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
             placeholder="Search projects by name, MCU, or tag..."
-            className="w-full pl-9 pr-3 py-1.5 rounded-lg bg-[#080f14] border border-white/10 text-xs font-mono text-[#E5E1DD] placeholder:text-slate-500 focus:outline-none focus:border-[#A58D66]"
+            className="w-full pl-9 pr-3 py-1.5 rounded-[12px] bg-[#000000] border border-[#29292A] text-xs font-mono text-[#F5F5F5] placeholder:text-slate-500 focus:outline-none focus:border-[#FFFFFF]"
           />
         </div>
 
         {/* Mode Filter Pills */}
-        <div className="flex items-center gap-1 bg-[#080f14] p-1 rounded-lg border border-white/5 text-xs font-mono">
+        <div className="flex items-center gap-1 bg-[#000000] p-1 rounded-[12px] border border-white/5 text-xs font-mono">
           {(['all', 'schematic', 'breadboard'] as const).map(m => (
             <button
               key={m}
               onClick={() => setModeFilter(m)}
               className={`px-3 py-1 rounded capitalize transition-colors cursor-pointer ${
-                modeFilter === m ? 'bg-[#A58D66] text-[#080f14] font-bold' : 'text-slate-400 hover:text-white'
+                modeFilter === m ? 'bg-[#FFFFFF] text-[#000000] font-bold' : 'text-slate-400 hover:text-white'
               }`}
             >
               {m}
@@ -119,7 +119,7 @@ export const ProjectsView: React.FC<ProjectsViewProps> = ({
           <select
             value={sortBy}
             onChange={e => setSortBy(e.target.value as any)}
-            className="bg-[#080f14] border border-white/10 rounded px-2 py-1 text-slate-300 text-xs font-mono focus:outline-none focus:border-[#A58D66]"
+            className="bg-[#000000] border border-[#29292A] rounded px-2 py-1 text-slate-300 text-xs font-mono focus:outline-none focus:border-[#FFFFFF]"
           >
             <option value="updated">Recently Updated</option>
             <option value="name">Name (A-Z)</option>
@@ -130,13 +130,13 @@ export const ProjectsView: React.FC<ProjectsViewProps> = ({
 
       {/* Projects Grid */}
       {filteredProjects.length === 0 ? (
-        <div className="rounded-xl border border-dashed border-white/10 bg-[#0c161d]/30 p-16 text-center">
+        <div className="rounded-[12px] border border-dashed border-[#29292A] bg-[#141415]/30 p-16 text-center">
           <FolderKanban className="w-10 h-10 text-slate-600 mx-auto mb-3" />
           <p className="text-sm font-mono text-slate-300 font-bold">No projects match your filter</p>
           <p className="text-xs text-slate-500 mt-1 mb-4">Try adjusting your search or create a new project.</p>
           <button
             onClick={onNewProject}
-            className="px-4 py-2 rounded-lg bg-[#A58D66] text-[#080f14] text-xs font-mono font-bold cursor-pointer hover:bg-[#bfa378]"
+            className="px-4 py-2 rounded-[12px] bg-[#FFFFFF] text-[#000000] text-xs font-mono font-bold cursor-pointer hover:bg-[#CCCCCC]"
           >
             + Create project
           </button>
@@ -146,7 +146,7 @@ export const ProjectsView: React.FC<ProjectsViewProps> = ({
           {filteredProjects.map(proj => (
             <div
               key={proj.id}
-              className="group rounded-xl bg-[#0c161d] hover:bg-[#111d24] border border-[#A58D66]/20 hover:border-[#A58D66]/50 p-4 transition-all duration-200 flex flex-col justify-between shadow-md"
+              className="group rounded-[12px] bg-[#141415] hover:bg-[#1D1D1E] border border-[#353536] hover:border-[#8F8F8F] p-4 transition-all duration-200 flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-start justify-between gap-2 mb-2">
@@ -154,12 +154,12 @@ export const ProjectsView: React.FC<ProjectsViewProps> = ({
                     onClick={() => onOpenProject(proj.id)}
                     className="cursor-pointer flex-1 min-w-0"
                   >
-                    <h3 className="text-sm font-bold font-mono text-[#E5E1DD] group-hover:text-[#DFCCA8] transition-colors truncate">
+                    <h3 className="text-sm font-bold font-mono text-[#F5F5F5] group-hover:text-[#E8E8E8] transition-colors truncate">
                       {proj.name}
                     </h3>
                     <div className="flex items-center gap-2 mt-1">
                       <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded uppercase font-semibold ${
-                        proj.mode === 'schematic' ? 'bg-[#A58D66]/20 text-[#DFCCA8]' : 'bg-[#407E8C]/20 text-[#22d3ee]'
+                        proj.mode === 'schematic' ? 'bg-[#FFFFFF]/20 text-[#E8E8E8]' : 'bg-[#8F8F8F]/20 text-[#B4B4B4]'
                       }`}>
                         {proj.mode}
                       </span>
@@ -207,7 +207,7 @@ export const ProjectsView: React.FC<ProjectsViewProps> = ({
                 <span>{proj.circuit.components.length} components • {proj.circuit.wires.length} nets</span>
                 <button
                   onClick={() => onOpenProject(proj.id)}
-                  className="text-[#DFCCA8] hover:text-white flex items-center gap-1 font-bold cursor-pointer"
+                  className="text-[#E8E8E8] hover:text-white flex items-center gap-1 font-bold cursor-pointer"
                 >
                   <span>Open</span>
                   <ArrowRight className="w-3.5 h-3.5" />

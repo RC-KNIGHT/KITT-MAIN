@@ -254,7 +254,7 @@ export function validateAndRepairHardwareResponse(rawInput: any): ValidationResu
             toComponentId: toComp,
             toPinId: toPin,
             signalType: payload.signalType ? String(payload.signalType) : 'DIGITAL',
-            color: payload.color ? String(payload.color) : '#06b6d4',
+            color: payload.color ? String(payload.color) : '#8F8F8F',
             netName: payload.netName ? String(payload.netName) : `${fromComp}_${fromPin}_TO_${toComp}_${toPin}`,
           },
         });

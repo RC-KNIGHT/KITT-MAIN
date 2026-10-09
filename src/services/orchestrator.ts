@@ -356,7 +356,7 @@ export class KittOrchestrator {
                   toComponentId: act.payload.toComponentId,
                   toPinId: act.payload.toPinId,
                   signalType: act.payload.signalType || 'DIGITAL',
-                  color: act.payload.color || '#06b6d4',
+                  color: act.payload.color || '#8F8F8F',
                   netName: act.payload.netName || 'NET',
                 },
               };

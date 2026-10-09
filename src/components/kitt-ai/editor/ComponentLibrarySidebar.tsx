@@ -112,7 +112,7 @@ export const ComponentLibrarySidebar: React.FC<ComponentLibrarySidebarProps> = R
     {
       id: 'passives',
       title: 'PASSIVES',
-      dotColor: '#06b6d4', // Cyan
+      dotColor: '#8F8F8F', // Cyan
       items: [
         {
           key: 'RESISTOR_220R',
@@ -248,7 +248,7 @@ export const ComponentLibrarySidebar: React.FC<ComponentLibrarySidebarProps> = R
     {
       id: 'semiconductors',
       title: 'SEMICONDUCTORS',
-      dotColor: '#10b981', // Emerald
+      dotColor: '#F5F5F5', // Emerald
       items: [
         {
           key: 'DIODE_1N4007',
@@ -328,7 +328,7 @@ export const ComponentLibrarySidebar: React.FC<ComponentLibrarySidebarProps> = R
     {
       id: 'ics',
       title: 'INTEGRATED CIRCUITS',
-      dotColor: '#a855f7', // Purple
+      dotColor: '#CCCCCC', // Purple
       items: [
         {
           key: 'IC_555_TIMER',
@@ -385,21 +385,21 @@ export const ComponentLibrarySidebar: React.FC<ComponentLibrarySidebarProps> = R
     : [];
 
   return (
-    <aside className="w-72 h-full bg-[#0a1117] border-r border-white/10 flex flex-col shrink-0 font-sans select-none z-20">
+    <aside className="w-72 h-full bg-[#0B0B0C] border-r border-[#29292A] flex flex-col shrink-0 font-sans select-none z-20">
       {/* Top Tabs: Components | Instruments (Antika exact tabs layout) */}
-      <div className="h-12 px-3 border-b border-white/10 flex items-center bg-[#070d12]">
+      <div className="h-12 px-3 border-b border-[#29292A] flex items-center bg-[#0B0B0C]">
         <div className="w-full flex items-center border-b border-transparent gap-4 text-xs font-mono">
           <button
             onClick={() => setActiveTab('components')}
             className={`pb-2 pt-1 transition-all cursor-pointer font-bold relative ${
               activeTab === 'components'
-                ? 'text-[#2dd4bf]'
+                ? 'text-[#B4B4B4]'
                 : 'text-slate-400 hover:text-white'
             }`}
           >
             Components
             {activeTab === 'components' && (
-              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#2dd4bf] rounded-full shadow-[0_0_8px_#2dd4bf]" />
+              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B4B4B4] rounded-full" />
             )}
           </button>
 
@@ -407,13 +407,13 @@ export const ComponentLibrarySidebar: React.FC<ComponentLibrarySidebarProps> = R
             onClick={() => setActiveTab('instruments')}
             className={`pb-2 pt-1 transition-all cursor-pointer font-bold relative ${
               activeTab === 'instruments'
-                ? 'text-[#2dd4bf]'
+                ? 'text-[#B4B4B4]'
                 : 'text-slate-400 hover:text-white'
             }`}
           >
             Instruments
             {activeTab === 'instruments' && (
-              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#2dd4bf] rounded-full shadow-[0_0_8px_#2dd4bf]" />
+              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B4B4B4] rounded-full" />
             )}
           </button>
         </div>
@@ -428,7 +428,7 @@ export const ComponentLibrarySidebar: React.FC<ComponentLibrarySidebarProps> = R
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
             placeholder={activeTab === 'components' ? "Search components..." : "Search instruments..."}
-            className="w-full pl-8 pr-3 py-1.5 rounded-lg bg-[#070d12] border border-white/10 text-xs font-mono text-[#E5E1DD] placeholder:text-slate-500 focus:outline-none focus:border-[#2dd4bf]"
+            className="w-full pl-8 pr-3 py-1.5 rounded-[12px] bg-[#0B0B0C] border border-[#29292A] text-xs font-mono text-[#F5F5F5] placeholder:text-slate-500 focus:outline-none focus:border-[#B4B4B4]"
           />
         </div>
       </div>
@@ -457,13 +457,13 @@ export const ComponentLibrarySidebar: React.FC<ComponentLibrarySidebarProps> = R
                     <button
                       key={item.key}
                       onClick={() => onAddComponent(item.key)}
-                      className="group flex flex-col items-center justify-center p-2 rounded-xl bg-[#0e171f] hover:bg-[#15232e] border border-white/5 hover:border-[#2dd4bf]/50 text-slate-400 hover:text-white transition-all cursor-pointer shadow-sm hover:shadow-[0_0_12px_rgba(45,212,191,0.15)] h-18"
+                      className="group flex flex-col items-center justify-center p-2 rounded-[12px] bg-[#141415] hover:bg-[#141415] border border-white/5 hover:border-[#B4B4B4]/50 text-slate-400 hover:text-white transition-all cursor-pointer shadow-sm hover: h-18"
                       title={`Add ${item.name}`}
                     >
-                      <div className="text-slate-300 group-hover:text-[#2dd4bf] transition-colors mb-1.5">
+                      <div className="text-slate-300 group-hover:text-[#B4B4B4] transition-colors mb-1.5">
                         {item.svg}
                       </div>
-                      <span className="text-[10px] font-mono text-center leading-tight truncate w-full group-hover:text-[#E5E1DD]">
+                      <span className="text-[10px] font-mono text-center leading-tight truncate w-full group-hover:text-[#F5F5F5]">
                         {item.name}
                       </span>
                     </button>
@@ -485,27 +485,27 @@ export const ComponentLibrarySidebar: React.FC<ComponentLibrarySidebarProps> = R
           {/* 1. Oscilloscope Card */}
           <div
             onClick={() => setSelectedInstrument('scope')}
-            className={`p-3.5 rounded-xl border transition-all cursor-pointer ${
+            className={`p-3.5 rounded-[12px] border transition-all cursor-pointer ${
               selectedInstrument === 'scope'
-                ? 'bg-[#2dd4bf]/10 border-[#2dd4bf] shadow-[0_0_15px_rgba(45,212,191,0.15)]'
-                : 'bg-[#0e171f] border-white/10 hover:border-white/20'
+                ? 'bg-[#B4B4B4]/10 border-[#B4B4B4]'
+                : 'bg-[#141415] border-[#29292A] hover:border-white/20'
             }`}
           >
             <div className="flex items-center gap-2.5 mb-1.5">
-              <Radio className={`w-4 h-4 ${selectedInstrument === 'scope' ? 'text-[#2dd4bf]' : 'text-slate-400'}`} />
-              <span className="font-bold text-sm text-[#E5E1DD]">Oscilloscope</span>
+              <Radio className={`w-4 h-4 ${selectedInstrument === 'scope' ? 'text-[#B4B4B4]' : 'text-slate-400'}`} />
+              <span className="font-bold text-sm text-[#F5F5F5]">Oscilloscope</span>
             </div>
             <p className="text-[11px] text-slate-400 leading-snug font-sans">
               Experimental plot of selected pin voltages and signal transients.
             </p>
 
             {selectedInstrument === 'scope' && (
-              <div className="mt-3 pt-2 border-t border-white/10">
-                <div className="h-20 bg-black/60 rounded-lg p-1 border border-white/5 relative overflow-hidden">
+              <div className="mt-3 pt-2 border-t border-[#29292A]">
+                <div className="h-20 bg-black/60 rounded-[12px] p-1 border border-white/5 relative overflow-hidden">
                   <svg className="w-full h-full">
                     <polyline
                       fill="none"
-                      stroke="#2dd4bf"
+                      stroke="#B4B4B4"
                       strokeWidth="2"
                       points={scopePoints.map((p, i) => `${i * 6},${40 - p.voltageV * 6}`).join(' ')}
                     />
@@ -513,7 +513,7 @@ export const ComponentLibrarySidebar: React.FC<ComponentLibrarySidebarProps> = R
                 </div>
                 <div className="flex justify-between text-[10px] text-slate-500 mt-1">
                   <span>CH1: GPIO Signal</span>
-                  <span className="text-[#2dd4bf]">1.5kHz 5.2Vpp</span>
+                  <span className="text-[#B4B4B4]">1.5kHz 5.2Vpp</span>
                 </div>
               </div>
             )}
@@ -522,23 +522,23 @@ export const ComponentLibrarySidebar: React.FC<ComponentLibrarySidebarProps> = R
           {/* 2. Multimeter Card */}
           <div
             onClick={() => setSelectedInstrument('multimeter')}
-            className={`p-3.5 rounded-xl border transition-all cursor-pointer ${
+            className={`p-3.5 rounded-[12px] border transition-all cursor-pointer ${
               selectedInstrument === 'multimeter'
-                ? 'bg-[#2dd4bf]/10 border-[#2dd4bf] shadow-[0_0_15px_rgba(45,212,191,0.15)]'
-                : 'bg-[#0e171f] border-white/10 hover:border-white/20'
+                ? 'bg-[#B4B4B4]/10 border-[#B4B4B4]'
+                : 'bg-[#141415] border-[#29292A] hover:border-white/20'
             }`}
           >
             <div className="flex items-center gap-2.5 mb-1.5">
-              <Gauge className={`w-4 h-4 ${selectedInstrument === 'multimeter' ? 'text-[#2dd4bf]' : 'text-slate-400'}`} />
-              <span className="font-bold text-sm text-[#E5E1DD]">Multimeter</span>
+              <Gauge className={`w-4 h-4 ${selectedInstrument === 'multimeter' ? 'text-[#B4B4B4]' : 'text-slate-400'}`} />
+              <span className="font-bold text-sm text-[#F5F5F5]">Multimeter</span>
             </div>
             <p className="text-[11px] text-slate-400 leading-snug font-sans">
               Experimental live readings for selected pins (V, I, R, Continuity).
             </p>
 
             {selectedInstrument === 'multimeter' && (
-              <div className="mt-3 pt-2 border-t border-white/10 text-center">
-                <div className="text-xl font-bold text-[#2dd4bf] bg-black/60 py-2 rounded-lg border border-white/5">
+              <div className="mt-3 pt-2 border-t border-[#29292A] text-center">
+                <div className="text-xl font-bold text-[#B4B4B4] bg-black/60 py-2 rounded-[12px] border border-white/5">
                   {meterReading.formatted} {meterReading.unit}
                 </div>
                 <div className="text-[10px] text-slate-500 mt-1">Node: GPIO26 vs GND</div>
@@ -549,40 +549,40 @@ export const ComponentLibrarySidebar: React.FC<ComponentLibrarySidebarProps> = R
           {/* 3. DC Operating Point Card */}
           <div
             onClick={() => setSelectedInstrument('dcpoint')}
-            className={`p-3.5 rounded-xl border transition-all cursor-pointer ${
+            className={`p-3.5 rounded-[12px] border transition-all cursor-pointer ${
               selectedInstrument === 'dcpoint'
-                ? 'bg-[#2dd4bf]/10 border-[#2dd4bf] shadow-[0_0_15px_rgba(45,212,191,0.15)]'
-                : 'bg-[#0e171f] border-white/10 hover:border-white/20'
+                ? 'bg-[#B4B4B4]/10 border-[#B4B4B4]'
+                : 'bg-[#141415] border-[#29292A] hover:border-white/20'
             }`}
           >
             <div className="flex items-center gap-2.5 mb-1.5">
-              <Activity className={`w-4 h-4 ${selectedInstrument === 'dcpoint' ? 'text-[#2dd4bf]' : 'text-slate-400'}`} />
-              <span className="font-bold text-sm text-[#E5E1DD]">DC operating point</span>
+              <Activity className={`w-4 h-4 ${selectedInstrument === 'dcpoint' ? 'text-[#B4B4B4]' : 'text-slate-400'}`} />
+              <span className="font-bold text-sm text-[#F5F5F5]">DC operating point</span>
             </div>
             <p className="text-[11px] text-slate-400 leading-snug font-sans">
               Static node voltages and branch currents solver.
             </p>
 
             {selectedInstrument === 'dcpoint' && (
-              <div className="mt-3 pt-2 border-t border-white/10 space-y-1 text-[11px]">
+              <div className="mt-3 pt-2 border-t border-[#29292A] space-y-1 text-[11px]">
                 <div className="flex justify-between text-slate-300">
                   <span>Supply VCC:</span>
-                  <span className="text-[#2dd4bf]">{circuit.telemetry.supplyVoltage}V</span>
+                  <span className="text-[#B4B4B4]">{circuit.telemetry.supplyVoltage}V</span>
                 </div>
                 <div className="flex justify-between text-slate-300">
                   <span>Loop Current:</span>
-                  <span className="text-[#2dd4bf]">{circuit.telemetry.totalCurrentDraw_mA} mA</span>
+                  <span className="text-[#B4B4B4]">{circuit.telemetry.totalCurrentDraw_mA} mA</span>
                 </div>
               </div>
             )}
           </div>
 
           {/* PROBES (0) SECTION (matching Antika media_1789194377551.png) */}
-          <div className="pt-3 border-t border-white/10 space-y-2">
+          <div className="pt-3 border-t border-[#29292A] space-y-2">
             <div className="text-[10px] uppercase font-bold tracking-wider text-slate-500">
               PROBES (0)
             </div>
-            <div className="p-3.5 rounded-xl bg-black/40 border border-white/5 text-center text-[11px] text-slate-400 font-sans leading-relaxed">
+            <div className="p-3.5 rounded-[12px] bg-black/40 border border-white/5 text-center text-[11px] text-slate-400 font-sans leading-relaxed">
               Open the waveform view and use its component and pin selectors to add a probe. Direct canvas probing is not available yet.
             </div>
           </div>

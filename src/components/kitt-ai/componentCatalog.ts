@@ -23,7 +23,7 @@ export const COMPONENT_CATALOG: Record<string, CatalogItem> = {
     package: 'MODULE_HEADER',
     operatingVoltage: '3.3V (5V via Micro-USB)',
     currentDraw: '80mA active (240mA Wi-Fi peak)',
-    color: '#3b82f6',
+    color: '#B4B4B4',
     width2D: 160,
     height2D: 220,
     defaultPins: [
@@ -50,7 +50,7 @@ export const COMPONENT_CATALOG: Record<string, CatalogItem> = {
     package: 'MODULE_HEADER',
     operatingVoltage: '5V (7-12V barrel jack)',
     currentDraw: '45mA',
-    color: '#06b6d4',
+    color: '#8F8F8F',
     width2D: 170,
     height2D: 240,
     defaultPins: [
@@ -79,7 +79,7 @@ export const COMPONENT_CATALOG: Record<string, CatalogItem> = {
     package: 'MODULE_HEADER',
     operatingVoltage: '3.3V',
     currentDraw: '30mA',
-    color: '#10b981',
+    color: '#F5F5F5',
     width2D: 150,
     height2D: 210,
     defaultPins: [
@@ -102,7 +102,7 @@ export const COMPONENT_CATALOG: Record<string, CatalogItem> = {
     package: 'MODULE_HEADER',
     operatingVoltage: '3.3V - 5.0V',
     currentDraw: '5mA',
-    color: '#10b981',
+    color: '#F5F5F5',
     width2D: 110,
     height2D: 90,
     defaultPins: [
@@ -120,7 +120,7 @@ export const COMPONENT_CATALOG: Record<string, CatalogItem> = {
     package: 'MODULE_HEADER',
     operatingVoltage: '5.0V',
     currentDraw: '15mA',
-    color: '#3b82f6',
+    color: '#B4B4B4',
     width2D: 130,
     height2D: 90,
     defaultPins: [
@@ -139,7 +139,7 @@ export const COMPONENT_CATALOG: Record<string, CatalogItem> = {
     package: 'MODULE_HEADER',
     operatingVoltage: '3.3V - 5.5V',
     currentDraw: '2.5mA',
-    color: '#06b6d4',
+    color: '#8F8F8F',
     width2D: 110,
     height2D: 90,
     defaultPins: [
@@ -157,7 +157,7 @@ export const COMPONENT_CATALOG: Record<string, CatalogItem> = {
     package: 'MODULE_HEADER',
     operatingVoltage: '3.3V - 5.0V',
     currentDraw: '20mA (typical)',
-    color: '#a855f7',
+    color: '#CCCCCC',
     width2D: 120,
     height2D: 90,
     defaultPins: [
@@ -211,7 +211,7 @@ export const COMPONENT_CATALOG: Record<string, CatalogItem> = {
     package: 'DISCRETE_2PIN',
     operatingVoltage: '5.0V DC',
     currentDraw: '250mA running (500mA stall)',
-    color: '#0ea5e9',
+    color: '#8F8F8F',
     width2D: 100,
     height2D: 80,
     defaultPins: [
@@ -228,7 +228,7 @@ export const COMPONENT_CATALOG: Record<string, CatalogItem> = {
     package: 'MODULE_HEADER',
     operatingVoltage: '4.8V - 6.0V',
     currentDraw: '100mA idle, 650mA stall',
-    color: '#f97316',
+    color: '#CCCCCC',
     width2D: 110,
     height2D: 80,
     defaultPins: [
@@ -297,7 +297,7 @@ export const COMPONENT_CATALOG: Record<string, CatalogItem> = {
     package: 'DIP',
     operatingVoltage: '4.5V - 15V',
     currentDraw: '3mA - 10mA',
-    color: '#6366f1',
+    color: '#B4B4B4',
     width2D: 120,
     height2D: 140,
     defaultPins: [
@@ -320,7 +320,7 @@ export const COMPONENT_CATALOG: Record<string, CatalogItem> = {
     package: 'MODULE_HEADER',
     operatingVoltage: '3.3V (5V tolerant)',
     currentDraw: '36mA',
-    color: '#2563eb',
+    color: '#8F8F8F',
     width2D: 160,
     height2D: 220,
     defaultPins: [
@@ -345,7 +345,7 @@ export const COMPONENT_CATALOG: Record<string, CatalogItem> = {
     package: 'MODULE_HEADER',
     operatingVoltage: '3.3V',
     currentDraw: '0.5mA',
-    color: '#06b6d4',
+    color: '#8F8F8F',
     width2D: 110,
     height2D: 90,
     defaultPins: [
@@ -364,7 +364,7 @@ export const COMPONENT_CATALOG: Record<string, CatalogItem> = {
     package: 'MODULE_HEADER',
     operatingVoltage: '3.3V - 5.0V',
     currentDraw: '3.9mA',
-    color: '#8b5cf6',
+    color: '#8F8F8F',
     width2D: 120,
     height2D: 110,
     defaultPins: [
@@ -448,7 +448,7 @@ export const COMPONENT_CATALOG: Record<string, CatalogItem> = {
     package: 'TO-220',
     operatingVoltage: 'Vceo = 40V',
     currentDraw: 'Ic max 800mA',
-    color: '#f97316',
+    color: '#CCCCCC',
     width2D: 90,
     height2D: 80,
     defaultPins: [
@@ -466,7 +466,7 @@ export const COMPONENT_CATALOG: Record<string, CatalogItem> = {
     package: 'DISCRETE_2PIN',
     operatingVoltage: '3.3V - 12V',
     currentDraw: '25mA',
-    color: '#06b6d4',
+    color: '#8F8F8F',
     width2D: 80,
     height2D: 60,
     defaultPins: [
@@ -500,7 +500,7 @@ export const COMPONENT_CATALOG: Record<string, CatalogItem> = {
     package: 'MODULE_HEADER',
     operatingVoltage: '0 - 50V',
     currentDraw: 'Passive divider',
-    color: '#14b8a6',
+    color: '#8F8F8F',
     width2D: 90,
     height2D: 70,
     defaultPins: [
@@ -535,7 +535,7 @@ export const COMPONENT_CATALOG: Record<string, CatalogItem> = {
     package: 'RADIAL',
     operatingVoltage: '25V',
     currentDraw: 'Passive reactive',
-    color: '#3b82f6',
+    color: '#B4B4B4',
     width2D: 70,
     height2D: 50,
     defaultPins: [
@@ -552,7 +552,7 @@ export const COMPONENT_CATALOG: Record<string, CatalogItem> = {
     package: 'DISCRETE_2PIN',
     operatingVoltage: 'Vf = 2.1V - 2.4V',
     currentDraw: '15mA - 20mA',
-    color: '#22c55e',
+    color: '#F5F5F5',
     width2D: 70,
     height2D: 50,
     defaultPins: [
@@ -569,7 +569,7 @@ export const COMPONENT_CATALOG: Record<string, CatalogItem> = {
     package: 'DISCRETE_2PIN',
     operatingVoltage: 'Vf = 3.0V - 3.4V',
     currentDraw: '15mA - 20mA',
-    color: '#3b82f6',
+    color: '#B4B4B4',
     width2D: 70,
     height2D: 50,
     defaultPins: [
@@ -586,7 +586,7 @@ export const COMPONENT_CATALOG: Record<string, CatalogItem> = {
     package: 'MODULE_HEADER',
     operatingVoltage: '5.0V Coil',
     currentDraw: '70mA energized',
-    color: '#0284c7',
+    color: '#8F8F8F',
     width2D: 130,
     height2D: 100,
     defaultPins: [

@@ -33,7 +33,7 @@ export const HardwareLab3D = forwardRef<HardwareLab3DRef, HardwareLab3DProps>(({
   circuit,
   onSelectComponent,
   breadboardSize = 'large',
-  wireColor = '#10b981',
+  wireColor = '#F5F5F5',
   selectedComponentId
 }, ref) => {
   const mountRef = useRef<HTMLDivElement>(null);
@@ -539,7 +539,7 @@ export const HardwareLab3D = forwardRef<HardwareLab3DRef, HardwareLab3DProps>(({
 
   return (
     <div 
-      className="relative w-full h-full bg-[#080f14] overflow-hidden select-none cursor-grab active:cursor-grabbing"
+      className="relative w-full h-full bg-[#000000] overflow-hidden select-none cursor-grab active:cursor-grabbing"
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
@@ -553,9 +553,9 @@ export const HardwareLab3D = forwardRef<HardwareLab3DRef, HardwareLab3DProps>(({
 
       {/* Graceful Fallback if WebGL is unsupported */}
       {!webGlSupported && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#080f14] text-center p-6">
-          <Info className="w-8 h-8 text-[#A58D66] mb-2" />
-          <h4 className="text-base font-bold text-[#E5E1DD]">WebGL Acceleration Unavailable</h4>
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#000000] text-center p-6">
+          <Info className="w-8 h-8 text-[#FFFFFF] mb-2" />
+          <h4 className="text-base font-bold text-[#F5F5F5]">WebGL Acceleration Unavailable</h4>
           <p className="text-xs text-[#94a3b8] max-w-md mt-1">
             Your browser does not have active WebGL hardware acceleration enabled. The 2D Schematic Lab remains 100% active and verified.
           </p>
@@ -563,9 +563,9 @@ export const HardwareLab3D = forwardRef<HardwareLab3DRef, HardwareLab3DProps>(({
       )}
 
       {/* Top Left Status Badge */}
-      <div className="absolute top-4 left-4 flex items-center gap-2 bg-[#0c161c]/85 border border-[#407E8C]/35 px-3 py-1.5 rounded-lg shadow-xl backdrop-blur-md pointer-events-none">
-        <Sparkles className="w-3.5 h-3.5 text-[#A58D66] animate-pulse" />
-        <span className="text-xs font-mono font-bold text-[#E5E1DD]">
+      <div className="absolute top-4 left-4 flex items-center gap-2 bg-[#141415]/85 border border-[#8F8F8F]/35 px-3 py-1.5 rounded-[12px] backdrop-blur-md pointer-events-none">
+        <Sparkles className="w-3.5 h-3.5 text-[#FFFFFF] animate-pulse" />
+        <span className="text-xs font-mono font-bold text-[#F5F5F5]">
           3D Hardware Lab • {breadboardSize.toUpperCase()} ({breadboardSize === 'mini' ? '170' : breadboardSize === 'medium' ? '400' : '830'} pts)
         </span>
       </div>
@@ -574,8 +574,8 @@ export const HardwareLab3D = forwardRef<HardwareLab3DRef, HardwareLab3DProps>(({
       <div className="absolute top-4 right-4 flex items-center gap-2">
         <button
           onClick={() => setExplodedView(v => !v)}
-          className={`px-2.5 py-1.5 rounded-lg text-xs font-mono flex items-center gap-1.5 transition-colors cursor-pointer border ${
-            explodedView ? 'bg-[#A58D66] text-[#080f14] font-bold border-[#A58D66]' : 'bg-[#0c161d]/85 text-slate-300 hover:bg-white/10 border-white/10'
+          className={`px-2.5 py-1.5 rounded-[12px] text-xs font-mono flex items-center gap-1.5 transition-colors cursor-pointer border ${
+            explodedView ? 'bg-[#FFFFFF] text-[#000000] font-bold border-[#FFFFFF]' : 'bg-[#141415]/85 text-slate-300 hover:bg-white/10 border-[#29292A]'
           }`}
           title="Toggle Exploded Assembly"
         >
@@ -585,8 +585,8 @@ export const HardwareLab3D = forwardRef<HardwareLab3DRef, HardwareLab3DProps>(({
 
         <button
           onClick={() => setShowWires(w => !w)}
-          className={`p-2 rounded-lg text-xs transition-colors cursor-pointer bg-[#0c161d]/85 border border-white/10 ${
-            showWires ? 'text-[#76B4C2] hover:bg-[#407E8C]/20' : 'text-slate-500 hover:bg-white/10'
+          className={`p-2 rounded-[12px] text-xs transition-colors cursor-pointer bg-[#141415]/85 border border-[#29292A] ${
+            showWires ? 'text-[#B4B4B4] hover:bg-[#8F8F8F]/20' : 'text-slate-500 hover:bg-white/10'
           }`}
           title={showWires ? 'Hide 3D Jumper Wires' : 'Show 3D Jumper Wires'}
         >

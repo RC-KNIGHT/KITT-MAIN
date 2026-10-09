@@ -53,7 +53,7 @@ export const SurrealAuraCursor: React.FC = () => {
     updateCanvasSize();
     window.addEventListener('resize', updateCanvasSize, { passive: true });
 
-    const sparkPalette = ['#DFCCA8', '#A58D66', '#407E8C', '#76B4C2', '#FFFFFF'];
+    const sparkPalette = ['#E8E8E8', '#FFFFFF', '#8F8F8F', '#B4B4B4', '#FFFFFF'];
 
     const spawnSparks = (x: number, y: number, count: number, speedMultiplier = 1.0) => {
       if (prefersReducedMotion) return;
@@ -192,10 +192,10 @@ export const SurrealAuraCursor: React.FC = () => {
         ref={auraElRef}
         className={`absolute rounded-full transition-all duration-200 ease-out will-change-transform pointer-events-none ${
           isHovered
-            ? 'w-16 h-16 bg-[#407E8C]/20 border border-[#A58D66]/70 shadow-[0_0_30px_rgba(64,126,140,0.6),inset_0_0_15px_rgba(165,141,102,0.3)] scale-125 backdrop-blur-[0.5px]'
+            ? 'w-16 h-16 bg-[#8F8F8F]/20 border border-[#FFFFFF]/70 shadow-[0_0_30px_rgba(143,143,143,0.6),inset_0_0_15px_rgba(255,255,255,0.3)] scale-125 backdrop-blur-[0.5px]'
             : isClicking
-            ? 'w-8 h-8 bg-[#A58D66]/35 border border-[#DFCCA8]/80 shadow-[0_0_24px_rgba(165,141,102,0.7)] scale-90'
-            : 'w-10 h-10 bg-[#407E8C]/15 border border-[#A58D66]/35 shadow-[0_0_18px_rgba(64,126,140,0.35)]'
+            ? 'w-8 h-8 bg-[#FFFFFF]/35 border border-[#E8E8E8]/80 shadow-[0_0_24px_rgba(255,255,255,0.7)] scale-90'
+            : 'w-10 h-10 bg-[#8F8F8F]/15 border border-[#FFFFFF]/35 shadow-[0_0_18px_rgba(143,143,143,0.35)]'
         }`}
       />
 
@@ -204,10 +204,10 @@ export const SurrealAuraCursor: React.FC = () => {
         ref={dotElRef}
         className={`absolute rounded-full will-change-transform transition-all duration-100 pointer-events-none ${
           isHovered
-            ? 'w-2.5 h-2.5 bg-[#DFCCA8] shadow-[0_0_10px_#DFCCA8,0_0_20px_#A58D66]'
+            ? 'w-2.5 h-2.5 bg-[#E8E8E8] shadow-[0_0_10px_#E8E8E8,0_0_20px_#FFFFFF]'
             : isClicking
-            ? 'w-3 h-3 bg-[#A58D66] shadow-[0_0_14px_#A58D66]'
-            : 'w-1.5 h-1.5 bg-[#E5E1DD] shadow-[0_0_6px_#E5E1DD]'
+            ? 'w-3 h-3 bg-[#FFFFFF] shadow-[0_0_14px_#FFFFFF]'
+            : 'w-1.5 h-1.5 bg-[#F5F5F5] shadow-[0_0_6px_#F5F5F5]'
         }`}
       />
     </div>

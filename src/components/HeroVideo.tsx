@@ -227,7 +227,7 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
       ctx.fillRect(0, 0, width, height);
 
       // Engineering grid
-      ctx.strokeStyle = 'rgba(168, 85, 247, 0.05)';
+      ctx.strokeStyle = 'rgba(204, 204, 204, 0.05)';
       ctx.lineWidth = 1;
       const gridSize = 40;
       for (let x = 0; x < width; x += gridSize) {
@@ -246,8 +246,8 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
       // Ambient radial glow
       const grad = ctx.createRadialGradient(width / 2, height / 2, 40, width / 2, height / 2, width / 2);
       grad.addColorStop(0, 'rgba(124, 58, 237, 0.22)');
-      grad.addColorStop(0.5, 'rgba(59, 130, 246, 0.09)');
-      grad.addColorStop(1, 'rgba(7, 8, 12, 0)');
+      grad.addColorStop(0.5, 'rgba(180, 180, 180, 0.09)');
+      grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, width, height);
 
@@ -257,7 +257,7 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
       // SCENE 1 (0 - 1.8s): "You imagined it" - Workspace with developer typing natural language prompt
       if (t < 1.8) {
         // Monitor frame
-        ctx.fillStyle = '#11131a';
+        ctx.fillStyle = '#141415';
         ctx.strokeStyle = 'rgba(255,255,255,0.15)';
         ctx.lineWidth = 2;
         ctx.beginPath();
@@ -271,7 +271,7 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
         ctx.fillRect(-80, 145, 160, 12);
 
         // KITT AI Prompt header inside monitor
-        ctx.fillStyle = '#c084fc';
+        ctx.fillStyle = '#CCCCCC';
         ctx.font = '700 16px "Plus Jakarta Sans", sans-serif';
         ctx.textAlign = 'center';
         ctx.fillText('⚡ KITT AI', 0, -85);
@@ -285,8 +285,8 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
         const charsToShow = Math.min(fullPrompt.length, Math.floor((t / 1.6) * fullPrompt.length));
         const currentTyped = fullPrompt.substring(0, charsToShow);
 
-        ctx.fillStyle = 'rgba(168, 85, 247, 0.15)';
-        ctx.strokeStyle = '#a855f7';
+        ctx.fillStyle = 'rgba(204, 204, 204, 0.15)';
+        ctx.strokeStyle = '#CCCCCC';
         ctx.lineWidth = 1;
         ctx.beginPath();
         ctx.roundRect(-190, -30, 380, 45, 8);
@@ -313,22 +313,22 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
         ctx.fillText('AUTOMATIC PLANT WATERING SYSTEM', 0, -110);
 
         ctx.font = '500 11px "Fira Code", monospace';
-        ctx.fillStyle = '#c084fc';
+        ctx.fillStyle = '#CCCCCC';
         ctx.fillText('Components matched: ESP32 • Soil Moisture Sensor • MOSFET Driver • Pump', 0, -88);
 
         // Architecture Flow Diagram: SOIL SENSOR -> ESP32 -> MOSFET DRIVER -> PUMP
         const blocks = [
-          { name: 'SOIL SENSOR', color: '#10b981', x: -220 },
-          { name: 'ESP32 MCU', color: '#3b82f6', x: -70 },
+          { name: 'SOIL SENSOR', color: '#F5F5F5', x: -220 },
+          { name: 'ESP32 MCU', color: '#B4B4B4', x: -70 },
           { name: 'MOSFET DRIVER', color: '#f59e0b', x: 80 },
-          { name: 'WATER PUMP', color: '#8b5cf6', x: 230 }
+          { name: 'WATER PUMP', color: '#8F8F8F', x: 230 }
         ];
 
         blocks.forEach((b, i) => {
           ctx.save();
           ctx.translate(b.x, -10);
 
-          ctx.fillStyle = '#11131a';
+          ctx.fillStyle = '#141415';
           ctx.strokeStyle = b.color;
           ctx.lineWidth = 1.5;
           ctx.beginPath();
@@ -343,14 +343,14 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
 
           // Arrow to next block
           if (i < blocks.length - 1) {
-            ctx.strokeStyle = '#a855f7';
+            ctx.strokeStyle = '#CCCCCC';
             ctx.lineWidth = 2;
             ctx.beginPath();
             ctx.moveTo(55, 0);
             ctx.lineTo(95, 0);
             ctx.stroke();
             // Arrowhead
-            ctx.fillStyle = '#a855f7';
+            ctx.fillStyle = '#CCCCCC';
             ctx.beginPath();
             ctx.moveTo(95, 0);
             ctx.lineTo(88, -4);
@@ -363,8 +363,8 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
         });
 
         // [ BUILD WITH KITT ] Button
-        ctx.fillStyle = '#9333ea';
-        ctx.strokeStyle = '#c084fc';
+        ctx.fillStyle = '#8F8F8F';
+        ctx.strokeStyle = '#CCCCCC';
         ctx.lineWidth = 1.5;
         ctx.beginPath();
         ctx.roundRect(-90, 60, 180, 36, 18);
@@ -384,7 +384,7 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
         ctx.roundRect(-130, -125, 260, 26, 6);
         ctx.fill();
 
-        ctx.fillStyle = '#9333ea';
+        ctx.fillStyle = '#8F8F8F';
         ctx.beginPath();
         ctx.roundRect(-128, -123, 126, 22, 5);
         ctx.fill();
@@ -398,7 +398,7 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
 
         // ESP32 Schematic IC Block
         ctx.fillStyle = '#0f1117';
-        ctx.strokeStyle = '#60a5fa';
+        ctx.strokeStyle = '#B4B4B4';
         ctx.lineWidth = 1.5;
         ctx.beginPath();
         ctx.roundRect(-180, -70, 120, 140, 4);
@@ -415,7 +415,7 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
         ctx.fillStyle = '#94a3b8';
         pins.forEach((p, idx) => {
           const py = -50 + idx * 20;
-          ctx.strokeStyle = '#60a5fa';
+          ctx.strokeStyle = '#B4B4B4';
           ctx.beginPath();
           ctx.moveTo(-60, py);
           ctx.lineTo(-30, py);
@@ -432,7 +432,7 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
         ctx.lineTo(40, -10);
         ctx.stroke();
 
-        ctx.fillStyle = '#11131a';
+        ctx.fillStyle = '#141415';
         ctx.beginPath();
         ctx.roundRect(40, -25, 60, 50, 4);
         ctx.fill();
@@ -442,7 +442,7 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
         ctx.fillText('Q1 N-FET', 70, 5);
 
         // Pump & flyback diode
-        ctx.strokeStyle = '#a855f7';
+        ctx.strokeStyle = '#CCCCCC';
         ctx.beginPath();
         ctx.moveTo(100, 0);
         ctx.lineTo(160, 0);
@@ -453,12 +453,12 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
         ctx.fillStyle = '#1e1b4b';
         ctx.fill();
         ctx.stroke();
-        ctx.fillStyle = '#c084fc';
+        ctx.fillStyle = '#CCCCCC';
         ctx.font = 'bold 10px "Fira Code", monospace';
         ctx.fillText('PUMP', 180, 4);
 
         ctx.font = '500 11px "Fira Code", monospace';
-        ctx.fillStyle = '#10b981';
+        ctx.fillStyle = '#F5F5F5';
         ctx.fillText('✓ Circuit Validated: 3.3V Logic Safe • No Shorts • Netlist Verified', 0, 95);
       }
       // SCENE 4 (5.2 - 6.8s): "YOUR PROJECT IS READY" - 3D Breadboard Assembly Pop-Up
@@ -474,7 +474,7 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
         ctx.roundRect(-130, -95, 260, 24, 6);
         ctx.fill();
 
-        ctx.fillStyle = '#9333ea';
+        ctx.fillStyle = '#8F8F8F';
         ctx.beginPath();
         ctx.roundRect(2, -93, 126, 20, 5);
         ctx.fill();
@@ -499,12 +499,12 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
         ctx.fillRect(-190, -1, 380, 2);
         ctx.fillStyle = '#ef4444';
         ctx.fillRect(-190, -38, 380, 1.5);
-        ctx.fillStyle = '#3b82f6';
+        ctx.fillStyle = '#B4B4B4';
         ctx.fillRect(-190, 36, 380, 1.5);
 
         // ESP32 Board mounted on breadboard
         ctx.fillStyle = '#0f172a';
-        ctx.strokeStyle = '#38bdf8';
+        ctx.strokeStyle = '#B4B4B4';
         ctx.lineWidth = 1;
         ctx.beginPath();
         ctx.roundRect(-90, -30, 90, 60, 4);
@@ -536,14 +536,14 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
         ctx.stroke();
 
         // Green signal wire
-        ctx.strokeStyle = '#22c55e';
+        ctx.strokeStyle = '#F5F5F5';
         ctx.beginPath();
         ctx.moveTo(-45, 20);
         ctx.bezierCurveTo(-10, 60 * wireProgress, 70, 50 * wireProgress, 120, 20);
         ctx.stroke();
 
         ctx.font = '500 11px "Fira Code", monospace';
-        ctx.fillStyle = '#c084fc';
+        ctx.fillStyle = '#CCCCCC';
         ctx.fillText('3D Physical Geometry & Pin Matrix Snapped', 0, 85);
       }
       // SCENE 5 (6.8 - 7.8s): KITT Copilot & Firmware Editor
@@ -578,14 +578,14 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
         ctx.fillText('}', -225, 70);
 
         // Right pane: KITT Copilot Chat
-        ctx.fillStyle = '#11131a';
-        ctx.strokeStyle = '#a855f7';
+        ctx.fillStyle = '#141415';
+        ctx.strokeStyle = '#CCCCCC';
         ctx.beginPath();
         ctx.roundRect(10, -100, 230, 180, 8);
         ctx.fill();
         ctx.stroke();
 
-        ctx.fillStyle = '#c084fc';
+        ctx.fillStyle = '#CCCCCC';
         ctx.font = 'bold 11px "Plus Jakarta Sans", sans-serif';
         ctx.fillText('KITT COPILOT', 25, -78);
 
@@ -599,7 +599,7 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
         ctx.fillText('Change pump threshold from 35% to 25%.', 35, -40);
 
         // KITT reply bubble
-        ctx.fillStyle = 'rgba(168, 85, 247, 0.15)';
+        ctx.fillStyle = 'rgba(204, 204, 204, 0.15)';
         ctx.beginPath();
         ctx.roundRect(25, -18, 200, 42, 6);
         ctx.fill();
@@ -611,7 +611,7 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
       else if (t < 8.8) {
         // Oscilloscope Screen on right
         ctx.fillStyle = '#021810';
-        ctx.strokeStyle = '#10b981';
+        ctx.strokeStyle = '#F5F5F5';
         ctx.lineWidth = 1.5;
         ctx.beginPath();
         ctx.roundRect(30, -90, 210, 110, 6);
@@ -619,7 +619,7 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
         ctx.stroke();
 
         // Oscilloscope graticule
-        ctx.strokeStyle = 'rgba(16, 185, 129, 0.2)';
+        ctx.strokeStyle = 'rgba(245, 245, 245, 0.2)';
         ctx.lineWidth = 0.5;
         for (let gx = 45; gx <= 225; gx += 20) {
           ctx.beginPath();
@@ -662,7 +662,7 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
 
         ctx.fillStyle = '#0f172a';
         ctx.fillRect(-230, -75, 100, 35);
-        ctx.fillStyle = '#38bdf8';
+        ctx.fillStyle = '#B4B4B4';
         ctx.font = 'bold 16px "Fira Code", monospace';
         ctx.textAlign = 'center';
         ctx.fillText('00.00 V', -180, -52);
@@ -672,8 +672,8 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
         ctx.fillText('DIGITAL MULTIMETER', -180, -25);
 
         // DC Pump & "PUMP ON" alert in center
-        ctx.fillStyle = '#10b981';
-        ctx.strokeStyle = '#34d399';
+        ctx.fillStyle = '#F5F5F5';
+        ctx.strokeStyle = '#E8E8E8';
         ctx.lineWidth = 1.5;
         ctx.beginPath();
         ctx.roundRect(-80, -70, 90, 30, 15);
@@ -689,7 +689,7 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
         ctx.translate(-35, -5);
         const spinAngle = t * 15;
         ctx.rotate(spinAngle);
-        ctx.strokeStyle = '#60a5fa';
+        ctx.strokeStyle = '#B4B4B4';
         ctx.lineWidth = 3;
         ctx.beginPath();
         ctx.moveTo(-15, 0);
@@ -707,7 +707,7 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
 
         // Pipeline ribbon at bottom
         ctx.font = '600 9px "Plus Jakarta Sans", sans-serif';
-        ctx.fillStyle = '#c084fc';
+        ctx.fillStyle = '#CCCCCC';
         ctx.fillText('IDEA → REQUIREMENTS → ARCHITECTURE → CIRCUIT → CODE → SIMULATION → 3D → PCB', 0, 75);
       }
       // SCENE 7 (8.8 - 10.0s): Title card "KITT AI - Where Ideas Become Inventions"
@@ -718,7 +718,7 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
         ctx.fillText('KITT AI', 0, -20);
 
         ctx.font = '500 16px "Plus Jakarta Sans", sans-serif';
-        ctx.fillStyle = '#DFCCA8';
+        ctx.fillStyle = '#E8E8E8';
         ctx.fillText('Where Ideas Become Inventions', 0, 20);
 
         ctx.font = '500 11px "Fira Code", monospace';
@@ -845,8 +845,8 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
       <AnimatedCircuitOverlay />
 
       {/* Cinematic Surreal Glows in Oceanic Teal & Solar Antique Gold */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-gradient-to-tr from-[#407E8C]/25 via-[#A58D66]/15 to-transparent blur-[140px] pointer-events-none rounded-full" />
-      <div className="absolute top-1/2 right-10 w-96 h-96 bg-[#A58D66]/15 blur-[120px] pointer-events-none rounded-full" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-gradient-to-tr from-[#8F8F8F]/25 via-[#FFFFFF]/15 to-transparent blur-[140px] pointer-events-none rounded-full" />
+      <div className="absolute top-1/2 right-10 w-96 h-96 bg-[#FFFFFF]/15 blur-[120px] pointer-events-none rounded-full" />
 
       {/* Hidden File Input for Drag & Drop / Fallback */}
       <input 
@@ -868,12 +868,12 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
         >
           {/* Header Badges & Taglines - elevated in front of the 3D particle K */}
           <div className="text-center w-full space-y-6 relative z-20 py-4">
-            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#407E8C]/15 border border-[#A58D66]/40 text-[#E5E1DD] text-xs font-mono tracking-widest uppercase shadow-inner backdrop-blur-md">
-              <span className="w-2 h-2 rounded-full bg-[#A58D66] shadow-[0_0_8px_#A58D66]" />
-              <span className="font-semibold text-[#A58D66]">KITT AI LABS • HARDWARE SYNTHESIS MATRIX</span>
+            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#8F8F8F]/15 border border-[#FFFFFF]/40 text-[#F5F5F5] text-xs font-mono tracking-widest uppercase shadow-inner backdrop-blur-md">
+              <span className="w-2 h-2 rounded-full bg-[#FFFFFF] shadow-[0_0_8px_#FFFFFF]" />
+              <span className="font-semibold text-[#FFFFFF]">KITT AI LABS • HARDWARE SYNTHESIS MATRIX</span>
             </div>
 
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[#E5E1DD] font-cinzel drop-shadow-xl animate-title-breathe">
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[#F5F5F5] font-cinzel drop-shadow-xl animate-title-breathe">
               Where Ideas Become <br className="hidden sm:inline" />
               <span id="hero-inventions-word" className="animate-text-shimmer italic font-cormorant font-normal inline-block mt-1 animate-text-glow">
                 Inventions.
@@ -884,7 +884,7 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
             <div className="min-h-[56px] flex items-center justify-center px-4">
               <p 
                 key={taglineIndex}
-                className="text-base sm:text-xl text-[#E5E1DD] max-w-2xl mx-auto font-serif italic drop-shadow-md transition-all duration-700 leading-relaxed animate-in fade-in zoom-in-95 animate-gold-radiance font-medium"
+                className="text-base sm:text-xl text-[#F5F5F5] max-w-2xl mx-auto font-serif italic drop-shadow-md transition-all duration-700 leading-relaxed animate-in fade-in zoom-in-95 animate-gold-radiance font-medium"
               >
                 "{AMBITIOUS_TAGLINES[taglineIndex]}"
               </p>
@@ -894,19 +894,19 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
             <div className="pt-2 flex flex-wrap items-center justify-center gap-4">
               <a
                 href="#/kitt-ai"
-                className="px-6 py-3.5 rounded-xl bg-gradient-to-r from-[#A58D66] via-[#BFA378] to-[#A58D66] hover:from-[#BFA378] hover:to-[#A58D66] text-[#080f14] font-bold text-sm shadow-[0_0_30px_rgba(165,141,102,0.35)] transition-all hover:scale-105 active:scale-95 flex items-center gap-2 cursor-pointer"
+                className="px-6 py-3.5 rounded-xl bg-gradient-to-r from-[#FFFFFF] via-[#CCCCCC] to-[#FFFFFF] hover:from-[#CCCCCC] hover:to-[#FFFFFF] text-[#000000] font-bold text-sm shadow-[0_0_30px_rgba(255,255,255,0.35)] transition-all hover:scale-105 active:scale-95 flex items-center gap-2 cursor-pointer"
               >
-                <Sparkles className="w-4 h-4 text-[#080f14]" />
+                <Sparkles className="w-4 h-4 text-[#000000]" />
                 <span>Launch KITT AI Studio</span>
                 <ExternalLink className="w-3.5 h-3.5 opacity-80" />
               </a>
 
               <a
                 href="#ecosystem-launchpad"
-                className="px-6 py-3.5 rounded-xl surreal-card hover:border-[#407E8C]/60 text-[#E5E1DD] font-semibold text-sm transition-all flex items-center gap-2 backdrop-blur-md shadow-lg"
+                className="px-6 py-3.5 rounded-xl surreal-card hover:border-[#8F8F8F]/60 text-[#F5F5F5] font-semibold text-sm transition-all flex items-center gap-2 backdrop-blur-md shadow-lg"
               >
                 <span>Explore 4 Ecosystem Portals</span>
-                <ExternalLink className="w-4 h-4 text-[#A58D66]" />
+                <ExternalLink className="w-4 h-4 text-[#FFFFFF]" />
               </a>
             </div>
           </div>
@@ -914,9 +914,9 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
 
         {/* Upload Success Alert Toast */}
         {uploadSuccessMessage && (
-          <div className="mt-4 max-w-lg mx-auto p-3 rounded-xl bg-[#12202b]/90 border border-[#A58D66]/50 text-[#E5E1DD] text-xs flex items-center gap-2.5 shadow-xl animate-fade-in relative z-20">
-            <Check className="w-4 h-4 text-[#A58D66] shrink-0" />
-            <span className="font-medium text-[#E5E1DD]">{uploadSuccessMessage}</span>
+          <div className="mt-4 max-w-lg mx-auto p-3 rounded-xl bg-[#1D1D1E]/90 border border-[#FFFFFF]/50 text-[#F5F5F5] text-xs flex items-center gap-2.5 shadow-xl animate-fade-in relative z-20">
+            <Check className="w-4 h-4 text-[#FFFFFF] shrink-0" />
+            <span className="font-medium text-[#F5F5F5]">{uploadSuccessMessage}</span>
           </div>
         )}
 
@@ -928,7 +928,7 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
           className={`mt-8 sm:mt-10 relative max-w-5xl mx-auto cursor-pointer group select-none z-10 will-change-transform ${
-            isDraggingOver ? 'ring-2 ring-[#A58D66]' : ''
+            isDraggingOver ? 'ring-2 ring-[#FFFFFF]' : ''
           }`}
           style={{
             transition: 'transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)'
@@ -936,28 +936,28 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
           title="Click anywhere on the video area to pause or resume"
         >
           {/* Ambient Soft Glow behind Video */}
-          <div className="absolute inset-0 bg-[#407E8C]/15 blur-[140px] rounded-full pointer-events-none -z-10" />
+          <div className="absolute inset-0 bg-[#8F8F8F]/15 blur-[140px] rounded-full pointer-events-none -z-10" />
 
           {/* Decorative SMD IC Lead Pins along left edge */}
           <div className="absolute -left-2 top-1/2 -translate-y-1/2 hidden md:flex flex-col gap-3 pointer-events-none z-0 opacity-40 group-hover:opacity-75 transition-opacity">
             {[0, 1, 2, 3, 4, 5].map((i) => (
-              <div key={`pin-l-${i}`} className="w-2.5 h-1 bg-gradient-to-r from-[#DFCCA8] to-[#A58D66] rounded-l-sm shadow-[0_0_4px_rgba(165,141,102,0.5)]" />
+              <div key={`pin-l-${i}`} className="w-2.5 h-1 bg-gradient-to-r from-[#E8E8E8] to-[#FFFFFF] rounded-l-sm shadow-[0_0_4px_rgba(255,255,255,0.5)]" />
             ))}
           </div>
           {/* Decorative SMD IC Lead Pins along right edge */}
           <div className="absolute -right-2 top-1/2 -translate-y-1/2 hidden md:flex flex-col gap-3 pointer-events-none z-0 opacity-40 group-hover:opacity-75 transition-opacity">
             {[0, 1, 2, 3, 4, 5].map((i) => (
-              <div key={`pin-r-${i}`} className="w-2.5 h-1 bg-gradient-to-l from-[#DFCCA8] to-[#407E8C] rounded-r-sm shadow-[0_0_4px_rgba(64,126,140,0.5)]" />
+              <div key={`pin-r-${i}`} className="w-2.5 h-1 bg-gradient-to-l from-[#E8E8E8] to-[#8F8F8F] rounded-r-sm shadow-[0_0_4px_rgba(143,143,143,0.5)]" />
             ))}
           </div>
 
           {/* Borderless Seamless Mixed Video Canvas */}
-          <div className="relative rounded-3xl overflow-hidden aspect-video sm:aspect-[16/9] flex items-center justify-center bg-[#080f14] border border-[#A58D66]/25 shadow-[0_20px_50px_rgba(0,0,0,0.8),0_0_35px_rgba(64,126,140,0.18)]">
+          <div className="relative rounded-3xl overflow-hidden aspect-video sm:aspect-[16/9] flex items-center justify-center bg-[#000000] border border-[#FFFFFF]/25 shadow-[0_20px_50px_rgba(0,0,0,0.8),0_0_35px_rgba(143,143,143,0.18)]">
             {/* Precision Reticle Corner Brackets */}
-            <div className="absolute top-3 left-3 w-4 h-4 border-t-2 border-l-2 border-[#A58D66]/60 rounded-tl pointer-events-none z-20" />
-            <div className="absolute top-3 right-3 w-4 h-4 border-t-2 border-r-2 border-[#A58D66]/60 rounded-tr pointer-events-none z-20" />
-            <div className="absolute bottom-3 left-3 w-4 h-4 border-b-2 border-l-2 border-[#A58D66]/60 rounded-bl pointer-events-none z-20" />
-            <div className="absolute bottom-3 right-3 w-4 h-4 border-b-2 border-r-2 border-[#A58D66]/60 rounded-br pointer-events-none z-20" />
+            <div className="absolute top-3 left-3 w-4 h-4 border-t-2 border-l-2 border-[#FFFFFF]/60 rounded-tl pointer-events-none z-20" />
+            <div className="absolute top-3 right-3 w-4 h-4 border-t-2 border-r-2 border-[#FFFFFF]/60 rounded-tr pointer-events-none z-20" />
+            <div className="absolute bottom-3 left-3 w-4 h-4 border-b-2 border-l-2 border-[#FFFFFF]/60 rounded-bl pointer-events-none z-20" />
+            <div className="absolute bottom-3 right-3 w-4 h-4 border-b-2 border-r-2 border-[#FFFFFF]/60 rounded-br pointer-events-none z-20" />
             {videoUrl ? (
               <video
                 ref={videoRef}
@@ -977,25 +977,25 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
               />
             )}
 
-            {/* Seamless Vignette & Edge Feathering blending into #080f14 background */}
-            <div className="absolute inset-0 pointer-events-none shadow-[inset_0_0_100px_50px_#080f14]" />
-            <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-[#080f14] via-transparent to-[#080f14]/60" />
-            <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-[#080f14]/70 via-transparent to-[#080f14]/70" />
+            {/* Seamless Vignette & Edge Feathering blending into #000000 background */}
+            <div className="absolute inset-0 pointer-events-none shadow-[inset_0_0_100px_50px_#000000]" />
+            <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-[#000000] via-transparent to-[#000000]/60" />
+            <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-[#000000]/70 via-transparent to-[#000000]/70" />
 
             {/* Drag-over dropzone overlay (if user drags file) */}
             {isDraggingOver && (
-              <div className="absolute inset-0 bg-[#080f14]/90 backdrop-blur-md z-40 flex flex-col items-center justify-center p-6 border-2 border-dashed border-[#A58D66] rounded-3xl animate-pulse pointer-events-none">
-                <FileVideo className="w-12 h-12 text-[#A58D66] mb-3" />
-                <p className="text-base font-bold font-cinzel text-[#E5E1DD]">Drop your KITT AI video here</p>
-                <p className="text-xs text-[#A58D66] mt-1 font-mono">Loads instantly</p>
+              <div className="absolute inset-0 bg-[#000000]/90 backdrop-blur-md z-40 flex flex-col items-center justify-center p-6 border-2 border-dashed border-[#FFFFFF] rounded-3xl animate-pulse pointer-events-none">
+                <FileVideo className="w-12 h-12 text-[#FFFFFF] mb-3" />
+                <p className="text-base font-bold font-cinzel text-[#F5F5F5]">Drop your KITT AI video here</p>
+                <p className="text-xs text-[#FFFFFF] mt-1 font-mono">Loads instantly</p>
               </div>
             )}
 
             {/* Subtle Pause Indicator Overlay when paused */}
             {!isPlaying && (
               <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px] flex items-center justify-center z-30 transition-all pointer-events-none">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#A58D66] to-[#8C7654] border border-[#E5E1DD]/40 flex items-center justify-center shadow-[0_0_30px_rgba(165,141,102,0.5)] text-[#080f14]">
-                  <Play className="w-7 h-7 fill-[#080f14] translate-x-0.5" />
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#FFFFFF] to-[#737373] border border-[#F5F5F5]/40 flex items-center justify-center shadow-[0_0_30px_rgba(255,255,255,0.5)] text-[#000000]">
+                  <Play className="w-7 h-7 fill-[#000000] translate-x-0.5" />
                 </div>
               </div>
             )}
@@ -1003,7 +1003,7 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
             {/* Subtle Closed Caption / Subtitle Banner */}
             {currentSubtitle && (
               <div className="absolute bottom-8 inset-x-0 flex justify-center pointer-events-none z-30 px-4">
-                <div className="px-5 py-2.5 rounded-xl bg-[#080f14]/85 backdrop-blur-md border border-[#A58D66]/30 text-[#E5E1DD] font-serif-luxury text-sm sm:text-base font-normal tracking-wide shadow-2xl text-center">
+                <div className="px-5 py-2.5 rounded-xl bg-[#000000]/85 backdrop-blur-md border border-[#FFFFFF]/30 text-[#F5F5F5] font-serif-luxury text-sm sm:text-base font-normal tracking-wide shadow-2xl text-center">
                   {currentSubtitle}
                 </div>
               </div>
@@ -1012,15 +1012,15 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
             {/* Synced Floating HUD Badges that appear as the video progresses */}
             <div className="absolute top-4 left-4 pointer-events-none z-20 space-y-2">
               <div className={`transition-all duration-500 transform ${currentTime >= 0 ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}>
-                <div className="px-3 py-1.5 rounded-lg bg-[#080f14]/80 backdrop-blur-md border border-[#A58D66]/35 text-[11px] font-mono text-[#E5E1DD] flex items-center gap-2 shadow-lg">
-                  <Sparkles className="w-3.5 h-3.5 text-[#A58D66]" />
+                <div className="px-3 py-1.5 rounded-lg bg-[#000000]/80 backdrop-blur-md border border-[#FFFFFF]/35 text-[11px] font-mono text-[#F5F5F5] flex items-center gap-2 shadow-lg">
+                  <Sparkles className="w-3.5 h-3.5 text-[#FFFFFF]" />
                   <span>Requirement: Auto-Hydration Architecture</span>
                 </div>
               </div>
 
               <div className={`transition-all duration-500 transform ${currentTime >= 5.0 ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}>
-                <div className="px-3 py-1.5 rounded-lg bg-[#080f14]/80 backdrop-blur-md border border-[#407E8C]/40 text-[11px] font-mono text-[#76B4C2] flex items-center gap-2 shadow-lg">
-                  <Layers className="w-3.5 h-3.5 text-[#407E8C]" />
+                <div className="px-3 py-1.5 rounded-lg bg-[#000000]/80 backdrop-blur-md border border-[#8F8F8F]/40 text-[11px] font-mono text-[#B4B4B4] flex items-center gap-2 shadow-lg">
+                  <Layers className="w-3.5 h-3.5 text-[#8F8F8F]" />
                   <span>3D Assembly: ESP32 + 5V Pump Tied</span>
                 </div>
               </div>
@@ -1028,16 +1028,16 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
 
             <div className="absolute top-4 right-4 pointer-events-none z-20 space-y-2 text-right">
               <div className={`transition-all duration-500 transform ${currentTime >= 7.0 ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4'}`}>
-                <div className="px-3 py-1.5 rounded-lg bg-[#080f14]/80 backdrop-blur-md border border-[#407E8C]/40 text-[11px] font-mono text-[#76B4C2] flex items-center gap-2 shadow-lg justify-end">
+                <div className="px-3 py-1.5 rounded-lg bg-[#000000]/80 backdrop-blur-md border border-[#8F8F8F]/40 text-[11px] font-mono text-[#B4B4B4] flex items-center gap-2 shadow-lg justify-end">
                   <span>Simulation Engine: 3.3V Logic Safe</span>
-                  <Activity className="w-3.5 h-3.5 text-[#76B4C2]" />
+                  <Activity className="w-3.5 h-3.5 text-[#B4B4B4]" />
                 </div>
               </div>
 
               <div className={`transition-all duration-500 transform ${currentTime >= 8.8 ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4'}`}>
-                <div className="px-3 py-1.5 rounded-lg bg-[#080f14]/80 backdrop-blur-md border border-[#A58D66]/40 text-[11px] font-mono text-[#E5E1DD] flex items-center gap-2 shadow-lg justify-end">
+                <div className="px-3 py-1.5 rounded-lg bg-[#000000]/80 backdrop-blur-md border border-[#FFFFFF]/40 text-[11px] font-mono text-[#F5F5F5] flex items-center gap-2 shadow-lg justify-end">
                   <span>Hardware Fabrication: DRC Pass</span>
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#A58D66]" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#FFFFFF]" />
                 </div>
               </div>
             </div>
@@ -1049,14 +1049,14 @@ export const HeroVideo: React.FC<HeroVideoProps> = ({ onExploreEcosystem, onTryK
                 e.stopPropagation();
                 toggleMute();
               }}
-              className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 z-30 p-2 sm:p-2.5 rounded-full bg-black/50 hover:bg-[#080f14]/90 backdrop-blur-md border border-[#A58D66]/25 hover:border-[#A58D66] text-[#E5E1DD]/80 hover:text-[#E5E1DD] transition-all shadow-lg cursor-pointer flex items-center justify-center group/vol"
+              className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 z-30 p-2 sm:p-2.5 rounded-full bg-black/50 hover:bg-[#000000]/90 backdrop-blur-md border border-[#FFFFFF]/25 hover:border-[#FFFFFF] text-[#F5F5F5]/80 hover:text-[#F5F5F5] transition-all shadow-lg cursor-pointer flex items-center justify-center group/vol"
               title={isMuted ? 'Turn volume on' : 'Turn volume off'}
               aria-label={isMuted ? 'Volume Off (Click to turn on)' : 'Volume On (Click to turn off)'}
             >
               {isMuted ? (
-                <VolumeX className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#E5E1DD]/70 group-hover/vol:text-[#E5E1DD] transition-colors" />
+                <VolumeX className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#F5F5F5]/70 group-hover/vol:text-[#F5F5F5] transition-colors" />
               ) : (
-                <Volume2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#A58D66] group-hover/vol:text-[#E5E1DD] transition-colors" />
+                <Volume2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#FFFFFF] group-hover/vol:text-[#F5F5F5] transition-colors" />
               )}
             </button>
           </div>

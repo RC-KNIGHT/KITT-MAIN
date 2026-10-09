@@ -28,12 +28,12 @@ const DigiLogicStudio = lazy(() => import('./components/digilogic/App').then(m =
 const NumberTrainerStudio = lazy(() => import('./components/number-trainer/NumberTrainerStudio').then(m => ({ default: m.NumberTrainerStudio })));
 
 const StudioLoadingFallback = ({ title }: { title: string }) => (
-  <div className="w-screen h-screen bg-[#080f14] text-[#E5E1DD] flex flex-col items-center justify-center font-mono select-none space-y-4">
-    <div className="relative flex items-center justify-center w-16 h-16 rounded-2xl bg-[#A58D66]/10 border border-[#A58D66]/40 text-[#A58D66] shadow-[0_0_30px_rgba(165,141,102,0.25)]">
+  <div className="w-screen h-screen bg-[#000000] text-[#F5F5F5] flex flex-col items-center justify-center font-mono select-none space-y-4">
+    <div className="relative flex items-center justify-center w-16 h-16 rounded-2xl bg-[#FFFFFF]/10 border border-[#FFFFFF]/40 text-[#FFFFFF] shadow-[0_0_30px_rgba(255,255,255,0.25)]">
       <KittLogo size={36} showGlow={true} />
     </div>
-    <div className="flex items-center gap-2.5 text-xs text-[#E5E1DD] font-semibold tracking-widest uppercase">
-      <div className="w-3.5 h-3.5 border-2 border-[#A58D66] border-t-transparent rounded-full animate-spin" />
+    <div className="flex items-center gap-2.5 text-xs text-[#F5F5F5] font-semibold tracking-widest uppercase">
+      <div className="w-3.5 h-3.5 border-2 border-[#FFFFFF] border-t-transparent rounded-full animate-spin" />
       <span>MOUNTING {title}</span>
     </div>
   </div>
@@ -72,7 +72,7 @@ export default function App() {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 1.005 }}
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className="w-screen h-screen bg-[#080f14] overflow-hidden"
+            className="w-screen h-screen bg-[#000000] overflow-hidden"
           >
             <Suspense fallback={<StudioLoadingFallback title="DIGILOGIC EDA" />}>
               <DigiLogicStudio />
@@ -87,7 +87,7 @@ export default function App() {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 1.005 }}
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className="w-full min-h-screen bg-[#080f14] overflow-y-auto overflow-x-hidden"
+            className="w-full min-h-screen bg-[#000000] overflow-y-auto overflow-x-hidden"
           >
             <Suspense fallback={<StudioLoadingFallback title="NUMBER TRAINER" />}>
               <NumberTrainerStudio onBackToHome={() => { window.location.hash = '#/'; }} />
@@ -102,7 +102,7 @@ export default function App() {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 1.002 }}
             transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="w-screen h-screen bg-[#080f14] overflow-hidden"
+            className="w-screen h-screen bg-[#000000] overflow-hidden"
           >
             <Suspense fallback={<StudioLoadingFallback title="KITT SOVEREIGN AI" />}>
               <KittAiStudio initialCanvasView="2d" />
@@ -117,7 +117,7 @@ export default function App() {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 1.002 }}
             transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="w-screen h-screen bg-[#080f14] overflow-hidden"
+            className="w-screen h-screen bg-[#000000] overflow-hidden"
           >
             <Suspense fallback={<StudioLoadingFallback title="KITT WORKSPACE" />}>
               <WorkspaceApp />
@@ -132,7 +132,7 @@ export default function App() {
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
-          className="min-h-screen bg-[#080f14] text-[#E5E1DD] selection:bg-[#407E8C]/40 selection:text-[#E5E1DD] antialiased font-sans relative overflow-x-hidden"
+          className="min-h-screen bg-[#000000] text-[#F5F5F5] selection:bg-[#8F8F8F]/40 selection:text-[#F5F5F5] antialiased font-sans relative overflow-x-hidden"
         >
 
       {/* Cinematic Micro-Spark & Magnetic Aura Cursor */}
@@ -153,7 +153,7 @@ export default function App() {
       <div 
         className="fixed inset-0 pointer-events-none z-0"
         style={{
-          background: 'radial-gradient(ellipse 90% 70% at 50% 50%, transparent 45%, rgba(8, 15, 20, 0.70) 100%)'
+          background: 'radial-gradient(ellipse 90% 70% at 50% 50%, transparent 45%, rgba(0, 0, 0, 0.70) 100%)'
         }}
       />
 

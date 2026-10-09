@@ -43,35 +43,35 @@ export const DirectEcosystemAccess: React.FC = () => {
   const getProductIcon = (iconName: string) => {
     switch (iconName) {
       case 'Bot': return <KittLogo size={28} showGlow={true} />;
-      case 'Cpu': return <Cpu className="w-6 h-6 text-[#A58D66]" />;
-      case 'Binary': return <Binary className="w-6 h-6 text-[#E5E1DD]" />;
-      case 'Calculator': return <Calculator className="w-6 h-6 text-[#A58D66]" />;
-      default: return <Sparkles className="w-6 h-6 text-[#E5E1DD]" />;
+      case 'Cpu': return <Cpu className="w-6 h-6 text-[#FFFFFF]" />;
+      case 'Binary': return <Binary className="w-6 h-6 text-[#F5F5F5]" />;
+      case 'Calculator': return <Calculator className="w-6 h-6 text-[#FFFFFF]" />;
+      default: return <Sparkles className="w-6 h-6 text-[#F5F5F5]" />;
     }
   };
 
   return (
-    <section id="ecosystem-launchpad" className="py-24 px-4 sm:px-6 lg:px-8 bg-transparent relative border-y border-[#A58D66]/15">
+    <section id="ecosystem-launchpad" className="py-24 px-4 sm:px-6 lg:px-8 bg-transparent relative border-y border-[#FFFFFF]/15">
       {/* Subtle Ambient Glow */}
       <div className="absolute inset-0 bg-surreal-grid opacity-30 pointer-events-none" />
-      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 bg-[#407E8C]/15 blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 bg-[#8F8F8F]/15 blur-[140px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#A58D66]/15 border border-[#A58D66]/35 text-[#A58D66] text-xs font-mono uppercase tracking-widest animate-ambition">
-            <span className="w-2 h-2 rounded-full bg-[#407E8C] animate-pulse shadow-[0_0_8px_#407E8C]" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FFFFFF]/15 border border-[#FFFFFF]/35 text-[#FFFFFF] text-xs font-mono uppercase tracking-widest animate-ambition">
+            <span className="w-2 h-2 rounded-full bg-[#8F8F8F] animate-pulse shadow-[0_0_8px_#8F8F8F]" />
             <span>THE SOVEREIGN ARSENAL</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-[#E5E1DD] font-cinzel tracking-tight leading-tight animate-title-breathe">
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-[#F5F5F5] font-cinzel tracking-tight leading-tight animate-title-breathe">
             Four Portals. <br />
             <span className="animate-text-shimmer italic font-cormorant font-normal block mt-1 animate-text-glow">
               One Sovereign Truth.
             </span>
           </h2>
 
-          <p className="text-base sm:text-lg text-[#E5E1DD] font-serif italic max-w-xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg text-[#F5F5F5] font-serif italic max-w-xl mx-auto leading-relaxed">
             "Spoken intent directly into verified silicon."
           </p>
         </div>
@@ -96,28 +96,28 @@ export const DirectEcosystemAccess: React.FC = () => {
                   tiltMaxAngle={3.5}
                   scale={1.01}
                   glareOpacity={0.16}
-                  className="h-full relative rounded-2xl surreal-card p-6 sm:p-7 flex flex-col justify-between group shadow-xl hover:shadow-2xl border border-[#A58D66]/20 hover:border-[#407E8C]/50 transition-colors"
+                  className="h-full relative rounded-2xl surreal-card p-6 sm:p-7 flex flex-col justify-between group shadow-xl hover:shadow-2xl border border-[#FFFFFF]/20 hover:border-[#8F8F8F]/50 transition-colors"
                 >
                 {/* Top Badge & Operational Status */}
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className="p-2.5 rounded-xl bg-[#407E8C]/10 border border-[#407E8C]/30 group-hover:border-[#A58D66]/50 transition-colors">
+                      <div className="p-2.5 rounded-xl bg-[#8F8F8F]/10 border border-[#8F8F8F]/30 group-hover:border-[#FFFFFF]/50 transition-colors">
                         {getProductIcon(product.iconName)}
                       </div>
                       <div>
                         <div className="flex items-center gap-2">
-                          <span className="text-[10px] font-mono font-bold text-[#A58D66] tracking-widest">
+                          <span className="text-[10px] font-mono font-bold text-[#FFFFFF] tracking-widest">
                             PORTAL {romanNumerals[idx] || 'I'}
                           </span>
-                          <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-[#407E8C]/20 text-[#76B4C2] border border-[#407E8C]/35">
+                          <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-[#8F8F8F]/20 text-[#B4B4B4] border border-[#8F8F8F]/35">
                             {product.badge}
                           </span>
                         </div>
-                        <div className="flex items-center gap-1.5 mt-1 text-[11px] text-[#A58D66] font-mono">
+                        <div className="flex items-center gap-1.5 mt-1 text-[11px] text-[#FFFFFF] font-mono">
                           <span className="relative flex h-2 w-2">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#A58D66] opacity-75" />
-                            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#A58D66]" />
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FFFFFF] opacity-75" />
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#FFFFFF]" />
                           </span>
                           <span>Operational & Resonant</span>
                         </div>
@@ -127,13 +127,13 @@ export const DirectEcosystemAccess: React.FC = () => {
                     {/* Copy Link Button */}
                     <button
                       onClick={() => handleCopyLink(product.url, product.id)}
-                      className="p-2 rounded-lg bg-white/5 hover:bg-[#A58D66]/20 text-[#E5E1DD]/60 hover:text-[#E5E1DD] transition-colors flex items-center gap-1 text-xs cursor-pointer"
+                      className="p-2 rounded-lg bg-white/5 hover:bg-[#FFFFFF]/20 text-[#F5F5F5]/60 hover:text-[#F5F5F5] transition-colors flex items-center gap-1 text-xs cursor-pointer"
                       title="Copy URL"
                     >
                       {copiedId === product.id ? (
                         <>
-                          <Check className="w-3.5 h-3.5 text-[#A58D66]" />
-                          <span className="text-[#A58D66] font-mono text-[10px]">Copied</span>
+                          <Check className="w-3.5 h-3.5 text-[#FFFFFF]" />
+                          <span className="text-[#FFFFFF] font-mono text-[10px]">Copied</span>
                         </>
                       ) : (
                         <>
@@ -146,28 +146,28 @@ export const DirectEcosystemAccess: React.FC = () => {
 
                   {/* Title & Tagline */}
                   <div>
-                    <h3 className="text-xl sm:text-2xl font-bold font-cinzel text-[#E5E1DD] group-hover:text-[#A58D66] transition-colors">
+                    <h3 className="text-xl sm:text-2xl font-bold font-cinzel text-[#F5F5F5] group-hover:text-[#FFFFFF] transition-colors">
                       {product.name}
                     </h3>
-                    <p className="text-xs font-mono text-[#76B4C2] mt-1">
+                    <p className="text-xs font-mono text-[#B4B4B4] mt-1">
                       {product.tagline}
                     </p>
                   </div>
 
                   {/* Description */}
-                  <p className="text-xs sm:text-sm text-[#E5E1DD]/80 leading-relaxed font-light">
+                  <p className="text-xs sm:text-sm text-[#F5F5F5]/80 leading-relaxed font-light">
                     {product.shortDescription}
                   </p>
 
                   {/* Key Capabilities Pills */}
                   <div className="space-y-2 pt-1">
-                    <span className="text-[11px] font-semibold text-[#A58D66] uppercase tracking-wider block font-mono">
+                    <span className="text-[11px] font-semibold text-[#FFFFFF] uppercase tracking-wider block font-mono">
                       Core Strengths:
                     </span>
                     <ul className="space-y-1.5">
                       {product.capabilities.slice(0, 3).map((cap, i) => (
-                        <li key={i} className="text-xs text-[#E5E1DD]/85 flex items-center gap-2">
-                          <ShieldCheck className="w-3.5 h-3.5 text-[#A58D66] shrink-0" />
+                        <li key={i} className="text-xs text-[#F5F5F5]/85 flex items-center gap-2">
+                          <ShieldCheck className="w-3.5 h-3.5 text-[#FFFFFF] shrink-0" />
                           <span>{cap}</span>
                         </li>
                       ))}
@@ -175,23 +175,23 @@ export const DirectEcosystemAccess: React.FC = () => {
                   </div>
 
                   {/* Metrics Bar */}
-                  <div className="grid grid-cols-3 gap-2 pt-3 border-t border-[#A58D66]/15">
+                  <div className="grid grid-cols-3 gap-2 pt-3 border-t border-[#FFFFFF]/15">
                     {product.demoMetrics.map((metric, i) => (
-                      <div key={i} className="bg-[#080f14]/60 p-2 rounded-lg text-center border border-[#A58D66]/15">
-                        <div className="text-xs font-bold text-[#E5E1DD] font-mono">{metric.value}</div>
-                        <div className="text-[10px] text-[#A58D66] mt-0.5 truncate">{metric.label}</div>
+                      <div key={i} className="bg-[#000000]/60 p-2 rounded-lg text-center border border-[#FFFFFF]/15">
+                        <div className="text-xs font-bold text-[#F5F5F5] font-mono">{metric.value}</div>
+                        <div className="text-[10px] text-[#FFFFFF] mt-0.5 truncate">{metric.label}</div>
                       </div>
                     ))}
                   </div>
                 </div>
 
                 {/* Bottom Launch Actions */}
-                <div className="pt-6 mt-4 border-t border-[#A58D66]/15 flex flex-col sm:flex-row items-center gap-3">
+                <div className="pt-6 mt-4 border-t border-[#FFFFFF]/15 flex flex-col sm:flex-row items-center gap-3">
                   <a
                     href={product.url}
                     {...(!isInternalRoute ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                     onClick={() => circuitAudio.playClick()}
-                    className="w-full sm:flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-[#A58D66] to-[#8C7654] hover:from-[#BFA378] hover:to-[#A58D66] text-[#080f14] font-bold text-xs sm:text-sm text-center shadow-[0_0_20px_rgba(165,141,102,0.35)] transition-all hover:scale-[1.02] active:scale-[0.96] flex items-center justify-center gap-2 cursor-pointer"
+                    className="w-full sm:flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-[#FFFFFF] to-[#737373] hover:from-[#CCCCCC] hover:to-[#FFFFFF] text-[#000000] font-bold text-xs sm:text-sm text-center shadow-[0_0_20px_rgba(255,255,255,0.35)] transition-all hover:scale-[1.02] active:scale-[0.96] flex items-center justify-center gap-2 cursor-pointer"
                   >
                     <span>Launch {product.name}</span>
                     <ArrowUpRight className="w-4 h-4" />
@@ -203,10 +203,10 @@ export const DirectEcosystemAccess: React.FC = () => {
                         circuitAudio.playTone(480, 0.05, 'sine');
                         setPreviewUrl(product.url);
                       }}
-                      className="w-full sm:w-auto py-3 px-3.5 rounded-xl bg-[#407E8C]/15 hover:bg-[#407E8C]/25 active:scale-95 text-[#E5E1DD] border border-[#407E8C]/35 text-xs font-medium transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+                      className="w-full sm:w-auto py-3 px-3.5 rounded-xl bg-[#8F8F8F]/15 hover:bg-[#8F8F8F]/25 active:scale-95 text-[#F5F5F5] border border-[#8F8F8F]/35 text-xs font-medium transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
                       title="Inline Preview"
                     >
-                      <Maximize2 className="w-3.5 h-3.5 text-[#76B4C2]" />
+                      <Maximize2 className="w-3.5 h-3.5 text-[#B4B4B4]" />
                       <span>Inline Peek</span>
                     </button>
                   )}
@@ -220,12 +220,12 @@ export const DirectEcosystemAccess: React.FC = () => {
         {/* Quick Launchpad Strip */}
         <div className="mt-12 rounded-2xl surreal-card-gold p-6 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-4">
-            <div className="p-3 rounded-xl bg-[#A58D66]/20 border border-[#A58D66]/40 text-[#A58D66]">
+            <div className="p-3 rounded-xl bg-[#FFFFFF]/20 border border-[#FFFFFF]/40 text-[#FFFFFF]">
               <Activity className="w-6 h-6" />
             </div>
             <div>
-              <h4 className="text-base font-bold font-cinzel text-[#E5E1DD]">Continuous Ecosystem Interoperability</h4>
-              <p className="text-xs text-[#E5E1DD]/75 mt-0.5 font-light">
+              <h4 className="text-base font-bold font-cinzel text-[#F5F5F5]">Continuous Ecosystem Interoperability</h4>
+              <p className="text-xs text-[#F5F5F5]/75 mt-0.5 font-light">
                 Creations synthesized in DigiLogic or KITT AI synchronize in real-time with the 3D Breadboard Lab netlist.
               </p>
             </div>
@@ -235,16 +235,16 @@ export const DirectEcosystemAccess: React.FC = () => {
             <a
               href="#/kitt-ai"
               onClick={() => circuitAudio.playClick()}
-              className="text-xs font-semibold px-4 py-2.5 rounded-lg bg-white/10 hover:bg-white/15 active:scale-95 text-[#E5E1DD] border border-white/15 transition-all flex items-center gap-1.5 cursor-pointer"
+              className="text-xs font-semibold px-4 py-2.5 rounded-lg bg-white/10 hover:bg-white/15 active:scale-95 text-[#F5F5F5] border border-white/15 transition-all flex items-center gap-1.5 cursor-pointer"
             >
               <span>Launch KITT AI Studio</span>
-              <ExternalLink className="w-3.5 h-3.5 text-[#A58D66]" />
+              <ExternalLink className="w-3.5 h-3.5 text-[#FFFFFF]" />
             </a>
 
             <a
               href="#/workspace"
               onClick={() => circuitAudio.playClick()}
-              className="text-xs font-bold px-4 py-2.5 rounded-lg bg-gradient-to-r from-[#A58D66] to-[#8C7654] text-[#080f14] transition-all flex items-center gap-1.5 shadow-[0_0_15px_rgba(165,141,102,0.3)] hover:scale-[1.02] active:scale-95 cursor-pointer"
+              className="text-xs font-bold px-4 py-2.5 rounded-lg bg-gradient-to-r from-[#FFFFFF] to-[#737373] text-[#000000] transition-all flex items-center gap-1.5 shadow-[0_0_15px_rgba(255,255,255,0.3)] hover:scale-[1.02] active:scale-95 cursor-pointer"
             >
               <span>Visit Workspace</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
@@ -263,12 +263,12 @@ export const DirectEcosystemAccess: React.FC = () => {
             }
           }}
         >
-          <div className="surreal-card rounded-2xl w-full max-w-6xl h-[85vh] flex flex-col shadow-2xl overflow-hidden border border-[#A58D66]/30 bg-[#080f14]">
+          <div className="surreal-card rounded-2xl w-full max-w-6xl h-[85vh] flex flex-col shadow-2xl overflow-hidden border border-[#FFFFFF]/30 bg-[#000000]">
             {/* Modal Header */}
-            <div className="px-4 py-3 bg-[#080f14] border-b border-[#A58D66]/20 flex items-center justify-between">
+            <div className="px-4 py-3 bg-[#000000] border-b border-[#FFFFFF]/20 flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <span className="text-xs font-mono text-[#A58D66]">Previewing Portal:</span>
-                <span className="text-xs font-mono text-[#E5E1DD] truncate max-w-md">{previewUrl}</span>
+                <span className="text-xs font-mono text-[#FFFFFF]">Previewing Portal:</span>
+                <span className="text-xs font-mono text-[#F5F5F5] truncate max-w-md">{previewUrl}</span>
               </div>
 
               <div className="flex items-center gap-3">
@@ -276,7 +276,7 @@ export const DirectEcosystemAccess: React.FC = () => {
                   href={previewUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs text-[#E5E1DD] hover:text-[#A58D66] flex items-center gap-1 bg-white/10 px-2.5 py-1 rounded"
+                  className="text-xs text-[#F5F5F5] hover:text-[#FFFFFF] flex items-center gap-1 bg-white/10 px-2.5 py-1 rounded"
                 >
                   <span>Open Full Screen</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
@@ -285,7 +285,7 @@ export const DirectEcosystemAccess: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setPreviewUrl(null)}
-                  className="p-1 rounded text-[#E5E1DD]/60 hover:text-[#E5E1DD] hover:bg-white/10 transition-colors"
+                  className="p-1 rounded text-[#F5F5F5]/60 hover:text-[#F5F5F5] hover:bg-white/10 transition-colors"
                   title="Close preview"
                 >
                   <X className="w-4 h-4" />
@@ -304,12 +304,12 @@ export const DirectEcosystemAccess: React.FC = () => {
             </div>
 
             {/* Bottom Bar with Close Button */}
-            <div className="px-4 py-2 bg-[#091116] border-t border-[#A58D66]/15 flex items-center justify-between">
-              <span className="text-[11px] text-[#E5E1DD]/50 font-mono">Press ESC or click outside to dismiss</span>
+            <div className="px-4 py-2 bg-[#0F0F10] border-t border-[#FFFFFF]/15 flex items-center justify-between">
+              <span className="text-[11px] text-[#F5F5F5]/50 font-mono">Press ESC or click outside to dismiss</span>
               <button
                 type="button"
                 onClick={() => setPreviewUrl(null)}
-                className="px-3 py-1.5 rounded-lg bg-[#121c22] border border-[#A58D66]/30 hover:border-[#A58D66] text-xs font-medium text-[#E5E1DD] hover:text-[#A58D66] transition-colors flex items-center gap-1.5"
+                className="px-3 py-1.5 rounded-lg bg-[#1D1D1E] border border-[#FFFFFF]/30 hover:border-[#FFFFFF] text-xs font-medium text-[#F5F5F5] hover:text-[#FFFFFF] transition-colors flex items-center gap-1.5"
               >
                 <X className="w-3.5 h-3.5" />
                 <span>Close Preview</span>

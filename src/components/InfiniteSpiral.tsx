@@ -172,7 +172,7 @@ export const InfiniteSpiral = <T extends Record<string, any>>({
       const edgeFadeFactor = Math.max(0, 1 - Math.max(0, Math.abs(y) - (halfH - 110)) / 110);
       
       // CRITICAL DEPTH OPACITY & PARTICLE OCCLUSION:
-      // Front 1-2 cards (zNorm > 0.15) are 100% SOLID and fully opaque (#080f14) to completely cover background particles!
+      // Front 1-2 cards (zNorm > 0.15) are 100% SOLID and fully opaque (#000000) to completely cover background particles!
       // Rear cards (zNorm <= 0.15) smoothly fade and blend with cosmic depth.
       let depthOpacity = 1;
       if (zNorm > 0.15) {
@@ -213,7 +213,7 @@ export const InfiniteSpiral = <T extends Record<string, any>>({
       // 100% Solid background and deep drop shadow for foreground cards to completely occlude particles
       if (zNorm > 0.15) {
         el.style.boxShadow = isCenterFront 
-          ? '0 25px 65px -10px rgba(0,0,0,0.98), 0 0 30px rgba(165,141,102,0.20)' 
+          ? '0 25px 65px -10px rgba(0,0,0,0.98), 0 0 30px rgba(255,255,255,0.20)' 
           : '0 16px 42px -8px rgba(0,0,0,0.92)';
       } else {
         el.style.boxShadow = '0 8px 20px rgba(0,0,0,0.6)';
@@ -331,14 +331,14 @@ export const InfiniteSpiral = <T extends Record<string, any>>({
                 willChange: 'transform, opacity, filter',
                 transform: 'translate3d(0,0,-2000px)',
                 opacity: 0,
-                backgroundColor: '#080f14', // 100% Solid Obsidian Void: completely occludes particles in foreground
+                backgroundColor: '#000000', // 100% Solid Obsidian Void: completely occludes particles in foreground
               }}
             >
               {renderItem ? (
                 renderItem(item, itemIndex, false)
               ) : item.src ? (
                 <div
-                  className="w-full h-full overflow-hidden shadow-2xl border border-[#A58D66]/30 bg-[#080f14]"
+                  className="w-full h-full overflow-hidden shadow-2xl border border-[#FFFFFF]/30 bg-[#000000]"
                   style={{ borderRadius: `${cardRadius}px` }}
                 >
                   <img
@@ -355,13 +355,13 @@ export const InfiniteSpiral = <T extends Record<string, any>>({
                 </div>
               ) : (
                 <div
-                  className="w-full h-full p-3 rounded-xl bg-[#080f14] border border-[#A58D66]/30 text-[#E5E1DD] shadow-2xl flex flex-col justify-between"
+                  className="w-full h-full p-3 rounded-xl bg-[#000000] border border-[#FFFFFF]/30 text-[#F5F5F5] shadow-2xl flex flex-col justify-between"
                   style={{ borderRadius: `${cardRadius}px` }}
                 >
-                  <div className="font-bold text-xs truncate text-[#DFCCA8]">
+                  <div className="font-bold text-xs truncate text-[#E8E8E8]">
                     {item.title || item.name || `Item ${itemIndex + 1}`}
                   </div>
-                  <div className="text-[10.5px] text-[#E5E1DD]/70 line-clamp-2">
+                  <div className="text-[10.5px] text-[#F5F5F5]/70 line-clamp-2">
                     {item.description || item.quote || ''}
                   </div>
                 </div>

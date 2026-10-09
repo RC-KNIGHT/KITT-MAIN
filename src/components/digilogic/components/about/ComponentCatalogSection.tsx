@@ -53,7 +53,7 @@ export const ComponentCatalogSection: React.FC = () => {
         name: 'AND Gate',
         category: 'gates',
         icon: GitMerge,
-        iconColor: 'text-[#76B4C2]',
+        iconColor: 'text-[#B4B4B4]',
         equation: 'Y = A · B',
         summary: 'Produces a High (1) output only when ALL connected inputs are High (1).',
         pinouts: [
@@ -69,7 +69,7 @@ export const ComponentCatalogSection: React.FC = () => {
         name: 'OR Gate',
         category: 'gates',
         icon: GitMerge,
-        iconColor: 'text-[#76B4C2]',
+        iconColor: 'text-[#B4B4B4]',
         equation: 'Y = A + B',
         summary: 'Produces a High (1) output when ANY of its inputs are High (1).',
         pinouts: [
@@ -85,7 +85,7 @@ export const ComponentCatalogSection: React.FC = () => {
         name: 'NOT Gate (Inverter)',
         category: 'gates',
         icon: Zap,
-        iconColor: 'text-[#76B4C2]',
+        iconColor: 'text-[#B4B4B4]',
         equation: "Y = A'",
         summary: 'Inverts the incoming signal: converts 0 to 1 and 1 to 0.',
         pinouts: [
@@ -100,7 +100,7 @@ export const ComponentCatalogSection: React.FC = () => {
         name: 'NAND Gate',
         category: 'gates',
         icon: GitMerge,
-        iconColor: 'text-[#76B4C2]',
+        iconColor: 'text-[#B4B4B4]',
         equation: "Y = (A · B)'",
         summary: 'Universal Gate: Output is 0 only when all inputs are 1; otherwise 1.',
         pinouts: [
@@ -116,7 +116,7 @@ export const ComponentCatalogSection: React.FC = () => {
         name: 'NOR Gate',
         category: 'gates',
         icon: GitMerge,
-        iconColor: 'text-[#DFCCA8]',
+        iconColor: 'text-[#E8E8E8]',
         equation: "Y = (A + B)'",
         summary: 'Universal Gate: Output is 1 only when all inputs are 0; otherwise 0.',
         pinouts: [
@@ -132,7 +132,7 @@ export const ComponentCatalogSection: React.FC = () => {
         name: 'XOR Gate (Exclusive-OR)',
         category: 'gates',
         icon: GitMerge,
-        iconColor: 'text-[#DFCCA8]',
+        iconColor: 'text-[#E8E8E8]',
         equation: 'Y = A ⊕ B',
         summary: 'Outputs 1 when an odd number of inputs are High. Detects inequality.',
         pinouts: [
@@ -148,7 +148,7 @@ export const ComponentCatalogSection: React.FC = () => {
         name: 'XNOR Gate (Equivalence)',
         category: 'gates',
         icon: GitMerge,
-        iconColor: 'text-[#76B4C2]',
+        iconColor: 'text-[#B4B4B4]',
         equation: 'Y = A ⊙ B',
         summary: 'Outputs 1 when inputs are identical (both 0 or both 1).',
         pinouts: [
@@ -164,7 +164,7 @@ export const ComponentCatalogSection: React.FC = () => {
         name: 'Tri-State Buffer',
         category: 'gates',
         icon: Sliders,
-        iconColor: 'text-[#76B4C2]',
+        iconColor: 'text-[#B4B4B4]',
         equation: 'Y = En ? A : High-Z',
         summary: 'Outputs signal A when Enable=1; enters high-impedance (Floating Z) when Enable=0.',
         pinouts: [
@@ -182,7 +182,7 @@ export const ComponentCatalogSection: React.FC = () => {
         name: 'Toggle Switch',
         category: 'inputs',
         icon: ToggleRight,
-        iconColor: 'text-[#76B4C2]',
+        iconColor: 'text-[#B4B4B4]',
         summary: 'Latching interactive binary input switch (toggles between 0 and 1 on click/touch).',
         pinouts: [{ label: 'Output State', type: 'output' }],
         behavior: 'Retains output logic level until tapped again. Tactile click feedback.',
@@ -193,7 +193,7 @@ export const ComponentCatalogSection: React.FC = () => {
         name: 'Push Button',
         category: 'inputs',
         icon: Radio,
-        iconColor: 'text-[#76B4C2]',
+        iconColor: 'text-[#B4B4B4]',
         summary: 'Momentary contact pushbutton. High (1) while pressed; Low (0) when released.',
         pinouts: [{ label: 'Pulse Out', type: 'output' }],
         behavior: 'Manual clock pulses, manual reset triggers, and test step inputs.',
@@ -204,7 +204,7 @@ export const ComponentCatalogSection: React.FC = () => {
         name: 'Clock Generator',
         category: 'inputs',
         icon: Clock,
-        iconColor: 'text-[#DFCCA8]',
+        iconColor: 'text-[#E8E8E8]',
         summary: 'Continuous square wave oscillation pulse generator at variable frequency.',
         pinouts: [{ label: 'Clock Signal (CLK)', type: 'output' }],
         behavior: 'Oscillates symmetrically between 0 and 1 according to the simulation Hz setting.',
@@ -215,7 +215,7 @@ export const ComponentCatalogSection: React.FC = () => {
         name: 'VCC (+5V / High 1)',
         category: 'inputs',
         icon: Zap,
-        iconColor: 'text-[#76B4C2]',
+        iconColor: 'text-[#B4B4B4]',
         summary: 'Hardwired Logic High (+5V / 1) power rail.',
         pinouts: [{ label: 'Constant 1', type: 'output' }],
         behavior: 'Always outputs 1. Never changes state.',
@@ -226,7 +226,7 @@ export const ComponentCatalogSection: React.FC = () => {
         name: 'GND (0V / Low 0)',
         category: 'inputs',
         icon: Minus,
-        iconColor: 'text-[#E5E1DD]/60',
+        iconColor: 'text-[#F5F5F5]/60',
         summary: 'Hardwired Ground reference (0V / 0) logic low rail.',
         pinouts: [{ label: 'Constant 0', type: 'output' }],
         behavior: 'Always outputs 0.',
@@ -239,7 +239,7 @@ export const ComponentCatalogSection: React.FC = () => {
         name: 'Logic Voltage Probe',
         category: 'outputs',
         icon: Activity,
-        iconColor: 'text-[#76B4C2]',
+        iconColor: 'text-[#B4B4B4]',
         summary: 'Displays exact real-time digital logic level (0, 1, High-Z floating, or Error X).',
         pinouts: [{ label: 'Probe In', type: 'input' }],
         behavior: 'Instantaneous logic inspector that illuminates emerald on 1 and slate on 0.',
@@ -250,7 +250,7 @@ export const ComponentCatalogSection: React.FC = () => {
         name: 'LED Indicator',
         category: 'outputs',
         icon: Lightbulb,
-        iconColor: 'text-[#76B4C2]',
+        iconColor: 'text-[#B4B4B4]',
         summary: 'Vibrant glowing digital lamp with realistic optical glow bloom when energized.',
         pinouts: [{ label: 'Anode In', type: 'input' }],
         behavior: 'Lights up bright glowing emerald when input is 1; dims when input is 0.',
@@ -261,7 +261,7 @@ export const ComponentCatalogSection: React.FC = () => {
         name: 'Hexadecimal Display',
         category: 'outputs',
         icon: Binary,
-        iconColor: 'text-[#76B4C2]',
+        iconColor: 'text-[#B4B4B4]',
         summary: 'Decodes 4-bit binary inputs (D3, D2, D1, D0) directly into Hex characters (0-9, A-F).',
         pinouts: [
           { label: 'D0 (LSB)', type: 'input' },
@@ -277,7 +277,7 @@ export const ComponentCatalogSection: React.FC = () => {
         name: '7-Segment Display (Raw)',
         category: 'outputs',
         icon: Grid,
-        iconColor: 'text-[#DFCCA8]',
+        iconColor: 'text-[#E8E8E8]',
         summary: 'Raw 7-segment LED array with individual pins for segments a, b, c, d, e, f, g, and DP.',
         pinouts: [
           { label: 'Seg A', type: 'input' },
@@ -299,7 +299,7 @@ export const ComponentCatalogSection: React.FC = () => {
         name: 'Half Adder (HA)',
         category: 'arithmetic',
         icon: Cpu,
-        iconColor: 'text-[#76B4C2]',
+        iconColor: 'text-[#B4B4B4]',
         equation: 'Sum = A ⊕ B, Carry = A · B',
         summary: 'Fundamental 1-bit binary adder producing Sum and Carry-out.',
         pinouts: [
@@ -316,7 +316,7 @@ export const ComponentCatalogSection: React.FC = () => {
         name: 'Full Adder (FA)',
         category: 'arithmetic',
         icon: Cpu,
-        iconColor: 'text-[#76B4C2]',
+        iconColor: 'text-[#B4B4B4]',
         equation: 'Sum = A ⊕ B ⊕ Cin, Cout = (A·B) + Cin(A⊕B)',
         summary: 'Complete 1-bit binary adder that handles Carry-In from preceding lower-order stages.',
         pinouts: [
@@ -334,7 +334,7 @@ export const ComponentCatalogSection: React.FC = () => {
         name: '4:1 Multiplexer (Data Selector)',
         category: 'arithmetic',
         icon: Sliders,
-        iconColor: 'text-[#76B4C2]',
+        iconColor: 'text-[#B4B4B4]',
         equation: 'Y = D0·S1\'S0\' + D1·S1\'S0 + D2·S1S0\' + D3·S1S0',
         summary: 'Routes one of four data inputs (D0..D3) to a single output line based on 2 select bits.',
         pinouts: [
@@ -350,7 +350,7 @@ export const ComponentCatalogSection: React.FC = () => {
         name: '4-Bit Parallel ALU (Adder)',
         category: 'arithmetic',
         icon: Cpu,
-        iconColor: 'text-[#DFCCA8]',
+        iconColor: 'text-[#E8E8E8]',
         summary: 'Parallel 4-bit binary adder with carry-in and carry-out pins.',
         pinouts: [
           { label: 'A[3..0] 4-Bit Bus', type: 'input' },
@@ -369,7 +369,7 @@ export const ComponentCatalogSection: React.FC = () => {
         name: 'D Flip-Flop (Edge-Triggered)',
         category: 'sequential',
         icon: Database,
-        iconColor: 'text-[#76B4C2]',
+        iconColor: 'text-[#B4B4B4]',
         summary: 'Captures input data D on the rising clock edge and holds it at output Q.',
         pinouts: [
           { label: 'Data (D)', type: 'input' },
@@ -386,7 +386,7 @@ export const ComponentCatalogSection: React.FC = () => {
         name: 'JK Flip-Flop (Universal)',
         category: 'sequential',
         icon: Database,
-        iconColor: 'text-[#76B4C2]',
+        iconColor: 'text-[#B4B4B4]',
         summary: 'Universal flip-flop with Set (J=1, K=0), Reset (J=0, K=1), Hold, and Toggle (J=1, K=1).',
         pinouts: [
           { label: 'J (Set)', type: 'input' },
@@ -403,7 +403,7 @@ export const ComponentCatalogSection: React.FC = () => {
         name: '4-Bit Binary Counter',
         category: 'sequential',
         icon: Database,
-        iconColor: 'text-[#DFCCA8]',
+        iconColor: 'text-[#E8E8E8]',
         summary: 'Modulo-16 synchronous binary up-counter (counts 0 to 15 on clock pulses).',
         pinouts: [
           { label: 'Clock (CLK)', type: 'input' },
@@ -420,7 +420,7 @@ export const ComponentCatalogSection: React.FC = () => {
         name: 'Custom IC Subcircuit',
         category: 'sequential',
         icon: Box,
-        iconColor: 'text-[#76B4C2]',
+        iconColor: 'text-[#B4B4B4]',
         summary: 'Modular custom integrated circuit packaged from any subcircuit schematic.',
         pinouts: [
           { label: 'Custom Inputs', type: 'input' },
@@ -458,18 +458,18 @@ export const ComponentCatalogSection: React.FC = () => {
   const SelectedIcon = selectedComp.icon;
 
   return (
-    <section id="components" className="py-12 sm:py-16 border-b border-[#A58D66]/20">
+    <section id="components" className="py-12 sm:py-16 border-b border-[#FFFFFF]/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#A58D66]/10 border border-[#A58D66]/30 text-[#DFCCA8] text-xs font-mono mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFFFFF]/10 border border-[#FFFFFF]/30 text-[#E8E8E8] text-xs font-mono mb-4">
             <Cpu className="w-3.5 h-3.5" />
             <span>Component & IC Catalog</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#E5E1DD] tracking-tight leading-tight mb-4">
-            Comprehensive Digital <span className="text-[#DFCCA8]">Component Encyclopedia</span>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#F5F5F5] tracking-tight leading-tight mb-4">
+            Comprehensive Digital <span className="text-[#E8E8E8]">Component Encyclopedia</span>
           </h2>
-          <p className="text-sm sm:text-base text-[#E5E1DD]/60 leading-relaxed">
+          <p className="text-sm sm:text-base text-[#F5F5F5]/60 leading-relaxed">
             Every gate, input source, display output, arithmetic unit, and sequential memory IC in the simulator is documented below with equations, pinouts, and use cases.
           </p>
         </div>
@@ -486,8 +486,8 @@ export const ComponentCatalogSection: React.FC = () => {
                   onClick={() => setActiveCategory(cat.id)}
                   className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
                     isSelected
-                      ? 'bg-[#A58D66] text-[#080f14] font-bold shadow-lg shadow-[#A58D66]/20'
-                      : 'bg-[#080f14] hover:bg-[#0d171f] text-[#DFCCA8] border border-[#A58D66]/20'
+                      ? 'bg-[#FFFFFF] text-[#000000] font-bold shadow-lg shadow-[#FFFFFF]/20'
+                      : 'bg-[#000000] hover:bg-[#141415] text-[#E8E8E8] border border-[#FFFFFF]/20'
                   }`}
                 >
                   {cat.label}
@@ -498,13 +498,13 @@ export const ComponentCatalogSection: React.FC = () => {
 
           {/* Search Input */}
           <div className="relative w-full md:w-64">
-            <Search className="w-4 h-4 text-[#E5E1DD]/60 absolute left-3 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-[#F5F5F5]/60 absolute left-3 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               placeholder="Search components or equations..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 bg-[#080f14] border border-[#A58D66]/20 rounded-xl text-xs text-[#E5E1DD] placeholder:text-[#E5E1DD]/45 focus:outline-none focus:border-[#A58D66] font-mono"
+              className="w-full pl-9 pr-4 py-2 bg-[#000000] border border-[#FFFFFF]/20 rounded-xl text-xs text-[#F5F5F5] placeholder:text-[#F5F5F5]/45 focus:outline-none focus:border-[#FFFFFF] font-mono"
             />
           </div>
         </div>
@@ -522,26 +522,26 @@ export const ComponentCatalogSection: React.FC = () => {
                   onClick={() => setSelectedCompId(comp.id)}
                   className={`p-4 rounded-2xl border text-left transition-all flex flex-col justify-between group active:scale-98 ${
                     isSelected
-                      ? 'bg-[#0d171f] border-[#A58D66] ring-2 ring-[#A58D66]/40 shadow-xl'
-                      : 'bg-[#080f14] border-[#A58D66]/20 hover:border-[#A58D66]/50 hover:bg-[#0d171f]'
+                      ? 'bg-[#141415] border-[#FFFFFF] ring-2 ring-[#FFFFFF]/40 shadow-xl'
+                      : 'bg-[#000000] border-[#FFFFFF]/20 hover:border-[#FFFFFF]/50 hover:bg-[#141415]'
                   }`}
                 >
                   <div className="flex items-start justify-between gap-3 mb-2">
                     <div className="flex items-center gap-3">
-                      <div className={`w-10 h-10 rounded-xl bg-[#080f14] border border-[#A58D66]/20 flex items-center justify-center ${comp.iconColor} group-hover:scale-110 transition-transform`}>
+                      <div className={`w-10 h-10 rounded-xl bg-[#000000] border border-[#FFFFFF]/20 flex items-center justify-center ${comp.iconColor} group-hover:scale-110 transition-transform`}>
                         <CompIcon className="w-5 h-5" />
                       </div>
                       <div>
-                        <h4 className="font-bold text-sm text-[#E5E1DD] group-hover:text-[#DFCCA8] transition-colors">{comp.name}</h4>
+                        <h4 className="font-bold text-sm text-[#F5F5F5] group-hover:text-[#E8E8E8] transition-colors">{comp.name}</h4>
                         {comp.equation && (
-                          <span className="text-[11px] font-mono text-[#DFCCA8] bg-[#A58D66]/10 px-1.5 py-0.5 rounded">
+                          <span className="text-[11px] font-mono text-[#E8E8E8] bg-[#FFFFFF]/10 px-1.5 py-0.5 rounded">
                             {comp.equation}
                           </span>
                         )}
                       </div>
                     </div>
                   </div>
-                  <p className="text-xs text-[#E5E1DD]/60 line-clamp-2 leading-relaxed">
+                  <p className="text-xs text-[#F5F5F5]/60 line-clamp-2 leading-relaxed">
                     {comp.summary}
                   </p>
                 </button>
@@ -550,22 +550,22 @@ export const ComponentCatalogSection: React.FC = () => {
           </div>
 
           {/* Right Column: In-Depth Component Deep Dive HUD */}
-          <div className="lg:col-span-5 bg-[#0d171f] border border-[#A58D66]/30 rounded-3xl p-6 sm:p-7 shadow-2xl flex flex-col justify-between">
+          <div className="lg:col-span-5 bg-[#141415] border border-[#FFFFFF]/30 rounded-3xl p-6 sm:p-7 shadow-2xl flex flex-col justify-between">
             <div>
               {/* Header with Large Icon */}
-              <div className="flex items-center gap-4 mb-6 pb-4 border-b border-[#A58D66]/20">
-                <div className="w-16 h-16 rounded-2xl bg-[#A58D66]/20 border border-[#A58D66]/40 text-[#DFCCA8] flex items-center justify-center shadow-lg shadow-[#A58D66]/20 shrink-0">
+              <div className="flex items-center gap-4 mb-6 pb-4 border-b border-[#FFFFFF]/20">
+                <div className="w-16 h-16 rounded-2xl bg-[#FFFFFF]/20 border border-[#FFFFFF]/40 text-[#E8E8E8] flex items-center justify-center shadow-lg shadow-[#FFFFFF]/20 shrink-0">
                   <SelectedIcon className="w-9 h-9" />
                 </div>
                 <div>
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#DFCCA8] bg-[#A58D66]/10 px-2 py-0.5 rounded-full border border-[#A58D66]/30">
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#E8E8E8] bg-[#FFFFFF]/10 px-2 py-0.5 rounded-full border border-[#FFFFFF]/30">
                     {selectedComp.category.toUpperCase()}
                   </span>
-                  <h3 className="text-xl sm:text-2xl font-bold text-[#E5E1DD] mt-1">
+                  <h3 className="text-xl sm:text-2xl font-bold text-[#F5F5F5] mt-1">
                     {selectedComp.name}
                   </h3>
                   {selectedComp.equation && (
-                    <div className="text-xs font-mono font-bold text-[#DFCCA8] mt-0.5">
+                    <div className="text-xs font-mono font-bold text-[#E8E8E8] mt-0.5">
                       Boolean Expression: {selectedComp.equation}
                     </div>
                   )}
@@ -574,31 +574,31 @@ export const ComponentCatalogSection: React.FC = () => {
 
               {/* Summary Description */}
               <div className="mb-5">
-                <h5 className="text-xs font-bold font-mono text-[#E5E1DD]/60 uppercase tracking-wider mb-1.5">Overview</h5>
-                <p className="text-sm text-[#E5E1DD] leading-relaxed">
+                <h5 className="text-xs font-bold font-mono text-[#F5F5F5]/60 uppercase tracking-wider mb-1.5">Overview</h5>
+                <p className="text-sm text-[#F5F5F5] leading-relaxed">
                   {selectedComp.summary}
                 </p>
               </div>
 
               {/* Behavior & Logic Rules */}
-              <div className="mb-5 bg-[#080f14] border border-[#A58D66]/20 rounded-2xl p-3.5">
-                <h5 className="text-xs font-bold font-mono text-[#DFCCA8] uppercase tracking-wider mb-1">Operational Logic</h5>
-                <p className="text-xs text-[#DFCCA8] leading-relaxed">
+              <div className="mb-5 bg-[#000000] border border-[#FFFFFF]/20 rounded-2xl p-3.5">
+                <h5 className="text-xs font-bold font-mono text-[#E8E8E8] uppercase tracking-wider mb-1">Operational Logic</h5>
+                <p className="text-xs text-[#E8E8E8] leading-relaxed">
                   {selectedComp.behavior}
                 </p>
               </div>
 
               {/* Pinouts */}
               <div className="mb-5">
-                <h5 className="text-xs font-bold font-mono text-[#E5E1DD]/60 uppercase tracking-wider mb-2">Pin Connections</h5>
+                <h5 className="text-xs font-bold font-mono text-[#F5F5F5]/60 uppercase tracking-wider mb-2">Pin Connections</h5>
                 <div className="flex flex-wrap gap-2">
                   {selectedComp.pinouts.map((pin, i) => (
                     <span
                       key={i}
                       className={`px-2.5 py-1 rounded-lg text-xs font-mono border ${
                         pin.type === 'input'
-                          ? 'bg-[#A58D66]/10 border-[#A58D66]/30 text-[#DFCCA8]'
-                          : 'bg-[#76B4C2]/10 border-[#76B4C2]/30 text-[#76B4C2]'
+                          ? 'bg-[#FFFFFF]/10 border-[#FFFFFF]/30 text-[#E8E8E8]'
+                          : 'bg-[#B4B4B4]/10 border-[#B4B4B4]/30 text-[#B4B4B4]'
                       }`}
                     >
                       {pin.type === 'input' ? '▼ IN: ' : '▲ OUT: '}{pin.label}
@@ -609,12 +609,12 @@ export const ComponentCatalogSection: React.FC = () => {
             </div>
 
             {/* Applications */}
-            <div className="pt-4 border-t border-[#A58D66]/20">
-              <h5 className="text-xs font-bold font-mono text-[#E5E1DD]/60 uppercase tracking-wider mb-2">Real-World Engineering Applications</h5>
+            <div className="pt-4 border-t border-[#FFFFFF]/20">
+              <h5 className="text-xs font-bold font-mono text-[#F5F5F5]/60 uppercase tracking-wider mb-2">Real-World Engineering Applications</h5>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
                 {selectedComp.applications.map((app, i) => (
-                  <div key={i} className="flex items-center gap-2 text-xs text-[#DFCCA8]">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#DFCCA8] shrink-0" />
+                  <div key={i} className="flex items-center gap-2 text-xs text-[#E8E8E8]">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#E8E8E8] shrink-0" />
                     <span>{app}</span>
                   </div>
                 ))}

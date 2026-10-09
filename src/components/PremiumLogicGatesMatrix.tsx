@@ -217,13 +217,13 @@ export const PremiumLogicGatesMatrix: React.FC<{ className?: string }> = ({ clas
     }
 
     const packets: SignalPacket[] = [
-      { traceIdx: 0, progress: 0.15, speed: 0.0035, size: 4, color: '#DFCCA8', state: '1' },
-      { traceIdx: 0, progress: 0.70, speed: 0.0035, size: 3.5, color: '#76B4C2', state: '0' },
-      { traceIdx: 1, progress: 0.40, speed: 0.0030, size: 4, color: '#DFCCA8', state: '1' },
-      { traceIdx: 2, progress: 0.25, speed: 0.0040, size: 4, color: '#76B4C2', state: '1' },
-      { traceIdx: 2, progress: 0.80, speed: 0.0040, size: 3.5, color: '#A58D66', state: '0' },
-      { traceIdx: 3, progress: 0.50, speed: 0.0032, size: 4, color: '#DFCCA8', state: '1' },
-      { traceIdx: 4, progress: 0.30, speed: 0.0038, size: 4, color: '#76B4C2', state: '1' },
+      { traceIdx: 0, progress: 0.15, speed: 0.0035, size: 4, color: '#E8E8E8', state: '1' },
+      { traceIdx: 0, progress: 0.70, speed: 0.0035, size: 3.5, color: '#B4B4B4', state: '0' },
+      { traceIdx: 1, progress: 0.40, speed: 0.0030, size: 4, color: '#E8E8E8', state: '1' },
+      { traceIdx: 2, progress: 0.25, speed: 0.0040, size: 4, color: '#B4B4B4', state: '1' },
+      { traceIdx: 2, progress: 0.80, speed: 0.0040, size: 3.5, color: '#FFFFFF', state: '0' },
+      { traceIdx: 3, progress: 0.50, speed: 0.0032, size: 4, color: '#E8E8E8', state: '1' },
+      { traceIdx: 4, progress: 0.30, speed: 0.0038, size: 4, color: '#B4B4B4', state: '1' },
     ];
 
     // Helper: Draw Logic Gate Symbols according to ANSI standard
@@ -235,7 +235,7 @@ export const PremiumLogicGatesMatrix: React.FC<{ className?: string }> = ({ clas
       const h = 40 * s;
 
       if (active > 0.3) {
-        ctx.shadowColor = 'rgba(165, 141, 102, 0.4)';
+        ctx.shadowColor = 'rgba(255, 255, 255, 0.4)';
         ctx.shadowBlur = 15 * active;
       }
 
@@ -246,9 +246,9 @@ export const PremiumLogicGatesMatrix: React.FC<{ className?: string }> = ({ clas
       ctx.lineTo(-w / 2, h / 2);
       ctx.closePath();
 
-      ctx.fillStyle = active > 0.5 ? 'rgba(13, 23, 31, 0.95)' : 'rgba(8, 15, 20, 0.85)';
+      ctx.fillStyle = active > 0.5 ? 'rgba(29, 29, 30, 0.95)' : 'rgba(0, 0, 0, 0.85)';
       ctx.fill();
-      ctx.strokeStyle = active > 0.5 ? '#DFCCA8' : 'rgba(165, 141, 102, 0.5)';
+      ctx.strokeStyle = active > 0.5 ? '#E8E8E8' : 'rgba(255, 255, 255, 0.5)';
       ctx.lineWidth = 1.5 * dpr;
       ctx.stroke();
 
@@ -261,7 +261,7 @@ export const PremiumLogicGatesMatrix: React.FC<{ className?: string }> = ({ clas
       // Output pin (Y)
       ctx.moveTo(h / 2, 0);
       ctx.lineTo(h / 2 + 12 * s, 0);
-      ctx.strokeStyle = active > 0.5 ? '#DFCCA8' : 'rgba(165, 141, 102, 0.4)';
+      ctx.strokeStyle = active > 0.5 ? '#E8E8E8' : 'rgba(255, 255, 255, 0.4)';
       ctx.lineWidth = 1.2 * dpr;
       ctx.stroke();
 
@@ -269,7 +269,7 @@ export const PremiumLogicGatesMatrix: React.FC<{ className?: string }> = ({ clas
       const drawVia = (px: number, py: number, high: boolean) => {
         ctx.beginPath();
         ctx.arc(px, py, 2.5 * s, 0, Math.PI * 2);
-        ctx.fillStyle = high ? '#DFCCA8' : '#407E8C';
+        ctx.fillStyle = high ? '#E8E8E8' : '#8F8F8F';
         ctx.fill();
       };
 
@@ -288,7 +288,7 @@ export const PremiumLogicGatesMatrix: React.FC<{ className?: string }> = ({ clas
       const h = 42 * s;
 
       if (active > 0.3) {
-        ctx.shadowColor = 'rgba(64, 126, 140, 0.45)';
+        ctx.shadowColor = 'rgba(143, 143, 143, 0.45)';
         ctx.shadowBlur = 15 * active;
       }
 
@@ -299,9 +299,9 @@ export const PremiumLogicGatesMatrix: React.FC<{ className?: string }> = ({ clas
       ctx.quadraticCurveTo(-w / 2 + 10 * s, 0, -w / 2, -h / 2);
       ctx.closePath();
 
-      ctx.fillStyle = active > 0.5 ? 'rgba(13, 23, 31, 0.95)' : 'rgba(8, 15, 20, 0.85)';
+      ctx.fillStyle = active > 0.5 ? 'rgba(29, 29, 30, 0.95)' : 'rgba(0, 0, 0, 0.85)';
       ctx.fill();
-      ctx.strokeStyle = active > 0.5 ? '#76B4C2' : 'rgba(64, 126, 140, 0.5)';
+      ctx.strokeStyle = active > 0.5 ? '#B4B4B4' : 'rgba(143, 143, 143, 0.5)';
       ctx.lineWidth = 1.5 * dpr;
       ctx.stroke();
 
@@ -313,7 +313,7 @@ export const PremiumLogicGatesMatrix: React.FC<{ className?: string }> = ({ clas
       ctx.lineTo(-w / 2 + 6 * s, h / 4);
       ctx.moveTo(w / 2, 0);
       ctx.lineTo(w / 2 + 12 * s, 0);
-      ctx.strokeStyle = active > 0.5 ? '#76B4C2' : 'rgba(64, 126, 140, 0.4)';
+      ctx.strokeStyle = active > 0.5 ? '#B4B4B4' : 'rgba(143, 143, 143, 0.4)';
       ctx.lineWidth = 1.2 * dpr;
       ctx.stroke();
 
@@ -328,7 +328,7 @@ export const PremiumLogicGatesMatrix: React.FC<{ className?: string }> = ({ clas
       const h = 42 * s;
 
       if (active > 0.3) {
-        ctx.shadowColor = 'rgba(165, 141, 102, 0.45)';
+        ctx.shadowColor = 'rgba(255, 255, 255, 0.45)';
         ctx.shadowBlur = 15 * active;
       }
 
@@ -336,7 +336,7 @@ export const PremiumLogicGatesMatrix: React.FC<{ className?: string }> = ({ clas
       ctx.beginPath();
       ctx.moveTo(-w / 2 - 5 * s, -h / 2);
       ctx.quadraticCurveTo(-w / 2 + 5 * s, 0, -w / 2 - 5 * s, h / 2);
-      ctx.strokeStyle = active > 0.5 ? '#DFCCA8' : 'rgba(165, 141, 102, 0.45)';
+      ctx.strokeStyle = active > 0.5 ? '#E8E8E8' : 'rgba(255, 255, 255, 0.45)';
       ctx.lineWidth = 1.5 * dpr;
       ctx.stroke();
 
@@ -348,9 +348,9 @@ export const PremiumLogicGatesMatrix: React.FC<{ className?: string }> = ({ clas
       ctx.quadraticCurveTo(-w / 2 + 12 * s, 0, -w / 2 + 2 * s, -h / 2);
       ctx.closePath();
 
-      ctx.fillStyle = active > 0.5 ? 'rgba(13, 23, 31, 0.95)' : 'rgba(8, 15, 20, 0.85)';
+      ctx.fillStyle = active > 0.5 ? 'rgba(29, 29, 30, 0.95)' : 'rgba(0, 0, 0, 0.85)';
       ctx.fill();
-      ctx.strokeStyle = active > 0.5 ? '#DFCCA8' : 'rgba(165, 141, 102, 0.5)';
+      ctx.strokeStyle = active > 0.5 ? '#E8E8E8' : 'rgba(255, 255, 255, 0.5)';
       ctx.lineWidth = 1.5 * dpr;
       ctx.stroke();
 
@@ -362,7 +362,7 @@ export const PremiumLogicGatesMatrix: React.FC<{ className?: string }> = ({ clas
       ctx.lineTo(-w / 2 - 2 * s, h / 4);
       ctx.moveTo(w / 2, 0);
       ctx.lineTo(w / 2 + 12 * s, 0);
-      ctx.strokeStyle = active > 0.5 ? '#DFCCA8' : 'rgba(165, 141, 102, 0.4)';
+      ctx.strokeStyle = active > 0.5 ? '#E8E8E8' : 'rgba(255, 255, 255, 0.4)';
       ctx.lineWidth = 1.2 * dpr;
       ctx.stroke();
 
@@ -377,7 +377,7 @@ export const PremiumLogicGatesMatrix: React.FC<{ className?: string }> = ({ clas
       const h = 34 * s;
 
       if (active > 0.3) {
-        ctx.shadowColor = 'rgba(118, 180, 194, 0.4)';
+        ctx.shadowColor = 'rgba(180, 180, 180, 0.4)';
         ctx.shadowBlur = 12 * active;
       }
 
@@ -387,18 +387,18 @@ export const PremiumLogicGatesMatrix: React.FC<{ className?: string }> = ({ clas
       ctx.lineTo(-w / 2, h / 2);
       ctx.closePath();
 
-      ctx.fillStyle = active > 0.5 ? 'rgba(13, 23, 31, 0.95)' : 'rgba(8, 15, 20, 0.85)';
+      ctx.fillStyle = active > 0.5 ? 'rgba(29, 29, 30, 0.95)' : 'rgba(0, 0, 0, 0.85)';
       ctx.fill();
-      ctx.strokeStyle = active > 0.5 ? '#76B4C2' : 'rgba(64, 126, 140, 0.5)';
+      ctx.strokeStyle = active > 0.5 ? '#B4B4B4' : 'rgba(143, 143, 143, 0.5)';
       ctx.lineWidth = 1.5 * dpr;
       ctx.stroke();
 
       // Inversion Bubble
       ctx.beginPath();
       ctx.arc(w / 2 - 2 * s, 0, 3.5 * s, 0, Math.PI * 2);
-      ctx.fillStyle = '#080f14';
+      ctx.fillStyle = '#000000';
       ctx.fill();
-      ctx.strokeStyle = active > 0.5 ? '#76B4C2' : 'rgba(64, 126, 140, 0.5)';
+      ctx.strokeStyle = active > 0.5 ? '#B4B4B4' : 'rgba(143, 143, 143, 0.5)';
       ctx.lineWidth = 1.2 * dpr;
       ctx.stroke();
 
@@ -408,7 +408,7 @@ export const PremiumLogicGatesMatrix: React.FC<{ className?: string }> = ({ clas
       ctx.lineTo(-w / 2, 0);
       ctx.moveTo(w / 2 + 2 * s, 0);
       ctx.lineTo(w / 2 + 14 * s, 0);
-      ctx.strokeStyle = active > 0.5 ? '#76B4C2' : 'rgba(64, 126, 140, 0.4)';
+      ctx.strokeStyle = active > 0.5 ? '#B4B4B4' : 'rgba(143, 143, 143, 0.4)';
       ctx.lineWidth = 1.2 * dpr;
       ctx.stroke();
 
@@ -421,9 +421,9 @@ export const PremiumLogicGatesMatrix: React.FC<{ className?: string }> = ({ clas
       ctx.translate(x + 23 * s, y);
       ctx.beginPath();
       ctx.arc(0, 0, 3.5 * s, 0, Math.PI * 2);
-      ctx.fillStyle = '#080f14';
+      ctx.fillStyle = '#000000';
       ctx.fill();
-      ctx.strokeStyle = active > 0.5 ? '#DFCCA8' : 'rgba(165, 141, 102, 0.5)';
+      ctx.strokeStyle = active > 0.5 ? '#E8E8E8' : 'rgba(255, 255, 255, 0.5)';
       ctx.lineWidth = 1.2 * dpr;
       ctx.stroke();
       ctx.restore();
@@ -435,9 +435,9 @@ export const PremiumLogicGatesMatrix: React.FC<{ className?: string }> = ({ clas
       ctx.translate(x + 25 * s, y);
       ctx.beginPath();
       ctx.arc(0, 0, 3.5 * s, 0, Math.PI * 2);
-      ctx.fillStyle = '#080f14';
+      ctx.fillStyle = '#000000';
       ctx.fill();
-      ctx.strokeStyle = active > 0.5 ? '#76B4C2' : 'rgba(64, 126, 140, 0.5)';
+      ctx.strokeStyle = active > 0.5 ? '#B4B4B4' : 'rgba(143, 143, 143, 0.5)';
       ctx.lineWidth = 1.2 * dpr;
       ctx.stroke();
       ctx.restore();
@@ -451,8 +451,8 @@ export const PremiumLogicGatesMatrix: React.FC<{ className?: string }> = ({ clas
       const size = 110 * dpr;
       const half = size / 2;
 
-      ctx.fillStyle = 'rgba(6, 11, 15, 0.95)';
-      ctx.strokeStyle = 'rgba(165, 141, 102, 0.35)';
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.95)';
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.35)';
       ctx.lineWidth = 1.5 * dpr;
 
       ctx.beginPath();
@@ -463,13 +463,13 @@ export const PremiumLogicGatesMatrix: React.FC<{ className?: string }> = ({ clas
       // Pin 1 Indicator
       ctx.beginPath();
       ctx.arc(-half + 12 * dpr, -half + 12 * dpr, 3.5 * dpr, 0, Math.PI * 2);
-      ctx.fillStyle = '#A58D66';
+      ctx.fillStyle = '#FFFFFF';
       ctx.fill();
 
       // Die Center
       const dieSize = size * 0.52;
-      ctx.fillStyle = 'rgba(13, 23, 31, 0.85)';
-      ctx.strokeStyle = 'rgba(64, 126, 140, 0.4)';
+      ctx.fillStyle = 'rgba(29, 29, 30, 0.85)';
+      ctx.strokeStyle = 'rgba(143, 143, 143, 0.4)';
       ctx.lineWidth = 1 * dpr;
       ctx.beginPath();
       ctx.roundRect(-dieSize / 2, -dieSize / 2, dieSize, dieSize, 4 * dpr);
@@ -477,17 +477,17 @@ export const PremiumLogicGatesMatrix: React.FC<{ className?: string }> = ({ clas
       ctx.stroke();
 
       // Labels
-      ctx.fillStyle = '#E5E1DD';
+      ctx.fillStyle = '#F5F5F5';
       ctx.font = 'bold ' + (9 * dpr) + 'px monospace';
       ctx.textAlign = 'center';
       ctx.fillText('KITT-IC 2.0', 0, -6 * dpr);
 
-      ctx.fillStyle = '#A58D66';
+      ctx.fillStyle = '#FFFFFF';
       ctx.font = (7.5 * dpr) + 'px monospace';
       ctx.fillText('RISC-V // 64-BIT', 0, 7 * dpr);
 
       const clkPhase = (timeSec * 4) % 1;
-      ctx.fillStyle = clkPhase > 0.5 ? '#76B4C2' : '#A58D66';
+      ctx.fillStyle = clkPhase > 0.5 ? '#B4B4B4' : '#FFFFFF';
       ctx.font = (6.5 * dpr) + 'px monospace';
       ctx.fillText('CLK: 100MHz', 0, 18 * dpr);
 
@@ -496,7 +496,7 @@ export const PremiumLogicGatesMatrix: React.FC<{ className?: string }> = ({ clas
       const pinLength = 8 * dpr;
       const step = size / (pinCount + 1);
 
-      ctx.strokeStyle = 'rgba(165, 141, 102, 0.5)';
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
       ctx.lineWidth = 1.2 * dpr;
 
       for (let i = 1; i <= pinCount; i++) {
@@ -546,7 +546,7 @@ export const PremiumLogicGatesMatrix: React.FC<{ className?: string }> = ({ clas
           if (i === 0) ctx.moveTo(px, py);
           else ctx.lineTo(px, py);
         }
-        ctx.strokeStyle = 'rgba(165, 141, 102, 0.12)';
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
         ctx.lineWidth = 1 * dpr;
         ctx.stroke();
       });
@@ -576,7 +576,7 @@ export const PremiumLogicGatesMatrix: React.FC<{ className?: string }> = ({ clas
         ctx.shadowBlur = 10 * dpr;
         ctx.fill();
 
-        ctx.fillStyle = '#080f14';
+        ctx.fillStyle = '#000000';
         ctx.font = 'bold ' + (6 * dpr) + 'px monospace';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
@@ -631,11 +631,11 @@ export const PremiumLogicGatesMatrix: React.FC<{ className?: string }> = ({ clas
         ctx.save();
         ctx.textAlign = 'center';
         ctx.font = 'bold ' + (8.5 * dpr) + 'px monospace';
-        ctx.fillStyle = gate.activePulse > 0.6 ? '#DFCCA8' : 'rgba(229, 225, 221, 0.7)';
+        ctx.fillStyle = gate.activePulse > 0.6 ? '#E8E8E8' : 'rgba(245, 245, 245, 0.7)';
         ctx.fillText(gate.label, gx, gy + 32 * s);
 
         ctx.font = (7 * dpr) + 'px monospace';
-        ctx.fillStyle = gate.activePulse > 0.6 ? '#76B4C2' : 'rgba(165, 141, 102, 0.55)';
+        ctx.fillStyle = gate.activePulse > 0.6 ? '#B4B4B4' : 'rgba(255, 255, 255, 0.55)';
         ctx.fillText(gate.subLabel, gx, gy + 42 * s);
         ctx.restore();
       });

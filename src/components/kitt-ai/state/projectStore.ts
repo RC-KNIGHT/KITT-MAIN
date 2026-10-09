@@ -45,7 +45,7 @@ const DEFAULT_SETTINGS: KittSettings = {
   autoSaveIntervalSec: 15,
   simStepMs: 1.0,
   wireRouting: 'orthogonal',
-  themeAccent: '#A58D66',
+  themeAccent: '#FFFFFF',
   showComponentLabels: true,
   soundEffects: false,
   autoOpenCopilotOnDrcFailure: true

@@ -65,11 +65,11 @@ export interface KMapResult {
 }
 
 const GROUP_COLORS = [
-  '#A58D66', // antique gold
-  '#407E8C', // oceanic teal
-  '#DFCCA8', // light gold sand
-  '#76B4C2', // bright teal
-  '#8C7654', // deep gold
+  '#FFFFFF', // antique gold
+  '#8F8F8F', // oceanic teal
+  '#E8E8E8', // light gold sand
+  '#B4B4B4', // bright teal
+  '#737373', // deep gold
   '#5397A6', // soft teal
 ];
 

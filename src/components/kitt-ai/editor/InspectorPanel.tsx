@@ -31,12 +31,12 @@ export const InspectorPanel: React.FC<InspectorPanelProps> = ({
   onDeselect
 }) => {
   return (
-    <aside className="w-72 h-full bg-[#080f14] border-l border-[#A58D66]/20 flex flex-col shrink-0 font-sans select-none z-20">
+    <aside className="w-72 h-full bg-[#000000] border-l border-[#353536] flex flex-col shrink-0 font-sans select-none z-20">
       {/* Header */}
-      <div className="h-11 px-4 border-b border-[#A58D66]/15 flex items-center justify-between bg-[#080f14]">
+      <div className="h-11 px-4 border-b border-[#29292A] flex items-center justify-between bg-[#000000]">
         <div className="flex items-center gap-2">
-          <Sliders className="w-3.5 h-3.5 text-[#A58D66]" />
-          <span className="text-xs font-mono font-bold text-[#E5E1DD]">Inspector</span>
+          <Sliders className="w-3.5 h-3.5 text-[#FFFFFF]" />
+          <span className="text-xs font-mono font-bold text-[#F5F5F5]">Inspector</span>
         </div>
         {selectedComponent && (
           <button
@@ -54,9 +54,9 @@ export const InspectorPanel: React.FC<InspectorPanelProps> = ({
           /* COMPONENT SELECTED VIEW */
           <div className="space-y-4">
             {/* Component Identity Card */}
-            <div className="p-3.5 rounded-xl bg-[#0c161d] border border-[#A58D66]/30 space-y-2">
+            <div className="p-3.5 rounded-[12px] bg-[#141415] border border-[#353536] space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-[10px] font-mono uppercase font-bold px-2 py-0.5 rounded bg-[#A58D66]/20 text-[#DFCCA8] border border-[#A58D66]/30">
+                <span className="text-[10px] font-mono uppercase font-bold px-2 py-0.5 rounded bg-[#FFFFFF]/20 text-[#E8E8E8] border border-[#353536]">
                   {selectedComponent.category}
                 </span>
                 <span className="text-[10px] font-mono text-slate-500">
@@ -64,7 +64,7 @@ export const InspectorPanel: React.FC<InspectorPanelProps> = ({
                 </span>
               </div>
 
-              <h3 className="text-sm font-bold font-mono text-[#E5E1DD] leading-snug">
+              <h3 className="text-sm font-bold font-mono text-[#F5F5F5] leading-snug">
                 {selectedComponent.displayName}
               </h3>
 
@@ -96,7 +96,7 @@ export const InspectorPanel: React.FC<InspectorPanelProps> = ({
                         });
                       }
                     }}
-                    className="w-full px-2.5 py-1 rounded bg-[#0c161d] border border-white/10 text-xs font-mono text-[#E5E1DD] focus:outline-none focus:border-[#A58D66]"
+                    className="w-full px-2.5 py-1 rounded bg-[#141415] border border-[#29292A] text-xs font-mono text-[#F5F5F5] focus:outline-none focus:border-[#FFFFFF]"
                   />
                 </div>
               ))}
@@ -107,11 +107,11 @@ export const InspectorPanel: React.FC<InspectorPanelProps> = ({
               <span className="text-[10px] font-mono uppercase text-slate-400 font-bold block">
                 Pin Connections ({selectedComponent.pins.length})
               </span>
-              <div className="border border-white/5 rounded-lg overflow-hidden divide-y divide-white/5 text-[11px] font-mono">
+              <div className="border border-white/5 rounded-[12px] overflow-hidden divide-y divide-white/5 text-[11px] font-mono">
                 {selectedComponent.pins.map(pin => (
-                  <div key={pin.id} className="p-2 bg-[#0c161d] flex items-center justify-between">
+                  <div key={pin.id} className="p-2 bg-[#141415] flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 rounded-full bg-[#A58D66]" />
+                      <span className="w-2 h-2 rounded-full bg-[#FFFFFF]" />
                       <span className="text-slate-200 font-bold">{pin.name}</span>
                     </div>
                     <span className="text-slate-500 text-[10px] capitalize">{pin.type}</span>
@@ -125,7 +125,7 @@ export const InspectorPanel: React.FC<InspectorPanelProps> = ({
               {onDeleteComponent && (
                 <button
                   onClick={() => onDeleteComponent(selectedComponent.id)}
-                  className="w-full py-2 px-3 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/20 text-xs font-mono flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                  className="w-full py-2 px-3 rounded-[12px] bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/20 text-xs font-mono flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
                 >
                   <Trash2 className="w-3.5 h-3.5" />
                   <span>Delete component</span>
@@ -136,7 +136,7 @@ export const InspectorPanel: React.FC<InspectorPanelProps> = ({
         ) : (
           /* EMPTY STATE MATCHING ANTIKA SCREENSHOT media_1789195367408.png */
           <div className="h-full flex flex-col items-center justify-center text-center p-6 text-slate-500 font-sans select-none min-h-[400px]">
-            <div className="w-10 h-10 mb-3 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400">
+            <div className="w-10 h-10 mb-3 rounded-[12px] bg-white/5 border border-[#29292A] flex items-center justify-center text-slate-400">
               <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <rect x="5" y="5" width="14" height="14" rx="2" />
                 <line x1="9" y1="2" x2="9" y2="5" />

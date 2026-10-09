@@ -181,7 +181,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBackToStudio, isAppGated
   };
 
   return (
-    <div className="relative min-h-screen w-full flex flex-col justify-between overflow-x-hidden bg-[#080f14] text-[#E5E1DD] font-sans selection:bg-[#A58D66]/30 selection:text-[#DFCCA8]">
+    <div className="relative min-h-screen w-full flex flex-col justify-between overflow-x-hidden bg-[#000000] text-[#F5F5F5] font-sans selection:bg-[#FFFFFF]/30 selection:text-[#E8E8E8]">
       {/* Animated Interactive Logic Gate & Signal Background */}
       <LogicGateBackground />
 
@@ -195,10 +195,10 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBackToStudio, isAppGated
         <div className="flex items-center gap-3">
           <a
             href="#/"
-            className="group flex items-center gap-2 px-3 py-2 rounded-xl bg-[#080f14]/80 hover:bg-[#A58D66]/10 text-[#DFCCA8] hover:text-[#E5E1DD] border border-[#A58D66]/20 hover:border-[#A58D66]/50 backdrop-blur-md transition-colors text-xs font-semibold shadow-md cursor-pointer"
+            className="group flex items-center gap-2 px-3 py-2 rounded-xl bg-[#000000]/80 hover:bg-[#FFFFFF]/10 text-[#E8E8E8] hover:text-[#F5F5F5] border border-[#FFFFFF]/20 hover:border-[#FFFFFF]/50 backdrop-blur-md transition-colors text-xs font-semibold shadow-md cursor-pointer"
             title="Return to KITT Ecosystem Landing Page"
           >
-            <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-0.5 text-[#A58D66]" />
+            <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-0.5 text-[#FFFFFF]" />
             <span>KITT Home</span>
           </a>
 
@@ -207,15 +207,15 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBackToStudio, isAppGated
               whileHover={{ scale: 1.03, x: -1 }}
               whileTap={{ scale: 0.97 }}
               onClick={handleReturnToStudio}
-              className="group flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl bg-[#080f14]/80 hover:bg-[#A58D66]/10 text-[#DFCCA8] hover:text-[#E5E1DD] border border-[#A58D66]/20 hover:border-[#A58D66]/50 backdrop-blur-md transition-colors text-xs sm:text-sm font-semibold shadow-md min-h-[44px] cursor-pointer"
+              className="group flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl bg-[#000000]/80 hover:bg-[#FFFFFF]/10 text-[#E8E8E8] hover:text-[#F5F5F5] border border-[#FFFFFF]/20 hover:border-[#FFFFFF]/50 backdrop-blur-md transition-colors text-xs sm:text-sm font-semibold shadow-md min-h-[44px] cursor-pointer"
             >
               <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
               <span>Back to Studio</span>
             </motion.button>
           ) : (
-            <div className="relative flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#080f14] border border-[#A58D66]/30 text-[#DFCCA8] text-xs font-mono backdrop-blur-md shadow-sm overflow-hidden">
+            <div className="relative flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#000000] border border-[#FFFFFF]/30 text-[#E8E8E8] text-xs font-mono backdrop-blur-md shadow-sm overflow-hidden">
               <span className="absolute inset-0 animate-shimmer-sweep pointer-events-none" />
-              <Lock className="w-3.5 h-3.5 text-[#DFCCA8] shrink-0" />
+              <Lock className="w-3.5 h-3.5 text-[#E8E8E8] shrink-0" />
               <span className="relative">LABORATORY GATEWAY • AUTH REQUIRED</span>
             </div>
           )}
@@ -224,21 +224,21 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBackToStudio, isAppGated
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
             onClick={() => setShowAboutModal(true)}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#080f14]/80 hover:bg-[#0d171f] text-[#DFCCA8] hover:text-[#E5E1DD] border border-[#A58D66]/20 hover:border-[#A58D66]/50 transition-colors text-xs font-medium backdrop-blur-md min-h-[44px] cursor-pointer"
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#000000]/80 hover:bg-[#141415] text-[#E8E8E8] hover:text-[#F5F5F5] border border-[#FFFFFF]/20 hover:border-[#FFFFFF]/50 transition-colors text-xs font-medium backdrop-blur-md min-h-[44px] cursor-pointer"
             title="Read documentation and learn about the creators"
           >
-            <BookOpen className="w-3.5 h-3.5 text-[#DFCCA8]" />
+            <BookOpen className="w-3.5 h-3.5 text-[#E8E8E8]" />
             <span className="hidden sm:inline">About &amp; Docs</span>
           </motion.button>
         </div>
 
-        <div className="flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-[#080f14]/80 border border-[#A58D66]/20 text-[#E5E1DD]/60 text-xs font-mono backdrop-blur-md">
+        <div className="flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-[#000000]/80 border border-[#FFFFFF]/20 text-[#F5F5F5]/60 text-xs font-mono backdrop-blur-md">
           <span className="relative flex w-2 h-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#A58D66] opacity-75" />
-            <span className="relative inline-flex rounded-full w-2 h-2 bg-[#A58D66]" />
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FFFFFF] opacity-75" />
+            <span className="relative inline-flex rounded-full w-2 h-2 bg-[#FFFFFF]" />
           </span>
           <span className="hidden sm:inline">DIGILOGIC CORE •</span>
-          <span className="text-[#DFCCA8] font-bold">ONLINE</span>
+          <span className="text-[#E8E8E8] font-bold">ONLINE</span>
         </div>
       </motion.header>
 
@@ -257,10 +257,10 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBackToStudio, isAppGated
             onMouseMove={handleCardPointerMove}
             onMouseLeave={handleCardPointerLeave}
             style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
-            className="relative rounded-3xl bg-[#0d171f] border border-[#A58D66]/30 shadow-[0_0_60px_rgba(165,141,102,0.12)] backdrop-blur-2xl p-6 sm:p-8 overflow-hidden transition-shadow duration-500 hover:shadow-[0_0_90px_rgba(165,141,102,0.2)]"
+            className="relative rounded-3xl bg-[#141415] border border-[#FFFFFF]/30 shadow-[0_0_60px_rgba(255,255,255,0.12)] backdrop-blur-2xl p-6 sm:p-8 overflow-hidden transition-shadow duration-500 hover:shadow-[0_0_90px_rgba(255,255,255,0.2)]"
           >
             {/* Top Glowing Circuit Accent Line */}
-            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#DFCCA8] to-transparent shadow-[0_0_15px_rgba(165,141,102,0.4)] animate-glow-pulse" />
+            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#E8E8E8] to-transparent shadow-[0_0_15px_rgba(255,255,255,0.4)] animate-glow-pulse" />
 
             {/* Pointer-reactive glare sheen for a premium glass feel */}
             <motion.div
@@ -270,14 +270,14 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBackToStudio, isAppGated
                 background: useTransform(
                   [glareX, glareY],
                   ([gx, gy]: [string, string]) =>
-                    `radial-gradient(500px circle at ${gx} ${gy}, rgba(165,141,102,0.10), transparent 60%)`
+                    `radial-gradient(500px circle at ${gx} ${gy}, rgba(255,255,255,0.10), transparent 60%)`
                 ),
               }}
             />
 
             {/* Glowing Corner Accents */}
-            <div className="absolute -top-12 -right-12 w-32 h-32 bg-[#A58D66]/10 rounded-full blur-2xl pointer-events-none" />
-            <div className="absolute -bottom-12 -left-12 w-32 h-32 bg-[#407E8C]/10 rounded-full blur-2xl pointer-events-none" />
+            <div className="absolute -top-12 -right-12 w-32 h-32 bg-[#FFFFFF]/10 rounded-full blur-2xl pointer-events-none" />
+            <div className="absolute -bottom-12 -left-12 w-32 h-32 bg-[#8F8F8F]/10 rounded-full blur-2xl pointer-events-none" />
 
             {/* Header / Brand Icon */}
             <motion.div
@@ -290,18 +290,18 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBackToStudio, isAppGated
               <motion.div
                 animate={prefersReducedMotion ? undefined : { y: [0, -5, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                className="relative inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-[#080f14] border border-[#A58D66]/40 text-[#DFCCA8] mb-3 shadow-[0_0_25px_rgba(165,141,102,0.2)] group"
+                className="relative inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-[#000000] border border-[#FFFFFF]/40 text-[#E8E8E8] mb-3 shadow-[0_0_25px_rgba(255,255,255,0.2)] group"
               >
                 <KittLogo size={46} showGlow={true} />
                 <span className="absolute -bottom-1 -right-1 flex h-3.5 w-3.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#A58D66] opacity-75" />
-                  <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-[#A58D66] border-2 border-[#080f14]" />
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FFFFFF] opacity-75" />
+                  <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-[#FFFFFF] border-2 border-[#000000]" />
                 </span>
               </motion.div>
-              <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight font-mono bg-clip-text text-transparent bg-[length:200%_auto] bg-gradient-to-r from-white via-[#DFCCA8] to-white animate-gradient-text">
+              <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight font-mono bg-clip-text text-transparent bg-[length:200%_auto] bg-gradient-to-r from-white via-[#E8E8E8] to-white animate-gradient-text">
                 DigiLogic Laboratory
               </h1>
-              <p className="text-xs text-[#E5E1DD]/60 mt-1.5 max-w-sm mx-auto leading-relaxed">
+              <p className="text-xs text-[#F5F5F5]/60 mt-1.5 max-w-sm mx-auto leading-relaxed">
                 Professional Digital Circuit Simulator, Truth Tables &amp; Microarchitecture Suite
               </p>
             </motion.div>
@@ -314,17 +314,17 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBackToStudio, isAppGated
                   animate={{ opacity: 1, height: 'auto', y: 0 }}
                   exit={{ opacity: 0, height: 0, y: -8 }}
                   transition={{ duration: 0.35, ease: CINEMATIC_EASE }}
-                  className="mb-5 p-3.5 rounded-2xl bg-[#080f14] border border-[#A58D66]/40 text-[#DFCCA8] text-xs flex items-start gap-2.5 overflow-hidden"
+                  className="mb-5 p-3.5 rounded-2xl bg-[#000000] border border-[#FFFFFF]/40 text-[#E8E8E8] text-xs flex items-start gap-2.5 overflow-hidden"
                 >
                   <motion.div
                     initial={{ rotate: 0 }}
                     animate={{ rotate: [0, -8, 8, -6, 0] }}
                     transition={{ duration: 0.5 }}
                   >
-                    <AlertCircle className="w-4 h-4 text-[#DFCCA8] shrink-0 mt-0.5" />
+                    <AlertCircle className="w-4 h-4 text-[#E8E8E8] shrink-0 mt-0.5" />
                   </motion.div>
                   <div className="flex-1 leading-relaxed">
-                    <div className="font-semibold text-[#DFCCA8] mb-0.5">Authentication Notice</div>
+                    <div className="font-semibold text-[#E8E8E8] mb-0.5">Authentication Notice</div>
                     <div>{error || formError}</div>
                   </div>
                 </motion.div>
@@ -342,10 +342,10 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBackToStudio, isAppGated
                   animate="animate"
                   exit="exit"
                   transition={{ duration: 0.4, ease: CINEMATIC_EASE }}
-                  className="py-12 flex flex-col items-center justify-center gap-3.5 text-[#E5E1DD]/60 text-xs font-mono"
+                  className="py-12 flex flex-col items-center justify-center gap-3.5 text-[#F5F5F5]/60 text-xs font-mono"
                 >
-                  <RefreshCw className="w-7 h-7 animate-spin text-[#DFCCA8]" />
-                  <span className="text-[#DFCCA8] font-semibold">Verifying Google security credentials...</span>
+                  <RefreshCw className="w-7 h-7 animate-spin text-[#E8E8E8]" />
+                  <span className="text-[#E8E8E8] font-semibold">Verifying Google security credentials...</span>
                 </motion.div>
               ) : activePanelKey === 'onboarding' ? (
                 /* ================= FIRST-TIME ONBOARDING FORM ================= */
@@ -362,9 +362,9 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBackToStudio, isAppGated
                     initial={{ opacity: 0, scale: 0.96 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.4, ease: CINEMATIC_EASE }}
-                    className="p-3.5 rounded-2xl bg-[#A58D66]/10 border border-[#A58D66]/30 text-[#DFCCA8] text-xs flex items-center gap-2.5"
+                    className="p-3.5 rounded-2xl bg-[#FFFFFF]/10 border border-[#FFFFFF]/30 text-[#E8E8E8] text-xs flex items-center gap-2.5"
                   >
-                    <Sparkles className="w-4 h-4 shrink-0 text-[#DFCCA8]" />
+                    <Sparkles className="w-4 h-4 shrink-0 text-[#E8E8E8]" />
                     <span>Welcome! Complete your laboratory profile to unlock the circuit simulator.</span>
                   </motion.div>
 
@@ -377,7 +377,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBackToStudio, isAppGated
                   >
                     {/* 1. Your Name */}
                     <motion.div variants={staggerItem}>
-                      <label className="block text-[11px] font-mono font-semibold uppercase tracking-wider text-[#DFCCA8] mb-1">
+                      <label className="block text-[11px] font-mono font-semibold uppercase tracking-wider text-[#E8E8E8] mb-1">
                         1. Your Display Name / Handle
                       </label>
                       <div className="relative">
@@ -388,21 +388,21 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBackToStudio, isAppGated
                           placeholder="e.g. Alan Turing"
                           maxLength={50}
                           required
-                          className="w-full px-3.5 py-2.5 rounded-xl bg-[#080f14] border border-[#A58D66]/20 focus:border-[#A58D66]/60 focus:shadow-[0_0_0_3px_rgba(165,141,102,0.15)] text-[#E5E1DD] text-xs font-medium placeholder-[#E5E1DD]/30 outline-none transition-all duration-300 min-h-[44px]"
+                          className="w-full px-3.5 py-2.5 rounded-xl bg-[#000000] border border-[#FFFFFF]/20 focus:border-[#FFFFFF]/60 focus:shadow-[0_0_0_3px_rgba(255,255,255,0.15)] text-[#F5F5F5] text-xs font-medium placeholder-[#F5F5F5]/30 outline-none transition-all duration-300 min-h-[44px]"
                         />
-                        <User className="absolute right-3 top-3 w-4 h-4 text-[#E5E1DD]/45" />
+                        <User className="absolute right-3 top-3 w-4 h-4 text-[#F5F5F5]/45" />
                       </div>
                     </motion.div>
 
                     {/* 2. Your Role */}
                     <motion.div variants={staggerItem}>
-                      <label className="block text-[11px] font-mono font-semibold uppercase tracking-wider text-[#DFCCA8] mb-1">
+                      <label className="block text-[11px] font-mono font-semibold uppercase tracking-wider text-[#E8E8E8] mb-1">
                         2. Your Role in DigiLogic Lab
                       </label>
                       <select
                         value={role}
                         onChange={(e) => setRole(e.target.value as UserRole)}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#080f14] border border-[#A58D66]/20 focus:border-[#A58D66]/60 focus:shadow-[0_0_0_3px_rgba(165,141,102,0.15)] text-[#E5E1DD] text-xs font-medium outline-none transition-all duration-300 min-h-[44px]"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#000000] border border-[#FFFFFF]/20 focus:border-[#FFFFFF]/60 focus:shadow-[0_0_0_3px_rgba(255,255,255,0.15)] text-[#F5F5F5] text-xs font-medium outline-none transition-all duration-300 min-h-[44px]"
                       >
                         <option value="Student">Student (High School / College / Uni)</option>
                         <option value="Teacher">Teacher / Professor / Educator</option>
@@ -416,13 +416,13 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBackToStudio, isAppGated
 
                     {/* 3. How did you discover this project? */}
                     <motion.div variants={staggerItem}>
-                      <label className="block text-[11px] font-mono font-semibold uppercase tracking-wider text-[#DFCCA8] mb-1">
+                      <label className="block text-[11px] font-mono font-semibold uppercase tracking-wider text-[#E8E8E8] mb-1">
                         3. How did you discover this project?
                       </label>
                       <select
                         value={discoverySource}
                         onChange={(e) => setDiscoverySource(e.target.value as DiscoverySource)}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#080f14] border border-[#A58D66]/20 focus:border-[#A58D66]/60 focus:shadow-[0_0_0_3px_rgba(165,141,102,0.15)] text-[#E5E1DD] text-xs font-medium outline-none transition-all duration-300 min-h-[44px]"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#000000] border border-[#FFFFFF]/20 focus:border-[#FFFFFF]/60 focus:shadow-[0_0_0_3px_rgba(255,255,255,0.15)] text-[#F5F5F5] text-xs font-medium outline-none transition-all duration-300 min-h-[44px]"
                       >
                         <option value="Google Search">Google Search</option>
                         <option value="GitHub">GitHub / Open Source</option>
@@ -437,13 +437,13 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBackToStudio, isAppGated
 
                     {/* 4. Experience with Digital Logic */}
                     <motion.div variants={staggerItem}>
-                      <label className="block text-[11px] font-mono font-semibold uppercase tracking-wider text-[#DFCCA8] mb-1">
+                      <label className="block text-[11px] font-mono font-semibold uppercase tracking-wider text-[#E8E8E8] mb-1">
                         4. Experience with Digital Logic
                       </label>
                       <select
                         value={experienceLevel}
                         onChange={(e) => setExperienceLevel(e.target.value as ExperienceLevel)}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#080f14] border border-[#A58D66]/20 focus:border-[#A58D66]/60 focus:shadow-[0_0_0_3px_rgba(165,141,102,0.15)] text-[#E5E1DD] text-xs font-medium outline-none transition-all duration-300 min-h-[44px]"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#000000] border border-[#FFFFFF]/20 focus:border-[#FFFFFF]/60 focus:shadow-[0_0_0_3px_rgba(255,255,255,0.15)] text-[#F5F5F5] text-xs font-medium outline-none transition-all duration-300 min-h-[44px]"
                       >
                         <option value="Beginner">Beginner — Learning logic gates for the first time</option>
                         <option value="Student">Student — Taking digital logic or electronics courses</option>
@@ -460,7 +460,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBackToStudio, isAppGated
                       whileTap={{ scale: 0.98 }}
                       type="submit"
                       disabled={isAuthenticating}
-                      className="w-full mt-4 flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#A58D66] hover:bg-[#DFCCA8] disabled:bg-[#080f14] disabled:text-[#E5E1DD]/45 text-[#080f14] font-bold text-xs uppercase tracking-wider transition-colors shadow-lg shadow-[#A58D66]/20 cursor-pointer min-h-[44px]"
+                      className="w-full mt-4 flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#FFFFFF] hover:bg-[#E8E8E8] disabled:bg-[#000000] disabled:text-[#F5F5F5]/45 text-[#000000] font-bold text-xs uppercase tracking-wider transition-colors shadow-lg shadow-[#FFFFFF]/20 cursor-pointer min-h-[44px]"
                     >
                       {isAuthenticating ? (
                         <>
@@ -491,9 +491,9 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBackToStudio, isAppGated
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.5, ease: CINEMATIC_EASE, delay: 0.05 }}
-                    className="p-4 rounded-2xl bg-[#A58D66]/10 border border-[#A58D66]/30"
+                    className="p-4 rounded-2xl bg-[#FFFFFF]/10 border border-[#FFFFFF]/30"
                   >
-                    <div className="flex items-center justify-center gap-2 text-[#DFCCA8] font-semibold text-xs mb-1">
+                    <div className="flex items-center justify-center gap-2 text-[#E8E8E8] font-semibold text-xs mb-1">
                       <motion.div
                         initial={{ scale: 0, rotate: -45 }}
                         animate={{ scale: 1, rotate: 0 }}
@@ -503,13 +503,13 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBackToStudio, isAppGated
                       </motion.div>
                       <span>Signed in with Google</span>
                     </div>
-                    <div className="font-bold text-[#E5E1DD] text-base font-mono mt-1">
+                    <div className="font-bold text-[#F5F5F5] text-base font-mono mt-1">
                       {userProfile!.displayName}
                     </div>
-                    <div className="text-xs text-[#E5E1DD]/60 mt-0.5">
+                    <div className="text-xs text-[#F5F5F5]/60 mt-0.5">
                       {currentUser!.email}
                     </div>
-                    <div className="mt-2.5 inline-block px-3 py-1 rounded-full bg-[#080f14] border border-[#A58D66]/30 text-[#DFCCA8] text-[11px] font-mono">
+                    <div className="mt-2.5 inline-block px-3 py-1 rounded-full bg-[#000000] border border-[#FFFFFF]/30 text-[#E8E8E8] text-[11px] font-mono">
                       {userProfile!.role} • {userProfile!.experienceLevel} Level
                     </div>
                   </motion.div>
@@ -521,10 +521,10 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBackToStudio, isAppGated
                     className="flex flex-col gap-2.5 pt-2"
                   >
                     <motion.button
-                      whileHover={{ scale: 1.015, boxShadow: '0 0 40px rgba(165,141,102,0.35)' }}
+                      whileHover={{ scale: 1.015, boxShadow: '0 0 40px rgba(255,255,255,0.35)' }}
                       whileTap={{ scale: 0.98 }}
                       onClick={handleReturnToStudio}
-                      className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-2xl bg-[#A58D66] hover:bg-[#DFCCA8] text-[#080f14] font-bold text-xs uppercase tracking-wider shadow-lg shadow-[#A58D66]/20 cursor-pointer min-h-[46px]"
+                      className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-2xl bg-[#FFFFFF] hover:bg-[#E8E8E8] text-[#000000] font-bold text-xs uppercase tracking-wider shadow-lg shadow-[#FFFFFF]/20 cursor-pointer min-h-[46px]"
                     >
                       <span>Enter Interactive Simulator</span>
                       <motion.span
@@ -540,7 +540,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBackToStudio, isAppGated
                       whileTap={{ scale: 0.98 }}
                       onClick={logout}
                       disabled={isAuthenticating}
-                      className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-[#080f14] hover:bg-[#0d171f] text-[#DFCCA8] hover:text-[#E5E1DD] border border-[#A58D66]/20 hover:border-[#A58D66]/50 text-xs font-semibold transition-colors cursor-pointer min-h-[44px]"
+                      className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-[#000000] hover:bg-[#141415] text-[#E8E8E8] hover:text-[#F5F5F5] border border-[#FFFFFF]/20 hover:border-[#FFFFFF]/50 text-xs font-semibold transition-colors cursor-pointer min-h-[44px]"
                     >
                       <LogOut className="w-4 h-4" />
                       <span>Sign Out</span>
@@ -567,29 +567,29 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBackToStudio, isAppGated
                   >
                     <motion.div
                       variants={staggerItem}
-                      whileHover={{ y: -3, borderColor: 'rgba(165,141,102,0.5)' }}
-                      className="p-2.5 rounded-xl bg-[#080f14] border border-[#A58D66]/20 flex items-start gap-2 transition-colors"
+                      whileHover={{ y: -3, borderColor: 'rgba(255,255,255,0.5)' }}
+                      className="p-2.5 rounded-xl bg-[#000000] border border-[#FFFFFF]/20 flex items-start gap-2 transition-colors"
                     >
-                      <div className="w-6 h-6 rounded-lg bg-[#A58D66]/10 border border-[#A58D66]/30 text-[#DFCCA8] flex items-center justify-center shrink-0">
+                      <div className="w-6 h-6 rounded-lg bg-[#FFFFFF]/10 border border-[#FFFFFF]/30 text-[#E8E8E8] flex items-center justify-center shrink-0">
                         <Zap className="w-3.5 h-3.5" />
                       </div>
                       <div>
-                        <div className="text-[11px] font-semibold text-[#E5E1DD]">Zero-Latency Engine</div>
-                        <div className="text-[10px] text-[#E5E1DD]/60">Sub-ms signal propagation</div>
+                        <div className="text-[11px] font-semibold text-[#F5F5F5]">Zero-Latency Engine</div>
+                        <div className="text-[10px] text-[#F5F5F5]/60">Sub-ms signal propagation</div>
                       </div>
                     </motion.div>
 
                     <motion.div
                       variants={staggerItem}
-                      whileHover={{ y: -3, borderColor: 'rgba(165,141,102,0.4)' }}
-                      className="p-2.5 rounded-xl bg-[#080f14] border border-[#A58D66]/20 flex items-start gap-2 transition-colors"
+                      whileHover={{ y: -3, borderColor: 'rgba(255,255,255,0.4)' }}
+                      className="p-2.5 rounded-xl bg-[#000000] border border-[#FFFFFF]/20 flex items-start gap-2 transition-colors"
                     >
-                      <div className="w-6 h-6 rounded-lg bg-[#A58D66]/10 border border-[#A58D66]/30 text-[#DFCCA8] flex items-center justify-center shrink-0">
+                      <div className="w-6 h-6 rounded-lg bg-[#FFFFFF]/10 border border-[#FFFFFF]/30 text-[#E8E8E8] flex items-center justify-center shrink-0">
                         <Layers className="w-3.5 h-3.5" />
                       </div>
                       <div>
-                        <div className="text-[11px] font-semibold text-[#E5E1DD]">Truth &amp; K-Maps</div>
-                        <div className="text-[10px] text-[#E5E1DD]/60">Automated boolean solving</div>
+                        <div className="text-[11px] font-semibold text-[#F5F5F5]">Truth &amp; K-Maps</div>
+                        <div className="text-[10px] text-[#F5F5F5]/60">Automated boolean solving</div>
                       </div>
                     </motion.div>
                   </motion.div>
@@ -603,50 +603,50 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBackToStudio, isAppGated
                     whileTap={{ scale: 0.98 }}
                     onClick={handleGoogleLogin}
                     disabled={isAuthenticating}
-                    className="group relative w-full flex items-center justify-between py-3.5 px-4 rounded-2xl bg-gradient-to-r from-[#0d171f] via-[#131f28] to-[#0d171f] hover:from-[#131f28] hover:to-[#172530] text-[#E5E1DD] font-bold text-xs sm:text-sm tracking-wide border border-[#A58D66]/30 hover:border-[#A58D66]/60 shadow-[0_4px_24px_rgba(0,0,0,0.5)] hover:shadow-[0_0_30px_rgba(165,141,102,0.2)] transition-all duration-300 cursor-pointer min-h-[52px] overflow-hidden"
+                    className="group relative w-full flex items-center justify-between py-3.5 px-4 rounded-2xl bg-gradient-to-r from-[#141415] via-[#131f28] to-[#141415] hover:from-[#131f28] hover:to-[#172530] text-[#F5F5F5] font-bold text-xs sm:text-sm tracking-wide border border-[#FFFFFF]/30 hover:border-[#FFFFFF]/60 shadow-[0_4px_24px_rgba(0,0,0,0.5)] hover:shadow-[0_0_30px_rgba(255,255,255,0.2)] transition-all duration-300 cursor-pointer min-h-[52px] overflow-hidden"
                   >
                     {/* Subtle inner hover glow */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#A58D66]/0 via-[#A58D66]/10 to-[#A58D66]/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#FFFFFF]/0 via-[#FFFFFF]/10 to-[#FFFFFF]/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
                     {/* Traveling light-sweep sheen for a premium button feel */}
                     <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out bg-gradient-to-r from-transparent via-white/10 to-transparent pointer-events-none" />
 
                     {isAuthenticating ? (
                       <div className="w-full flex items-center justify-center gap-3">
-                        <RefreshCw className="w-5 h-5 animate-spin text-[#DFCCA8]" />
-                        <span className="text-[#E5E1DD] font-semibold">Connecting to Google OAuth...</span>
+                        <RefreshCw className="w-5 h-5 animate-spin text-[#E8E8E8]" />
+                        <span className="text-[#F5F5F5] font-semibold">Connecting to Google OAuth...</span>
                       </div>
                     ) : (
                       <>
                         {/* Left: Google Icon in matching dark box container */}
                         <div className="relative flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-xl bg-[#080f14] border border-[#A58D66]/20 group-hover:border-[#A58D66]/50 flex items-center justify-center shrink-0 transition-colors shadow-inner">
+                          <div className="w-8 h-8 rounded-xl bg-[#000000] border border-[#FFFFFF]/20 group-hover:border-[#FFFFFF]/50 flex items-center justify-center shrink-0 transition-colors shadow-inner">
                             <svg className="w-4 h-4" viewBox="0 0 24 24">
                               <path
-                                fill="#DFCCA8"
+                                fill="#E8E8E8"
                                 d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
                               />
                               <path
-                                fill="#A58D66"
+                                fill="#FFFFFF"
                                 d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
                               />
                               <path
-                                fill="#DFCCA8"
+                                fill="#E8E8E8"
                                 d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"
                               />
                               <path
-                                fill="#A58D66"
+                                fill="#FFFFFF"
                                 d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
                               />
                             </svg>
                           </div>
-                          <span className="font-semibold text-[#E5E1DD] group-hover:text-[#DFCCA8] transition-colors">
+                          <span className="font-semibold text-[#F5F5F5] group-hover:text-[#E8E8E8] transition-colors">
                             Continue with Google
                           </span>
                         </div>
 
                         {/* Right: Dynamic arrow indicator */}
-                        <div className="relative flex items-center gap-1 text-[#E5E1DD]/60 group-hover:text-[#DFCCA8] transition-colors text-xs font-mono">
+                        <div className="relative flex items-center gap-1 text-[#F5F5F5]/60 group-hover:text-[#E8E8E8] transition-colors text-xs font-mono">
                           <span className="hidden sm:inline">Unlock Studio</span>
                           <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                         </div>
@@ -656,11 +656,11 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBackToStudio, isAppGated
 
                   {/* Divider */}
                   <div className="relative flex items-center justify-center my-0.5">
-                    <div className="border-t border-[#A58D66]/20 w-full" />
-                    <span className="bg-[#0d171f] px-3 text-[10px] text-[#E5E1DD]/45 font-mono uppercase tracking-wider shrink-0">
+                    <div className="border-t border-[#FFFFFF]/20 w-full" />
+                    <span className="bg-[#141415] px-3 text-[10px] text-[#F5F5F5]/45 font-mono uppercase tracking-wider shrink-0">
                       or explore directly
                     </span>
-                    <div className="border-t border-[#A58D66]/20 w-full" />
+                    <div className="border-t border-[#FFFFFF]/20 w-full" />
                   </div>
 
                   {/* Guest Mode Instant Access Option */}
@@ -672,26 +672,26 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBackToStudio, isAppGated
                     whileTap={{ scale: 0.98 }}
                     onClick={handleGuestLogin}
                     disabled={isAuthenticating}
-                    className="group relative w-full flex items-center justify-between py-3 px-4 rounded-2xl bg-[#080f14] hover:bg-[#0d171f] text-[#DFCCA8] hover:text-[#E5E1DD] border border-[#A58D66]/20 hover:border-[#A58D66]/40 hover:shadow-[0_0_20px_rgba(165,141,102,0.15)] transition-all duration-300 cursor-pointer min-h-[48px]"
+                    className="group relative w-full flex items-center justify-between py-3 px-4 rounded-2xl bg-[#000000] hover:bg-[#141415] text-[#E8E8E8] hover:text-[#F5F5F5] border border-[#FFFFFF]/20 hover:border-[#FFFFFF]/40 hover:shadow-[0_0_20px_rgba(255,255,255,0.15)] transition-all duration-300 cursor-pointer min-h-[48px]"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-xl bg-[#080f14] border border-[#A58D66]/20 group-hover:border-[#A58D66]/50 text-[#DFCCA8] flex items-center justify-center shrink-0 transition-colors shadow-inner">
+                      <div className="w-8 h-8 rounded-xl bg-[#000000] border border-[#FFFFFF]/20 group-hover:border-[#FFFFFF]/50 text-[#E8E8E8] flex items-center justify-center shrink-0 transition-colors shadow-inner">
                         <Compass className="w-4 h-4" />
                       </div>
                       <div className="text-left">
-                        <div className="font-semibold text-xs sm:text-sm text-[#E5E1DD] group-hover:text-[#E5E1DD] transition-colors flex items-center gap-2">
+                        <div className="font-semibold text-xs sm:text-sm text-[#F5F5F5] group-hover:text-[#F5F5F5] transition-colors flex items-center gap-2">
                           <span>Continue as Guest</span>
-                          <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#A58D66]/10 text-[#DFCCA8] border border-[#A58D66]/30">
+                          <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#FFFFFF]/10 text-[#E8E8E8] border border-[#FFFFFF]/30">
                             Instant Sandbox
                           </span>
                         </div>
-                        <div className="text-[10px] text-[#E5E1DD]/60 group-hover:text-[#DFCCA8] font-mono transition-colors">
+                        <div className="text-[10px] text-[#F5F5F5]/60 group-hover:text-[#E8E8E8] font-mono transition-colors">
                           Access full circuit simulator without signing in
                         </div>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-1 text-[#E5E1DD]/60 group-hover:text-[#DFCCA8] text-xs font-mono transition-colors">
+                    <div className="flex items-center gap-1 text-[#F5F5F5]/60 group-hover:text-[#E8E8E8] text-xs font-mono transition-colors">
                       <span className="hidden sm:inline">Explore</span>
                       <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
                     </div>
@@ -702,14 +702,14 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBackToStudio, isAppGated
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.5, delay: 0.3 }}
-                    className="pt-3 border-t border-[#A58D66]/20 space-y-2 text-[11px] text-[#E5E1DD]/60"
+                    className="pt-3 border-t border-[#FFFFFF]/20 space-y-2 text-[11px] text-[#F5F5F5]/60"
                   >
                     <div className="flex items-center gap-2">
-                      <ShieldCheck className="w-3.5 h-3.5 text-[#DFCCA8] shrink-0" />
+                      <ShieldCheck className="w-3.5 h-3.5 text-[#E8E8E8] shrink-0" />
                       <span>Google OAuth 2.0 Verified • Zero password vulnerabilities</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Lock className="w-3.5 h-3.5 text-[#DFCCA8] shrink-0" />
+                      <Lock className="w-3.5 h-3.5 text-[#E8E8E8] shrink-0" />
                       <span>Hardened Firestore ABAC Security Rules Enforced</span>
                     </div>
                   </motion.div>
@@ -730,7 +730,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onBackToStudio, isAppGated
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.3 }}
-        className="relative z-10 w-full text-center py-5 px-4 text-xs font-mono text-[#DFCCA8] border-t border-[#A58D66]/20 bg-[#080f14]/80 backdrop-blur-md"
+        className="relative z-10 w-full text-center py-5 px-4 text-xs font-mono text-[#E8E8E8] border-t border-[#FFFFFF]/20 bg-[#000000]/80 backdrop-blur-md"
       >
         Created with precision and passion by Team KITT
       </motion.footer>

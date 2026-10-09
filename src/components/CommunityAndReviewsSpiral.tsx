@@ -64,7 +64,7 @@ export const COMMUNITY_SPIRAL_PROJECTS: SpiralProject[] = [
     likes: 642,
     forks: 186,
     rating: 5.0,
-    badgeColor: 'border-[#407E8C]/50 bg-[#407E8C]/20 text-[#76B4C2]'
+    badgeColor: 'border-[#8F8F8F]/50 bg-[#8F8F8F]/20 text-[#B4B4B4]'
   },
   {
     id: 'sp-2',
@@ -81,7 +81,7 @@ export const COMMUNITY_SPIRAL_PROJECTS: SpiralProject[] = [
     likes: 428,
     forks: 98,
     rating: 4.9,
-    badgeColor: 'border-[#A58D66]/50 bg-[#A58D66]/20 text-[#DFCCA8]'
+    badgeColor: 'border-[#FFFFFF]/50 bg-[#FFFFFF]/20 text-[#E8E8E8]'
   },
   {
     id: 'sp-3',
@@ -98,7 +98,7 @@ export const COMMUNITY_SPIRAL_PROJECTS: SpiralProject[] = [
     likes: 590,
     forks: 164,
     rating: 5.0,
-    badgeColor: 'border-[#407E8C]/50 bg-[#407E8C]/20 text-[#76B4C2]'
+    badgeColor: 'border-[#8F8F8F]/50 bg-[#8F8F8F]/20 text-[#B4B4B4]'
   },
   {
     id: 'sp-4',
@@ -115,7 +115,7 @@ export const COMMUNITY_SPIRAL_PROJECTS: SpiralProject[] = [
     likes: 712,
     forks: 230,
     rating: 5.0,
-    badgeColor: 'border-[#A58D66]/50 bg-[#A58D66]/20 text-[#DFCCA8]'
+    badgeColor: 'border-[#FFFFFF]/50 bg-[#FFFFFF]/20 text-[#E8E8E8]'
   },
   {
     id: 'sp-5',
@@ -132,7 +132,7 @@ export const COMMUNITY_SPIRAL_PROJECTS: SpiralProject[] = [
     likes: 415,
     forks: 89,
     rating: 4.9,
-    badgeColor: 'border-[#407E8C]/50 bg-[#407E8C]/20 text-[#76B4C2]'
+    badgeColor: 'border-[#8F8F8F]/50 bg-[#8F8F8F]/20 text-[#B4B4B4]'
   },
   {
     id: 'sp-6',
@@ -149,7 +149,7 @@ export const COMMUNITY_SPIRAL_PROJECTS: SpiralProject[] = [
     likes: 360,
     forks: 72,
     rating: 4.9,
-    badgeColor: 'border-[#A58D66]/50 bg-[#A58D66]/20 text-[#DFCCA8]'
+    badgeColor: 'border-[#FFFFFF]/50 bg-[#FFFFFF]/20 text-[#E8E8E8]'
   },
   {
     id: 'sp-7',
@@ -166,7 +166,7 @@ export const COMMUNITY_SPIRAL_PROJECTS: SpiralProject[] = [
     likes: 530,
     forks: 142,
     rating: 5.0,
-    badgeColor: 'border-[#407E8C]/50 bg-[#407E8C]/20 text-[#76B4C2]'
+    badgeColor: 'border-[#8F8F8F]/50 bg-[#8F8F8F]/20 text-[#B4B4B4]'
   },
   {
     id: 'sp-8',
@@ -183,7 +183,7 @@ export const COMMUNITY_SPIRAL_PROJECTS: SpiralProject[] = [
     likes: 645,
     forks: 195,
     rating: 5.0,
-    badgeColor: 'border-[#A58D66]/50 bg-[#A58D66]/20 text-[#DFCCA8]'
+    badgeColor: 'border-[#FFFFFF]/50 bg-[#FFFFFF]/20 text-[#E8E8E8]'
   }
 ];
 
@@ -200,7 +200,7 @@ export const USER_SPIRAL_REVIEWS: SpiralReview[] = [
     quote: 'Gate-level propagation and dynamic truth tables in DigiLogic rival Cadence at an introductory level. Our students mastered ripple vs carry-lookahead adders in one afternoon.',
     platform: 'Digilogic',
     platformBadge: 'DIGILOGIC',
-    badgeColor: 'border-[#407E8C]/50 bg-[#407E8C]/20 text-[#76B4C2]',
+    badgeColor: 'border-[#8F8F8F]/50 bg-[#8F8F8F]/20 text-[#B4B4B4]',
     verifiedDate: 'Verified Academic Chair',
     helpfulCount: 142
   },
@@ -215,7 +215,7 @@ export const USER_SPIRAL_REVIEWS: SpiralReview[] = [
     quote: 'Demystifies hex-to-binary, two’s complement, and IEEE-754 mantissa decomposition for over 500 first-year undergraduates every semester.',
     platform: 'Number Trainer',
     platformBadge: 'NUMBER TRAINER',
-    badgeColor: 'border-[#A58D66]/50 bg-[#A58D66]/20 text-[#DFCCA8]',
+    badgeColor: 'border-[#FFFFFF]/50 bg-[#FFFFFF]/20 text-[#E8E8E8]',
     verifiedDate: 'Verified Faculty',
     helpfulCount: 118
   },
@@ -230,7 +230,7 @@ export const USER_SPIRAL_REVIEWS: SpiralReview[] = [
     quote: 'Prompting KITT AI with operating voltages and motor inductance generates verified gate drive circuits and flyback snubbers immediately. Spares weeks of bench iterations.',
     platform: 'AI Electronic Lab',
     platformBadge: 'AI ELECTRONIC LAB',
-    badgeColor: 'border-[#407E8C]/50 bg-[#407E8C]/20 text-[#76B4C2]',
+    badgeColor: 'border-[#8F8F8F]/50 bg-[#8F8F8F]/20 text-[#B4B4B4]',
     verifiedDate: 'Verified Industry Lead',
     helpfulCount: 135
   },
@@ -245,7 +245,7 @@ export const USER_SPIRAL_REVIEWS: SpiralReview[] = [
     quote: 'Validating RTL models in KITT before FPGA synthesis gives our team complete confidence without paying lakhs for proprietary workstation seats.',
     platform: 'Hardware Synthesizer',
     platformBadge: 'HARDWARE SYNTH',
-    badgeColor: 'border-[#A58D66]/50 bg-[#A58D66]/20 text-[#DFCCA8]',
+    badgeColor: 'border-[#FFFFFF]/50 bg-[#FFFFFF]/20 text-[#E8E8E8]',
     verifiedDate: 'Verified Architect',
     helpfulCount: 104
   },
@@ -260,7 +260,7 @@ export const USER_SPIRAL_REVIEWS: SpiralReview[] = [
     quote: 'Connecting number theory, gate-level RTL, 3D breadboards, and autonomous AI circuit generation under one unified ecosystem is a game-changer for Bharat’s deep-tech startups.',
     platform: 'Full Ecosystem',
     platformBadge: 'ECOSYSTEM',
-    badgeColor: 'border-[#76B4C2]/50 bg-[#76B4C2]/20 text-[#E5E1DD]',
+    badgeColor: 'border-[#B4B4B4]/50 bg-[#B4B4B4]/20 text-[#F5F5F5]',
     verifiedDate: 'Verified Director',
     helpfulCount: 156
   },
@@ -275,7 +275,7 @@ export const USER_SPIRAL_REVIEWS: SpiralReview[] = [
     quote: 'The sub-nanosecond gate propagation simulator caught a critical shoot-through hazard in our high-side MOSFET driver logic before we fabricated the PCBA.',
     platform: 'Digilogic',
     platformBadge: 'DIGILOGIC',
-    badgeColor: 'border-[#407E8C]/50 bg-[#407E8C]/20 text-[#76B4C2]',
+    badgeColor: 'border-[#8F8F8F]/50 bg-[#8F8F8F]/20 text-[#B4B4B4]',
     verifiedDate: 'Verified Research Scholar',
     helpfulCount: 97
   },
@@ -290,7 +290,7 @@ export const USER_SPIRAL_REVIEWS: SpiralReview[] = [
     quote: 'The seamless transition between 2D schematics, interactive 3D breadboard wiring, and deterministic mixed-signal simulation has accelerated our hardware capstones tenfold.',
     platform: 'Hardware Synthesizer',
     platformBadge: 'HARDWARE SYNTH',
-    badgeColor: 'border-[#A58D66]/50 bg-[#A58D66]/20 text-[#DFCCA8]',
+    badgeColor: 'border-[#FFFFFF]/50 bg-[#FFFFFF]/20 text-[#E8E8E8]',
     verifiedDate: 'Verified Dean',
     helpfulCount: 129
   },
@@ -305,7 +305,7 @@ export const USER_SPIRAL_REVIEWS: SpiralReview[] = [
     quote: 'KITT is the most cohesive electronic engineering suite available today. Built with obsidian precision, authentic hardware intelligence, and zero superficial fluff.',
     platform: 'Full Ecosystem',
     platformBadge: 'ECOSYSTEM',
-    badgeColor: 'border-[#76B4C2]/50 bg-[#76B4C2]/20 text-[#E5E1DD]',
+    badgeColor: 'border-[#B4B4B4]/50 bg-[#B4B4B4]/20 text-[#F5F5F5]',
     verifiedDate: 'Verified CTO',
     helpfulCount: 168
   }
@@ -324,27 +324,27 @@ export const CommunityAndReviewsSpiral: React.FC = () => {
     <section 
       id="community" 
       data-section="community-reviews"
-      className="py-20 px-4 sm:px-6 lg:px-8 bg-transparent relative z-20 border-t border-[#A58D66]/15"
+      className="py-20 px-4 sm:px-6 lg:px-8 bg-transparent relative z-20 border-t border-[#FFFFFF]/15"
     >
       <div className="max-w-7xl mx-auto space-y-8">
         {/* Prestige Banner: Atmanirbhar Silicon & Indian Institutional Innovation */}
-        <div className="flex flex-wrap items-center justify-between gap-3 px-5 py-3 rounded-2xl bg-gradient-to-r from-[#A58D66]/10 via-[#080f14] to-[#407E8C]/10 border border-[#A58D66]/25 shadow-lg backdrop-blur-sm">
+        <div className="flex flex-wrap items-center justify-between gap-3 px-5 py-3 rounded-2xl bg-gradient-to-r from-[#FFFFFF]/10 via-[#000000] to-[#8F8F8F]/10 border border-[#FFFFFF]/25 shadow-lg backdrop-blur-sm">
           <div className="flex items-center gap-2.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#A58D66] animate-pulse shadow-[0_0_8px_rgba(165,141,102,0.6)]" />
-            <span className="text-xs sm:text-sm font-cinzel font-bold text-[#E5E1DD] tracking-wide">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#FFFFFF] animate-pulse shadow-[0_0_8px_rgba(255,255,255,0.6)]" />
+            <span className="text-xs sm:text-sm font-cinzel font-bold text-[#F5F5F5] tracking-wide">
               Forged in Bharat • Atmanirbhar Silicon & Deep-Tech Hardware EDA
             </span>
           </div>
-          <div className="flex items-center gap-2 sm:gap-3 text-[11px] font-mono text-[#E5E1DD]/65 flex-wrap">
-            <span className="text-[#A58D66] font-semibold">IIT Bombay (e-Yantra)</span>
+          <div className="flex items-center gap-2 sm:gap-3 text-[11px] font-mono text-[#F5F5F5]/65 flex-wrap">
+            <span className="text-[#FFFFFF] font-semibold">IIT Bombay (e-Yantra)</span>
             <span>•</span>
-            <span className="text-[#76B4C2] font-semibold">BITS Pilani</span>
+            <span className="text-[#B4B4B4] font-semibold">BITS Pilani</span>
             <span>•</span>
-            <span className="text-[#A58D66] font-semibold">NIT Trichy</span>
+            <span className="text-[#FFFFFF] font-semibold">NIT Trichy</span>
             <span>•</span>
-            <span className="text-[#76B4C2] font-semibold">IIIT Hyderabad</span>
+            <span className="text-[#B4B4B4] font-semibold">IIIT Hyderabad</span>
             <span>•</span>
-            <span className="text-emerald-400 font-semibold">Maker Village</span>
+            <span className="text-zinc-400 font-semibold">Maker Village</span>
           </div>
         </div>
 
@@ -358,15 +358,15 @@ export const CommunityAndReviewsSpiral: React.FC = () => {
             {/* Animated Header */}
             <div className="space-y-2.5">
               <div className="flex items-center justify-between">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#A58D66]/15 border border-[#A58D66]/35 text-[#A58D66] text-xs font-mono tracking-widest uppercase animate-ambition">
-                  <Cpu className="w-3.5 h-3.5 text-[#A58D66]" />
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFFFFF]/15 border border-[#FFFFFF]/35 text-[#FFFFFF] text-xs font-mono tracking-widest uppercase animate-ambition">
+                  <Cpu className="w-3.5 h-3.5 text-[#FFFFFF]" />
                   <span>COMMUNITY REPOSITORY</span>
                 </div>
 
                 {/* View All Button */}
                 <button
                   onClick={() => setActiveModal('projects')}
-                  className="px-3 py-1.5 rounded-xl bg-gradient-to-r from-[#A58D66] to-[#8C7654] hover:from-[#BFA378] hover:to-[#A58D66] text-[#080f14] font-bold text-xs flex items-center gap-1.5 transition-all shadow-[0_0_15px_rgba(165,141,102,0.25)] hover:scale-105 active:scale-95 cursor-pointer"
+                  className="px-3 py-1.5 rounded-xl bg-gradient-to-r from-[#FFFFFF] to-[#737373] hover:from-[#CCCCCC] hover:to-[#FFFFFF] text-[#000000] font-bold text-xs flex items-center gap-1.5 transition-all shadow-[0_0_15px_rgba(255,255,255,0.25)] hover:scale-105 active:scale-95 cursor-pointer"
                   title="Explore All Community Projects"
                 >
                   <span>View All</span>
@@ -374,14 +374,14 @@ export const CommunityAndReviewsSpiral: React.FC = () => {
                 </button>
               </div>
 
-              <h2 className="text-xl sm:text-2xl lg:text-3xl font-serif tracking-tight text-[#E5E1DD]">
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-serif tracking-tight text-[#F5F5F5]">
                 Community Projects <br />
-                <span className="animate-text-shimmer italic font-cormorant font-normal block text-lg sm:text-xl text-[#A58D66]">
+                <span className="animate-text-shimmer italic font-cormorant font-normal block text-lg sm:text-xl text-[#FFFFFF]">
                   Architectures Across All 4 Platforms
                 </span>
               </h2>
 
-              <p className="text-xs sm:text-sm text-[#E5E1DD]/70 font-light max-w-lg leading-relaxed">
+              <p className="text-xs sm:text-sm text-[#F5F5F5]/70 font-light max-w-lg leading-relaxed">
                 Circuits, algorithms, and silicon synthesized across the ecosystem. Glides upward; scroll on hover to explore.
               </p>
             </div>
@@ -414,9 +414,9 @@ export const CommunityAndReviewsSpiral: React.FC = () => {
                 isFrozen={hoveredSpiral === 'reviews'}
                 renderItem={(project) => (
                   <div 
-                    className="w-full h-full p-4 rounded-2xl border border-[#A58D66]/35 hover:border-[#407E8C]/80 transition-colors flex flex-col justify-between select-none cursor-pointer shadow-2xl relative overflow-hidden"
+                    className="w-full h-full p-4 rounded-2xl border border-[#FFFFFF]/35 hover:border-[#8F8F8F]/80 transition-colors flex flex-col justify-between select-none cursor-pointer shadow-2xl relative overflow-hidden"
                     style={{
-                      backgroundColor: '#080f14', // 100% Solid Obsidian Void: completely occludes particles in foreground!
+                      backgroundColor: '#000000', // 100% Solid Obsidian Void: completely occludes particles in foreground!
                     }}
                   >
                     {/* Top Row: Platform Badge & Rating */}
@@ -424,39 +424,39 @@ export const CommunityAndReviewsSpiral: React.FC = () => {
                       <span className={`text-[9.5px] font-mono font-bold px-2 py-0.5 rounded-full border ${project.badgeColor}`}>
                         {project.platformBadge}
                       </span>
-                      <div className="flex items-center gap-1 text-[#A58D66] text-xs font-mono font-bold">
-                        <Star className="w-3 h-3 fill-[#A58D66]" />
+                      <div className="flex items-center gap-1 text-[#FFFFFF] text-xs font-mono font-bold">
+                        <Star className="w-3 h-3 fill-[#FFFFFF]" />
                         <span>{project.rating.toFixed(1)}</span>
                       </div>
                     </div>
 
                     {/* Middle: Project Title & Description */}
                     <div className="my-1.5 space-y-1 flex-1">
-                      <div className="text-xs sm:text-[12.5px] font-bold text-[#E5E1DD] hover:text-[#A58D66] transition-colors leading-snug font-cinzel">
+                      <div className="text-xs sm:text-[12.5px] font-bold text-[#F5F5F5] hover:text-[#FFFFFF] transition-colors leading-snug font-cinzel">
                         {project.title}
                       </div>
-                      <p className="text-[11px] text-[#E5E1DD]/75 leading-relaxed line-clamp-3">
+                      <p className="text-[11px] text-[#F5F5F5]/75 leading-relaxed line-clamp-3">
                         {project.description}
                       </p>
                     </div>
 
                     {/* Bottom: Creator & Stats */}
-                    <div className="flex items-center justify-between pt-2 border-t border-[#A58D66]/20 text-[10.5px] text-[#E5E1DD]/60 shrink-0">
+                    <div className="flex items-center justify-between pt-2 border-t border-[#FFFFFF]/20 text-[10.5px] text-[#F5F5F5]/60 shrink-0">
                       <div className="flex items-center gap-2 truncate max-w-[155px]">
                         <img 
                           src={project.creator.avatar} 
                           alt={project.creator.name} 
-                          className="w-5 h-5 rounded-full object-cover border border-[#A58D66]/40 shrink-0" 
+                          className="w-5 h-5 rounded-full object-cover border border-[#FFFFFF]/40 shrink-0" 
                         />
-                        <span className="truncate text-[#E5E1DD]/90 font-medium">{project.creator.name}</span>
+                        <span className="truncate text-[#F5F5F5]/90 font-medium">{project.creator.name}</span>
                       </div>
                       <div className="flex items-center gap-2.5 font-mono shrink-0 text-[11px]">
-                        <span className="flex items-center gap-1 text-[#E5E1DD]/75">
-                          <Heart className="w-3 h-3 text-[#A58D66]" />
+                        <span className="flex items-center gap-1 text-[#F5F5F5]/75">
+                          <Heart className="w-3 h-3 text-[#FFFFFF]" />
                           {project.likes}
                         </span>
-                        <span className="flex items-center gap-1 text-[#E5E1DD]/75">
-                          <GitFork className="w-3 h-3 text-[#407E8C]" />
+                        <span className="flex items-center gap-1 text-[#F5F5F5]/75">
+                          <GitFork className="w-3 h-3 text-[#8F8F8F]" />
                           {project.forks}
                         </span>
                       </div>
@@ -476,16 +476,16 @@ export const CommunityAndReviewsSpiral: React.FC = () => {
             title="Move cursor here or onto screen sides to scroll the page freely"
           >
             {/* Subtle Cosmic Guide Line */}
-            <div className="w-px h-full bg-gradient-to-b from-transparent via-[#A58D66]/25 to-transparent relative flex items-center justify-center">
+            <div className="w-px h-full bg-gradient-to-b from-transparent via-[#FFFFFF]/25 to-transparent relative flex items-center justify-center">
               {/* Central Golden Diamond Node */}
-              <div className="absolute w-2.5 h-2.5 rotate-45 border border-[#A58D66]/50 bg-[#080f14] shadow-[0_0_12px_rgba(165,141,102,0.4)]" />
+              <div className="absolute w-2.5 h-2.5 rotate-45 border border-[#FFFFFF]/50 bg-[#000000] shadow-[0_0_12px_rgba(255,255,255,0.4)]" />
             </div>
 
             {/* Vertical Scroll Direction Hint */}
-            <div className="my-auto py-3 px-1.5 rounded-full border border-[#A58D66]/20 bg-[#080f14]/85 backdrop-blur-sm text-[9px] font-mono tracking-widest text-[#A58D66]/70 uppercase [writing-mode:vertical-rl] flex items-center gap-2">
-              <span className="rotate-90 text-[10px] text-[#A58D66]">⇅</span>
+            <div className="my-auto py-3 px-1.5 rounded-full border border-[#FFFFFF]/20 bg-[#000000]/85 backdrop-blur-sm text-[9px] font-mono tracking-widest text-[#FFFFFF]/70 uppercase [writing-mode:vertical-rl] flex items-center gap-2">
+              <span className="rotate-90 text-[10px] text-[#FFFFFF]">⇅</span>
               <span>PAGE SCROLL</span>
-              <span className="rotate-90 text-[10px] text-[#A58D66]">⇅</span>
+              <span className="rotate-90 text-[10px] text-[#FFFFFF]">⇅</span>
             </div>
           </div>
 
@@ -497,15 +497,15 @@ export const CommunityAndReviewsSpiral: React.FC = () => {
             {/* Animated Header */}
             <div className="space-y-2.5">
               <div className="flex items-center justify-between">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#407E8C]/15 border border-[#407E8C]/35 text-[#76B4C2] text-xs font-mono tracking-widest uppercase animate-ambition">
-                  <BadgeCheck className="w-3.5 h-3.5 text-[#76B4C2]" />
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#8F8F8F]/15 border border-[#8F8F8F]/35 text-[#B4B4B4] text-xs font-mono tracking-widest uppercase animate-ambition">
+                  <BadgeCheck className="w-3.5 h-3.5 text-[#B4B4B4]" />
                   <span>VERIFIED ARCHITECT REVIEWS</span>
                 </div>
 
                 {/* View All Button */}
                 <button
                   onClick={() => setActiveModal('reviews')}
-                  className="px-3 py-1.5 rounded-xl bg-[#407E8C]/20 hover:bg-[#407E8C]/35 text-[#E5E1DD] border border-[#407E8C]/40 hover:border-[#A58D66]/60 text-xs font-bold flex items-center gap-1.5 transition-all shadow-sm hover:scale-105 active:scale-95 cursor-pointer"
+                  className="px-3 py-1.5 rounded-xl bg-[#8F8F8F]/20 hover:bg-[#8F8F8F]/35 text-[#F5F5F5] border border-[#8F8F8F]/40 hover:border-[#FFFFFF]/60 text-xs font-bold flex items-center gap-1.5 transition-all shadow-sm hover:scale-105 active:scale-95 cursor-pointer"
                   title="Explore All Reviews"
                 >
                   <span>View All</span>
@@ -513,14 +513,14 @@ export const CommunityAndReviewsSpiral: React.FC = () => {
                 </button>
               </div>
 
-              <h2 className="text-xl sm:text-2xl lg:text-3xl font-serif tracking-tight text-[#E5E1DD]">
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-serif tracking-tight text-[#F5F5F5]">
                 Engineer Reviews <br />
-                <span className="animate-text-shimmer italic font-cormorant font-normal block text-lg sm:text-xl text-[#76B4C2]">
+                <span className="animate-text-shimmer italic font-cormorant font-normal block text-lg sm:text-xl text-[#B4B4B4]">
                   Praise from Silicon Pioneers & Academics
                 </span>
               </h2>
 
-              <p className="text-xs sm:text-sm text-[#E5E1DD]/70 font-light max-w-lg leading-relaxed">
+              <p className="text-xs sm:text-sm text-[#F5F5F5]/70 font-light max-w-lg leading-relaxed">
                 Feedback from embedded engineers and researchers. Glides in opposite direction (downward); scroll on hover to inspect.
               </p>
             </div>
@@ -553,9 +553,9 @@ export const CommunityAndReviewsSpiral: React.FC = () => {
                 isFrozen={hoveredSpiral === 'projects'}
                 renderItem={(rev) => (
                   <div 
-                    className="w-full h-full p-4 rounded-2xl border border-[#A58D66]/35 hover:border-[#76B4C2]/80 transition-colors flex flex-col justify-between select-none cursor-pointer shadow-2xl relative overflow-hidden"
+                    className="w-full h-full p-4 rounded-2xl border border-[#FFFFFF]/35 hover:border-[#B4B4B4]/80 transition-colors flex flex-col justify-between select-none cursor-pointer shadow-2xl relative overflow-hidden"
                     style={{
-                      backgroundColor: '#080f14', // 100% Solid Obsidian Void: completely occludes particles in foreground!
+                      backgroundColor: '#000000', // 100% Solid Obsidian Void: completely occludes particles in foreground!
                     }}
                   >
                     {/* Top Row: Platform Badge & Rating (EXACTLY like Community Projects!) */}
@@ -563,34 +563,34 @@ export const CommunityAndReviewsSpiral: React.FC = () => {
                       <span className={`text-[9.5px] font-mono font-bold px-2 py-0.5 rounded-full border ${rev.badgeColor}`}>
                         {rev.platformBadge}
                       </span>
-                      <div className="flex items-center gap-1 text-[#A58D66] text-xs font-mono font-bold">
-                        <Star className="w-3 h-3 fill-[#A58D66]" />
+                      <div className="flex items-center gap-1 text-[#FFFFFF] text-xs font-mono font-bold">
+                        <Star className="w-3 h-3 fill-[#FFFFFF]" />
                         <span>{rev.rating.toFixed(1)}</span>
                       </div>
                     </div>
 
                     {/* Middle: Review Title & Description (EXACTLY like Community Projects!) */}
                     <div className="my-1.5 space-y-1 flex-1">
-                      <div className="text-xs sm:text-[12.5px] font-bold text-[#E5E1DD] hover:text-[#76B4C2] transition-colors leading-snug font-cinzel">
+                      <div className="text-xs sm:text-[12.5px] font-bold text-[#F5F5F5] hover:text-[#B4B4B4] transition-colors leading-snug font-cinzel">
                         {rev.title}
                       </div>
-                      <p className="text-[11px] text-[#E5E1DD]/75 leading-relaxed font-serif italic line-clamp-3">
+                      <p className="text-[11px] text-[#F5F5F5]/75 leading-relaxed font-serif italic line-clamp-3">
                         "{rev.quote}"
                       </p>
                     </div>
 
                     {/* Bottom: Author Avatar & Verification Badge (EXACTLY like Community Projects!) */}
-                    <div className="flex items-center justify-between pt-2 border-t border-[#A58D66]/20 text-[10.5px] text-[#E5E1DD]/60 shrink-0">
+                    <div className="flex items-center justify-between pt-2 border-t border-[#FFFFFF]/20 text-[10.5px] text-[#F5F5F5]/60 shrink-0">
                       <div className="flex items-center gap-2 truncate max-w-[155px]">
                         <img 
                           src={rev.avatar} 
                           alt={rev.author} 
-                          className="w-5 h-5 rounded-full object-cover border border-[#407E8C]/50 shrink-0" 
+                          className="w-5 h-5 rounded-full object-cover border border-[#8F8F8F]/50 shrink-0" 
                         />
-                        <span className="truncate text-[#E5E1DD]/90 font-medium">{rev.author}</span>
+                        <span className="truncate text-[#F5F5F5]/90 font-medium">{rev.author}</span>
                       </div>
-                      <div className="flex items-center gap-1.5 font-mono shrink-0 text-[10px] text-[#76B4C2] bg-[#407E8C]/15 px-2 py-0.5 rounded border border-[#407E8C]/30">
-                        <CheckCircle2 className="w-3 h-3 text-[#76B4C2]" />
+                      <div className="flex items-center gap-1.5 font-mono shrink-0 text-[10px] text-[#B4B4B4] bg-[#8F8F8F]/15 px-2 py-0.5 rounded border border-[#8F8F8F]/30">
+                        <CheckCircle2 className="w-3 h-3 text-[#B4B4B4]" />
                         <span>Verified</span>
                       </div>
                     </div>
@@ -614,15 +614,15 @@ export const CommunityAndReviewsSpiral: React.FC = () => {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ duration: 0.25 }}
-              className="w-full max-w-4xl max-h-[85vh] flex flex-col rounded-3xl bg-[#080f14] border border-[#A58D66]/40 shadow-2xl overflow-hidden"
+              className="w-full max-w-4xl max-h-[85vh] flex flex-col rounded-3xl bg-[#000000] border border-[#FFFFFF]/40 shadow-2xl overflow-hidden"
             >
               {/* Modal Header */}
-              <div className="p-6 border-b border-[#A58D66]/20 flex items-center justify-between bg-[#0d171f]">
+              <div className="p-6 border-b border-[#FFFFFF]/20 flex items-center justify-between bg-[#141415]">
                 <div>
-                  <h3 className="text-xl font-bold font-serif text-[#E5E1DD]">
+                  <h3 className="text-xl font-bold font-serif text-[#F5F5F5]">
                     {activeModal === 'projects' ? 'All Community Projects (All 4 Platforms)' : 'All Verified Engineer Reviews'}
                   </h3>
-                  <p className="text-xs text-[#E5E1DD]/60 mt-0.5">
+                  <p className="text-xs text-[#F5F5F5]/60 mt-0.5">
                     {activeModal === 'projects' 
                       ? 'Verified architectures, logic gates, drills, and hardware schematics.'
                       : 'Global feedback from verified researchers, educators, and embedded designers.'}
@@ -630,7 +630,7 @@ export const CommunityAndReviewsSpiral: React.FC = () => {
                 </div>
                 <button
                   onClick={() => setActiveModal(null)}
-                  className="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-[#E5E1DD]/70 hover:text-[#E5E1DD] transition-colors cursor-pointer"
+                  className="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-[#F5F5F5]/70 hover:text-[#F5F5F5] transition-colors cursor-pointer"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -643,29 +643,29 @@ export const CommunityAndReviewsSpiral: React.FC = () => {
                     {COMMUNITY_SPIRAL_PROJECTS.map((proj) => (
                       <div 
                         key={proj.id}
-                        className="p-5 rounded-2xl bg-[#0d171f] border border-[#A58D66]/25 hover:border-[#407E8C]/60 transition-colors flex flex-col justify-between space-y-3 shadow-lg"
+                        className="p-5 rounded-2xl bg-[#141415] border border-[#FFFFFF]/25 hover:border-[#8F8F8F]/60 transition-colors flex flex-col justify-between space-y-3 shadow-lg"
                       >
                         <div className="flex items-center justify-between">
                           <span className={`text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full border ${proj.badgeColor}`}>
                             {proj.platformBadge}
                           </span>
-                          <span className="flex items-center gap-1 text-[#A58D66] text-xs font-mono font-bold">
-                            <Star className="w-3.5 h-3.5 fill-[#A58D66]" />
+                          <span className="flex items-center gap-1 text-[#FFFFFF] text-xs font-mono font-bold">
+                            <Star className="w-3.5 h-3.5 fill-[#FFFFFF]" />
                             {proj.rating.toFixed(1)}
                           </span>
                         </div>
                         <div>
-                          <h4 className="text-sm font-bold text-[#E5E1DD] font-cinzel">{proj.title}</h4>
-                          <p className="text-xs text-[#E5E1DD]/70 mt-1 leading-relaxed">{proj.description}</p>
+                          <h4 className="text-sm font-bold text-[#F5F5F5] font-cinzel">{proj.title}</h4>
+                          <p className="text-xs text-[#F5F5F5]/70 mt-1 leading-relaxed">{proj.description}</p>
                         </div>
-                        <div className="flex items-center justify-between pt-2 border-t border-[#A58D66]/15 text-xs text-[#E5E1DD]/60">
+                        <div className="flex items-center justify-between pt-2 border-t border-[#FFFFFF]/15 text-xs text-[#F5F5F5]/60">
                           <div className="flex items-center gap-2">
                             <img src={proj.creator.avatar} alt={proj.creator.name} className="w-5 h-5 rounded-full object-cover" />
-                            <span className="text-[#E5E1DD]/90 font-medium">{proj.creator.name}</span>
+                            <span className="text-[#F5F5F5]/90 font-medium">{proj.creator.name}</span>
                           </div>
                           <div className="flex items-center gap-3 font-mono text-[11px]">
-                            <span className="flex items-center gap-1 text-[#A58D66]"><Heart className="w-3 h-3" /> {proj.likes}</span>
-                            <span className="flex items-center gap-1 text-[#407E8C]"><GitFork className="w-3 h-3" /> {proj.forks}</span>
+                            <span className="flex items-center gap-1 text-[#FFFFFF]"><Heart className="w-3 h-3" /> {proj.likes}</span>
+                            <span className="flex items-center gap-1 text-[#8F8F8F]"><GitFork className="w-3 h-3" /> {proj.forks}</span>
                           </div>
                         </div>
                       </div>
@@ -676,32 +676,32 @@ export const CommunityAndReviewsSpiral: React.FC = () => {
                     {USER_SPIRAL_REVIEWS.map((rev) => (
                       <div 
                         key={rev.id}
-                        className="p-5 rounded-2xl bg-[#0d171f] border border-[#407E8C]/25 hover:border-[#A58D66]/60 transition-colors flex flex-col justify-between space-y-3 shadow-lg"
+                        className="p-5 rounded-2xl bg-[#141415] border border-[#8F8F8F]/25 hover:border-[#FFFFFF]/60 transition-colors flex flex-col justify-between space-y-3 shadow-lg"
                       >
                         <div className="flex items-center justify-between">
                           <span className={`text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full border ${rev.badgeColor}`}>
                             {rev.platformBadge}
                           </span>
-                          <div className="flex items-center gap-1 text-[#A58D66] text-xs font-mono font-bold">
-                            <Star className="w-3.5 h-3.5 fill-[#A58D66]" />
+                          <div className="flex items-center gap-1 text-[#FFFFFF] text-xs font-mono font-bold">
+                            <Star className="w-3.5 h-3.5 fill-[#FFFFFF]" />
                             {rev.rating.toFixed(1)}
                           </div>
                         </div>
                         <div>
-                          <h4 className="text-sm font-bold text-[#E5E1DD] font-cinzel">{rev.title}</h4>
-                          <p className="text-xs text-[#E5E1DD]/90 leading-relaxed font-serif italic mt-1">
+                          <h4 className="text-sm font-bold text-[#F5F5F5] font-cinzel">{rev.title}</h4>
+                          <p className="text-xs text-[#F5F5F5]/90 leading-relaxed font-serif italic mt-1">
                             "{rev.quote}"
                           </p>
                         </div>
-                        <div className="flex items-center justify-between pt-2 border-t border-[#A58D66]/15 text-xs text-[#E5E1DD]/60">
+                        <div className="flex items-center justify-between pt-2 border-t border-[#FFFFFF]/15 text-xs text-[#F5F5F5]/60">
                           <div className="flex items-center gap-2.5">
-                            <img src={rev.avatar} alt={rev.author} className="w-6 h-6 rounded-full object-cover border border-[#407E8C]/40" />
+                            <img src={rev.avatar} alt={rev.author} className="w-6 h-6 rounded-full object-cover border border-[#8F8F8F]/40" />
                             <div>
-                              <div className="text-xs font-bold text-[#E5E1DD]">{rev.author}</div>
-                              <div className="text-[10px] text-[#A58D66] font-mono">{rev.role} • {rev.institution}</div>
+                              <div className="text-xs font-bold text-[#F5F5F5]">{rev.author}</div>
+                              <div className="text-[10px] text-[#FFFFFF] font-mono">{rev.role} • {rev.institution}</div>
                             </div>
                           </div>
-                          <span className="text-[10px] font-mono text-[#76B4C2] bg-[#407E8C]/15 px-2 py-0.5 rounded border border-[#407E8C]/30 flex items-center gap-1">
+                          <span className="text-[10px] font-mono text-[#B4B4B4] bg-[#8F8F8F]/15 px-2 py-0.5 rounded border border-[#8F8F8F]/30 flex items-center gap-1">
                             <CheckCircle2 className="w-3 h-3" /> Verified
                           </span>
                         </div>

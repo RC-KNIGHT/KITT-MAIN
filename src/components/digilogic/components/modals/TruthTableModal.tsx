@@ -406,14 +406,14 @@ export const TruthTableModal: React.FC = () => {
   if (activeModal !== 'truthTable') return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#080f14]/80 backdrop-blur-sm p-2 sm:p-4 animate-fade-in select-none">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#000000]/80 backdrop-blur-sm p-2 sm:p-4 animate-fade-in select-none">
       <div
         style={{
           backgroundColor: isLight ? '#ffffff' : currentTheme.panelBg,
           borderColor: currentTheme.borderTone,
         }}
         className={`border rounded-2xl w-full max-w-4xl max-h-[92vh] flex flex-col shadow-2xl overflow-hidden transition-colors duration-300 ${
-          isLight ? 'text-slate-800' : 'text-[#E5E1DD]'
+          isLight ? 'text-slate-800' : 'text-[#F5F5F5]'
         }`}
       >
         {/* Header */}
@@ -438,7 +438,7 @@ export const TruthTableModal: React.FC = () => {
             <div>
               <div className="flex items-center gap-2">
                 <h2 className={`font-bold text-sm sm:text-base tracking-wide font-mono ${
-                  isLight ? 'text-slate-900' : 'text-[#E5E1DD]'
+                  isLight ? 'text-slate-900' : 'text-[#F5F5F5]'
                 }`}>
                   Circuit Truth Table & Analysis Engine
                 </h2>
@@ -455,7 +455,7 @@ export const TruthTableModal: React.FC = () => {
                   </span>
                 )}
               </div>
-              <p className={`text-xs ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>
+              <p className={`text-xs ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>
                 Unified multi-variable evaluation, canonical boolean equations & real-time canvas synchronization
               </p>
             </div>
@@ -468,7 +468,7 @@ export const TruthTableModal: React.FC = () => {
               className={`hidden sm:flex items-center gap-1.5 px-3 py-1.5 disabled:opacity-40 text-xs font-semibold rounded-lg transition-colors border shadow-xs cursor-pointer ${
                 isLight
                   ? 'bg-white hover:bg-slate-100 text-slate-700 border-slate-300'
-                  : 'bg-[#080f14] hover:bg-[#0d171f] text-[#E5E1DD] border-[#A58D66]/30'
+                  : 'bg-[#000000] hover:bg-[#141415] text-[#F5F5F5] border-[#FFFFFF]/30'
               }`}
               title="Export complete truth table as CSV"
             >
@@ -478,7 +478,7 @@ export const TruthTableModal: React.FC = () => {
             <button
               onClick={() => setActiveModal('none')}
               className={`p-1.5 rounded-lg transition-colors cursor-pointer ${
-                isLight ? 'text-[#E5E1DD]/60 hover:text-slate-700 hover:bg-slate-100' : 'text-[#E5E1DD]/60 hover:text-[#E5E1DD] hover:bg-[#080f14]'
+                isLight ? 'text-[#F5F5F5]/60 hover:text-slate-700 hover:bg-slate-100' : 'text-[#F5F5F5]/60 hover:text-[#F5F5F5] hover:bg-[#000000]'
               }`}
             >
               <X className="w-5 h-5" />
@@ -497,12 +497,12 @@ export const TruthTableModal: React.FC = () => {
           {/* Detected Input Variables with Multi-Switch Unification */}
           <div className="flex items-center gap-2 flex-wrap">
             <span className={`font-semibold text-[11px] uppercase tracking-wider flex items-center gap-1 ${
-              isLight ? 'text-slate-600' : 'text-[#E5E1DD]/60'
+              isLight ? 'text-slate-600' : 'text-[#F5F5F5]/60'
             }`}>
               <Sliders className="w-3.5 h-3.5" /> Inputs ({variableGroups.length}):
             </span>
             {variableGroups.length === 0 ? (
-              <span className="text-[#A58D66] font-mono text-[11px]">No input switches detected</span>
+              <span className="text-[#FFFFFF] font-mono text-[11px]">No input switches detected</span>
             ) : (
               variableGroups.map((v, i) => (
                 <span
@@ -518,14 +518,14 @@ export const TruthTableModal: React.FC = () => {
                   <span>{v.name}</span>
                   {v.componentIds.length > 1 && (
                     <span className={`text-[9px] px-1 rounded font-normal ${
-                      isLight ? 'bg-slate-200 text-slate-700' : 'bg-[#080f14]/80 text-[#DFCCA8]'
+                      isLight ? 'bg-slate-200 text-slate-700' : 'bg-[#000000]/80 text-[#E8E8E8]'
                     }`}>
                       ×{v.componentIds.length}
                     </span>
                   )}
                   <span
                     className={`w-1.5 h-1.5 rounded-full ${
-                      v.currentValue === 1 ? 'bg-[#76B4C2] animate-pulse' : isLight ? 'bg-slate-400' : 'bg-slate-600'
+                      v.currentValue === 1 ? 'bg-[#B4B4B4] animate-pulse' : isLight ? 'bg-slate-400' : 'bg-slate-600'
                     }`}
                   />
                 </span>
@@ -536,12 +536,12 @@ export const TruthTableModal: React.FC = () => {
           {/* Monitored Outputs Selector */}
           <div className="flex items-center gap-2 flex-wrap">
             <span className={`font-semibold text-[11px] uppercase tracking-wider flex items-center gap-1 ${
-              isLight ? 'text-slate-600' : 'text-[#E5E1DD]/60'
+              isLight ? 'text-slate-600' : 'text-[#F5F5F5]/60'
             }`}>
               <Activity className="w-3.5 h-3.5" /> Output:
             </span>
             {outputGroups.length === 0 ? (
-              <span className="text-[#A58D66] font-mono text-[11px]">No output probes placed</span>
+              <span className="text-[#FFFFFF] font-mono text-[11px]">No output probes placed</span>
             ) : outputGroups.length === 1 ? (
               <span
                 style={{
@@ -555,7 +555,7 @@ export const TruthTableModal: React.FC = () => {
               </span>
             ) : (
               <div className={`flex items-center gap-1 p-0.5 rounded-lg border ${
-                isLight ? 'bg-white border-slate-300 shadow-xs' : 'bg-[#080f14] border-[#A58D66]/20'
+                isLight ? 'bg-white border-slate-300 shadow-xs' : 'bg-[#000000] border-[#FFFFFF]/20'
               }`}>
                 {outputGroups.map((out, idx) => (
                   <button
@@ -575,7 +575,7 @@ export const TruthTableModal: React.FC = () => {
                         ? 'border shadow-xs'
                         : isLight
                         ? 'border-transparent text-slate-600 hover:text-slate-900'
-                        : 'border-transparent text-[#E5E1DD]/60 hover:text-[#E5E1DD]'
+                        : 'border-transparent text-[#F5F5F5]/60 hover:text-[#F5F5F5]'
                     }`}
                   >
                     {out.name}
@@ -590,7 +590,7 @@ export const TruthTableModal: React.FC = () => {
         <div
           style={{ borderColor: currentTheme.borderTone }}
           className={`flex border-b px-4 sm:px-6 pt-2.5 gap-4 sm:gap-6 text-xs font-semibold shrink-0 overflow-x-auto transition-colors ${
-            isLight ? 'bg-slate-50' : 'bg-[#080f14]'
+            isLight ? 'bg-slate-50' : 'bg-[#000000]'
           }`}
         >
           <button
@@ -607,8 +607,8 @@ export const TruthTableModal: React.FC = () => {
               activeTab === 'table'
                 ? 'font-bold'
                 : isLight
-                ? 'border-transparent text-[#E5E1DD]/45 hover:text-slate-800'
-                : 'border-transparent text-[#E5E1DD]/60 hover:text-[#E5E1DD]'
+                ? 'border-transparent text-[#F5F5F5]/45 hover:text-slate-800'
+                : 'border-transparent text-[#F5F5F5]/60 hover:text-[#F5F5F5]'
             }`}
           >
             <Table className="w-4 h-4" />
@@ -640,8 +640,8 @@ export const TruthTableModal: React.FC = () => {
               activeTab === 'equations'
                 ? 'font-bold'
                 : isLight
-                ? 'border-transparent text-[#E5E1DD]/45 hover:text-slate-800'
-                : 'border-transparent text-[#E5E1DD]/60 hover:text-[#E5E1DD]'
+                ? 'border-transparent text-[#F5F5F5]/45 hover:text-slate-800'
+                : 'border-transparent text-[#F5F5F5]/60 hover:text-[#F5F5F5]'
             }`}
           >
             <Code className="w-4 h-4" />
@@ -662,8 +662,8 @@ export const TruthTableModal: React.FC = () => {
               activeTab === 'kmap'
                 ? 'font-bold'
                 : isLight
-                ? 'border-transparent text-[#E5E1DD]/45 hover:text-slate-800'
-                : 'border-transparent text-[#E5E1DD]/60 hover:text-[#E5E1DD]'
+                ? 'border-transparent text-[#F5F5F5]/45 hover:text-slate-800'
+                : 'border-transparent text-[#F5F5F5]/60 hover:text-[#F5F5F5]'
             }`}
           >
             <Sparkles className="w-4 h-4" />
@@ -686,10 +686,10 @@ export const TruthTableModal: React.FC = () => {
                 <Cpu className="w-6 h-6" />
               </div>
               <div className="space-y-1 max-w-md">
-                <h3 className={`font-bold text-sm ${isLight ? 'text-slate-800' : 'text-[#E5E1DD]'}`}>
+                <h3 className={`font-bold text-sm ${isLight ? 'text-slate-800' : 'text-[#F5F5F5]'}`}>
                   Circuit Inputs & Outputs Required
                 </h3>
-                <p className={`text-xs leading-relaxed ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>
+                <p className={`text-xs leading-relaxed ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>
                   Place at least one input variable switch (Toggle Switch, Push Button) and one output indicator
                   (Output Probe, LED, or 7-Segment Display) on the canvas to generate a complete truth table.
                 </p>
@@ -702,18 +702,18 @@ export const TruthTableModal: React.FC = () => {
                 <div className="space-y-3">
                   {/* Filters and Search Bar */}
                   <div className={`flex flex-wrap items-center justify-between gap-2.5 p-2.5 rounded-xl border ${
-                    isLight ? 'bg-slate-50 border-slate-200' : 'bg-[#080f14] border-[#A58D66]/20'
+                    isLight ? 'bg-slate-50 border-slate-200' : 'bg-[#000000] border-[#FFFFFF]/20'
                   }`}>
                     <div className="flex items-center gap-2 flex-wrap">
                       <div className={`flex items-center gap-1 p-0.5 rounded-lg border text-[11px] ${
-                        isLight ? 'bg-slate-200/70 border-slate-300' : 'bg-[#080f14] border-[#A58D66]/20'
+                        isLight ? 'bg-slate-200/70 border-slate-300' : 'bg-[#000000] border-[#FFFFFF]/20'
                       }`}>
                         <button
                           onClick={() => setRowFilter('all')}
                           className={`px-2.5 py-1 rounded font-semibold transition-colors cursor-pointer ${
                             rowFilter === 'all'
-                              ? isLight ? 'bg-white text-slate-900 shadow-xs' : 'bg-[#0d171f] text-[#E5E1DD]'
-                              : isLight ? 'text-slate-600 hover:text-slate-900' : 'text-[#E5E1DD]/60 hover:text-[#E5E1DD]'
+                              ? isLight ? 'bg-white text-slate-900 shadow-xs' : 'bg-[#141415] text-[#F5F5F5]'
+                              : isLight ? 'text-slate-600 hover:text-slate-900' : 'text-[#F5F5F5]/60 hover:text-[#F5F5F5]'
                           }`}
                         >
                           All ({tableRows.length})
@@ -722,8 +722,8 @@ export const TruthTableModal: React.FC = () => {
                           onClick={() => setRowFilter('ones')}
                           className={`px-2.5 py-1 rounded font-semibold transition-colors cursor-pointer ${
                             rowFilter === 'ones'
-                              ? isLight ? 'bg-emerald-100 text-emerald-800 shadow-xs' : 'bg-[#A58D66]/20 text-[#DFCCA8]'
-                              : isLight ? 'text-slate-600 hover:text-slate-900' : 'text-[#E5E1DD]/60 hover:text-[#E5E1DD]'
+                              ? isLight ? 'bg-zinc-100 text-zinc-800 shadow-xs' : 'bg-[#FFFFFF]/20 text-[#E8E8E8]'
+                              : isLight ? 'text-slate-600 hover:text-slate-900' : 'text-[#F5F5F5]/60 hover:text-[#F5F5F5]'
                           }`}
                         >
                           Minterms ({mintermMap[activeOutputName]?.length || 0})
@@ -732,8 +732,8 @@ export const TruthTableModal: React.FC = () => {
                           onClick={() => setRowFilter('zeros')}
                           className={`px-2.5 py-1 rounded font-semibold transition-colors cursor-pointer ${
                             rowFilter === 'zeros'
-                              ? isLight ? 'bg-white text-slate-800 shadow-xs' : 'bg-[#0d171f] text-[#DFCCA8]'
-                              : isLight ? 'text-slate-600 hover:text-slate-900' : 'text-[#E5E1DD]/60 hover:text-[#E5E1DD]'
+                              ? isLight ? 'bg-white text-slate-800 shadow-xs' : 'bg-[#141415] text-[#E8E8E8]'
+                              : isLight ? 'text-slate-600 hover:text-slate-900' : 'text-[#F5F5F5]/60 hover:text-[#F5F5F5]'
                           }`}
                         >
                           Maxterms ({maxtermMap[activeOutputName]?.length || 0})
@@ -741,7 +741,7 @@ export const TruthTableModal: React.FC = () => {
                       </div>
 
                       <div className="relative">
-                        <Search className="w-3.5 h-3.5 text-[#E5E1DD]/60 absolute left-2.5 top-2" />
+                        <Search className="w-3.5 h-3.5 text-[#F5F5F5]/60 absolute left-2.5 top-2" />
                         <input
                           type="text"
                           value={searchQuery}
@@ -750,17 +750,17 @@ export const TruthTableModal: React.FC = () => {
                           className={`pl-8 pr-3 py-1 border rounded-lg text-xs font-mono focus:outline-none w-36 sm:w-44 ${
                             isLight
                               ? 'bg-white border-slate-300 text-slate-800 placeholder-slate-400 focus:border-slate-500'
-                              : 'bg-[#080f14] border-[#A58D66]/20 text-[#E5E1DD] focus:border-[#A58D66]/50'
+                              : 'bg-[#000000] border-[#FFFFFF]/20 text-[#F5F5F5] focus:border-[#FFFFFF]/50'
                           }`}
                         />
                       </div>
                     </div>
 
-                    <div className={`flex items-center gap-2 text-[11px] ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>
+                    <div className={`flex items-center gap-2 text-[11px] ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>
                       <span className="flex items-center gap-1">
-                        <span className="w-2 h-2 rounded-full bg-[#DFCCA8] animate-pulse" />
+                        <span className="w-2 h-2 rounded-full bg-[#E8E8E8] animate-pulse" />
                         <span>Current Canvas Row:</span>
-                        <strong className={`font-mono ${isLight ? 'text-slate-800' : 'text-[#E5E1DD]'}`}>
+                        <strong className={`font-mono ${isLight ? 'text-slate-800' : 'text-[#F5F5F5]'}`}>
                           {activeRowIndex >= 0 ? `#${activeRowIndex}` : 'None'}
                         </strong>
                       </span>
@@ -769,20 +769,20 @@ export const TruthTableModal: React.FC = () => {
 
                   {/* Truth Table Grid */}
                   <div className={`border rounded-xl overflow-hidden shadow-xs max-h-96 overflow-y-auto ${
-                    isLight ? 'border-slate-300 bg-white' : 'border-[#A58D66]/20 bg-[#080f14]'
+                    isLight ? 'border-slate-300 bg-white' : 'border-[#FFFFFF]/20 bg-[#000000]'
                   }`}>
                     <table className="w-full text-center border-collapse text-xs font-mono">
                       <thead className={`sticky top-0 border-b z-10 ${
-                        isLight ? 'bg-slate-100 border-slate-300 text-slate-700' : 'bg-[#0d171f] border-[#A58D66]/20 text-[#DFCCA8]'
+                        isLight ? 'bg-slate-100 border-slate-300 text-slate-700' : 'bg-[#141415] border-[#FFFFFF]/20 text-[#E8E8E8]'
                       }`}>
                         <tr>
-                          <th className={`p-2 border-r w-12 ${isLight ? 'border-slate-300 text-[#E5E1DD]/45' : 'border-[#A58D66]/20 text-[#E5E1DD]/45'}`}>#</th>
-                          <th className={`p-2 border-r w-16 ${isLight ? 'border-slate-300 text-[#E5E1DD]/45' : 'border-[#A58D66]/20 text-[#E5E1DD]/45'}`}>Term</th>
+                          <th className={`p-2 border-r w-12 ${isLight ? 'border-slate-300 text-[#F5F5F5]/45' : 'border-[#FFFFFF]/20 text-[#F5F5F5]/45'}`}>#</th>
+                          <th className={`p-2 border-r w-16 ${isLight ? 'border-slate-300 text-[#F5F5F5]/45' : 'border-[#FFFFFF]/20 text-[#F5F5F5]/45'}`}>Term</th>
                           {variableGroups.map((v) => (
                             <th
                               key={v.name}
                               style={{ color: currentTheme.primaryColor }}
-                              className={`p-2 border-r font-bold ${isLight ? 'border-slate-300' : 'border-[#A58D66]/20'}`}
+                              className={`p-2 border-r font-bold ${isLight ? 'border-slate-300' : 'border-[#FFFFFF]/20'}`}
                             >
                               {v.name}
                             </th>
@@ -792,23 +792,23 @@ export const TruthTableModal: React.FC = () => {
                               key={out.name}
                               style={{ color: currentTheme.accentColor }}
                               className={`p-2 border-r last:border-r-0 font-bold ${
-                                isLight ? 'border-slate-300 bg-slate-100/90' : 'border-[#A58D66]/20 bg-[#0d171f]'
+                                isLight ? 'border-slate-300 bg-slate-100/90' : 'border-[#FFFFFF]/20 bg-[#141415]'
                               }`}
                             >
                               {out.name}
                             </th>
                           ))}
-                          <th className={`p-2 w-24 ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/45'}`}>Action</th>
+                          <th className={`p-2 w-24 ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/45'}`}>Action</th>
                         </tr>
                       </thead>
                       <tbody className={`divide-y ${
-                        isLight ? 'divide-slate-200 text-slate-700' : 'divide-slate-800/60 text-[#DFCCA8]'
+                        isLight ? 'divide-slate-200 text-slate-700' : 'divide-slate-800/60 text-[#E8E8E8]'
                       }`}>
                         {filteredRows.length === 0 ? (
                           <tr>
                             <td
                               colSpan={3 + variableGroups.length + outputGroups.length}
-                              className={`p-6 text-center font-sans ${isLight ? 'text-[#E5E1DD]/60' : 'text-[#E5E1DD]/45'}`}
+                              className={`p-6 text-center font-sans ${isLight ? 'text-[#F5F5F5]/60' : 'text-[#F5F5F5]/45'}`}
                             >
                               No matching truth table rows for current filter criteria.
                             </td>
@@ -830,16 +830,16 @@ export const TruthTableModal: React.FC = () => {
                                     : {}
                                 }
                                 className={`transition-colors ${
-                                  isLight ? 'hover:bg-slate-50' : 'hover:bg-[#0d171f]/50'
+                                  isLight ? 'hover:bg-slate-50' : 'hover:bg-[#141415]/50'
                                 } ${isLive ? 'font-semibold' : ''}`}
                               >
                                 <td className={`p-2 border-r font-mono text-[11px] ${
-                                  isLight ? 'border-slate-200 text-[#E5E1DD]/45' : 'border-slate-800/80 text-[#E5E1DD]/45'
+                                  isLight ? 'border-slate-200 text-[#F5F5F5]/45' : 'border-slate-800/80 text-[#F5F5F5]/45'
                                 }`}>
                                   {row.rowIndex}
                                 </td>
                                 <td className={`p-2 border-r font-mono text-[11px] ${
-                                  isLight ? 'border-slate-200 text-slate-600' : 'border-slate-800/80 text-[#E5E1DD]/60'
+                                  isLight ? 'border-slate-200 text-slate-600' : 'border-slate-800/80 text-[#F5F5F5]/60'
                                 }`}>
                                   {row.minterm}
                                 </td>
@@ -860,7 +860,7 @@ export const TruthTableModal: React.FC = () => {
                                             : {}
                                         }
                                         className={`px-2 py-0.5 rounded font-bold inline-block min-w-6 text-center ${
-                                          val === 1 ? 'border shadow-xs' : isLight ? 'text-[#E5E1DD]/45 bg-slate-100' : 'text-[#E5E1DD]/45 bg-[#080f14]/60'
+                                          val === 1 ? 'border shadow-xs' : isLight ? 'text-[#F5F5F5]/45 bg-slate-100' : 'text-[#F5F5F5]/45 bg-[#000000]/60'
                                         }`}
                                       >
                                         {val}
@@ -874,7 +874,7 @@ export const TruthTableModal: React.FC = () => {
                                     <td
                                       key={out.name}
                                       className={`p-2 border-r last:border-r-0 ${
-                                        isLight ? 'border-slate-200 bg-slate-50/50' : 'border-[#A58D66]/20 bg-[#080f14]'
+                                        isLight ? 'border-slate-200 bg-slate-50/50' : 'border-[#FFFFFF]/20 bg-[#000000]'
                                       }`}
                                     >
                                       <span
@@ -886,7 +886,7 @@ export const TruthTableModal: React.FC = () => {
                                                 borderColor: `${currentTheme.accentColor}60`,
                                               }
                                             : outVal === 'X'
-                                            ? { backgroundColor: 'rgba(165,141,102,0.2)', color: '#DFCCA8' }
+                                            ? { backgroundColor: 'rgba(255,255,255,0.2)', color: '#E8E8E8' }
                                             : outVal === 'Z'
                                             ? { backgroundColor: '#f59e0b33', color: '#fbbf24' }
                                             : {}
@@ -895,8 +895,8 @@ export const TruthTableModal: React.FC = () => {
                                           outVal === 1
                                             ? 'border shadow-xs'
                                             : isLight
-                                            ? 'text-[#E5E1DD]/45 bg-slate-100'
-                                            : 'text-[#E5E1DD]/45 bg-[#080f14]/80'
+                                            ? 'text-[#F5F5F5]/45 bg-slate-100'
+                                            : 'text-[#F5F5F5]/45 bg-[#000000]/80'
                                         }`}
                                       >
                                         {outVal}
@@ -918,12 +918,12 @@ export const TruthTableModal: React.FC = () => {
                                     }
                                     className={`px-2 py-1 rounded text-[10px] font-bold transition-all border cursor-pointer ${
                                       isApplied
-                                        ? 'bg-[#A58D66] text-[#080f14] border-[#DFCCA8]'
+                                        ? 'bg-[#FFFFFF] text-[#000000] border-[#E8E8E8]'
                                         : isLive
                                         ? 'border'
                                         : isLight
                                         ? 'bg-white hover:bg-slate-100 text-slate-700 border-slate-300'
-                                        : 'bg-[#080f14] hover:bg-[#0d171f] text-[#DFCCA8] border-[#A58D66]/20'
+                                        : 'bg-[#000000] hover:bg-[#141415] text-[#E8E8E8] border-[#FFFFFF]/20'
                                     }`}
                                     title="Drive canvas switches to this combination in real-time"
                                   >
@@ -933,7 +933,7 @@ export const TruthTableModal: React.FC = () => {
                                       </span>
                                     ) : isLive ? (
                                       <span className="flex items-center gap-1 justify-center">
-                                        <span className="w-1.5 h-1.5 rounded-full bg-[#76B4C2] animate-ping" />
+                                        <span className="w-1.5 h-1.5 rounded-full bg-[#B4B4B4] animate-ping" />
                                         Active
                                       </span>
                                     ) : (
@@ -970,11 +970,11 @@ export const TruthTableModal: React.FC = () => {
                           style={{ color: currentTheme.primaryColor }}
                           className="w-4 h-4"
                         />
-                        <span className={`font-bold text-xs ${isLight ? 'text-slate-900' : 'text-[#E5E1DD]'}`}>
+                        <span className={`font-bold text-xs ${isLight ? 'text-slate-900' : 'text-[#F5F5F5]'}`}>
                           Minimized Boolean Equation ({activeOutputName})
                         </span>
                         <span className={`text-[10px] px-2 py-0.5 rounded border font-mono ${
-                          isLight ? 'bg-white border-slate-300 text-slate-700' : 'bg-[#080f14] border-slate-800 text-[#DFCCA8]'
+                          isLight ? 'bg-white border-slate-300 text-slate-700' : 'bg-[#000000] border-slate-800 text-[#E8E8E8]'
                         }`}>
                           Optimal Prime Implicants
                         </span>
@@ -986,13 +986,13 @@ export const TruthTableModal: React.FC = () => {
                           className={`flex items-center gap-1 px-2.5 py-1 rounded text-[11px] font-semibold border transition-colors cursor-pointer ${
                             isLight
                               ? 'bg-white hover:bg-slate-100 text-slate-700 border-slate-300 shadow-xs'
-                              : 'bg-[#080f14] hover:bg-[#0d171f] text-[#DFCCA8] border-slate-800'
+                              : 'bg-[#000000] hover:bg-[#141415] text-[#E8E8E8] border-slate-800'
                           }`}
                         >
                           {copiedFormat === 'minimized' ? (
                             <>
-                              <Check className="w-3 h-3 text-emerald-500" />
-                              <span className="text-emerald-500">Copied</span>
+                              <Check className="w-3 h-3 text-zinc-500" />
+                              <span className="text-zinc-500">Copied</span>
                             </>
                           ) : (
                             <>
@@ -1005,7 +1005,7 @@ export const TruthTableModal: React.FC = () => {
                           onClick={handleSynthesizeMinimizedCircuit}
                           style={{
                             backgroundColor: currentTheme.primaryColor,
-                            color: '#080f14',
+                            color: '#000000',
                           }}
                           className="flex items-center gap-1.5 px-3 py-1 rounded font-bold text-[11px] transition-all shadow-xs cursor-pointer hover:opacity-95"
                         >
@@ -1018,17 +1018,17 @@ export const TruthTableModal: React.FC = () => {
                     <div className={`p-3 rounded-lg border font-mono text-sm sm:text-base flex items-center justify-between ${
                       isLight
                         ? 'bg-white border-slate-200 text-slate-900 shadow-xs'
-                        : 'bg-[#080f14] border-[#A58D66]/20 text-[#E5E1DD]'
+                        : 'bg-[#000000] border-[#FFFFFF]/20 text-[#F5F5F5]'
                     }`}>
                       <span className="font-bold tracking-wide">
                         <span style={{ color: currentTheme.accentColor }}>{activeOutputName}</span>
-                        <span className={`mx-2 ${isLight ? 'text-[#E5E1DD]/60' : 'text-[#E5E1DD]/60'}`}>=</span>
+                        <span className={`mx-2 ${isLight ? 'text-[#F5F5F5]/60' : 'text-[#F5F5F5]/60'}`}>=</span>
                         <span style={{ color: currentTheme.primaryColor }}>{minimizedSOP}</span>
                       </span>
                     </div>
 
                     {synthesisSuccess && (
-                      <div className="p-2.5 rounded-lg bg-[#76B4C2]/10 border border-emerald-500/30 text-emerald-600 text-xs flex items-center gap-2">
+                      <div className="p-2.5 rounded-lg bg-[#B4B4B4]/10 border border-zinc-500/30 text-zinc-600 text-xs flex items-center gap-2">
                         <CheckCircle2 className="w-4 h-4 shrink-0" />
                         <span>{synthesisSuccess}</span>
                       </div>
@@ -1039,58 +1039,58 @@ export const TruthTableModal: React.FC = () => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {/* Canonical SOP */}
                     <div className={`p-3.5 border rounded-xl space-y-2 ${
-                      isLight ? 'bg-slate-50 border-slate-200' : 'bg-[#080f14] border-[#A58D66]/20'
+                      isLight ? 'bg-slate-50 border-slate-200' : 'bg-[#000000] border-[#FFFFFF]/20'
                     }`}>
                       <div className="flex items-center justify-between">
                         <span className={`text-[11px] font-bold uppercase tracking-wider ${
-                          isLight ? 'text-slate-700' : 'text-[#DFCCA8]'
+                          isLight ? 'text-slate-700' : 'text-[#E8E8E8]'
                         }`}>
                           Canonical Sum of Products (SOP)
                         </span>
                         <button
                           onClick={() => copyToClipboard(canonicalSOP, 'sop')}
                           className={`text-[10px] flex items-center gap-1 font-mono cursor-pointer ${
-                            isLight ? 'text-[#E5E1DD]/45 hover:text-slate-800' : 'text-[#E5E1DD]/60 hover:text-[#E5E1DD]'
+                            isLight ? 'text-[#F5F5F5]/45 hover:text-slate-800' : 'text-[#F5F5F5]/60 hover:text-[#F5F5F5]'
                           }`}
                         >
                           {copiedFormat === 'sop' ? 'Copied!' : 'Copy Σm'}
                         </button>
                       </div>
                       <div className={`p-2.5 border rounded-lg font-mono text-xs break-words ${
-                        isLight ? 'bg-white border-slate-200 text-emerald-700 shadow-xs' : 'bg-[#080f14] border-[#A58D66]/20 text-[#DFCCA8]'
+                        isLight ? 'bg-white border-slate-200 text-zinc-700 shadow-xs' : 'bg-[#000000] border-[#FFFFFF]/20 text-[#E8E8E8]'
                       }`}>
                         {canonicalSOP}
                       </div>
-                      <p className={`text-[10px] ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>
+                      <p className={`text-[10px] ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>
                         Evaluates to 1 for all true minterm input combinations.
                       </p>
                     </div>
 
                     {/* Canonical POS */}
                     <div className={`p-3.5 border rounded-xl space-y-2 ${
-                      isLight ? 'bg-slate-50 border-slate-200' : 'bg-[#080f14] border-[#A58D66]/20'
+                      isLight ? 'bg-slate-50 border-slate-200' : 'bg-[#000000] border-[#FFFFFF]/20'
                     }`}>
                       <div className="flex items-center justify-between">
                         <span className={`text-[11px] font-bold uppercase tracking-wider ${
-                          isLight ? 'text-slate-700' : 'text-[#DFCCA8]'
+                          isLight ? 'text-slate-700' : 'text-[#E8E8E8]'
                         }`}>
                           Canonical Product of Sums (POS)
                         </span>
                         <button
                           onClick={() => copyToClipboard(canonicalPOS, 'pos')}
                           className={`text-[10px] flex items-center gap-1 font-mono cursor-pointer ${
-                            isLight ? 'text-[#E5E1DD]/45 hover:text-slate-800' : 'text-[#E5E1DD]/60 hover:text-[#E5E1DD]'
+                            isLight ? 'text-[#F5F5F5]/45 hover:text-slate-800' : 'text-[#F5F5F5]/60 hover:text-[#F5F5F5]'
                           }`}
                         >
                           {copiedFormat === 'pos' ? 'Copied!' : 'Copy ΠM'}
                         </button>
                       </div>
                       <div className={`p-2.5 border rounded-lg font-mono text-xs break-words ${
-                        isLight ? 'bg-white border-slate-200 text-cyan-700 shadow-xs' : 'bg-[#080f14] border-[#A58D66]/20 text-[#DFCCA8]'
+                        isLight ? 'bg-white border-slate-200 text-zinc-700 shadow-xs' : 'bg-[#000000] border-[#FFFFFF]/20 text-[#E8E8E8]'
                       }`}>
                         {canonicalPOS}
                       </div>
-                      <p className={`text-[10px] ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>
+                      <p className={`text-[10px] ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>
                         Evaluates to 0 for all false maxterm input combinations.
                       </p>
                     </div>
@@ -1098,15 +1098,15 @@ export const TruthTableModal: React.FC = () => {
 
                   {/* Export / HDL Formats */}
                   <div className={`p-3.5 border rounded-xl space-y-2 ${
-                    isLight ? 'bg-slate-50 border-slate-200' : 'bg-[#080f14] border-[#A58D66]/20'
+                    isLight ? 'bg-slate-50 border-slate-200' : 'bg-[#000000] border-[#FFFFFF]/20'
                   }`}>
                     <span className={`text-[11px] font-bold uppercase tracking-wider block ${
-                      isLight ? 'text-slate-600' : 'text-[#E5E1DD]/60'
+                      isLight ? 'text-slate-600' : 'text-[#F5F5F5]/60'
                     }`}>
                       Hardware Description Code (Verilog / VHDL):
                     </span>
                     <div className={`p-2.5 rounded-lg border font-mono text-xs flex items-center justify-between ${
-                      isLight ? 'bg-white border-slate-200 text-slate-800' : 'bg-[#080f14] border-[#A58D66]/20 text-[#DFCCA8]'
+                      isLight ? 'bg-white border-slate-200 text-slate-800' : 'bg-[#000000] border-[#FFFFFF]/20 text-[#E8E8E8]'
                     }`}>
                       <code>
                         assign {activeOutputName} = {minimizedSOP.replace(/ \+ /g, ' | ').replace(/([A-Za-z0-9_]+)'/g, '~$1').replace(/([A-Za-z0-9_]+)([A-Za-z0-9_]+)/g, '$1 & $2')};
@@ -1119,7 +1119,7 @@ export const TruthTableModal: React.FC = () => {
                           )
                         }
                         className={`text-[10px] ml-2 cursor-pointer ${
-                          isLight ? 'text-[#E5E1DD]/45 hover:text-slate-800' : 'text-[#E5E1DD]/60 hover:text-[#E5E1DD]'
+                          isLight ? 'text-[#F5F5F5]/45 hover:text-slate-800' : 'text-[#F5F5F5]/60 hover:text-[#F5F5F5]'
                         }`}
                       >
                         {copiedFormat === 'verilog' ? 'Copied' : 'Copy'}
@@ -1134,18 +1134,18 @@ export const TruthTableModal: React.FC = () => {
                 <div className="space-y-4">
                   {kmapAnalysis ? (
                     <div className={`p-4 border rounded-xl space-y-3 ${
-                      isLight ? 'bg-slate-50 border-slate-200' : 'bg-[#080f14] border-[#A58D66]/20'
+                      isLight ? 'bg-slate-50 border-slate-200' : 'bg-[#000000] border-[#FFFFFF]/20'
                     }`}>
                       <div className={`flex items-center justify-between border-b pb-2 ${
-                        isLight ? 'border-slate-200' : 'border-[#A58D66]/20'
+                        isLight ? 'border-slate-200' : 'border-[#FFFFFF]/20'
                       }`}>
                         <span className={`font-bold text-xs flex items-center gap-1.5 ${
-                          isLight ? 'text-slate-800' : 'text-[#E5E1DD]'
+                          isLight ? 'text-slate-800' : 'text-[#F5F5F5]'
                         }`}>
-                          <Layers className="w-4 h-4 text-[#DFCCA8]" />
+                          <Layers className="w-4 h-4 text-[#E8E8E8]" />
                           <span>2D Karnaugh Map Matrix for {activeOutputName}</span>
                         </span>
-                        <span className={`text-[10px] font-mono ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>
+                        <span className={`text-[10px] font-mono ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>
                           {kmapAnalysis.variableCount}-Variable Gray-Code Grid
                         </span>
                       </div>
@@ -1156,7 +1156,7 @@ export const TruthTableModal: React.FC = () => {
                           <thead>
                             <tr>
                               <th className={`p-2 border text-[10px] ${
-                                isLight ? 'text-[#E5E1DD]/45 border-slate-300 bg-slate-100' : 'text-[#E5E1DD]/45 border-[#A58D66]/20 bg-[#080f14]'
+                                isLight ? 'text-[#F5F5F5]/45 border-slate-300 bg-slate-100' : 'text-[#F5F5F5]/45 border-[#FFFFFF]/20 bg-[#000000]'
                               }`}>
                                 {kmapAnalysis.rowVarNames.join('')} \ {kmapAnalysis.colVarNames.join('')}
                               </th>
@@ -1164,7 +1164,7 @@ export const TruthTableModal: React.FC = () => {
                                 <th
                                   key={colH}
                                   className={`p-2 border font-bold min-w-12 text-center ${
-                                    isLight ? 'border-slate-300 text-cyan-700 bg-slate-100' : 'border-[#A58D66]/20 text-[#DFCCA8] bg-[#0d171f]'
+                                    isLight ? 'border-slate-300 text-zinc-700 bg-slate-100' : 'border-[#FFFFFF]/20 text-[#E8E8E8] bg-[#141415]'
                                   }`}
                                 >
                                   {colH}
@@ -1176,7 +1176,7 @@ export const TruthTableModal: React.FC = () => {
                             {kmapAnalysis.grid.map((rowCells, rIdx) => (
                               <tr key={rIdx}>
                                 <th className={`p-2 border font-bold text-center ${
-                                  isLight ? 'border-slate-300 text-purple-700 bg-slate-100' : 'border-[#A58D66]/20 text-[#DFCCA8] bg-[#0d171f]'
+                                  isLight ? 'border-slate-300 text-zinc-700 bg-slate-100' : 'border-[#FFFFFF]/20 text-[#E8E8E8] bg-[#141415]'
                                 }`}>
                                   {kmapAnalysis.rowHeaders[rIdx]}
                                 </th>
@@ -1196,13 +1196,13 @@ export const TruthTableModal: React.FC = () => {
                                       cell.value === 1
                                         ? 'shadow-inner'
                                         : isLight
-                                        ? 'border-slate-300 text-[#E5E1DD]/45 bg-white'
-                                        : 'border-[#A58D66]/20 text-[#E5E1DD]/45 bg-[#080f14]'
+                                        ? 'border-slate-300 text-[#F5F5F5]/45 bg-white'
+                                        : 'border-[#FFFFFF]/20 text-[#F5F5F5]/45 bg-[#000000]'
                                     }`}
                                   >
                                     <div className="flex flex-col items-center">
                                       <span>{cell.value}</span>
-                                      <span className={`text-[9px] font-normal ${isLight ? 'text-[#E5E1DD]/60' : 'text-[#E5E1DD]/45'}`}>
+                                      <span className={`text-[9px] font-normal ${isLight ? 'text-[#F5F5F5]/60' : 'text-[#F5F5F5]/45'}`}>
                                         m{cell.mintermIndex}
                                       </span>
                                     </div>
@@ -1216,7 +1216,7 @@ export const TruthTableModal: React.FC = () => {
                     </div>
                   ) : (
                     <div className={`p-6 text-center rounded-xl border ${
-                      isLight ? 'text-[#E5E1DD]/45 bg-slate-50 border-slate-200' : 'text-[#E5E1DD]/60 bg-[#080f14] border-[#A58D66]/20'
+                      isLight ? 'text-[#F5F5F5]/45 bg-slate-50 border-slate-200' : 'text-[#F5F5F5]/60 bg-[#000000] border-[#FFFFFF]/20'
                     }`}>
                       <p>K-Map matrix is supported for 2, 3, or 4 input variables.</p>
                     </div>
@@ -1224,18 +1224,18 @@ export const TruthTableModal: React.FC = () => {
 
                   {/* Digital Timing Waveform Sequence Preview */}
                   <div className={`p-4 border rounded-xl space-y-3 ${
-                    isLight ? 'bg-slate-50 border-slate-200' : 'bg-[#080f14] border-[#A58D66]/20'
+                    isLight ? 'bg-slate-50 border-slate-200' : 'bg-[#000000] border-[#FFFFFF]/20'
                   }`}>
                     <div className={`flex items-center justify-between border-b pb-2 ${
-                      isLight ? 'border-slate-200' : 'border-[#A58D66]/20'
+                      isLight ? 'border-slate-200' : 'border-[#FFFFFF]/20'
                     }`}>
                       <span className={`font-bold text-xs flex items-center gap-1.5 ${
-                        isLight ? 'text-slate-800' : 'text-[#E5E1DD]'
+                        isLight ? 'text-slate-800' : 'text-[#F5F5F5]'
                       }`}>
-                        <Activity className="w-4 h-4 text-[#DFCCA8]" />
+                        <Activity className="w-4 h-4 text-[#E8E8E8]" />
                         <span>Digital Timing Waveform Preview</span>
                       </span>
-                      <span className={`text-[10px] font-mono ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>
+                      <span className={`text-[10px] font-mono ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>
                         {totalCombinations} State Steps
                       </span>
                     </div>
@@ -1251,7 +1251,7 @@ export const TruthTableModal: React.FC = () => {
                             {v.name}:
                           </span>
                           <div className={`flex-1 flex h-6 border rounded overflow-hidden ${
-                            isLight ? 'bg-slate-200/70 border-slate-300' : 'bg-[#080f14] border-[#A58D66]/20'
+                            isLight ? 'bg-slate-200/70 border-slate-300' : 'bg-[#000000] border-[#FFFFFF]/20'
                           }`}>
                             {tableRows.map((r) => {
                               const bit = r.inputs[v.name];
@@ -1259,7 +1259,7 @@ export const TruthTableModal: React.FC = () => {
                                 <div
                                   key={r.rowIndex}
                                   className={`flex-1 border-r flex items-center justify-center relative ${
-                                    isLight ? 'border-slate-300' : 'border-[#A58D66]/20'
+                                    isLight ? 'border-slate-300' : 'border-[#FFFFFF]/20'
                                   }`}
                                   title={`Step ${r.rowIndex}: ${v.name} = ${bit}`}
                                 >
@@ -1273,7 +1273,7 @@ export const TruthTableModal: React.FC = () => {
                                             opacity: 0.9,
                                           }
                                         : {
-                                            backgroundColor: isLight ? '#94a3b8' : '#1d2c38',
+                                            backgroundColor: isLight ? '#94a3b8' : '#29292A',
                                             height: '15%',
                                             width: '100%',
                                             marginTop: 'auto',
@@ -1289,7 +1289,7 @@ export const TruthTableModal: React.FC = () => {
 
                       {/* Output Trace */}
                       <div className={`flex items-center gap-3 text-[11px] font-mono pt-1 border-t ${
-                        isLight ? 'border-slate-200' : 'border-[#A58D66]/20'
+                        isLight ? 'border-slate-200' : 'border-[#FFFFFF]/20'
                       }`}>
                         <span
                           style={{ color: currentTheme.accentColor }}
@@ -1298,7 +1298,7 @@ export const TruthTableModal: React.FC = () => {
                           {activeOutputName}:
                         </span>
                         <div className={`flex-1 flex h-6 border rounded overflow-hidden ${
-                          isLight ? 'bg-slate-200/70 border-slate-300' : 'bg-[#080f14] border-[#A58D66]/20'
+                          isLight ? 'bg-slate-200/70 border-slate-300' : 'bg-[#000000] border-[#FFFFFF]/20'
                         }`}>
                           {tableRows.map((r) => {
                             const outBit = r.outputs[activeOutputName];
@@ -1306,7 +1306,7 @@ export const TruthTableModal: React.FC = () => {
                               <div
                                 key={r.rowIndex}
                                 className={`flex-1 border-r flex items-center justify-center relative ${
-                                  isLight ? 'border-slate-300' : 'border-[#A58D66]/20'
+                                  isLight ? 'border-slate-300' : 'border-[#FFFFFF]/20'
                                 }`}
                                 title={`Step ${r.rowIndex}: ${activeOutputName} = ${outBit}`}
                               >
@@ -1320,7 +1320,7 @@ export const TruthTableModal: React.FC = () => {
                                           opacity: 0.95,
                                         }
                                       : {
-                                          backgroundColor: isLight ? '#94a3b8' : '#1d2c38',
+                                          backgroundColor: isLight ? '#94a3b8' : '#29292A',
                                           height: '15%',
                                           width: '100%',
                                           marginTop: 'auto',
@@ -1348,7 +1348,7 @@ export const TruthTableModal: React.FC = () => {
           }}
           className="px-4 sm:px-6 py-3 border-t flex items-center justify-between shrink-0 transition-colors"
         >
-          <div className={`flex items-center gap-2 text-xs ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>
+          <div className={`flex items-center gap-2 text-xs ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>
             <span className="hidden sm:inline">
               Variables automatically unified by label & net names.
             </span>
@@ -1360,7 +1360,7 @@ export const TruthTableModal: React.FC = () => {
               className={`px-4 py-2 rounded-xl font-semibold text-xs transition-colors border cursor-pointer ${
                 isLight
                   ? 'text-slate-700 hover:text-slate-900 bg-white hover:bg-slate-100 border-slate-300 shadow-xs'
-                  : 'text-[#DFCCA8] hover:text-[#E5E1DD] hover:bg-[#0d171f] border-[#A58D66]/30'
+                  : 'text-[#E8E8E8] hover:text-[#F5F5F5] hover:bg-[#141415] border-[#FFFFFF]/30'
               }`}
             >
               Close

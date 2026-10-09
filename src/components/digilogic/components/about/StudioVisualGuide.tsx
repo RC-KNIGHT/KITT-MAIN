@@ -188,18 +188,18 @@ export const StudioVisualGuide: React.FC = () => {
   const currentZone = zones.find((z) => z.id === activeZone) || zones[0];
 
   return (
-    <section id="studio-guide" className="py-12 sm:py-16 border-b border-[#A58D66]/20 bg-[#080f14]">
+    <section id="studio-guide" className="py-12 sm:py-16 border-b border-[#FFFFFF]/20 bg-[#000000]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#A58D66]/10 border border-[#A58D66]/30 text-[#DFCCA8] text-xs font-mono mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFFFFF]/10 border border-[#FFFFFF]/30 text-[#E8E8E8] text-xs font-mono mb-4">
             <MoreHorizontal className="w-3.5 h-3.5" />
             <span>Workspace & Menus Architecture</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#E5E1DD] tracking-tight leading-tight mb-4">
-            The 3 Core Menus & <span className="text-[#DFCCA8]">Toolbar Systems</span>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#F5F5F5] tracking-tight leading-tight mb-4">
+            The 3 Core Menus & <span className="text-[#E8E8E8]">Toolbar Systems</span>
           </h2>
-          <p className="text-sm sm:text-base text-[#E5E1DD]/60 leading-relaxed">
+          <p className="text-sm sm:text-base text-[#F5F5F5]/60 leading-relaxed">
             DigiLogic Lab is organized into three unified control systems designed for maximum productivity on desktop, touchscreens, and tablets.
           </p>
         </div>
@@ -215,16 +215,16 @@ export const StudioVisualGuide: React.FC = () => {
                 onClick={() => setActiveZone(zone.id)}
                 className={`text-left p-5 rounded-2xl border transition-all duration-200 ${
                   isSelected
-                    ? 'bg-[#0d171f] border-[#A58D66]/60 shadow-lg shadow-[#A58D66]/10 ring-1 ring-[#A58D66]/40'
-                    : 'bg-[#080f14] border-[#A58D66]/20 hover:border-[#A58D66]/40 text-[#DFCCA8]'
+                    ? 'bg-[#141415] border-[#FFFFFF]/60 shadow-lg shadow-[#FFFFFF]/10 ring-1 ring-[#FFFFFF]/40'
+                    : 'bg-[#000000] border-[#FFFFFF]/20 hover:border-[#FFFFFF]/40 text-[#E8E8E8]'
                 }`}
               >
                 <div className="flex items-center justify-between mb-3">
                   <div
                     className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold ${
                       isSelected
-                        ? 'bg-[#A58D66]/20 text-[#DFCCA8] border border-[#A58D66]/40'
-                        : 'bg-[#0d171f] text-[#E5E1DD]/60'
+                        ? 'bg-[#FFFFFF]/20 text-[#E8E8E8] border border-[#FFFFFF]/40'
+                        : 'bg-[#141415] text-[#F5F5F5]/60'
                     }`}
                   >
                     <Icon className="w-5 h-5" />
@@ -232,31 +232,31 @@ export const StudioVisualGuide: React.FC = () => {
                   <span
                     className={`text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full border ${
                       isSelected
-                        ? 'bg-[#A58D66]/20 text-[#DFCCA8] border-[#A58D66]/40'
-                        : 'bg-[#0d171f] text-[#E5E1DD]/60 border-[#A58D66]/20'
+                        ? 'bg-[#FFFFFF]/20 text-[#E8E8E8] border-[#FFFFFF]/40'
+                        : 'bg-[#141415] text-[#F5F5F5]/60 border-[#FFFFFF]/20'
                     }`}
                   >
                     {zone.badge}
                   </span>
                 </div>
-                <h3 className="font-bold text-base text-[#E5E1DD] mb-1">{zone.title}</h3>
-                <p className="text-xs text-[#E5E1DD]/60 line-clamp-2 leading-relaxed">{zone.subtitle}</p>
+                <h3 className="font-bold text-base text-[#F5F5F5] mb-1">{zone.title}</h3>
+                <p className="text-xs text-[#F5F5F5]/60 line-clamp-2 leading-relaxed">{zone.subtitle}</p>
               </button>
             );
           })}
         </div>
 
         {/* Active Zone Detail Showcase Card */}
-        <div className="bg-[#0d171f] border border-[#A58D66]/20 rounded-3xl p-6 sm:p-8 shadow-xl">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 mb-6 border-b border-[#A58D66]/20">
+        <div className="bg-[#141415] border border-[#FFFFFF]/20 rounded-3xl p-6 sm:p-8 shadow-xl">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 mb-6 border-b border-[#FFFFFF]/20">
             <div>
               <div className="flex items-center gap-2 mb-1">
-                <span className="text-xs font-mono font-bold text-[#DFCCA8] px-2 py-0.5 rounded bg-[#A58D66]/10 border border-[#A58D66]/30">
+                <span className="text-xs font-mono font-bold text-[#E8E8E8] px-2 py-0.5 rounded bg-[#FFFFFF]/10 border border-[#FFFFFF]/30">
                   {currentZone.badge}
                 </span>
-                <h3 className="text-xl sm:text-2xl font-bold text-[#E5E1DD]">{currentZone.title}</h3>
+                <h3 className="text-xl sm:text-2xl font-bold text-[#F5F5F5]">{currentZone.title}</h3>
               </div>
-              <p className="text-sm text-[#DFCCA8] leading-relaxed max-w-3xl mt-1">
+              <p className="text-sm text-[#E8E8E8] leading-relaxed max-w-3xl mt-1">
                 {currentZone.description}
               </p>
             </div>
@@ -269,21 +269,21 @@ export const StudioVisualGuide: React.FC = () => {
               return (
                 <div
                   key={idx}
-                  className="p-4 rounded-2xl bg-[#080f14] border border-[#A58D66]/20 hover:border-[#A58D66]/50 transition-colors flex flex-col justify-between"
+                  className="p-4 rounded-2xl bg-[#000000] border border-[#FFFFFF]/20 hover:border-[#FFFFFF]/50 transition-colors flex flex-col justify-between"
                 >
                   <div>
                     <div className="flex items-center justify-between mb-2.5">
-                      <div className="w-8 h-8 rounded-lg bg-[#0d171f] text-[#DFCCA8] flex items-center justify-center">
+                      <div className="w-8 h-8 rounded-lg bg-[#141415] text-[#E8E8E8] flex items-center justify-center">
                         <ToolIcon className="w-4 h-4" />
                       </div>
                       {tool.badge && (
-                        <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#A58D66]/10 text-[#DFCCA8] border border-[#A58D66]/30 font-semibold">
+                        <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#FFFFFF]/10 text-[#E8E8E8] border border-[#FFFFFF]/30 font-semibold">
                           {tool.badge}
                         </span>
                       )}
                     </div>
-                    <h4 className="font-bold text-sm text-[#E5E1DD] mb-1.5">{tool.name}</h4>
-                    <p className="text-xs text-[#E5E1DD]/60 leading-relaxed">{tool.detail}</p>
+                    <h4 className="font-bold text-sm text-[#F5F5F5] mb-1.5">{tool.name}</h4>
+                    <p className="text-xs text-[#F5F5F5]/60 leading-relaxed">{tool.detail}</p>
                   </div>
                 </div>
               );

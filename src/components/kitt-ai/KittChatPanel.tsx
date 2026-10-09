@@ -1,23 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { 
-  Send, 
-  Sparkles, 
-  ChevronDown, 
-  ChevronRight, 
-  Copy, 
-  Check, 
-  RotateCcw, 
-  Bot, 
-  User, 
-  Layers, 
-  Zap, 
-  CheckCircle2, 
-  AlertTriangle,
-  ArrowRight,
-  Maximize2
+import {
+  Send,
+  ChevronDown,
+  ChevronRight,
+  Copy,
+  Check,
+  Layers,
+  CheckCircle2
 } from 'lucide-react';
 import { UserIntentType, CanonicalCircuitModel, CIRPatchTransaction } from './cir/cirTypes';
-import { classifyUserIntent, ClassifiedIntent } from './agent/intentClassifier';
 import { circuitAudio } from '../../utils/audio';
 
 export interface ChatMessageItem {
@@ -51,21 +42,21 @@ function parseInline(text: string): React.ReactNode {
   return parts.map((part, index) => {
     if (part.startsWith('**') && part.endsWith('**')) {
       return (
-        <strong key={index} className="font-semibold text-[#E5E1DD]">
+        <strong key={index} className="font-semibold text-[#F5F5F5]">
           {part.slice(2, -2)}
         </strong>
       );
     }
     if (part.startsWith('`') && part.endsWith('`')) {
       return (
-        <code key={index} className="px-1.5 py-0.5 rounded bg-black/50 text-[#76B4C2] font-mono text-[10.5px] border border-white/10">
+        <code key={index} className="px-1.5 py-0.5 rounded-[6px] bg-[#29292A] text-[#E8E8E8] font-mono text-[12px]">
           {part.slice(1, -1)}
         </code>
       );
     }
     if (part.startsWith('$') && part.endsWith('$')) {
       return (
-        <span key={index} className="font-mono text-[#A58D66] px-0.5">
+        <span key={index} className="font-mono text-[#E8E8E8] px-0.5">
           {part.slice(1, -1)}
         </span>
       );
@@ -76,32 +67,32 @@ function parseInline(text: string): React.ReactNode {
 
 export const FormattedMessageText: React.FC<{ text: string; isKitt: boolean }> = ({ text, isKitt }) => {
   if (!isKitt) {
-    return <span>{text}</span>;
+    return <span className="kds-body-sm">{text}</span>;
   }
 
   const parts = text.split(/(\$\$[\s\S]*?\$\$|```[\s\S]*?```)/g);
 
   return (
-    <div className="space-y-2 text-xs leading-relaxed">
+    <div className="space-y-3 kds-body-sm">
       {parts.map((part, pIdx) => {
         if (part.startsWith('```') && part.endsWith('```')) {
           const firstLineEnd = part.indexOf('\n');
           const lang = part.slice(3, firstLineEnd > -1 ? firstLineEnd : 3).trim();
           const code = firstLineEnd > -1 ? part.slice(firstLineEnd + 1, -3) : part.slice(3, -3);
           return (
-            <div key={pIdx} className="my-2 rounded-lg bg-[#070c10] border border-white/10 overflow-hidden text-left shadow-md">
-              <div className="px-3 py-1 bg-white/5 border-b border-white/5 flex items-center justify-between text-[10px] font-mono text-slate-400">
-                <span className="uppercase text-[#A58D66] font-bold tracking-wider">{lang || 'CODE'}</span>
+            <div key={pIdx} className="my-2 rounded-[12px] bg-[#0B0B0C] border border-[#353536] overflow-hidden text-left">
+              <div className="px-3 py-2 border-b border-[#353536] flex items-center justify-between">
+                <span className="kds-caption uppercase tracking-wide">{lang || 'code'}</span>
                 <button
                   onClick={() => navigator.clipboard.writeText(code)}
-                  className="hover:text-white flex items-center gap-1 transition-colors cursor-pointer"
+                  className="kds-caption flex items-center gap-1 hover:text-[#F5F5F5] transition-colors cursor-pointer kds-focusable"
                   title="Copy code"
                 >
                   <Copy className="w-3 h-3" />
                   <span>Copy</span>
                 </button>
               </div>
-              <pre className="p-3 overflow-x-auto font-mono text-[11px] text-[#76B4C2] leading-snug">
+              <pre className="p-3 overflow-x-auto font-mono text-[12px] text-[#E8E8E8] leading-relaxed">
                 <code>{code}</code>
               </pre>
             </div>
@@ -121,7 +112,7 @@ export const FormattedMessageText: React.FC<{ text: string; isKitt: boolean }> =
             .trim();
 
           return (
-            <div key={pIdx} className="my-2 p-2.5 rounded-lg bg-[#09131a] border border-[#A58D66]/25 font-mono text-[11.5px] text-[#A58D66] overflow-x-auto whitespace-pre-wrap leading-relaxed shadow-sm">
+            <div key={pIdx} className="my-2 p-3 rounded-[12px] bg-[#1D1D1E] border border-[#353536] font-mono text-[12px] text-[#E8E8E8] overflow-x-auto whitespace-pre-wrap leading-relaxed">
               {displayMath}
             </div>
           );
@@ -135,7 +126,7 @@ export const FormattedMessageText: React.FC<{ text: string; isKitt: boolean }> =
           if (tableBuffer.length < 2) {
             tableBuffer.forEach((tblLine, idx) => {
               elements.push(
-                <p key={`tbl-raw-${keyPrefix}-${idx}`} className="text-[11.5px] leading-relaxed text-slate-200">
+                <p key={`tbl-raw-${keyPrefix}-${idx}`} className="kds-body-sm text-[#F5F5F5]">
                   {parseInline(tblLine)}
                 </p>
               );
@@ -153,22 +144,22 @@ export const FormattedMessageText: React.FC<{ text: string; isKitt: boolean }> =
           const rows = isSep ? rawRows.slice(2) : rawRows.slice(1);
 
           elements.push(
-            <div key={`tbl-${keyPrefix}`} className="my-2.5 overflow-x-auto rounded-lg border border-white/10 bg-[#060b0f] shadow-inner">
-              <table className="w-full text-left text-[11px] font-mono border-collapse">
+            <div key={`tbl-${keyPrefix}`} className="my-2 overflow-x-auto rounded-[12px] border border-[#353536]">
+              <table className="w-full text-left kds-body-sm border-collapse">
                 <thead>
-                  <tr className="border-b border-white/10 bg-white/[0.04]">
+                  <tr className="border-b border-[#353536] bg-[#1D1D1E]">
                     {headers.map((h, hIdx) => (
-                      <th key={hIdx} className="py-2 px-3 text-[#A58D66] font-semibold tracking-wider text-[10.5px]">
+                      <th key={hIdx} className="py-2 px-3 text-[#F5F5F5] font-medium">
                         {parseInline(h)}
                       </th>
                     ))}
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-white/[0.06]">
+                <tbody>
                   {rows.map((row, rIdx) => (
-                    <tr key={rIdx} className="hover:bg-white/[0.02] transition-colors">
+                    <tr key={rIdx} className="border-b border-[#29292A] last:border-0">
                       {row.map((cell, cIdx) => (
-                        <td key={cIdx} className="py-1.5 px-3 text-slate-200">
+                        <td key={cIdx} className="py-2 px-3 text-[#9E9E9E]">
                           {parseInline(cell)}
                         </td>
                       ))}
@@ -191,22 +182,21 @@ export const FormattedMessageText: React.FC<{ text: string; isKitt: boolean }> =
           }
 
           if (!trimmed) {
-            elements.push(<div key={lIdx} className="h-1" />);
+            elements.push(<div key={lIdx} className="h-1.5" />);
             return;
           }
 
           if (trimmed.startsWith('### ')) {
             elements.push(
-              <h3 key={lIdx} className="text-xs font-bold font-mono text-[#A58D66] tracking-wide mt-2 mb-1 flex items-center gap-1.5">
-                <Zap className="w-3.5 h-3.5 text-[#A58D66]" />
-                <span>{parseInline(trimmed.slice(4))}</span>
+              <h3 key={lIdx} className="kds-heading-xs text-[#F5F5F5] mt-3 mb-1">
+                {parseInline(trimmed.slice(4))}
               </h3>
             );
             return;
           }
           if (trimmed.startsWith('## ')) {
             elements.push(
-              <h2 key={lIdx} className="text-sm font-bold font-mono text-[#E5E1DD] mt-2 mb-1">
+              <h2 key={lIdx} className="kds-heading-md text-[#F5F5F5] mt-3 mb-1">
                 {parseInline(trimmed.slice(3))}
               </h2>
             );
@@ -214,7 +204,7 @@ export const FormattedMessageText: React.FC<{ text: string; isKitt: boolean }> =
           }
           if (trimmed.startsWith('# ')) {
             elements.push(
-              <h1 key={lIdx} className="text-sm font-black font-mono text-[#A58D66] mt-2 mb-1">
+              <h1 key={lIdx} className="kds-heading-lg text-[#F5F5F5] mt-3 mb-1">
                 {parseInline(trimmed.slice(2))}
               </h1>
             );
@@ -222,7 +212,7 @@ export const FormattedMessageText: React.FC<{ text: string; isKitt: boolean }> =
           }
           if (trimmed.startsWith('> ')) {
             elements.push(
-              <blockquote key={lIdx} className="border-l-2 border-[#A58D66] pl-2.5 py-0.5 my-1 text-slate-300 italic bg-[#A58D66]/5 rounded-r font-mono text-[11px]">
+              <blockquote key={lIdx} className="border-l-2 border-[#8F8F8F] pl-3 py-1 my-2 text-[#9E9E9E] kds-body-sm">
                 {parseInline(trimmed.slice(2))}
               </blockquote>
             );
@@ -230,8 +220,8 @@ export const FormattedMessageText: React.FC<{ text: string; isKitt: boolean }> =
           }
           if (trimmed.startsWith('• ') || trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
             elements.push(
-              <div key={lIdx} className="flex items-start gap-2 pl-1 text-[11.5px] leading-relaxed text-slate-200">
-                <span className="text-[#A58D66] mt-1 text-[8px]">◆</span>
+              <div key={lIdx} className="flex items-start gap-2 kds-body-sm text-[#F5F5F5]">
+                <span className="text-[#9E9E9E] mt-1.5 text-[6px]">●</span>
                 <span>{parseInline(trimmed.slice(2))}</span>
               </div>
             );
@@ -240,8 +230,8 @@ export const FormattedMessageText: React.FC<{ text: string; isKitt: boolean }> =
           const numMatch = trimmed.match(/^(\d+)\.\s+(.*)/);
           if (numMatch) {
             elements.push(
-              <div key={lIdx} className="flex items-start gap-2 pl-1 text-[11.5px] leading-relaxed text-slate-200">
-                <span className="text-[#76B4C2] font-mono text-[10px] mt-0.5">{numMatch[1]}.</span>
+              <div key={lIdx} className="flex items-start gap-2 kds-body-sm text-[#F5F5F5]">
+                <span className="text-[#9E9E9E] font-mono text-[12px]">{numMatch[1]}.</span>
                 <span>{parseInline(numMatch[2])}</span>
               </div>
             );
@@ -249,7 +239,7 @@ export const FormattedMessageText: React.FC<{ text: string; isKitt: boolean }> =
           }
 
           elements.push(
-            <p key={lIdx} className="text-[11.5px] leading-relaxed text-slate-200">
+            <p key={lIdx} className="kds-body-sm text-[#F5F5F5]">
               {parseInline(line)}
             </p>
           );
@@ -260,7 +250,7 @@ export const FormattedMessageText: React.FC<{ text: string; isKitt: boolean }> =
         }
 
         return (
-          <div key={pIdx} className="space-y-1.5">
+          <div key={pIdx} className="space-y-2">
             {elements}
           </div>
         );
@@ -316,173 +306,145 @@ export const KittChatPanel: React.FC<KittChatPanelProps> = ({
   };
 
   const quickPrompts = [
-    { label: '📡 Build Ultrasonic Radar', prompt: 'Build an ultrasonic distance radar with Arduino and servo' },
-    { label: '⛅ IoT Weather Station', prompt: 'Create an IoT weather station with ESP32 and OLED display' },
-    { label: '⏱️ 555 Timer Flasher', prompt: 'Build a 555 timer dual LED astable flasher' },
-    { label: '🚦 Traffic Light Controller', prompt: 'Build an autonomous intersection traffic light controller' },
-    { label: '🌱 Smart Irrigation', prompt: 'Synthesize an automated soil moisture plant watering system' },
-    { label: '🔧 Swap Resistor to 330Ω', prompt: 'Replace the 220Ω resistor with 330Ω' },
-    { label: '❓ Why 1N4007 Diode?', prompt: 'Why is the 1N4007 flyback diode necessary for motors?' },
-    { label: '💻 Show C++ Firmware', prompt: 'Show me the full C++ firmware for this circuit' }
+    { label: 'Ultrasonic radar', prompt: 'Build an ultrasonic distance radar with Arduino and servo' },
+    { label: 'IoT weather station', prompt: 'Create an IoT weather station with ESP32 and OLED display' },
+    { label: '555 timer flasher', prompt: 'Build a 555 timer dual LED astable flasher' },
+    { label: 'Traffic light', prompt: 'Build an autonomous intersection traffic light controller' },
+    { label: 'Smart irrigation', prompt: 'Synthesize an automated soil moisture plant watering system' },
+    { label: 'Swap resistor to 330Ω', prompt: 'Replace the 220Ω resistor with 330Ω' },
+    { label: 'Why 1N4007 diode?', prompt: 'Why is the 1N4007 flyback diode necessary for motors?' }
   ];
 
   return (
-    <div className="flex flex-col h-full bg-[#0a1116] border-l border-[#A58D66]/20 relative overflow-hidden">
-      {/* Top Header */}
-      <div className="px-4 py-3 border-b border-[#A58D66]/20 bg-[#080f14]/80 backdrop-blur-md flex items-center justify-between">
-        <div className="flex items-center gap-2.5">
-          <div className="w-7 h-7 rounded-lg bg-[#A58D66]/20 border border-[#A58D66]/40 flex items-center justify-center text-[#A58D66]">
-            <Bot className="w-4 h-4" />
-          </div>
-          <div>
-            <div className="text-xs font-mono font-bold text-[#E5E1DD]">KITT Electronics Agent</div>
-            <div className="text-[10px] text-[#76B4C2] font-mono flex items-center gap-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse" />
-              <span>Universal Brain • Deterministic Solver</span>
-            </div>
+    <div className="flex flex-col h-full bg-black border-l border-[#353536] relative overflow-hidden">
+      {/* Header */}
+      <div className="h-14 px-5 border-b border-[#353536] flex items-center justify-between shrink-0">
+        <div className="flex items-center gap-3 min-w-0">
+          <span className="w-8 h-8 rounded-full bg-[#1D1D1E] border border-[#353536] flex items-center justify-center shrink-0">
+            <span className="w-2 h-2 rounded-full bg-[#F5F5F5]" />
+          </span>
+          <div className="min-w-0">
+            <p className="kds-body-sm text-[#F5F5F5] truncate">KITT Electronics Agent</p>
+            <p className="kds-caption truncate">Universal brain · deterministic solver</p>
           </div>
         </div>
 
         {activeCircuit && (
-          <div className="text-[10px] font-mono text-[#A58D66] bg-[#A58D66]/10 px-2 py-0.5 rounded border border-[#A58D66]/30">
-            CIR v{activeCircuit.version} Active
-          </div>
+          <span className="kds-badge shrink-0">CIR v{activeCircuit.version}</span>
         )}
       </div>
 
-      {/* Message List */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4 font-sans text-xs">
+      {/* Messages */}
+      <div className="flex-1 overflow-y-auto px-5 py-6 space-y-6">
         {messages.map(msg => {
           const isKitt = msg.sender === 'kitt';
           const isThinkingOpen = expandedThinkingIds.has(msg.id);
 
           return (
-            <div key={msg.id} className={`flex gap-3 ${isKitt ? 'justify-start' : 'justify-end'}`}>
-              {isKitt && (
-                <div className="w-6 h-6 rounded-full bg-[#A58D66]/20 border border-[#A58D66]/40 flex items-center justify-center shrink-0 mt-0.5">
-                  <Bot className="w-3.5 h-3.5 text-[#A58D66]" />
-                </div>
-              )}
+            <div key={msg.id} className={`flex flex-col ${isKitt ? 'items-start' : 'items-end'}`}>
+              {/* Thinking trace */}
+              {isKitt && msg.thinkingTrace && (
+                <div className="w-full mb-2">
+                  <button
+                    onClick={() => toggleThinking(msg.id)}
+                    aria-expanded={isThinkingOpen}
+                    className="flex items-center gap-1.5 kds-caption hover:text-[#F5F5F5] transition-colors cursor-pointer kds-focusable rounded-[6px]"
+                  >
+                    {isThinkingOpen ? <ChevronDown className="w-3.5 h-3.5" /> : <ChevronRight className="w-3.5 h-3.5" />}
+                    <span className="truncate max-w-[320px]">{msg.thinkingTrace.summary}</span>
+                    <span>· {(msg.thinkingTrace.durationMs / 1000).toFixed(1)}s</span>
+                  </button>
 
-              <div className={`max-w-[85%] space-y-2 ${isKitt ? 'text-[#E5E1DD]' : 'text-right'}`}>
-                {/* Thinking Process Accordion */}
-                {isKitt && msg.thinkingTrace && (
-                  <div className="rounded-lg bg-black/40 border border-white/5 overflow-hidden">
-                    <button
-                      onClick={() => toggleThinking(msg.id)}
-                      className="w-full px-3 py-1.5 flex items-center justify-between text-[11px] font-mono text-[#76B4C2] hover:text-[#E5E1DD] transition-colors cursor-pointer"
-                    >
-                      <span className="flex items-center gap-1.5">
-                        <Sparkles className="w-3 h-3 text-[#A58D66]" />
-                        <span>{msg.thinkingTrace.summary}</span>
-                      </span>
-                      <span className="text-[10px] text-slate-500 font-mono flex items-center gap-1">
-                        <span>{(msg.thinkingTrace.durationMs / 1000).toFixed(1)}s</span>
-                        {isThinkingOpen ? <ChevronDown className="w-3 h-3" /> : <ChevronRight className="w-3 h-3" />}
-                      </span>
-                    </button>
-
-                    {isThinkingOpen && (
-                      <div className="px-3 pb-2 pt-1 border-t border-white/5 space-y-1 text-[10px] font-mono text-slate-400">
-                        {msg.thinkingTrace.steps.map((step, idx) => (
-                          <div key={idx} className="flex items-start gap-1.5">
-                            <span className="text-[#A58D66]">›</span>
-                            <span>{step}</span>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                )}
-
-                {/* Message Bubble */}
-                <div
-                  className={`p-3.5 rounded-xl ${
-                    isKitt
-                      ? 'bg-[#121c22]/90 border border-[#407E8C]/25 text-[#E5E1DD] shadow-lg'
-                      : 'bg-[#A58D66] text-[#080f14] font-medium shadow-md ml-auto'
-                  }`}
-                >
-                  <FormattedMessageText text={msg.text} isKitt={isKitt} />
-
-                  {/* Copy Button on Assistant Message */}
-                  {isKitt && (
-                    <div className="pt-2 mt-2 border-t border-white/5 flex items-center justify-between text-[10px] text-slate-500 font-mono">
-                      <span>KITT Engineering v2.0</span>
-                      <button
-                        onClick={() => handleCopyText(msg.text, msg.id)}
-                        className="hover:text-[#E5E1DD] flex items-center gap-1 transition-colors cursor-pointer"
-                      >
-                        {copiedId === msg.id ? <Check className="w-3 h-3 text-[#10b981]" /> : <Copy className="w-3 h-3" />}
-                        <span>{copiedId === msg.id ? 'Copied' : 'Copy'}</span>
-                      </button>
+                  {isThinkingOpen && (
+                    <div className="mt-2 kds-card p-3 space-y-1.5">
+                      {msg.thinkingTrace.steps.map((step, idx) => (
+                        <div key={idx} className="flex items-start gap-2 kds-caption">
+                          <span className="text-[#8F8F8F]">—</span>
+                          <span>{step}</span>
+                        </div>
+                      ))}
                     </div>
                   )}
                 </div>
+              )}
 
-                {/* Workspace Selection Card (Prompted on Build Request) */}
-                {msg.suggestedWorkspaceChoice && (
-                  <div className="p-3.5 rounded-xl bg-[#0c161c] border border-[#A58D66]/40 space-y-2.5 shadow-xl">
-                    <div className="text-[11px] font-mono font-bold text-[#A58D66] flex items-center gap-1.5">
-                      <Layers className="w-3.5 h-3.5" />
-                      <span>CHOOSE YOUR WORKSPACE</span>
-                    </div>
-                    <p className="text-[11px] text-slate-300">
-                      I have synthesized the canonical hardware netlist and verified the electrical operating points. Choose how you would like to inspect the system:
-                    </p>
-                    <div className="grid grid-cols-3 gap-2 pt-1">
-                      <button
-                        onClick={() => onSelectWorkspaceMode('2d')}
-                        className="p-2 rounded-lg bg-[#407E8C]/20 border border-[#407E8C]/40 hover:bg-[#407E8C]/30 text-center transition-colors cursor-pointer"
-                      >
-                        <div className="text-[11px] font-bold text-[#E5E1DD] font-mono">2D Circuit Lab</div>
-                        <div className="text-[9px] text-[#76B4C2] mt-0.5">IEEE Schematics</div>
-                      </button>
-                      <button
-                        onClick={() => onSelectWorkspaceMode('3d')}
-                        className="p-2 rounded-lg bg-[#A58D66]/20 border border-[#A58D66]/40 hover:bg-[#A58D66]/30 text-center transition-colors cursor-pointer"
-                      >
-                        <div className="text-[11px] font-bold text-[#E5E1DD] font-mono">3D Hardware Lab</div>
-                        <div className="text-[9px] text-[#A58D66] mt-0.5">Breadboard 3D</div>
-                      </button>
-                      <button
-                        onClick={() => onSelectWorkspaceMode('both')}
-                        className="p-2 rounded-lg bg-white/5 border border-white/15 hover:bg-white/10 text-center transition-colors cursor-pointer"
-                      >
-                        <div className="text-[11px] font-bold text-[#E5E1DD] font-mono">Both / Start in 2D</div>
-                        <div className="text-[9px] text-slate-400 mt-0.5">Full Studio</div>
-                      </button>
-                    </div>
-                  </div>
-                )}
+              {/* Message body */}
+              <div
+                className={
+                  isKitt
+                    ? 'w-full'
+                    : 'max-w-[85%] px-4 py-3 rounded-[12px] bg-[#1D1D1E] border border-[#353536]'
+                }
+              >
+                <FormattedMessageText text={msg.text} isKitt={isKitt} />
 
-                {/* Transactional Patch Confirmation Card */}
-                {msg.proposedPatch && onApplyPatch && (
-                  <div className="p-3 rounded-xl bg-[#0c161c] border border-[#10b981]/40 space-y-2 shadow-xl">
-                    <div className="text-[11px] font-mono font-bold text-[#10b981] flex items-center gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5" />
-                      <span>PROPOSED CIR PATCH TRANSACTION</span>
-                    </div>
-                    <div className="text-[11px] text-slate-300 font-mono">
-                      {msg.proposedPatch.description}
-                    </div>
+                {isKitt && (
+                  <div className="pt-2 mt-2 flex items-center justify-between gap-4">
+                    <span className="kds-caption">{msg.timestamp}</span>
                     <button
-                      onClick={() => {
-                        circuitAudio.playBeepSuccess();
-                        onApplyPatch(msg.proposedPatch!);
-                      }}
-                      className="w-full py-2 px-3 rounded-lg bg-[#10b981] hover:bg-[#059669] active:scale-[0.97] text-[#080f14] font-bold text-xs font-mono transition-all shadow-[0_0_15px_rgba(16,185,129,0.3)] flex items-center justify-center gap-1.5 cursor-pointer"
+                      onClick={() => handleCopyText(msg.text, msg.id)}
+                      className="kds-caption flex items-center gap-1 hover:text-[#F5F5F5] transition-colors cursor-pointer kds-focusable"
                     >
-                      <span>Apply Changes to Live Circuit</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
+                      {copiedId === msg.id ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+                      <span>{copiedId === msg.id ? 'Copied' : 'Copy'}</span>
                     </button>
                   </div>
                 )}
               </div>
 
-              {!isKitt && (
-                <div className="w-6 h-6 rounded-full bg-[#E5E1DD]/20 border border-[#E5E1DD]/40 flex items-center justify-center shrink-0 mt-0.5">
-                  <User className="w-3.5 h-3.5 text-[#E5E1DD]" />
+              {/* Workspace choice */}
+              {msg.suggestedWorkspaceChoice && (
+                <div className="w-full mt-3 kds-card p-4 space-y-3">
+                  <p className="kds-heading-xs text-[#F5F5F5] flex items-center gap-2">
+                    <Layers className="w-4 h-4" />
+                    <span>Choose your workspace</span>
+                  </p>
+                  <p className="kds-caption leading-relaxed">
+                    The canonical netlist is synthesized and electrically verified. Choose how to inspect it.
+                  </p>
+                  <div className="grid grid-cols-3 gap-2 pt-1">
+                    <button
+                      onClick={() => onSelectWorkspaceMode('2d')}
+                      className="kds-btn kds-btn-secondary flex-col !min-h-[64px] !px-3 !py-2 kds-focusable"
+                    >
+                      <span className="kds-body-sm text-[#F5F5F5]">2D circuit</span>
+                      <span className="kds-caption">Schematics</span>
+                    </button>
+                    <button
+                      onClick={() => onSelectWorkspaceMode('3d')}
+                      className="kds-btn kds-btn-secondary flex-col !min-h-[64px] !px-3 !py-2 kds-focusable"
+                    >
+                      <span className="kds-body-sm text-[#F5F5F5]">3D lab</span>
+                      <span className="kds-caption">Breadboard</span>
+                    </button>
+                    <button
+                      onClick={() => onSelectWorkspaceMode('both')}
+                      className="kds-btn kds-btn-secondary flex-col !min-h-[64px] !px-3 !py-2 kds-focusable"
+                    >
+                      <span className="kds-body-sm text-[#F5F5F5]">Both</span>
+                      <span className="kds-caption">Full studio</span>
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {/* Proposed patch */}
+              {msg.proposedPatch && onApplyPatch && (
+                <div className="w-full mt-3 kds-card p-4 space-y-3">
+                  <p className="kds-heading-xs text-[#F5F5F5] flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4" />
+                    <span>Proposed circuit patch</span>
+                  </p>
+                  <p className="kds-caption leading-relaxed">{msg.proposedPatch.description}</p>
+                  <button
+                    onClick={() => {
+                      circuitAudio.playBeepSuccess();
+                      onApplyPatch(msg.proposedPatch!);
+                    }}
+                    className="kds-btn kds-btn-primary w-full kds-focusable"
+                  >
+                    <span>Apply changes to live circuit</span>
+                  </button>
                 </div>
               )}
             </div>
@@ -490,22 +452,17 @@ export const KittChatPanel: React.FC<KittChatPanelProps> = ({
         })}
 
         {isGenerating && (
-          <div className="flex gap-3">
-            <div className="w-6 h-6 rounded-full bg-[#A58D66]/20 border border-[#A58D66]/40 flex items-center justify-center shrink-0">
-              <Bot className="w-3.5 h-3.5 text-[#A58D66] animate-spin" />
-            </div>
-            <div className="p-3 rounded-xl bg-[#121c22] border border-[#407E8C]/25 text-slate-400 text-xs font-mono flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#A58D66] animate-ping" />
-              <span>Analyzing requirements & checking design rule constraints...</span>
-            </div>
+          <div className="flex items-center gap-3">
+            <span className="w-2 h-2 rounded-full bg-[#F5F5F5] animate-pulse" />
+            <span className="kds-caption">Analyzing requirements and checking design rules…</span>
           </div>
         )}
 
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Suggested Quick Prompts */}
-      <div className="px-3 py-2 border-t border-[#A58D66]/15 bg-[#091014] overflow-x-auto flex items-center gap-1.5 no-scrollbar">
+      {/* Quick prompts */}
+      <div className="px-3 py-2 border-t border-[#353536] overflow-x-auto flex items-center gap-2">
         {quickPrompts.map((p, i) => (
           <button
             key={i}
@@ -513,32 +470,29 @@ export const KittChatPanel: React.FC<KittChatPanelProps> = ({
               circuitAudio.playTone(520, 0.04, 'triangle');
               onSendMessage(p.prompt);
             }}
-            className="px-2.5 py-1 rounded-full bg-white/5 hover:bg-[#A58D66]/20 active:scale-95 border border-white/10 hover:border-[#A58D66]/40 text-[10.5px] font-mono text-slate-300 hover:text-[#E5E1DD] whitespace-nowrap transition-all cursor-pointer flex items-center gap-1"
+            className="px-3 py-1.5 rounded-full border border-[#353536] hover:border-[#8F8F8F] hover:bg-white/[0.06] kds-caption hover:text-[#F5F5F5] whitespace-nowrap transition-colors cursor-pointer kds-focusable"
           >
-            <span>{p.label}</span>
+            {p.label}
           </button>
         ))}
       </div>
 
-      {/* Input Form */}
-      <div className="p-3 bg-[#080f14] border-t border-[#A58D66]/20">
-        <div className="relative flex items-end gap-2 bg-[#0d161c] border border-[#A58D66]/30 rounded-xl p-2 focus-within:border-[#A58D66] transition-colors shadow-inner">
+      {/* Composer */}
+      <div className="p-3 border-t border-[#353536]">
+        <div className="flex items-end gap-2">
           <textarea
             value={inputText}
             onChange={e => setInputText(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Ask about circuits, sensors, code, physics, or describe an invention to build..."
+            placeholder="Ask about circuits, sensors, code, or describe an invention…"
             rows={2}
-            className="w-full bg-transparent text-xs text-[#E5E1DD] placeholder:text-slate-500 outline-none resize-none font-sans"
+            className="kds-input flex-1 resize-none !text-[15px]"
           />
           <button
             onClick={handleSend}
             disabled={!inputText.trim() || isGenerating}
-            className={`p-2 rounded-lg transition-all shrink-0 cursor-pointer active:scale-95 ${
-              inputText.trim() && !isGenerating
-                ? 'bg-gradient-to-r from-[#A58D66] to-[#8C7654] text-[#080f14] hover:from-[#BFA378] hover:to-[#A58D66] shadow-[0_0_12px_rgba(165,141,102,0.3)]'
-                : 'bg-white/5 text-slate-600'
-            }`}
+            title="Send"
+            className="kds-btn kds-btn-primary !px-3.5 shrink-0 kds-focusable"
           >
             <Send className="w-4 h-4" />
           </button>

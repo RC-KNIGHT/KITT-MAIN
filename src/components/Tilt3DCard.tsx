@@ -66,7 +66,7 @@ export const Tilt3DCard: React.FC<Tilt3DCardProps> = ({
       if (s.isHovered) {
         glare.style.opacity = String(glareOpacity);
         // Anti-reflective optical glass reflection: sharp white luminaire core + gold/teal diffraction rings
-        glare.style.background = `radial-gradient(circle at ${s.glareX.toFixed(1)}% ${s.glareY.toFixed(1)}%, rgba(255, 255, 255, 0.35) 0%, rgba(223, 204, 168, 0.18) 18%, rgba(64, 126, 140, 0.09) 38%, transparent 68%)`;
+        glare.style.background = `radial-gradient(circle at ${s.glareX.toFixed(1)}% ${s.glareY.toFixed(1)}%, rgba(255, 255, 255, 0.35) 0%, rgba(232, 232, 232, 0.18) 18%, rgba(143, 143, 143, 0.09) 38%, transparent 68%)`;
       } else {
         glare.style.opacity = '0';
       }
@@ -77,7 +77,7 @@ export const Tilt3DCard: React.FC<Tilt3DCardProps> = ({
         chromatic.style.opacity = '0.9';
         // Chromatic aberration edge light bleed: prismatic refraction across card border
         const angle = Math.atan2(s.glareY - 50, s.glareX - 50) * (180 / Math.PI) + 90;
-        chromatic.style.background = `linear-gradient(${angle.toFixed(1)}deg, rgba(64, 126, 140, 0.3) 0%, rgba(118, 180, 194, 0.15) 25%, rgba(165, 141, 102, 0.25) 50%, rgba(223, 204, 168, 0.15) 75%, rgba(139, 92, 246, 0.2) 100%)`;
+        chromatic.style.background = `linear-gradient(${angle.toFixed(1)}deg, rgba(143, 143, 143, 0.3) 0%, rgba(180, 180, 180, 0.15) 25%, rgba(255, 255, 255, 0.25) 50%, rgba(232, 232, 232, 0.15) 75%, rgba(143, 143, 143, 0.2) 100%)`;
       } else {
         chromatic.style.opacity = '0';
       }

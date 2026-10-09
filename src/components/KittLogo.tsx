@@ -41,7 +41,7 @@ export const KittLogo: React.FC<KittLogoProps> = ({
       {/* Ambient Luminous Pulsing Glow */}
       {showGlow && (
         <div 
-          className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#A58D66]/40 via-[#407E8C]/35 to-[#E5E1DD]/25 blur-md group-hover:blur-lg transition-all duration-500 opacity-80 group-hover:opacity-100 animate-pulse pointer-events-none" 
+          className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#FFFFFF]/40 via-[#8F8F8F]/35 to-[#F5F5F5]/25 blur-md group-hover:blur-lg transition-all duration-500 opacity-80 group-hover:opacity-100 animate-pulse pointer-events-none" 
         />
       )}
 
@@ -49,7 +49,7 @@ export const KittLogo: React.FC<KittLogoProps> = ({
       <img
         src={imgSrc}
         alt={alt}
-        className="w-full h-full object-contain relative z-10 filter drop-shadow-[0_2px_14px_rgba(165,141,102,0.45)] group-hover:drop-shadow-[0_4px_20px_rgba(64,126,140,0.6)] transition-transform duration-300 group-hover:scale-105 pointer-events-none"
+        className="w-full h-full object-contain relative z-10 filter drop-shadow-[0_2px_14px_rgba(255,255,255,0.45)] group-hover:drop-shadow-[0_4px_20px_rgba(143,143,143,0.6)] transition-transform duration-300 group-hover:scale-105 pointer-events-none"
         loading="eager"
         decoding="async"
       />

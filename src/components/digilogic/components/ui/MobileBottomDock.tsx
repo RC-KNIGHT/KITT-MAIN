@@ -102,7 +102,7 @@ export const MobileBottomDock: React.FC = () => {
         <div className={`backdrop-blur-xl border rounded-2xl shadow-xl p-1.5 flex items-center justify-between pointer-events-auto gap-1 ${
           isLight
             ? 'bg-white/95 border-slate-300 shadow-[0_8px_32px_rgba(0,0,0,0.12)]'
-            : 'bg-[#080f14]/95 border-[#A58D66]/20 shadow-[0_8px_32px_rgba(0,0,0,0.6)]'
+            : 'bg-[#000000]/95 border-[#FFFFFF]/20 shadow-[0_8px_32px_rgba(0,0,0,0.6)]'
         }`}>
           {/* Left: Library Toggle (+ Gate) */}
           <button
@@ -119,7 +119,7 @@ export const MobileBottomDock: React.FC = () => {
             className={`flex items-center justify-center w-11 h-11 rounded-xl font-bold transition-transform active:scale-95 border ${
               sidebarOpen
                 ? 'border'
-                : 'bg-[#A58D66]/20 border-[#A58D66]/40 text-[#DFCCA8]'
+                : 'bg-[#FFFFFF]/20 border-[#FFFFFF]/40 text-[#E8E8E8]'
             }`}
             title="Open Component Library"
             aria-label="Add Logic Gates"
@@ -129,7 +129,7 @@ export const MobileBottomDock: React.FC = () => {
 
           {/* Center Group: Simulation Engine Controls */}
           <div className={`flex items-center border rounded-xl p-0.5 gap-0.5 ${
-            isLight ? 'bg-slate-100 border-slate-200' : 'bg-[#080f14]/90 border-[#A58D66]/20'
+            isLight ? 'bg-slate-100 border-slate-200' : 'bg-[#000000]/90 border-[#FFFFFF]/20'
           }`}>
             {/* Play / Pause Toggle */}
             <button
@@ -144,15 +144,15 @@ export const MobileBottomDock: React.FC = () => {
               }
               className={`flex items-center justify-center w-10 h-10 rounded-lg font-black transition-transform active:scale-90 ${
                 simulationRunning
-                  ? 'border border-[#A58D66]/40'
-                  : 'bg-[#A58D66]/20 text-[#A58D66] border border-[#A58D66]/40'
+                  ? 'border border-[#FFFFFF]/40'
+                  : 'bg-[#FFFFFF]/20 text-[#FFFFFF] border border-[#FFFFFF]/40'
               }`}
               title={simulationRunning ? 'Pause Engine' : 'Run Engine'}
             >
               {simulationRunning ? (
                 <Pause className="w-4 h-4" style={{ fill: activeTheme.primaryColor }} />
               ) : (
-                <Play className="w-4 h-4 fill-[#A58D66] text-[#A58D66] ml-0.5" />
+                <Play className="w-4 h-4 fill-[#FFFFFF] text-[#FFFFFF] ml-0.5" />
               )}
             </button>
 
@@ -161,7 +161,7 @@ export const MobileBottomDock: React.FC = () => {
               onClick={stepSimulation}
               disabled={simulationRunning}
               className={`flex items-center justify-center w-9 h-10 rounded-lg disabled:opacity-25 transition-all active:scale-90 ${
-                isLight ? 'text-slate-600 hover:text-slate-900 active:bg-slate-200' : 'text-[#E5E1DD]/60 hover:text-[#E5E1DD] active:bg-[#0d171f]'
+                isLight ? 'text-slate-600 hover:text-slate-900 active:bg-slate-200' : 'text-[#F5F5F5]/60 hover:text-[#F5F5F5] active:bg-[#141415]'
               }`}
               title="Single Clock Step"
             >
@@ -172,7 +172,7 @@ export const MobileBottomDock: React.FC = () => {
             <button
               onClick={resetSimulation}
               className={`flex items-center justify-center w-9 h-10 rounded-lg transition-all active:scale-90 ${
-                isLight ? 'text-slate-600 hover:text-slate-900 active:bg-slate-200' : 'text-[#E5E1DD]/60 hover:text-[#E5E1DD] active:bg-[#0d171f]'
+                isLight ? 'text-slate-600 hover:text-slate-900 active:bg-slate-200' : 'text-[#F5F5F5]/60 hover:text-[#F5F5F5] active:bg-[#141415]'
               }`}
               title="Reset Circuit Signals"
             >
@@ -186,8 +186,8 @@ export const MobileBottomDock: React.FC = () => {
                 const nextIdx = (speeds.indexOf(simulationSpeedHz) + 1) % speeds.length;
                 setSimulationSpeedHz(speeds[nextIdx] || 10);
               }}
-              className={`flex items-center justify-center px-2 h-10 rounded-lg text-[#A58D66] font-mono text-[11px] font-bold border-l active:scale-95 ${
-                isLight ? 'border-slate-200 active:bg-slate-200' : 'border-[#A58D66]/20 active:bg-[#0d171f]'
+              className={`flex items-center justify-center px-2 h-10 rounded-lg text-[#FFFFFF] font-mono text-[11px] font-bold border-l active:scale-95 ${
+                isLight ? 'border-slate-200 active:bg-slate-200' : 'border-[#FFFFFF]/20 active:bg-[#141415]'
               }`}
               title="Simulation Speed"
             >
@@ -202,19 +202,19 @@ export const MobileBottomDock: React.FC = () => {
                 <button
                   onClick={rotateSelection}
                   className={`flex items-center justify-center w-9 h-10 border rounded-lg active:scale-90 ${
-                    isLight ? 'bg-slate-100 border-slate-200 text-slate-700' : 'bg-[#080f14] border-[#A58D66]/20 text-[#E5E1DD]'
+                    isLight ? 'bg-slate-100 border-slate-200 text-slate-700' : 'bg-[#000000] border-[#FFFFFF]/20 text-[#F5F5F5]'
                   }`}
                   title="Rotate Gate"
                 >
-                  <RotateCw className="w-4 h-4 text-[#A58D66]" />
+                  <RotateCw className="w-4 h-4 text-[#FFFFFF]" />
                 </button>
                 <button
                   onClick={deleteSelection}
-                  className="flex items-center justify-center w-10 h-10 bg-[#A58D66]/20 border border-[#A58D66]/40 text-[#DFCCA8] rounded-lg active:scale-90 relative"
+                  className="flex items-center justify-center w-10 h-10 bg-[#FFFFFF]/20 border border-[#FFFFFF]/40 text-[#E8E8E8] rounded-lg active:scale-90 relative"
                   title="Delete Selection"
                 >
                   <Trash2 className="w-4 h-4" />
-                  <span className="absolute -top-1 -right-1 px-1 bg-[#8C7654] text-[#E5E1DD] text-[9px] font-bold rounded-full">
+                  <span className="absolute -top-1 -right-1 px-1 bg-[#737373] text-[#F5F5F5] text-[9px] font-bold rounded-full">
                     {totalSelected}
                   </span>
                 </button>
@@ -226,7 +226,7 @@ export const MobileBottomDock: React.FC = () => {
                   onClick={undo}
                   disabled={!canUndo}
                   className={`flex items-center justify-center w-9 h-10 border rounded-lg disabled:opacity-25 active:scale-90 ${
-                    isLight ? 'bg-slate-100 border-slate-200 text-slate-700' : 'bg-[#080f14] border-[#A58D66]/20 text-[#DFCCA8]'
+                    isLight ? 'bg-slate-100 border-slate-200 text-slate-700' : 'bg-[#000000] border-[#FFFFFF]/20 text-[#E8E8E8]'
                   }`}
                   title="Undo"
                 >
@@ -248,7 +248,7 @@ export const MobileBottomDock: React.FC = () => {
                   className={`flex items-center justify-center w-9 h-10 rounded-lg border ${
                     inspectorOpen
                       ? 'border'
-                      : isLight ? 'bg-slate-100 border-slate-200 text-slate-700' : 'bg-[#080f14] border-[#A58D66]/20 text-[#DFCCA8]'
+                      : isLight ? 'bg-slate-100 border-slate-200 text-slate-700' : 'bg-[#000000] border-[#FFFFFF]/20 text-[#E8E8E8]'
                   }`}
                   title="Inspector & Properties"
                 >
@@ -261,12 +261,12 @@ export const MobileBottomDock: React.FC = () => {
             <button
               onClick={() => setMobileSheetOpen(true)}
               className={`flex items-center justify-center w-10 h-10 border rounded-xl active:scale-95 transition-transform ${
-                isLight ? 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-700' : 'bg-[#080f14] hover:bg-[#0d171f] border-[#A58D66]/20 text-[#E5E1DD]'
+                isLight ? 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-700' : 'bg-[#000000] hover:bg-[#141415] border-[#FFFFFF]/20 text-[#F5F5F5]'
               }`}
               title="All Tools & Analysis"
               aria-label="Open mobile menu"
             >
-              <MoreHorizontal className="w-5 h-5 text-[#A58D66]" />
+              <MoreHorizontal className="w-5 h-5 text-[#FFFFFF]" />
             </button>
           </div>
         </div>
@@ -275,19 +275,19 @@ export const MobileBottomDock: React.FC = () => {
       {/* Full-Screen Smooth Bottom Sheet Modal for Mobile Phones */}
       {mobileSheetOpen && (
         <div
-          className="fixed inset-0 z-50 md:hidden flex flex-col justify-end bg-[#080f14]/70 backdrop-blur-sm animate-fade-in"
+          className="fixed inset-0 z-50 md:hidden flex flex-col justify-end bg-[#000000]/70 backdrop-blur-sm animate-fade-in"
           onClick={() => setMobileSheetOpen(false)}
         >
           <div
             className={`w-full border-t rounded-t-3xl p-4 max-h-[85vh] overflow-y-auto overscroll-contain flex flex-col gap-4 shadow-2xl touch-auto ${
-              isLight ? 'bg-white border-slate-300 text-slate-800' : 'bg-[#0d171f] border-[#A58D66]/20 text-[#E5E1DD]'
+              isLight ? 'bg-white border-slate-300 text-slate-800' : 'bg-[#141415] border-[#FFFFFF]/20 text-[#F5F5F5]'
             }`}
             onClick={(e) => e.stopPropagation()}
           >
             {/* Grab Handle */}
-            <div className={`w-12 h-1 rounded-full mx-auto -mt-1 mb-1 ${isLight ? 'bg-slate-300' : 'bg-[#080f14]'}`} />
+            <div className={`w-12 h-1 rounded-full mx-auto -mt-1 mb-1 ${isLight ? 'bg-slate-300' : 'bg-[#000000]'}`} />
 
-            <div className={`flex items-center justify-between pb-2 border-b ${isLight ? 'border-slate-200' : 'border-[#A58D66]/20'}`}>
+            <div className={`flex items-center justify-between pb-2 border-b ${isLight ? 'border-slate-200' : 'border-[#FFFFFF]/20'}`}>
               <div className="flex items-center gap-2">
                 <div
                   style={{
@@ -300,14 +300,14 @@ export const MobileBottomDock: React.FC = () => {
                   <Cpu className="w-4 h-4" />
                 </div>
                 <div>
-                  <div className={`font-bold text-sm font-mono ${isLight ? 'text-slate-900' : 'text-[#E5E1DD]'}`}>DigiLogic Lab</div>
-                  <div className={`text-[11px] ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>Mobile Circuit Studio</div>
+                  <div className={`font-bold text-sm font-mono ${isLight ? 'text-slate-900' : 'text-[#F5F5F5]'}`}>DigiLogic Lab</div>
+                  <div className={`text-[11px] ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>Mobile Circuit Studio</div>
                 </div>
               </div>
               <button
                 onClick={() => setMobileSheetOpen(false)}
                 className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                  isLight ? 'bg-slate-100 text-slate-600 hover:bg-slate-200' : 'bg-[#080f14] text-[#E5E1DD]/60'
+                  isLight ? 'bg-slate-100 text-slate-600 hover:bg-slate-200' : 'bg-[#000000] text-[#F5F5F5]/60'
                 }`}
               >
                 <X className="w-4 h-4" />
@@ -316,15 +316,15 @@ export const MobileBottomDock: React.FC = () => {
 
             {/* Live Collaboration Room */}
             <div className={`border rounded-xl p-3 flex items-center justify-between ${
-              isLight ? 'bg-slate-50 border-slate-200' : 'bg-[#080f14]/80 border-[#A58D66]/20'
+              isLight ? 'bg-slate-50 border-slate-200' : 'bg-[#000000]/80 border-[#FFFFFF]/20'
             }`}>
               <div className="flex items-center gap-2.5">
-                <Users className="w-5 h-5 text-[#A58D66]" />
+                <Users className="w-5 h-5 text-[#FFFFFF]" />
                 <div>
-                  <div className={`font-bold text-xs ${isLight ? 'text-slate-800' : 'text-[#E5E1DD]'}`}>
+                  <div className={`font-bold text-xs ${isLight ? 'text-slate-800' : 'text-[#F5F5F5]'}`}>
                     {isCollaborating ? `Room: ${roomCode}` : 'Live Multiplayer'}
                   </div>
-                  <div className={`text-[10px] ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>
+                  <div className={`text-[10px] ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>
                     {isCollaborating ? `${collaborators.length + 1} active members` : 'Connect & design together'}
                   </div>
                 </div>
@@ -334,7 +334,7 @@ export const MobileBottomDock: React.FC = () => {
                   setActiveModal('collaborate');
                   setMobileSheetOpen(false);
                 }}
-                className="px-3 py-1.5 bg-[#A58D66]/20 hover:bg-[#A58D66]/30 text-[#DFCCA8] border border-[#A58D66]/40 rounded-lg text-xs font-bold"
+                className="px-3 py-1.5 bg-[#FFFFFF]/20 hover:bg-[#FFFFFF]/30 text-[#E8E8E8] border border-[#FFFFFF]/40 rounded-lg text-xs font-bold"
               >
                 {isCollaborating ? 'Manage Room' : 'Join / Host'}
               </button>
@@ -342,43 +342,43 @@ export const MobileBottomDock: React.FC = () => {
 
             {/* Quick Canvas View & Navigation Tools */}
             <div>
-              <div className={`text-[10px] font-bold uppercase tracking-wider mb-2 ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>
+              <div className={`text-[10px] font-bold uppercase tracking-wider mb-2 ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>
                 Canvas View & Snapping
               </div>
               <div className="grid grid-cols-4 gap-2">
                 <button
                   onClick={() => handleZoom('in')}
                   className={`flex flex-col items-center justify-center p-2.5 border rounded-xl active:scale-95 ${
-                    isLight ? 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-700' : 'bg-[#080f14] border-[#A58D66]/20 text-[#DFCCA8]'
+                    isLight ? 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-700' : 'bg-[#000000] border-[#FFFFFF]/20 text-[#E8E8E8]'
                   }`}
                 >
                   <span className="text-xs font-bold font-mono">+{Math.round(camera.zoom * 100)}%</span>
-                  <span className={`text-[9px] ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>Zoom In</span>
+                  <span className={`text-[9px] ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>Zoom In</span>
                 </button>
                 <button
                   onClick={() => handleZoom('out')}
                   className={`flex flex-col items-center justify-center p-2.5 border rounded-xl active:scale-95 ${
-                    isLight ? 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-700' : 'bg-[#080f14] border-[#A58D66]/20 text-[#DFCCA8]'
+                    isLight ? 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-700' : 'bg-[#000000] border-[#FFFFFF]/20 text-[#E8E8E8]'
                   }`}
                 >
                   <span className="text-xs font-bold font-mono">Zoom -</span>
-                  <span className={`text-[9px] ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>Zoom Out</span>
+                  <span className={`text-[9px] ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>Zoom Out</span>
                 </button>
                 <button
                   onClick={() => handleZoom('reset')}
                   className={`flex flex-col items-center justify-center p-2.5 border rounded-xl active:scale-95 ${
-                    isLight ? 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-700' : 'bg-[#080f14] border-[#A58D66]/20 text-[#DFCCA8]'
+                    isLight ? 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-700' : 'bg-[#000000] border-[#FFFFFF]/20 text-[#E8E8E8]'
                   }`}
                 >
-                  <Maximize2 className="w-4 h-4 text-[#76B4C2]" />
-                  <span className={`text-[9px] ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>Fit Screen</span>
+                  <Maximize2 className="w-4 h-4 text-[#B4B4B4]" />
+                  <span className={`text-[9px] ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>Fit Screen</span>
                 </button>
                 <button
                   onClick={() => setSnapToGrid(!snapToGrid)}
                   className={`flex flex-col items-center justify-center p-2.5 border rounded-xl ${
                     snapToGrid
-                      ? 'bg-[#A58D66]/20 border-[#A58D66]/40 text-[#DFCCA8]'
-                      : isLight ? 'bg-slate-100 border-slate-200 text-slate-600' : 'bg-[#080f14] border-[#A58D66]/20 text-[#E5E1DD]/60'
+                      ? 'bg-[#FFFFFF]/20 border-[#FFFFFF]/40 text-[#E8E8E8]'
+                      : isLight ? 'bg-slate-100 border-slate-200 text-slate-600' : 'bg-[#000000] border-[#FFFFFF]/20 text-[#F5F5F5]/60'
                   }`}
                 >
                   <Grid className="w-4 h-4" />
@@ -389,7 +389,7 @@ export const MobileBottomDock: React.FC = () => {
 
             {/* Global Actions */}
             <div>
-              <div className={`text-[10px] font-bold uppercase tracking-wider mb-2 ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>
+              <div className={`text-[10px] font-bold uppercase tracking-wider mb-2 ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>
                 Canvas Editing
               </div>
               <div className="grid grid-cols-2 gap-2">
@@ -400,13 +400,13 @@ export const MobileBottomDock: React.FC = () => {
                     setMobileSheetOpen(false);
                   }}
                   className={`flex items-center gap-2.5 p-3 border rounded-xl text-left active:scale-95 ${
-                    isLight ? 'bg-slate-100 hover:bg-slate-200 border-slate-200' : 'bg-[#080f14] border-[#A58D66]/20'
+                    isLight ? 'bg-slate-100 hover:bg-slate-200 border-slate-200' : 'bg-[#000000] border-[#FFFFFF]/20'
                   }`}
                 >
-                  <Network className="w-4 h-4 text-[#76B4C2] shrink-0" />
+                  <Network className="w-4 h-4 text-[#B4B4B4] shrink-0" />
                   <div>
-                    <div className={`text-xs font-bold ${isLight ? 'text-slate-800' : 'text-[#E5E1DD]'}`}>Auto-Arrange</div>
-                    <div className={`text-[10px] ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>Clean up layout</div>
+                    <div className={`text-xs font-bold ${isLight ? 'text-slate-800' : 'text-[#F5F5F5]'}`}>Auto-Arrange</div>
+                    <div className={`text-[10px] ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>Clean up layout</div>
                   </div>
                 </button>
                 <button
@@ -414,14 +414,14 @@ export const MobileBottomDock: React.FC = () => {
                     clearCanvas();
                     setMobileSheetOpen(false);
                   }}
-                  className={`flex items-center gap-2.5 p-3 border rounded-xl text-left active:scale-95 hover:bg-[#A58D66]/10 ${
-                    isLight ? 'bg-slate-100 hover:bg-slate-200 border-slate-200' : 'bg-[#080f14] border-[#A58D66]/20'
+                  className={`flex items-center gap-2.5 p-3 border rounded-xl text-left active:scale-95 hover:bg-[#FFFFFF]/10 ${
+                    isLight ? 'bg-slate-100 hover:bg-slate-200 border-slate-200' : 'bg-[#000000] border-[#FFFFFF]/20'
                   }`}
                 >
-                  <Trash2 className="w-4 h-4 text-[#DFCCA8] shrink-0" />
+                  <Trash2 className="w-4 h-4 text-[#E8E8E8] shrink-0" />
                   <div>
-                    <div className={`text-xs font-bold ${isLight ? 'text-slate-800' : 'text-[#E5E1DD]'}`}>Clear Canvas</div>
-                    <div className={`text-[10px] ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>Delete everything</div>
+                    <div className={`text-xs font-bold ${isLight ? 'text-slate-800' : 'text-[#F5F5F5]'}`}>Clear Canvas</div>
+                    <div className={`text-[10px] ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>Delete everything</div>
                   </div>
                 </button>
               </div>
@@ -429,7 +429,7 @@ export const MobileBottomDock: React.FC = () => {
 
             {/* Wire Routing Selection */}
             <div>
-              <div className={`text-[10px] font-bold uppercase tracking-wider mb-2 ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>
+              <div className={`text-[10px] font-bold uppercase tracking-wider mb-2 ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>
                 Wire Connection Routing
               </div>
               <div className="grid grid-cols-3 gap-2">
@@ -437,41 +437,41 @@ export const MobileBottomDock: React.FC = () => {
                   onClick={() => setWireRoutingMode('orthogonal')}
                   className={`p-2.5 rounded-xl border flex flex-col items-center gap-1 ${
                     wireRoutingMode === 'orthogonal'
-                      ? 'bg-[#A58D66]/20 border-[#A58D66]/40 text-[#DFCCA8] font-bold'
-                      : isLight ? 'bg-slate-100 border-slate-200 text-slate-600' : 'bg-[#080f14] border-[#A58D66]/20 text-[#E5E1DD]/60'
+                      ? 'bg-[#FFFFFF]/20 border-[#FFFFFF]/40 text-[#E8E8E8] font-bold'
+                      : isLight ? 'bg-slate-100 border-slate-200 text-slate-600' : 'bg-[#000000] border-[#FFFFFF]/20 text-[#F5F5F5]/60'
                   }`}
                 >
                   <span className="text-xs">90° Manhattan</span>
-                  <span className={`text-[9px] ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/45'}`}>Orthogonal</span>
+                  <span className={`text-[9px] ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/45'}`}>Orthogonal</span>
                 </button>
                 <button
                   onClick={() => setWireRoutingMode('curved')}
                   className={`p-2.5 rounded-xl border flex flex-col items-center gap-1 ${
                     wireRoutingMode === 'curved'
-                      ? 'bg-[#76B4C2]/20 border-[#76B4C2]/40 text-[#76B4C2] font-bold'
-                      : isLight ? 'bg-slate-100 border-slate-200 text-slate-600' : 'bg-[#080f14] border-[#A58D66]/20 text-[#E5E1DD]/60'
+                      ? 'bg-[#B4B4B4]/20 border-[#B4B4B4]/40 text-[#B4B4B4] font-bold'
+                      : isLight ? 'bg-slate-100 border-slate-200 text-slate-600' : 'bg-[#000000] border-[#FFFFFF]/20 text-[#F5F5F5]/60'
                   }`}
                 >
                   <Spline className="w-4 h-4" />
-                  <span className={`text-[9px] ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/45'}`}>Smooth Curves</span>
+                  <span className={`text-[9px] ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/45'}`}>Smooth Curves</span>
                 </button>
                 <button
                   onClick={() => setWireRoutingMode('straight')}
                   className={`p-2.5 rounded-xl border flex flex-col items-center gap-1 ${
                     wireRoutingMode === 'straight'
-                      ? 'bg-[#76B4C2]/20 border-[#407E8C]/40 text-[#76B4C2] font-bold'
-                      : isLight ? 'bg-slate-100 border-slate-200 text-slate-600' : 'bg-[#080f14] border-[#A58D66]/20 text-[#E5E1DD]/60'
+                      ? 'bg-[#B4B4B4]/20 border-[#8F8F8F]/40 text-[#B4B4B4] font-bold'
+                      : isLight ? 'bg-slate-100 border-slate-200 text-slate-600' : 'bg-[#000000] border-[#FFFFFF]/20 text-[#F5F5F5]/60'
                   }`}
                 >
                   <Minus className="w-4 h-4" />
-                  <span className={`text-[9px] ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/45'}`}>Straight Lines</span>
+                  <span className={`text-[9px] ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/45'}`}>Straight Lines</span>
                 </button>
               </div>
             </div>
 
             {/* Digital Analysis & Logic Tools */}
             <div>
-              <div className="text-[10px] font-bold text-[#DFCCA8] uppercase tracking-wider mb-2">
+              <div className="text-[10px] font-bold text-[#E8E8E8] uppercase tracking-wider mb-2">
                 Digital Analysis & Tools
               </div>
               <div className="grid grid-cols-2 gap-2">
@@ -481,13 +481,13 @@ export const MobileBottomDock: React.FC = () => {
                     setMobileSheetOpen(false);
                   }}
                   className={`flex items-center gap-2.5 p-3 border rounded-xl text-left active:scale-95 ${
-                    isLight ? 'bg-slate-100 hover:bg-slate-200 border-slate-200' : 'bg-[#080f14] border-[#A58D66]/20'
+                    isLight ? 'bg-slate-100 hover:bg-slate-200 border-slate-200' : 'bg-[#000000] border-[#FFFFFF]/20'
                   }`}
                 >
-                  <Table className="w-4 h-4 text-[#A58D66] shrink-0" />
+                  <Table className="w-4 h-4 text-[#FFFFFF] shrink-0" />
                   <div>
-                    <div className={`text-xs font-bold ${isLight ? 'text-slate-800' : 'text-[#E5E1DD]'}`}>Truth Table</div>
-                    <div className={`text-[10px] ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>All Input States</div>
+                    <div className={`text-xs font-bold ${isLight ? 'text-slate-800' : 'text-[#F5F5F5]'}`}>Truth Table</div>
+                    <div className={`text-[10px] ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>All Input States</div>
                   </div>
                 </button>
 
@@ -497,13 +497,13 @@ export const MobileBottomDock: React.FC = () => {
                     setMobileSheetOpen(false);
                   }}
                   className={`flex items-center gap-2.5 p-3 border rounded-xl text-left active:scale-95 ${
-                    isLight ? 'bg-slate-100 hover:bg-slate-200 border-slate-200' : 'bg-[#080f14] border-[#A58D66]/20'
+                    isLight ? 'bg-slate-100 hover:bg-slate-200 border-slate-200' : 'bg-[#000000] border-[#FFFFFF]/20'
                   }`}
                 >
-                  <FileCode2 className="w-4 h-4 text-[#76B4C2] shrink-0" />
+                  <FileCode2 className="w-4 h-4 text-[#B4B4B4] shrink-0" />
                   <div>
-                    <div className={`text-xs font-bold ${isLight ? 'text-slate-800' : 'text-[#E5E1DD]'}`}>Boolean Algebra</div>
-                    <div className={`text-[10px] ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>Equation Solver</div>
+                    <div className={`text-xs font-bold ${isLight ? 'text-slate-800' : 'text-[#F5F5F5]'}`}>Boolean Algebra</div>
+                    <div className={`text-[10px] ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>Equation Solver</div>
                   </div>
                 </button>
 
@@ -513,13 +513,13 @@ export const MobileBottomDock: React.FC = () => {
                     setMobileSheetOpen(false);
                   }}
                   className={`flex items-center gap-2.5 p-3 border rounded-xl text-left active:scale-95 ${
-                    isLight ? 'bg-slate-100 hover:bg-slate-200 border-slate-200' : 'bg-[#080f14] border-[#A58D66]/20'
+                    isLight ? 'bg-slate-100 hover:bg-slate-200 border-slate-200' : 'bg-[#000000] border-[#FFFFFF]/20'
                   }`}
                 >
-                  <Sparkles className="w-4 h-4 text-[#407E8C] shrink-0" />
+                  <Sparkles className="w-4 h-4 text-[#8F8F8F] shrink-0" />
                   <div>
-                    <div className={`text-xs font-bold ${isLight ? 'text-slate-800' : 'text-[#E5E1DD]'}`}>K-Map Minimizer</div>
-                    <div className={`text-[10px] ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>Visual SOP / POS</div>
+                    <div className={`text-xs font-bold ${isLight ? 'text-slate-800' : 'text-[#F5F5F5]'}`}>K-Map Minimizer</div>
+                    <div className={`text-[10px] ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>Visual SOP / POS</div>
                   </div>
                 </button>
 
@@ -529,13 +529,13 @@ export const MobileBottomDock: React.FC = () => {
                     setMobileSheetOpen(false);
                   }}
                   className={`flex items-center gap-2.5 p-3 border rounded-xl text-left active:scale-95 ${
-                    isLight ? 'bg-slate-100 hover:bg-slate-200 border-slate-200' : 'bg-[#080f14] border-[#A58D66]/20'
+                    isLight ? 'bg-slate-100 hover:bg-slate-200 border-slate-200' : 'bg-[#000000] border-[#FFFFFF]/20'
                   }`}
                 >
-                  <Activity className="w-4 h-4 text-[#A58D66] shrink-0" />
+                  <Activity className="w-4 h-4 text-[#FFFFFF] shrink-0" />
                   <div>
-                    <div className={`text-xs font-bold ${isLight ? 'text-slate-800' : 'text-[#E5E1DD]'}`}>Oscilloscope</div>
-                    <div className={`text-[10px] ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>Timing Diagram</div>
+                    <div className={`text-xs font-bold ${isLight ? 'text-slate-800' : 'text-[#F5F5F5]'}`}>Oscilloscope</div>
+                    <div className={`text-[10px] ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>Timing Diagram</div>
                   </div>
                 </button>
               </div>
@@ -543,7 +543,7 @@ export const MobileBottomDock: React.FC = () => {
 
             {/* Learning & Circuit Library */}
             <div>
-              <div className="text-[10px] font-bold text-[#76B4C2] uppercase tracking-wider mb-2">
+              <div className="text-[10px] font-bold text-[#B4B4B4] uppercase tracking-wider mb-2">
                 Library & Learning
               </div>
               <div className="grid grid-cols-2 gap-2">
@@ -553,13 +553,13 @@ export const MobileBottomDock: React.FC = () => {
                     setMobileSheetOpen(false);
                   }}
                   className={`flex items-center gap-2.5 p-3 border rounded-xl text-left active:scale-95 ${
-                    isLight ? 'bg-slate-100 hover:bg-slate-200 border-slate-200' : 'bg-[#080f14] border-[#A58D66]/20'
+                    isLight ? 'bg-slate-100 hover:bg-slate-200 border-slate-200' : 'bg-[#000000] border-[#FFFFFF]/20'
                   }`}
                 >
-                  <Database className="w-4 h-4 text-[#A58D66] shrink-0" />
+                  <Database className="w-4 h-4 text-[#FFFFFF] shrink-0" />
                   <div>
-                    <div className={`text-xs font-bold ${isLight ? 'text-slate-800' : 'text-[#E5E1DD]'}`}>My Circuits</div>
-                    <div className={`text-[10px] ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>Saved Projects</div>
+                    <div className={`text-xs font-bold ${isLight ? 'text-slate-800' : 'text-[#F5F5F5]'}`}>My Circuits</div>
+                    <div className={`text-[10px] ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>Saved Projects</div>
                   </div>
                 </button>
 
@@ -569,13 +569,13 @@ export const MobileBottomDock: React.FC = () => {
                     setMobileSheetOpen(false);
                   }}
                   className={`flex items-center gap-2.5 p-3 border rounded-xl text-left active:scale-95 ${
-                    isLight ? 'bg-slate-100 hover:bg-slate-200 border-slate-200' : 'bg-[#080f14] border-[#A58D66]/20'
+                    isLight ? 'bg-slate-100 hover:bg-slate-200 border-slate-200' : 'bg-[#000000] border-[#FFFFFF]/20'
                   }`}
                 >
-                  <FolderOpen className="w-4 h-4 text-[#76B4C2] shrink-0" />
+                  <FolderOpen className="w-4 h-4 text-[#B4B4B4] shrink-0" />
                   <div>
-                    <div className={`text-xs font-bold ${isLight ? 'text-slate-800' : 'text-[#E5E1DD]'}`}>Preset Library</div>
-                    <div className={`text-[10px] ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>ALU, Adders, Latches</div>
+                    <div className={`text-xs font-bold ${isLight ? 'text-slate-800' : 'text-[#F5F5F5]'}`}>Preset Library</div>
+                    <div className={`text-[10px] ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>ALU, Adders, Latches</div>
                   </div>
                 </button>
 
@@ -585,13 +585,13 @@ export const MobileBottomDock: React.FC = () => {
                     setMobileSheetOpen(false);
                   }}
                   className={`flex items-center gap-2.5 p-3 border rounded-xl text-left active:scale-95 ${
-                    isLight ? 'bg-slate-100 hover:bg-slate-200 border-slate-200' : 'bg-[#080f14] border-[#A58D66]/20'
+                    isLight ? 'bg-slate-100 hover:bg-slate-200 border-slate-200' : 'bg-[#000000] border-[#FFFFFF]/20'
                   }`}
                 >
-                  <Award className="w-4 h-4 text-[#A58D66] shrink-0" />
+                  <Award className="w-4 h-4 text-[#FFFFFF] shrink-0" />
                   <div>
-                    <div className={`text-xs font-bold ${isLight ? 'text-slate-800' : 'text-[#E5E1DD]'}`}>Challenges</div>
-                    <div className={`text-[10px] ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>Puzzles & Quizzes</div>
+                    <div className={`text-xs font-bold ${isLight ? 'text-slate-800' : 'text-[#F5F5F5]'}`}>Challenges</div>
+                    <div className={`text-[10px] ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>Puzzles & Quizzes</div>
                   </div>
                 </button>
 
@@ -601,30 +601,30 @@ export const MobileBottomDock: React.FC = () => {
                     setMobileSheetOpen(false);
                   }}
                   className={`flex items-center gap-2.5 p-3 border rounded-xl text-left active:scale-95 ${
-                    isLight ? 'bg-slate-100 hover:bg-slate-200 border-slate-200' : 'bg-[#080f14] border-[#A58D66]/20'
+                    isLight ? 'bg-slate-100 hover:bg-slate-200 border-slate-200' : 'bg-[#000000] border-[#FFFFFF]/20'
                   }`}
                 >
-                  <BookOpen className="w-4 h-4 text-[#A58D66] shrink-0" />
+                  <BookOpen className="w-4 h-4 text-[#FFFFFF] shrink-0" />
                   <div>
-                    <div className={`text-xs font-bold ${isLight ? 'text-slate-800' : 'text-[#E5E1DD]'}`}>Educational Wiki</div>
-                    <div className={`text-[10px] ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>Digital Logic Guide</div>
+                    <div className={`text-xs font-bold ${isLight ? 'text-slate-800' : 'text-[#F5F5F5]'}`}>Educational Wiki</div>
+                    <div className={`text-[10px] ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>Digital Logic Guide</div>
                   </div>
                 </button>
               </div>
             </div>
 
             {/* Settings & Help */}
-            <div className={`grid grid-cols-2 gap-2 pt-2 border-t ${isLight ? 'border-slate-200' : 'border-[#A58D66]/20'}`}>
+            <div className={`grid grid-cols-2 gap-2 pt-2 border-t ${isLight ? 'border-slate-200' : 'border-[#FFFFFF]/20'}`}>
               <button
                 onClick={() => {
                   setActiveModal('settings');
                   setMobileSheetOpen(false);
                 }}
                 className={`flex items-center justify-center gap-2 p-3 border rounded-xl font-semibold text-xs ${
-                  isLight ? 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-800' : 'bg-[#080f14] border-[#A58D66]/20 text-[#DFCCA8]'
+                  isLight ? 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-800' : 'bg-[#000000] border-[#FFFFFF]/20 text-[#E8E8E8]'
                 }`}
               >
-                <Settings className="w-4 h-4 text-[#A58D66]" />
+                <Settings className="w-4 h-4 text-[#FFFFFF]" />
                 <span>Simulator Settings</span>
               </button>
 
@@ -634,7 +634,7 @@ export const MobileBottomDock: React.FC = () => {
                   setMobileSheetOpen(false);
                 }}
                 className={`flex items-center justify-center gap-2 p-3 border rounded-xl font-semibold text-xs ${
-                  isLight ? 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-cyan-600' : 'bg-[#080f14] border-[#A58D66]/20 text-[#76B4C2]'
+                  isLight ? 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-zinc-600' : 'bg-[#000000] border-[#FFFFFF]/20 text-[#B4B4B4]'
                 }`}
               >
                 <Compass className="w-4 h-4" />
@@ -648,9 +648,9 @@ export const MobileBottomDock: React.FC = () => {
                 setActiveModal('about');
                 setMobileSheetOpen(false);
               }}
-              className="w-full flex items-center justify-center gap-2 p-3 rounded-xl bg-[#A58D66]/15 border border-[#A58D66]/30 text-[#DFCCA8] font-bold text-xs"
+              className="w-full flex items-center justify-center gap-2 p-3 rounded-xl bg-[#FFFFFF]/15 border border-[#FFFFFF]/30 text-[#E8E8E8] font-bold text-xs"
             >
-              <Sparkles className="w-4 h-4 text-[#DFCCA8]" />
+              <Sparkles className="w-4 h-4 text-[#E8E8E8]" />
               <span>About Team KITT & Full Lab Guide</span>
             </button>
           </div>

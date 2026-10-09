@@ -49,7 +49,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/5">
         <div>
-          <h1 className="text-xl sm:text-2xl font-bold font-mono text-[#E5E1DD]">Settings</h1>
+          <h1 className="text-xl sm:text-2xl font-bold font-mono text-[#F5F5F5]">Settings</h1>
           <p className="text-xs text-slate-400 mt-1">
             Configure your electronics CAD preferences, SPICE numerical engine, and workspace settings.
           </p>
@@ -57,7 +57,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
 
         <button
           onClick={handleSave}
-          className="px-4 py-2 rounded-lg bg-gradient-to-r from-[#A58D66] to-[#8C7654] hover:from-[#bfa378] hover:to-[#A58D66] text-[#080f14] font-mono font-bold text-xs flex items-center gap-2 shadow-[0_0_15px_rgba(165,141,102,0.3)] transition-all cursor-pointer self-start sm:self-auto"
+          className="px-4 py-2 rounded-[12px] bg-[#FFFFFF] hover:bg-[#E8E8E8] text-[#000000] font-mono font-bold text-xs flex items-center gap-2 transition-all cursor-pointer self-start sm:self-auto"
         >
           {savedSuccess ? <Check className="w-4 h-4" /> : <Save className="w-4 h-4" />}
           <span>{savedSuccess ? 'Preferences Saved' : 'Save Changes'}</span>
@@ -75,13 +75,13 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs font-mono text-left transition-all cursor-pointer ${
+                className={`w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-[12px] text-xs font-mono text-left transition-all cursor-pointer ${
                   isActive
-                    ? 'bg-[#A58D66]/15 text-[#DFCCA8] border border-[#A58D66]/35 font-bold shadow-sm'
+                    ? 'bg-[#FFFFFF]/15 text-[#E8E8E8] border border-[#353536] font-bold shadow-sm'
                     : 'text-slate-400 hover:text-white hover:bg-white/5 border border-transparent'
                 }`}
               >
-                <Icon className={`w-4 h-4 ${isActive ? 'text-[#A58D66]' : 'text-slate-500'}`} />
+                <Icon className={`w-4 h-4 ${isActive ? 'text-[#FFFFFF]' : 'text-slate-500'}`} />
                 <span>{tab.label}</span>
               </button>
             );
@@ -89,7 +89,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
         </div>
 
         {/* Right Content Panel */}
-        <div className="md:col-span-9 bg-[#0c161d] border border-[#A58D66]/20 rounded-2xl p-6 shadow-xl">
+        <div className="md:col-span-9 bg-[#141415] border border-[#353536] rounded-[24px] p-6">
           {/* 1. General Tab */}
           {activeTab === 'general' && (
             <div className="space-y-5 font-mono text-xs">
@@ -99,7 +99,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                   type="text"
                   value={localSettings.workspaceName}
                   onChange={e => setLocalSettings({ ...localSettings, workspaceName: e.target.value })}
-                  className="w-full max-w-md px-3.5 py-2 rounded-lg bg-[#080f14] border border-white/10 text-[#E5E1DD] focus:outline-none focus:border-[#A58D66]"
+                  className="w-full max-w-md px-3.5 py-2 rounded-[12px] bg-[#000000] border border-[#29292A] text-[#F5F5F5] focus:outline-none focus:border-[#FFFFFF]"
                 />
               </div>
 
@@ -111,10 +111,10 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                       key={m}
                       type="button"
                       onClick={() => setLocalSettings({ ...localSettings, defaultMode: m })}
-                      className={`px-4 py-2 rounded-lg border capitalize cursor-pointer transition-colors ${
+                      className={`px-4 py-2 rounded-[12px] border capitalize cursor-pointer transition-colors ${
                         localSettings.defaultMode === m
-                          ? 'bg-[#A58D66]/20 border-[#A58D66] text-[#DFCCA8] font-bold'
-                          : 'bg-[#080f14] border-white/10 text-slate-400 hover:text-white'
+                          ? 'bg-[#FFFFFF]/20 border-[#FFFFFF] text-[#E8E8E8] font-bold'
+                          : 'bg-[#000000] border-[#29292A] text-slate-400 hover:text-white'
                       }`}
                     >
                       {m}
@@ -129,7 +129,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                     type="checkbox"
                     checked={localSettings.autoSave}
                     onChange={e => setLocalSettings({ ...localSettings, autoSave: e.target.checked })}
-                    className="w-4 h-4 rounded accent-[#A58D66]"
+                    className="w-4 h-4 rounded accent-[#FFFFFF]"
                   />
                   <div>
                     <span className="text-slate-300 font-bold">Auto-save circuits</span>
@@ -142,7 +142,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                     type="checkbox"
                     checked={localSettings.soundEffects}
                     onChange={e => setLocalSettings({ ...localSettings, soundEffects: e.target.checked })}
-                    className="w-4 h-4 rounded accent-[#A58D66]"
+                    className="w-4 h-4 rounded accent-[#FFFFFF]"
                   />
                   <div>
                     <span className="text-slate-300 font-bold">Audio buzzer & relays simulation</span>
@@ -164,10 +164,10 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                       key={style}
                       type="button"
                       onClick={() => setLocalSettings({ ...localSettings, gridStyle: style })}
-                      className={`px-4 py-2 rounded-lg border capitalize cursor-pointer transition-colors ${
+                      className={`px-4 py-2 rounded-[12px] border capitalize cursor-pointer transition-colors ${
                         localSettings.gridStyle === style
-                          ? 'bg-[#A58D66]/20 border-[#A58D66] text-[#DFCCA8] font-bold'
-                          : 'bg-[#080f14] border-white/10 text-slate-400 hover:text-white'
+                          ? 'bg-[#FFFFFF]/20 border-[#FFFFFF] text-[#E8E8E8] font-bold'
+                          : 'bg-[#000000] border-[#29292A] text-slate-400 hover:text-white'
                       }`}
                     >
                       {style}
@@ -184,10 +184,10 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                       key={w}
                       type="button"
                       onClick={() => setLocalSettings({ ...localSettings, wireRouting: w })}
-                      className={`px-4 py-2 rounded-lg border capitalize cursor-pointer transition-colors ${
+                      className={`px-4 py-2 rounded-[12px] border capitalize cursor-pointer transition-colors ${
                         localSettings.wireRouting === w
-                          ? 'bg-[#A58D66]/20 border-[#A58D66] text-[#DFCCA8] font-bold'
-                          : 'bg-[#080f14] border-white/10 text-slate-400 hover:text-white'
+                          ? 'bg-[#FFFFFF]/20 border-[#FFFFFF] text-[#E8E8E8] font-bold'
+                          : 'bg-[#000000] border-[#29292A] text-slate-400 hover:text-white'
                       }`}
                     >
                       {w === 'orthogonal' ? 'Orthogonal (Manhattan 90°)' : 'Direct Point-to-Point'}
@@ -202,7 +202,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                     type="checkbox"
                     checked={localSettings.snapToGrid}
                     onChange={e => setLocalSettings({ ...localSettings, snapToGrid: e.target.checked })}
-                    className="w-4 h-4 rounded accent-[#A58D66]"
+                    className="w-4 h-4 rounded accent-[#FFFFFF]"
                   />
                   <div>
                     <span className="text-slate-300 font-bold">Snap to Grid (20px standard)</span>
@@ -215,7 +215,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                     type="checkbox"
                     checked={localSettings.showComponentLabels}
                     onChange={e => setLocalSettings({ ...localSettings, showComponentLabels: e.target.checked })}
-                    className="w-4 h-4 rounded accent-[#A58D66]"
+                    className="w-4 h-4 rounded accent-[#FFFFFF]"
                   />
                   <div>
                     <span className="text-slate-300 font-bold">Show Component Designators & Values</span>
@@ -234,7 +234,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                 <select
                   value={localSettings.simStepMs}
                   onChange={e => setLocalSettings({ ...localSettings, simStepMs: Number(e.target.value) })}
-                  className="px-3 py-2 rounded-lg bg-[#080f14] border border-white/10 text-slate-300 focus:outline-none focus:border-[#A58D66]"
+                  className="px-3 py-2 rounded-[12px] bg-[#000000] border border-[#29292A] text-slate-300 focus:outline-none focus:border-[#FFFFFF]"
                 >
                   <option value={0.1}>0.1 ms (10kHz High-Resolution Audio/RF)</option>
                   <option value={1.0}>1.0 ms (1kHz Balanced General Purpose)</option>
@@ -242,8 +242,8 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                 </select>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-black/40 border border-white/5 space-y-2">
-                <div className="text-xs font-bold text-[#10b981] flex items-center gap-1.5">
+              <div className="p-3.5 rounded-[12px] bg-black/40 border border-white/5 space-y-2">
+                <div className="text-xs font-bold text-[#F5F5F5] flex items-center gap-1.5">
                   <ShieldCheck className="w-4 h-4" />
                   <span>Mixed-Signal SPICE Kernel Status: Calibrated</span>
                 </div>
@@ -257,7 +257,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                   type="checkbox"
                   checked={localSettings.autoOpenCopilotOnDrcFailure}
                   onChange={e => setLocalSettings({ ...localSettings, autoOpenCopilotOnDrcFailure: e.target.checked })}
-                  className="w-4 h-4 rounded accent-[#A58D66]"
+                  className="w-4 h-4 rounded accent-[#FFFFFF]"
                 />
                 <div>
                   <span className="text-slate-300 font-bold">Auto-trigger AI Copilot on Design Rule Check (DRC) violation</span>
@@ -271,22 +271,22 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
           {activeTab === 'team' && (
             <div className="space-y-5 font-mono text-xs">
               <div>
-                <h3 className="text-sm font-bold text-[#E5E1DD] mb-1">Collaborators & Permissions</h3>
+                <h3 className="text-sm font-bold text-[#F5F5F5] mb-1">Collaborators & Permissions</h3>
                 <p className="text-[11px] text-slate-400 font-sans">1 active member in this sovereign lab workspace.</p>
               </div>
 
-              <div className="divide-y divide-white/5 border border-white/10 rounded-xl overflow-hidden">
+              <div className="divide-y divide-white/5 border border-[#29292A] rounded-[12px] overflow-hidden">
                 <div className="p-3.5 flex items-center justify-between bg-black/40">
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-[#A58D66] text-[#080f14] font-bold flex items-center justify-center">
+                    <div className="w-8 h-8 rounded-[12px] bg-[#FFFFFF] text-[#000000] font-bold flex items-center justify-center">
                       OP
                     </div>
                     <div>
-                      <span className="text-xs font-bold text-[#E5E1DD]">Om Prakash</span>
+                      <span className="text-xs font-bold text-[#F5F5F5]">Om Prakash</span>
                       <span className="text-[11px] text-slate-500 block">om@kitt-engineering.io</span>
                     </div>
                   </div>
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-[#A58D66]/20 text-[#DFCCA8] border border-[#A58D66]/30">
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-[#FFFFFF]/20 text-[#E8E8E8] border border-[#353536]">
                     OWNER
                   </span>
                 </div>
@@ -296,7 +296,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                 <button
                   type="button"
                   onClick={() => alert('Invite link copied to clipboard!')}
-                  className="px-3.5 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white border border-white/10 transition-colors cursor-pointer"
+                  className="px-3.5 py-2 rounded-[12px] bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white border border-[#29292A] transition-colors cursor-pointer"
                 >
                   + Generate Invite Link
                 </button>
@@ -307,28 +307,28 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
           {/* 5. Account & Plan Tab */}
           {activeTab === 'account' && (
             <div className="space-y-5 font-mono text-xs">
-              <div className="p-4 rounded-xl bg-gradient-to-r from-[#A58D66]/15 to-transparent border border-[#A58D66]/30 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="p-4 rounded-[12px] bg-gradient-to-r from-[#FFFFFF]/15 to-transparent border border-[#353536] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                  <span className="text-[10px] uppercase tracking-wider text-[#A58D66] font-bold">Active Subscription</span>
-                  <h3 className="text-base font-bold text-[#E5E1DD] mt-0.5">Student Explorer Tier</h3>
+                  <span className="text-[10px] uppercase tracking-wider text-[#FFFFFF] font-bold">Active Subscription</span>
+                  <h3 className="text-base font-bold text-[#F5F5F5] mt-0.5">Student Explorer Tier</h3>
                   <p className="text-[11px] text-slate-400 font-sans mt-1">8 of 10 daily AI autonomous hardware generation credits available.</p>
                 </div>
                 <button
                   onClick={onOpenUpgradeModal}
-                  className="px-4 py-2 rounded-lg bg-gradient-to-r from-[#A58D66] to-[#8C7654] hover:from-[#bfa378] hover:to-[#A58D66] text-[#080f14] font-bold text-xs shadow-md transition-all cursor-pointer self-start sm:self-auto"
+                  className="px-4 py-2 rounded-[12px] bg-[#FFFFFF] hover:bg-[#E8E8E8] text-[#000000] font-bold text-xs transition-all cursor-pointer self-start sm:self-auto"
                 >
                   Upgrade to Pro
                 </button>
               </div>
 
               <div className="grid grid-cols-2 gap-3 text-slate-300">
-                <div className="p-3 bg-black/40 rounded-lg border border-white/5">
+                <div className="p-3 bg-black/40 rounded-[12px] border border-white/5">
                   <span className="text-slate-500 text-[10px] block">SPICE SOLVER</span>
-                  <span className="font-bold text-sm text-[#10b981]">Standard Dual-Channel</span>
+                  <span className="font-bold text-sm text-[#F5F5F5]">Standard Dual-Channel</span>
                 </div>
-                <div className="p-3 bg-black/40 rounded-lg border border-white/5">
+                <div className="p-3 bg-black/40 rounded-[12px] border border-white/5">
                   <span className="text-slate-500 text-[10px] block">KICAD / GERBER EXPORTS</span>
-                  <span className="font-bold text-sm text-[#DFCCA8]">Enabled (Free)</span>
+                  <span className="font-bold text-sm text-[#E8E8E8]">Enabled (Free)</span>
                 </div>
               </div>
             </div>
@@ -337,7 +337,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
           {/* 6. Keyboard Shortcuts Cheatsheet Tab */}
           {activeTab === 'shortcuts' && (
             <div className="space-y-4 font-mono text-xs">
-              <h3 className="text-sm font-bold text-[#E5E1DD] mb-2">IDE & Laboratory Shortcuts</h3>
+              <h3 className="text-sm font-bold text-[#F5F5F5] mb-2">IDE & Laboratory Shortcuts</h3>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {[
@@ -352,9 +352,9 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                   { key: '+ / -', desc: 'Zoom in / out on canvas' },
                   { key: '0', desc: 'Reset zoom & center canvas' },
                 ].map(sc => (
-                  <div key={sc.key} className="p-2.5 rounded-lg bg-black/40 border border-white/5 flex items-center justify-between">
+                  <div key={sc.key} className="p-2.5 rounded-[12px] bg-black/40 border border-white/5 flex items-center justify-between">
                     <span className="text-slate-400 font-sans text-[11px]">{sc.desc}</span>
-                    <kbd className="px-2 py-0.5 rounded bg-white/10 text-[#DFCCA8] border border-white/10 text-[10px] font-bold">
+                    <kbd className="px-2 py-0.5 rounded bg-white/10 text-[#E8E8E8] border border-[#29292A] text-[10px] font-bold">
                       {sc.key}
                     </kbd>
                   </div>

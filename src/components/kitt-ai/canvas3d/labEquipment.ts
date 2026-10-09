@@ -57,13 +57,13 @@ export function buildBenchOscilloscope(): THREE.Group {
 
     // Header telemetry
     ctx.font = 'bold 16px monospace';
-    ctx.fillStyle = '#34d399';
+    ctx.fillStyle = '#E8E8E8';
     ctx.fillText('CH1: 2.00V/div   CH2: 500mV   T: 20.0ms   f: 1.000kHz', 20, 28);
 
     // Glowing active waveform (Sine + PWM trace)
-    ctx.strokeStyle = '#10b981';
+    ctx.strokeStyle = '#F5F5F5';
     ctx.lineWidth = 3;
-    ctx.shadowColor = '#34d399';
+    ctx.shadowColor = '#E8E8E8';
     ctx.shadowBlur = 8;
     ctx.beginPath();
     for (let x = 0; x < 512; x += 3) {
@@ -162,7 +162,7 @@ export function buildBenchMultimeter(): THREE.Group {
   if (ctx) {
     ctx.fillStyle = '#1e293b';
     ctx.fillRect(0, 0, 256, 128);
-    ctx.fillStyle = '#38bdf8';
+    ctx.fillStyle = '#B4B4B4';
     ctx.font = 'bold 44px monospace';
     ctx.textAlign = 'right';
     ctx.fillText('5.021', 190, 75);

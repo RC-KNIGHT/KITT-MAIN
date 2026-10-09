@@ -38,7 +38,7 @@ export function createProceduralBreadboardTexture(size: 'mini' | 'medium' | 'lar
   ctx.fillRect(0, 0, width, height);
 
   // Subtle polymer surface micro-texture
-  ctx.fillStyle = 'rgba(15, 23, 42, 0.015)';
+  ctx.fillStyle = 'rgba(15, 15, 16, 0.015)';
   for (let i = 0; i < 6000; i++) {
     const rx = Math.random() * width;
     const ry = Math.random() * height;
@@ -81,7 +81,7 @@ export function createProceduralBreadboardTexture(size: 'mini' | 'medium' | 'lar
     ctx.stroke();
 
     // Blue bus line (-)
-    ctx.strokeStyle = '#2563eb';
+    ctx.strokeStyle = '#8F8F8F';
     ctx.lineWidth = 4.5;
     ctx.beginPath();
     ctx.moveTo(35, topRailBlueY);
@@ -101,7 +101,7 @@ export function createProceduralBreadboardTexture(size: 'mini' | 'medium' | 'lar
       ctx.fillText('+', x, topRailRedY - 16);
       ctx.fillText('+', x, botRailRedY + 16);
 
-      ctx.fillStyle = '#2563eb';
+      ctx.fillStyle = '#8F8F8F';
       ctx.fillText('−', x, topRailBlueY - 16);
       ctx.fillText('−', x, botRailBlueY + 16);
     }
@@ -213,7 +213,7 @@ export function createProceduralBreadboardTexture(size: 'mini' | 'medium' | 'lar
   }
 
   // 5. Breadboard Perimeter Bevel & Dovetail interlocking tab guides
-  ctx.strokeStyle = 'rgba(15, 23, 42, 0.15)';
+  ctx.strokeStyle = 'rgba(15, 15, 16, 0.15)';
   ctx.lineWidth = 3;
   ctx.strokeRect(3, 3, width - 6, height - 6);
 

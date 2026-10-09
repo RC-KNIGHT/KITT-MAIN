@@ -309,7 +309,7 @@ export const BooleanToolModal: React.FC = () => {
   return (
     <div
       id="boolean_solver_modal_backdrop"
-      className="fixed inset-0 z-50 flex items-center justify-center bg-[#080f14]/75 backdrop-blur-xs p-2 sm:p-4 md:p-6 animate-fade-in"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-[#000000]/75 backdrop-blur-xs p-2 sm:p-4 md:p-6 animate-fade-in"
       onClick={(e) => {
         if (e.target === e.currentTarget) setActiveModal('none');
       }}
@@ -319,30 +319,30 @@ export const BooleanToolModal: React.FC = () => {
         className={`rounded-2xl w-full max-w-4xl max-h-[92vh] flex flex-col shadow-2xl overflow-hidden animate-scale-up border transition-colors ${
           isLight
             ? 'bg-white border-slate-300 text-slate-800'
-            : 'bg-[#0d171f] border-[#A58D66]/20 text-[#E5E1DD]'
+            : 'bg-[#141415] border-[#FFFFFF]/20 text-[#F5F5F5]'
         }`}
       >
         {/* Modal Header */}
         <div className={`flex items-center justify-between px-4 sm:px-6 py-4 border-b shrink-0 transition-colors ${
           isLight
             ? 'bg-slate-50 border-slate-200'
-            : 'bg-[#0d171f] border-[#A58D66]/20'
+            : 'bg-[#141415] border-[#FFFFFF]/20'
         }`}>
           <div className="flex items-center gap-3">
             <div className={`w-10 h-10 rounded-xl border flex items-center justify-center shadow-xs ${
               isLight
-                ? 'bg-cyan-50 border-cyan-200 text-cyan-600'
-                : 'bg-gradient-to-br from-cyan-500/20 to-emerald-500/20 border-[#76B4C2]/40'
+                ? 'bg-zinc-50 border-zinc-200 text-zinc-600'
+                : 'bg-gradient-to-br from-zinc-500/20 to-zinc-500/20 border-[#B4B4B4]/40'
             }`}>
-              <Sparkles className={`w-5 h-5 ${isLight ? 'text-cyan-600' : 'text-[#76B4C2]'}`} />
+              <Sparkles className={`w-5 h-5 ${isLight ? 'text-zinc-600' : 'text-[#B4B4B4]'}`} />
             </div>
             <div>
               <h2 className={`text-base sm:text-lg font-bold flex items-center gap-2 ${
-                isLight ? 'text-slate-900' : 'text-[#E5E1DD]'
+                isLight ? 'text-slate-900' : 'text-[#F5F5F5]'
               }`}>
                 <span>Boolean Algebra Simplifier & Proof Engine</span>
               </h2>
-              <p className={`text-xs ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>
+              <p className={`text-xs ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>
                 Textbook law-by-law algebraic reduction, slow walkthrough, and instant circuit synthesis
               </p>
             </div>
@@ -352,8 +352,8 @@ export const BooleanToolModal: React.FC = () => {
             onClick={() => setActiveModal('none')}
             className={`p-2 rounded-xl transition-colors cursor-pointer ${
               isLight
-                ? 'text-[#E5E1DD]/45 hover:text-slate-800 hover:bg-slate-100'
-                : 'text-[#E5E1DD]/60 hover:text-[#E5E1DD] hover:bg-[#0d171f]/80'
+                ? 'text-[#F5F5F5]/45 hover:text-slate-800 hover:bg-slate-100'
+                : 'text-[#F5F5F5]/60 hover:text-[#F5F5F5] hover:bg-[#141415]/80'
             }`}
             title="Close"
           >
@@ -367,14 +367,14 @@ export const BooleanToolModal: React.FC = () => {
           <div className={`p-4 rounded-xl space-y-3 shadow-xs border transition-colors ${
             isLight
               ? 'bg-slate-50 border-slate-200'
-              : 'bg-[#080f14]/80 border-[#A58D66]/20'
+              : 'bg-[#000000]/80 border-[#FFFFFF]/20'
           }`}>
             <div className="flex items-center justify-between">
               <label htmlFor="boolean_equation_input" className={`font-bold flex items-center gap-2 ${
-                isLight ? 'text-slate-800' : 'text-[#DFCCA8]'
+                isLight ? 'text-slate-800' : 'text-[#E8E8E8]'
               }`}>
                 <span>Enter Boolean Equation:</span>
-                <span className={`text-[11px] font-normal ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/45'}`}>
+                <span className={`text-[11px] font-normal ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/45'}`}>
                   (Supports literals A-Z, NOT &apos;, AND ·, OR +, XOR ⊕, XNOR ⊙, parens)
                 </span>
               </label>
@@ -382,7 +382,7 @@ export const BooleanToolModal: React.FC = () => {
               {inputEquation && (
                 <button
                   onClick={handleClear}
-                  className="text-xs font-semibold text-[#DFCCA8] hover:text-[#A58D66] transition-colors cursor-pointer"
+                  className="text-xs font-semibold text-[#E8E8E8] hover:text-[#FFFFFF] transition-colors cursor-pointer"
                 >
                   Clear All
                 </button>
@@ -417,14 +417,14 @@ export const BooleanToolModal: React.FC = () => {
                 placeholder="e.g. (XY + Y'X + YZ') X'Y' + X'Y' + YZ' or A ⊕ B ⊕ C"
                 className={`w-full px-4 py-3 rounded-xl font-mono text-sm sm:text-base focus:outline-hidden transition-all pr-24 shadow-xs border ${
                   isLight
-                    ? 'bg-white border-slate-300 text-slate-900 focus:border-cyan-600 focus:ring-1 focus:ring-cyan-500'
-                    : 'bg-[#080f14] border-[#A58D66]/20 text-[#DFCCA8] focus:border-[#A58D66]'
+                    ? 'bg-white border-slate-300 text-slate-900 focus:border-zinc-600 focus:ring-1 focus:ring-zinc-500'
+                    : 'bg-[#000000] border-[#FFFFFF]/20 text-[#E8E8E8] focus:border-[#FFFFFF]'
                 }`}
               />
               <button
                 type="button"
                 onClick={() => solveEquation(inputEquation, true)}
-                className="absolute right-1.5 top-1.5 bottom-1.5 px-3 bg-[#407E8C] hover:bg-[#76B4C2] active:bg-cyan-700 text-[#E5E1DD] font-bold rounded-lg transition-colors flex items-center gap-1.5 text-xs cursor-pointer shadow-xs"
+                className="absolute right-1.5 top-1.5 bottom-1.5 px-3 bg-[#8F8F8F] hover:bg-[#B4B4B4] active:bg-zinc-700 text-[#F5F5F5] font-bold rounded-lg transition-colors flex items-center gap-1.5 text-xs cursor-pointer shadow-xs"
               >
                 <Zap className="w-3.5 h-3.5" />
                 <span>Solve</span>
@@ -433,8 +433,8 @@ export const BooleanToolModal: React.FC = () => {
 
             {/* Error banner if invalid syntax */}
             {parseError && (
-              <div className="p-3 bg-[#A58D66]/10 border border-[#A58D66]/30 rounded-lg text-[#DFCCA8] text-xs flex items-center gap-2">
-                <AlertCircle className="w-4 h-4 shrink-0 text-[#A58D66]" />
+              <div className="p-3 bg-[#FFFFFF]/10 border border-[#FFFFFF]/30 rounded-lg text-[#E8E8E8] text-xs flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 shrink-0 text-[#FFFFFF]" />
                 <span>{parseError}</span>
               </div>
             )}
@@ -443,7 +443,7 @@ export const BooleanToolModal: React.FC = () => {
             <div className="flex flex-wrap items-center gap-1.5 pt-1">
               <div className="flex items-center gap-1">
                 <span className={`text-[10px] uppercase font-bold mr-0.5 tracking-wider ${
-                  isLight ? 'text-slate-600' : 'text-[#E5E1DD]/60'
+                  isLight ? 'text-slate-600' : 'text-[#F5F5F5]/60'
                 }`}>Vars:</span>
                 {['A', 'B', 'C', 'D', 'X', 'Y', 'Z'].map((v) => (
                   <button
@@ -453,8 +453,8 @@ export const BooleanToolModal: React.FC = () => {
                     onClick={() => handleInsertSymbol(v)}
                     className={`min-h-[42px] min-w-[36px] sm:min-w-[40px] px-2.5 sm:px-3 py-1.5 rounded-lg font-mono text-sm font-bold border transition-colors shadow-xs cursor-pointer ${
                       isLight
-                        ? 'bg-white hover:bg-slate-100 active:bg-cyan-100 text-cyan-800 border-slate-300'
-                        : 'bg-[#0d171f] hover:bg-[#0d171f] active:bg-[#76B4C2] text-cyan-300 active:text-[#080f14] border-[#A58D66]/20'
+                        ? 'bg-white hover:bg-slate-100 active:bg-zinc-100 text-zinc-800 border-slate-300'
+                        : 'bg-[#141415] hover:bg-[#141415] active:bg-[#B4B4B4] text-zinc-300 active:text-[#000000] border-[#FFFFFF]/20'
                     }`}
                   >
                     {v}
@@ -462,12 +462,12 @@ export const BooleanToolModal: React.FC = () => {
                 ))}
               </div>
 
-              <div className={`h-6 w-px mx-1 hidden sm:block ${isLight ? 'bg-slate-200' : 'bg-[#0d171f]'}`} />
+              <div className={`h-6 w-px mx-1 hidden sm:block ${isLight ? 'bg-slate-200' : 'bg-[#141415]'}`} />
 
               {/* Operators & Logic Symbols */}
               <div className="flex flex-wrap items-center gap-1 flex-1">
                 <span className={`text-[10px] uppercase font-bold mr-0.5 tracking-wider ${
-                  isLight ? 'text-slate-600' : 'text-[#E5E1DD]/60'
+                  isLight ? 'text-slate-600' : 'text-[#F5F5F5]/60'
                 }`}>Ops:</span>
                 {[
                   { label: "'", sym: "'", title: 'NOT' },
@@ -491,8 +491,8 @@ export const BooleanToolModal: React.FC = () => {
                     onClick={() => handleInsertSymbol(op.sym)}
                     className={`min-h-[42px] min-w-[36px] sm:min-w-[40px] px-2.5 sm:px-3 py-1.5 rounded-lg font-mono text-xs sm:text-sm font-bold border transition-colors shadow-xs cursor-pointer ${
                       isLight
-                        ? 'bg-white hover:bg-slate-100 active:bg-cyan-100 text-slate-800 border-slate-300'
-                        : 'bg-[#0d171f] hover:bg-[#0d171f] active:bg-[#76B4C2] text-[#E5E1DD] active:text-[#080f14] border-[#A58D66]/20'
+                        ? 'bg-white hover:bg-slate-100 active:bg-zinc-100 text-slate-800 border-slate-300'
+                        : 'bg-[#141415] hover:bg-[#141415] active:bg-[#B4B4B4] text-[#F5F5F5] active:text-[#000000] border-[#FFFFFF]/20'
                     }`}
                   >
                     {op.label}
@@ -506,7 +506,7 @@ export const BooleanToolModal: React.FC = () => {
                   className={`min-h-[42px] px-3.5 py-1.5 rounded-lg font-semibold border transition-colors flex items-center gap-1.5 text-xs cursor-pointer ml-auto ${
                     isLight
                       ? 'bg-slate-100 hover:bg-slate-200 text-slate-700 border-slate-300'
-                      : 'bg-[#080f14] hover:bg-[#0d171f] text-[#DFCCA8] border-[#A58D66]/20'
+                      : 'bg-[#000000] hover:bg-[#141415] text-[#E8E8E8] border-[#FFFFFF]/20'
                   }`}
                   title="Backspace"
                 >
@@ -523,18 +523,18 @@ export const BooleanToolModal: React.FC = () => {
               {/* Final Result Card */}
               <div className={`p-4 rounded-xl flex flex-wrap items-center justify-between gap-3 shadow-lg border transition-colors ${
                 isLight
-                  ? 'bg-gradient-to-r from-cyan-50 via-sky-50 to-slate-50 border-cyan-300 text-slate-900'
-                  : 'bg-gradient-to-r from-cyan-950/50 via-blue-950/40 to-slate-900 border-[#76B4C2]/40'
+                  ? 'bg-gradient-to-r from-zinc-50 via-zinc-50 to-slate-50 border-zinc-300 text-slate-900'
+                  : 'bg-gradient-to-r from-cyan-950/50 via-blue-950/40 to-slate-900 border-[#B4B4B4]/40'
               }`}>
                 <div>
                   <span className={`text-[11px] font-bold uppercase tracking-wider flex items-center gap-1.5 ${
-                    isLight ? 'text-cyan-700' : 'text-[#76B4C2]'
+                    isLight ? 'text-zinc-700' : 'text-[#B4B4B4]'
                   }`}>
-                    <ShieldCheck className="w-4 h-4 text-emerald-500" />
+                    <ShieldCheck className="w-4 h-4 text-zinc-500" />
                     <span>Simplest Minimal Form:</span>
                   </span>
                   <div className={`text-xl sm:text-2xl font-bold font-mono mt-1 ${
-                    isLight ? 'text-cyan-950' : 'text-cyan-200'
+                    isLight ? 'text-cyan-950' : 'text-zinc-200'
                   }`}>
                     Y = {solvedResult.simplifiedExpression}
                   </div>
@@ -546,10 +546,10 @@ export const BooleanToolModal: React.FC = () => {
                     className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold border transition-colors cursor-pointer ${
                       isLight
                         ? 'bg-white hover:bg-slate-100 text-slate-700 border-slate-300 shadow-xs'
-                        : 'bg-[#0d171f] hover:bg-[#0d171f] text-[#E5E1DD] border-[#A58D66]/20'
+                        : 'bg-[#141415] hover:bg-[#141415] text-[#F5F5F5] border-[#FFFFFF]/20'
                     }`}
                   >
-                    {copiedResult ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className={`w-3.5 h-3.5 ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`} />}
+                    {copiedResult ? <Check className="w-3.5 h-3.5 text-zinc-500" /> : <Copy className={`w-3.5 h-3.5 ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`} />}
                     <span>{copiedResult ? 'Copied' : 'Copy Result'}</span>
                   </button>
 
@@ -558,10 +558,10 @@ export const BooleanToolModal: React.FC = () => {
                     className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold border transition-colors cursor-pointer ${
                       isLight
                         ? 'bg-white hover:bg-slate-100 text-slate-700 border-slate-300 shadow-xs'
-                        : 'bg-[#0d171f] hover:bg-[#0d171f] text-[#E5E1DD] border-[#A58D66]/20'
+                        : 'bg-[#141415] hover:bg-[#141415] text-[#F5F5F5] border-[#FFFFFF]/20'
                     }`}
                   >
-                    {copiedProof ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className={`w-3.5 h-3.5 ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`} />}
+                    {copiedProof ? <Check className="w-3.5 h-3.5 text-zinc-500" /> : <Copy className={`w-3.5 h-3.5 ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`} />}
                     <span>{copiedProof ? 'Copied Proof' : 'Copy All Steps'}</span>
                   </button>
                 </div>
@@ -571,22 +571,22 @@ export const BooleanToolModal: React.FC = () => {
               <div className={`p-4 rounded-xl space-y-3.5 shadow-xs border transition-colors ${
                 isLight
                   ? 'bg-slate-50 border-slate-200'
-                  : 'bg-[#080f14]/90 border-[#A58D66]/20'
+                  : 'bg-[#000000]/90 border-[#FFFFFF]/20'
               }`}>
                 <div className={`flex flex-wrap items-center justify-between gap-2.5 pb-2.5 border-b ${
-                  isLight ? 'border-slate-200' : 'border-[#A58D66]/20'
+                  isLight ? 'border-slate-200' : 'border-[#FFFFFF]/20'
                 }`}>
                   <div className="flex flex-wrap items-center gap-2">
-                    <Zap className="w-4 h-4 text-[#A58D66]" />
+                    <Zap className="w-4 h-4 text-[#FFFFFF]" />
                     <span className={`font-bold text-xs sm:text-sm ${
-                      isLight ? 'text-slate-900' : 'text-[#E5E1DD]'
+                      isLight ? 'text-slate-900' : 'text-[#F5F5F5]'
                     }`}>
                       Algebraic Derivation
                     </span>
                     <span className={`text-[11px] font-semibold px-2 py-0.5 rounded border ${
                       isLight
-                        ? 'text-cyan-800 bg-cyan-100 border-cyan-300'
-                        : 'text-[#76B4C2] bg-cyan-950/60 border-cyan-800/40'
+                        ? 'text-zinc-800 bg-zinc-100 border-zinc-300'
+                        : 'text-[#B4B4B4] bg-cyan-950/60 border-zinc-800/40'
                     }`}>
                       {solvedResult.steps.length} Steps
                     </span>
@@ -597,19 +597,19 @@ export const BooleanToolModal: React.FC = () => {
                           onClick={handleExpandAll}
                           className={`px-2 py-1 rounded text-[11px] font-medium transition-colors cursor-pointer ${
                             isLight
-                              ? 'text-slate-600 hover:text-cyan-700 hover:bg-slate-200'
-                              : 'text-[#E5E1DD]/60 hover:text-cyan-300 hover:bg-[#0d171f]'
+                              ? 'text-slate-600 hover:text-zinc-700 hover:bg-slate-200'
+                              : 'text-[#F5F5F5]/60 hover:text-zinc-300 hover:bg-[#141415]'
                           }`}
                         >
                           Expand All
                         </button>
-                        <span className={isLight ? 'text-[#DFCCA8]' : 'text-slate-600'}>|</span>
+                        <span className={isLight ? 'text-[#E8E8E8]' : 'text-slate-600'}>|</span>
                         <button
                           onClick={handleCollapseAll}
                           className={`px-2 py-1 rounded text-[11px] font-medium transition-colors cursor-pointer ${
                             isLight
-                              ? 'text-slate-600 hover:text-cyan-700 hover:bg-slate-200'
-                              : 'text-[#E5E1DD]/60 hover:text-cyan-300 hover:bg-[#0d171f]'
+                              ? 'text-slate-600 hover:text-zinc-700 hover:bg-slate-200'
+                              : 'text-[#F5F5F5]/60 hover:text-zinc-300 hover:bg-[#141415]'
                           }`}
                         >
                           Collapse All
@@ -622,7 +622,7 @@ export const BooleanToolModal: React.FC = () => {
                   <div className={`flex items-center gap-1 p-1 rounded-lg border ${
                     isLight
                       ? 'bg-white border-slate-300 shadow-2xs'
-                      : 'bg-[#080f14] border-[#A58D66]/20'
+                      : 'bg-[#000000] border-[#FFFFFF]/20'
                   }`}>
                     <button
                       onClick={() => {
@@ -632,11 +632,11 @@ export const BooleanToolModal: React.FC = () => {
                       className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md font-semibold text-xs transition-colors cursor-pointer ${
                         viewMode === 'all'
                           ? isLight
-                            ? 'bg-cyan-100 text-cyan-800 border border-cyan-300'
-                            : 'bg-[#76B4C2]/20 text-cyan-300 border border-[#76B4C2]/30'
+                            ? 'bg-zinc-100 text-zinc-800 border border-zinc-300'
+                            : 'bg-[#B4B4B4]/20 text-zinc-300 border border-[#B4B4B4]/30'
                           : isLight
                           ? 'text-slate-600 hover:text-slate-900'
-                          : 'text-[#E5E1DD]/60 hover:text-[#E5E1DD]'
+                          : 'text-[#F5F5F5]/60 hover:text-[#F5F5F5]'
                       }`}
                     >
                       <FileText className="w-3.5 h-3.5" />
@@ -648,11 +648,11 @@ export const BooleanToolModal: React.FC = () => {
                       className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md font-semibold text-xs transition-colors cursor-pointer ${
                         viewMode === 'walkthrough'
                           ? isLight
-                            ? 'bg-cyan-100 text-cyan-800 border border-cyan-300'
-                            : 'bg-[#76B4C2]/20 text-cyan-300 border border-[#76B4C2]/30'
+                            ? 'bg-zinc-100 text-zinc-800 border border-zinc-300'
+                            : 'bg-[#B4B4B4]/20 text-zinc-300 border border-[#B4B4B4]/30'
                           : isLight
                           ? 'text-slate-600 hover:text-slate-900'
-                          : 'text-[#E5E1DD]/60 hover:text-[#E5E1DD]'
+                          : 'text-[#F5F5F5]/60 hover:text-[#F5F5F5]'
                       }`}
                     >
                       <Sliders className="w-3.5 h-3.5" />
@@ -666,14 +666,14 @@ export const BooleanToolModal: React.FC = () => {
                   <div className="space-y-4 pt-1">
                     {/* Step Navigation Controls & Progress Bar */}
                     <div className={`p-3 rounded-xl space-y-3 border ${
-                      isLight ? 'bg-white border-slate-200 shadow-2xs' : 'bg-[#080f14] border-[#A58D66]/20'
+                      isLight ? 'bg-white border-slate-200 shadow-2xs' : 'bg-[#000000] border-[#FFFFFF]/20'
                     }`}>
                       <div className="flex items-center justify-between gap-3">
                         <div className="flex items-center gap-2">
-                          <span className={`text-xs font-bold ${isLight ? 'text-slate-800' : 'text-[#DFCCA8]'}`}>
+                          <span className={`text-xs font-bold ${isLight ? 'text-slate-800' : 'text-[#E8E8E8]'}`}>
                             Step {activeStepIndex + 1} of {solvedResult.steps.length}
                           </span>
-                          <span className={`text-[10px] ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>
+                          <span className={`text-[10px] ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>
                             ({Math.round(((activeStepIndex + 1) / solvedResult.steps.length) * 100)}% complete)
                           </span>
                         </div>
@@ -689,7 +689,7 @@ export const BooleanToolModal: React.FC = () => {
                             className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg disabled:opacity-30 text-xs font-semibold border transition-colors cursor-pointer ${
                               isLight
                                 ? 'bg-white hover:bg-slate-100 text-slate-700 border-slate-300 shadow-xs'
-                                : 'bg-[#0d171f] hover:bg-[#0d171f] text-[#E5E1DD] border-[#A58D66]/20'
+                                : 'bg-[#141415] hover:bg-[#141415] text-[#F5F5F5] border-[#FFFFFF]/20'
                             }`}
                           >
                             <ChevronLeft className="w-3.5 h-3.5" />
@@ -700,8 +700,8 @@ export const BooleanToolModal: React.FC = () => {
                             onClick={() => setIsPlaying(!isPlaying)}
                             className={`flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-semibold border transition-colors cursor-pointer ${
                               isLight
-                                ? 'bg-cyan-50 hover:bg-cyan-100 text-cyan-800 border-cyan-300'
-                                : 'bg-cyan-950 hover:bg-cyan-900 text-cyan-300 border-cyan-700/60'
+                                ? 'bg-zinc-50 hover:bg-zinc-100 text-zinc-800 border-zinc-300'
+                                : 'bg-cyan-950 hover:bg-zinc-900 text-zinc-300 border-zinc-700/60'
                             }`}
                             title={isPlaying ? 'Pause Auto-Walkthrough' : 'Slow Auto-Play Steps'}
                           >
@@ -718,7 +718,7 @@ export const BooleanToolModal: React.FC = () => {
                             className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg disabled:opacity-30 text-xs font-semibold border transition-colors cursor-pointer ${
                               isLight
                                 ? 'bg-white hover:bg-slate-100 text-slate-700 border-slate-300 shadow-xs'
-                                : 'bg-[#0d171f] hover:bg-[#0d171f] text-[#E5E1DD] border-[#A58D66]/20'
+                                : 'bg-[#141415] hover:bg-[#141415] text-[#F5F5F5] border-[#FFFFFF]/20'
                             }`}
                           >
                             <span>Next Step</span>
@@ -729,10 +729,10 @@ export const BooleanToolModal: React.FC = () => {
 
                       {/* Progress Bar */}
                       <div className={`w-full rounded-full h-1.5 overflow-hidden border ${
-                        isLight ? 'bg-slate-200 border-slate-300' : 'bg-[#080f14] border-[#A58D66]/20'
+                        isLight ? 'bg-slate-200 border-slate-300' : 'bg-[#000000] border-[#FFFFFF]/20'
                       }`}>
                         <div
-                          className="bg-gradient-to-r from-[#A58D66] to-[#DFCCA8] h-full transition-all duration-300"
+                          className="bg-gradient-to-r from-[#FFFFFF] to-[#E8E8E8] h-full transition-all duration-300"
                           style={{
                             width: `${((activeStepIndex + 1) / solvedResult.steps.length) * 100}%`,
                           }}
@@ -743,21 +743,21 @@ export const BooleanToolModal: React.FC = () => {
                     {/* Active Step Card */}
                     <div className={`p-4 sm:p-5 rounded-xl border space-y-3.5 shadow-md ${
                       isLight
-                        ? 'bg-white border-cyan-300'
-                        : 'bg-[#080f14] border-[#A58D66]/20'
+                        ? 'bg-white border-zinc-300'
+                        : 'bg-[#000000] border-[#FFFFFF]/20'
                     }`}>
                       {/* Step Header */}
                       <div className="flex flex-wrap items-center justify-between gap-2">
                         <div className="flex items-center gap-2">
                           <span className={`w-7 h-7 rounded-full font-bold text-xs flex items-center justify-center border ${
                             isLight
-                              ? 'bg-cyan-100 text-cyan-800 border-cyan-300'
-                              : 'bg-[#76B4C2]/20 text-cyan-300 border-[#76B4C2]/40'
+                              ? 'bg-zinc-100 text-zinc-800 border-zinc-300'
+                              : 'bg-[#B4B4B4]/20 text-zinc-300 border-[#B4B4B4]/40'
                           }`}>
                             {activeStepIndex + 1}
                           </span>
                           <span className={`font-bold text-xs uppercase tracking-wide ${
-                            isLight ? 'text-slate-800' : 'text-[#DFCCA8]'
+                            isLight ? 'text-slate-800' : 'text-[#E8E8E8]'
                           }`}>
                             {activeStepIndex === 0
                               ? 'Initial Problem'
@@ -772,8 +772,8 @@ export const BooleanToolModal: React.FC = () => {
                             onClick={() => handleOpenLawInfo(currentWalkthroughStep.lawName)}
                             className={`flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold border transition-colors cursor-pointer ${
                               isLight
-                                ? 'bg-cyan-50 hover:bg-cyan-100 text-cyan-800 border-cyan-300'
-                                : 'bg-cyan-950/80 hover:bg-cyan-900 text-cyan-300 border-cyan-700/60'
+                                ? 'bg-zinc-50 hover:bg-zinc-100 text-zinc-800 border-zinc-300'
+                                : 'bg-cyan-950/80 hover:bg-zinc-900 text-zinc-300 border-zinc-700/60'
                             }`}
                             title="Click to view full textbook law definition & examples"
                           >
@@ -787,14 +787,14 @@ export const BooleanToolModal: React.FC = () => {
                               className={`flex items-center gap-1.5 px-3 py-1 rounded-lg border text-xs font-semibold transition-colors cursor-pointer ${
                                 walkthroughShowDetails
                                   ? isLight
-                                    ? 'bg-cyan-100 border-cyan-300 text-cyan-800'
-                                    : 'bg-[#76B4C2]/20 border-[#76B4C2]/40 text-cyan-300'
+                                    ? 'bg-zinc-100 border-zinc-300 text-zinc-800'
+                                    : 'bg-[#B4B4B4]/20 border-[#B4B4B4]/40 text-zinc-300'
                                   : isLight
                                   ? 'bg-white hover:bg-slate-100 text-slate-700 border-slate-300 shadow-xs'
-                                  : 'bg-[#0d171f] hover:bg-[#0d171f] text-[#DFCCA8] border-[#A58D66]/20'
+                                  : 'bg-[#141415] hover:bg-[#141415] text-[#E8E8E8] border-[#FFFFFF]/20'
                               }`}
                             >
-                              <HelpCircle className="w-3.5 h-3.5 text-[#76B4C2]" />
+                              <HelpCircle className="w-3.5 h-3.5 text-[#B4B4B4]" />
                               <span>{walkthroughShowDetails ? 'Hide Details' : 'Explain Step'}</span>
                               {walkthroughShowDetails ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
                             </button>
@@ -806,7 +806,7 @@ export const BooleanToolModal: React.FC = () => {
                       <div className={`p-3.5 rounded-xl font-mono text-base sm:text-lg font-bold break-all border ${
                         isLight
                           ? 'bg-slate-50 border-slate-200 text-cyan-950 shadow-2xs'
-                          : 'bg-[#080f14]/90 border-[#A58D66]/20 text-cyan-200'
+                          : 'bg-[#000000]/90 border-[#FFFFFF]/20 text-zinc-200'
                       }`}>
                         = {currentWalkthroughStep.expression}
                       </div>
@@ -814,19 +814,19 @@ export const BooleanToolModal: React.FC = () => {
                       {/* Collapsible Dropdown Details */}
                       {walkthroughShowDetails && (
                         <div className={`space-y-3 pt-1 animate-fade-in border-t ${
-                          isLight ? 'border-slate-200' : 'border-[#A58D66]/20'
+                          isLight ? 'border-slate-200' : 'border-[#FFFFFF]/20'
                         }`}>
                           {/* Deep pedagogical breakdown */}
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 pt-2">
                             {currentWalkthroughStep.selectedTerms && (
                               <div className={`p-3 rounded-lg space-y-1 border ${
-                                isLight ? 'bg-slate-50 border-slate-200' : 'bg-[#080f14]/60 border-[#A58D66]/20'
+                                isLight ? 'bg-slate-50 border-slate-200' : 'bg-[#000000]/60 border-[#FFFFFF]/20'
                               }`}>
                                 <span className="text-[10px] font-bold uppercase tracking-wider text-amber-600 flex items-center gap-1.5">
                                   <Target className="w-3.5 h-3.5" />
                                   <span>Terms Selected / Grouped:</span>
                                 </span>
-                                <p className={`font-mono text-xs ${isLight ? 'text-slate-800' : 'text-[#E5E1DD]'}`}>
+                                <p className={`font-mono text-xs ${isLight ? 'text-slate-800' : 'text-[#F5F5F5]'}`}>
                                   {currentWalkthroughStep.selectedTerms}
                                 </p>
                               </div>
@@ -834,13 +834,13 @@ export const BooleanToolModal: React.FC = () => {
 
                             {currentWalkthroughStep.formulaUsed && (
                               <div className={`p-3 rounded-lg space-y-1 border ${
-                                isLight ? 'bg-slate-50 border-slate-200' : 'bg-[#080f14]/60 border-[#A58D66]/20'
+                                isLight ? 'bg-slate-50 border-slate-200' : 'bg-[#000000]/60 border-[#FFFFFF]/20'
                               }`}>
-                                <span className="text-[10px] font-bold uppercase tracking-wider text-[#A58D66] flex items-center gap-1.5">
+                                <span className="text-[10px] font-bold uppercase tracking-wider text-[#FFFFFF] flex items-center gap-1.5">
                                   <Zap className="w-3.5 h-3.5" />
                                   <span>Formula / Identity Applied:</span>
                                 </span>
-                                <p className="text-[#DFCCA8] font-mono text-xs font-semibold">
+                                <p className="text-[#E8E8E8] font-mono text-xs font-semibold">
                                   {currentWalkthroughStep.formulaUsed}
                                 </p>
                               </div>
@@ -850,15 +850,15 @@ export const BooleanToolModal: React.FC = () => {
                           {/* Full human-friendly explanation */}
                           {currentWalkthroughStep.explanation && (
                             <div className={`p-3.5 rounded-xl space-y-1 border ${
-                              isLight ? 'bg-cyan-50/70 border-cyan-200' : 'bg-cyan-950/30 border-[#76B4C2]/20'
+                              isLight ? 'bg-zinc-50/70 border-zinc-200' : 'bg-cyan-950/30 border-[#B4B4B4]/20'
                             }`}>
                               <span className={`text-[10px] font-bold uppercase tracking-wider flex items-center gap-1.5 ${
-                                isLight ? 'text-cyan-800' : 'text-[#76B4C2]'
+                                isLight ? 'text-zinc-800' : 'text-[#B4B4B4]'
                               }`}>
                                 <HelpCircle className="w-3.5 h-3.5" />
                                 <span>How it was simplified:</span>
                               </span>
-                              <p className={`text-xs leading-relaxed ${isLight ? 'text-slate-700' : 'text-[#DFCCA8]'}`}>
+                              <p className={`text-xs leading-relaxed ${isLight ? 'text-slate-700' : 'text-[#E8E8E8]'}`}>
                                 {currentWalkthroughStep.explanation}
                               </p>
                             </div>
@@ -883,11 +883,11 @@ export const BooleanToolModal: React.FC = () => {
                           className={`rounded-xl border transition-all overflow-hidden ${
                             isFinal
                               ? isLight
-                                ? 'bg-amber-50 border-[#A58D66]/40 shadow-xs'
-                                : 'bg-[#A58D66]/15 border-[#A58D66]/40 shadow-xs'
+                                ? 'bg-amber-50 border-[#FFFFFF]/40 shadow-xs'
+                                : 'bg-[#FFFFFF]/15 border-[#FFFFFF]/40 shadow-xs'
                               : isLight
                               ? 'bg-white border-slate-200 shadow-2xs'
-                              : 'bg-[#080f14] border-[#A58D66]/20'
+                              : 'bg-[#000000] border-[#FFFFFF]/20'
                           }`}
                         >
                           {/* Clean, compact Step Row */}
@@ -898,11 +898,11 @@ export const BooleanToolModal: React.FC = () => {
                                 className={`w-6 h-6 rounded-full font-bold text-xs flex items-center justify-center shrink-0 border ${
                                   isFinal
                                     ? isLight
-                                      ? 'bg-amber-100 text-[#A58D66] border-[#A58D66]/40'
-                                      : 'bg-[#A58D66]/30 text-[#DFCCA8] border-[#A58D66]/50'
+                                      ? 'bg-amber-100 text-[#FFFFFF] border-[#FFFFFF]/40'
+                                      : 'bg-[#FFFFFF]/30 text-[#E8E8E8] border-[#FFFFFF]/50'
                                     : isLight
                                     ? 'bg-slate-100 text-slate-700 border-slate-300'
-                                    : 'bg-[#0d171f] text-[#76B4C2] border-[#A58D66]/20'
+                                    : 'bg-[#141415] text-[#B4B4B4] border-[#FFFFFF]/20'
                                 }`}
                               >
                                 {idx + 1}
@@ -911,11 +911,11 @@ export const BooleanToolModal: React.FC = () => {
                                 className={`font-bold text-sm sm:text-base break-all ${
                                   isFinal
                                     ? isLight
-                                      ? 'text-[#A58D66]'
-                                      : 'text-[#DFCCA8]'
+                                      ? 'text-[#FFFFFF]'
+                                      : 'text-[#E8E8E8]'
                                     : isLight
                                     ? 'text-slate-900'
-                                    : 'text-cyan-200'
+                                    : 'text-zinc-200'
                                 }`}
                               >
                                 = {step.expression}
@@ -929,11 +929,11 @@ export const BooleanToolModal: React.FC = () => {
                                 className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold shadow-xs transition-colors cursor-pointer border ${
                                   isLight
                                     ? 'bg-slate-50 hover:bg-slate-100 text-slate-700 border-slate-300'
-                                    : 'bg-[#0d171f]/90 hover:bg-[#0d171f] text-cyan-300 border-[#A58D66]/20'
+                                    : 'bg-[#141415]/90 hover:bg-[#141415] text-zinc-300 border-[#FFFFFF]/20'
                                 }`}
                                 title="View law definition in textbook guide"
                               >
-                                <BookOpen className="w-3 h-3 text-[#76B4C2]" />
+                                <BookOpen className="w-3 h-3 text-[#B4B4B4]" />
                                 <span>{step.lawName}</span>
                               </button>
 
@@ -943,20 +943,20 @@ export const BooleanToolModal: React.FC = () => {
                                   className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold border transition-all cursor-pointer ${
                                     isExpanded
                                       ? isLight
-                                        ? 'bg-cyan-100 text-cyan-800 border-cyan-300 shadow-inner'
-                                        : 'bg-[#76B4C2]/20 text-cyan-300 border-[#76B4C2]/40 shadow-inner'
+                                        ? 'bg-zinc-100 text-zinc-800 border-zinc-300 shadow-inner'
+                                        : 'bg-[#B4B4B4]/20 text-zinc-300 border-[#B4B4B4]/40 shadow-inner'
                                       : isLight
                                       ? 'bg-white hover:bg-slate-100 text-slate-700 border-slate-300 shadow-xs'
-                                      : 'bg-[#080f14] hover:bg-[#0d171f] text-[#DFCCA8] hover:text-cyan-300 border-[#A58D66]/20/80'
+                                      : 'bg-[#000000] hover:bg-[#141415] text-[#E8E8E8] hover:text-zinc-300 border-[#FFFFFF]/20/80'
                                   }`}
                                   title={isExpanded ? 'Hide explanation' : 'Show step explanation dropdown'}
                                 >
-                                  <HelpCircle className="w-3 h-3 text-[#76B4C2]" />
+                                  <HelpCircle className="w-3 h-3 text-[#B4B4B4]" />
                                   <span>{isExpanded ? 'Hide' : 'Explain'}</span>
                                   {isExpanded ? (
-                                    <ChevronUp className={`w-3.5 h-3.5 ${isLight ? 'text-cyan-700' : 'text-cyan-300'}`} />
+                                    <ChevronUp className={`w-3.5 h-3.5 ${isLight ? 'text-zinc-700' : 'text-zinc-300'}`} />
                                   ) : (
-                                    <ChevronDown className={`w-3.5 h-3.5 ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`} />
+                                    <ChevronDown className={`w-3.5 h-3.5 ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`} />
                                   )}
                                 </button>
                               )}
@@ -966,31 +966,31 @@ export const BooleanToolModal: React.FC = () => {
                           {/* Expandable Dropdown Content Area */}
                           {isExpanded && hasDetails && (
                             <div className={`px-3.5 pb-3.5 pt-1 space-y-2.5 border-t animate-fade-in font-sans ${
-                              isLight ? 'border-slate-200 bg-slate-50/70' : 'border-[#A58D66]/20 bg-[#080f14]/40'
+                              isLight ? 'border-slate-200 bg-slate-50/70' : 'border-[#FFFFFF]/20 bg-[#000000]/40'
                             }`}>
                               {/* Terms selected & formula applied */}
                               {(step.selectedTerms || step.formulaUsed) && (
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] pt-1">
                                   {step.selectedTerms && (
                                     <div className={`p-2 rounded-lg border flex items-start gap-1.5 ${
-                                      isLight ? 'bg-white border-slate-200' : 'bg-[#080f14]/90 border-[#A58D66]/20'
+                                      isLight ? 'bg-white border-slate-200' : 'bg-[#000000]/90 border-[#FFFFFF]/20'
                                     }`}>
-                                      <Target className="w-3.5 h-3.5 text-[#A58D66] shrink-0 mt-0.5" />
+                                      <Target className="w-3.5 h-3.5 text-[#FFFFFF] shrink-0 mt-0.5" />
                                       <div>
-                                        <span className={`font-semibold mr-1 ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>Target Terms:</span>
-                                        <span className={`font-mono ${isLight ? 'text-slate-800' : 'text-[#E5E1DD]'}`}>{step.selectedTerms}</span>
+                                        <span className={`font-semibold mr-1 ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>Target Terms:</span>
+                                        <span className={`font-mono ${isLight ? 'text-slate-800' : 'text-[#F5F5F5]'}`}>{step.selectedTerms}</span>
                                       </div>
                                     </div>
                                   )}
 
                                   {step.formulaUsed && (
                                     <div className={`p-2 rounded-lg border flex items-start gap-1.5 ${
-                                      isLight ? 'bg-white border-slate-200' : 'bg-[#080f14]/90 border-[#A58D66]/20'
+                                      isLight ? 'bg-white border-slate-200' : 'bg-[#000000]/90 border-[#FFFFFF]/20'
                                     }`}>
-                                      <Zap className="w-3.5 h-3.5 text-[#A58D66] shrink-0 mt-0.5" />
+                                      <Zap className="w-3.5 h-3.5 text-[#FFFFFF] shrink-0 mt-0.5" />
                                       <div>
-                                        <span className={`font-semibold mr-1 ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>Identity / Formula:</span>
-                                        <span className="font-mono text-[#DFCCA8] font-semibold">{step.formulaUsed}</span>
+                                        <span className={`font-semibold mr-1 ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>Identity / Formula:</span>
+                                        <span className="font-mono text-[#E8E8E8] font-semibold">{step.formulaUsed}</span>
                                       </div>
                                     </div>
                                   )}
@@ -1000,16 +1000,16 @@ export const BooleanToolModal: React.FC = () => {
                               {/* Human Pedagogical Step Explanation */}
                               {step.explanation && (
                                 <div className={`p-2.5 rounded-lg border text-xs leading-relaxed flex items-start gap-2 ${
-                                  isLight ? 'bg-white border-slate-200 text-slate-700' : 'bg-[#080f14] border-[#A58D66]/20 text-[#DFCCA8]'
+                                  isLight ? 'bg-white border-slate-200 text-slate-700' : 'bg-[#000000] border-[#FFFFFF]/20 text-[#E8E8E8]'
                                 }`}>
-                                  <HelpCircle className="w-3.5 h-3.5 text-[#76B4C2] shrink-0 mt-0.5" />
+                                  <HelpCircle className="w-3.5 h-3.5 text-[#B4B4B4] shrink-0 mt-0.5" />
                                   <div className="space-y-0.5">
                                     <span className={`text-[10px] uppercase font-bold block tracking-wider ${
-                                      isLight ? 'text-cyan-700' : 'text-[#76B4C2]'
+                                      isLight ? 'text-zinc-700' : 'text-[#B4B4B4]'
                                     }`}>
                                       Transformation Explanation
                                     </span>
-                                    <p className={isLight ? 'text-slate-700' : 'text-[#DFCCA8]'}>{step.explanation}</p>
+                                    <p className={isLight ? 'text-slate-700' : 'text-[#E8E8E8]'}>{step.explanation}</p>
                                   </div>
                                 </div>
                               )}
@@ -1025,7 +1025,7 @@ export const BooleanToolModal: React.FC = () => {
           )}
 
           {loadSuccessNotice && (
-            <div className="p-3 bg-[#A58D66]/10 border border-[#A58D66]/30 rounded-lg text-[#DFCCA8] text-xs font-semibold flex items-center gap-2">
+            <div className="p-3 bg-[#FFFFFF]/10 border border-[#FFFFFF]/30 rounded-lg text-[#E8E8E8] text-xs font-semibold flex items-center gap-2">
               <Check className="w-4 h-4" />
               <span>{loadSuccessNotice}</span>
             </div>
@@ -1034,18 +1034,18 @@ export const BooleanToolModal: React.FC = () => {
 
         {/* Modal Law Dictionary Inspector Drawer */}
         {inspectingLaw && (
-          <div className="fixed inset-0 z-60 flex items-center justify-center bg-[#080f14]/70 p-4 animate-fade-in">
+          <div className="fixed inset-0 z-60 flex items-center justify-center bg-[#000000]/70 p-4 animate-fade-in">
             <div className={`border rounded-2xl w-full max-w-lg shadow-2xl p-5 space-y-4 text-xs transition-colors ${
               isLight
                 ? 'bg-white border-slate-300 text-slate-800'
-                : 'bg-[#0d171f] border-[#A58D66]/30 text-[#E5E1DD]'
+                : 'bg-[#141415] border-[#FFFFFF]/30 text-[#F5F5F5]'
             }`}>
               <div className={`flex items-center justify-between border-b pb-3 ${
-                isLight ? 'border-slate-200' : 'border-[#A58D66]/20'
+                isLight ? 'border-slate-200' : 'border-[#FFFFFF]/20'
               }`}>
                 <div className="flex items-center gap-2">
-                  <BookOpen className="w-5 h-5 text-[#76B4C2]" />
-                  <h3 className={`font-bold text-base ${isLight ? 'text-slate-900' : 'text-[#E5E1DD]'}`}>
+                  <BookOpen className="w-5 h-5 text-[#B4B4B4]" />
+                  <h3 className={`font-bold text-base ${isLight ? 'text-slate-900' : 'text-[#F5F5F5]'}`}>
                     {inspectingLaw.name}
                   </h3>
                 </div>
@@ -1053,53 +1053,53 @@ export const BooleanToolModal: React.FC = () => {
                   onClick={() => setInspectingLaw(null)}
                   className={`p-1 rounded-lg transition-colors cursor-pointer ${
                     isLight
-                      ? 'text-[#E5E1DD]/60 hover:text-slate-700 hover:bg-slate-100'
-                      : 'text-[#E5E1DD]/60 hover:text-[#E5E1DD] hover:bg-[#0d171f]'
+                      ? 'text-[#F5F5F5]/60 hover:text-slate-700 hover:bg-slate-100'
+                      : 'text-[#F5F5F5]/60 hover:text-[#F5F5F5] hover:bg-[#141415]'
                   }`}
                 >
                   <X className="w-4 h-4" />
                 </button>
               </div>
 
-              <div className={`space-y-3 ${isLight ? 'text-slate-700' : 'text-[#DFCCA8]'}`}>
+              <div className={`space-y-3 ${isLight ? 'text-slate-700' : 'text-[#E8E8E8]'}`}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   <div className={`p-2.5 rounded-lg border ${
-                    isLight ? 'bg-slate-50 border-slate-200' : 'bg-[#080f14] border-[#A58D66]/20'
+                    isLight ? 'bg-slate-50 border-slate-200' : 'bg-[#000000] border-[#FFFFFF]/20'
                   }`}>
                     <span className={`text-[10px] font-bold uppercase tracking-wider block mb-1 ${
-                      isLight ? 'text-cyan-700' : 'text-[#76B4C2]'
+                      isLight ? 'text-zinc-700' : 'text-[#B4B4B4]'
                     }`}>
                       Primal Form (AND/OR)
                     </span>
-                    <span className={`font-mono font-bold ${isLight ? 'text-slate-900' : 'text-[#E5E1DD]'}`}>
+                    <span className={`font-mono font-bold ${isLight ? 'text-slate-900' : 'text-[#F5F5F5]'}`}>
                       {inspectingLaw.primalEquation}
                     </span>
                   </div>
 
                   <div className={`p-2.5 rounded-lg border ${
-                    isLight ? 'bg-slate-50 border-slate-200' : 'bg-[#080f14] border-[#A58D66]/20'
+                    isLight ? 'bg-slate-50 border-slate-200' : 'bg-[#000000] border-[#FFFFFF]/20'
                   }`}>
-                    <span className="text-[10px] font-bold text-[#DFCCA8] uppercase tracking-wider block mb-1">
+                    <span className="text-[10px] font-bold text-[#E8E8E8] uppercase tracking-wider block mb-1">
                       Dual Form
                     </span>
-                    <span className={`font-mono font-bold ${isLight ? 'text-slate-900' : 'text-[#E5E1DD]'}`}>
+                    <span className={`font-mono font-bold ${isLight ? 'text-slate-900' : 'text-[#F5F5F5]'}`}>
                       {inspectingLaw.dualEquation}
                     </span>
                   </div>
                 </div>
 
                 <div className="space-y-1">
-                  <span className={`font-bold ${isLight ? 'text-slate-900' : 'text-[#E5E1DD]'}`}>Rule Description:</span>
-                  <p className={`leading-relaxed ${isLight ? 'text-slate-600' : 'text-[#DFCCA8]'}`}>{inspectingLaw.description}</p>
+                  <span className={`font-bold ${isLight ? 'text-slate-900' : 'text-[#F5F5F5]'}`}>Rule Description:</span>
+                  <p className={`leading-relaxed ${isLight ? 'text-slate-600' : 'text-[#E8E8E8]'}`}>{inspectingLaw.description}</p>
                 </div>
 
                 {inspectingLaw.example && (
                   <div className="space-y-1 pt-1">
-                    <span className={`font-bold ${isLight ? 'text-slate-900' : 'text-[#E5E1DD]'}`}>Textbook Example:</span>
+                    <span className={`font-bold ${isLight ? 'text-slate-900' : 'text-[#F5F5F5]'}`}>Textbook Example:</span>
                     <pre className={`p-2.5 rounded-lg font-mono text-[11px] whitespace-pre-wrap border ${
                       isLight
                         ? 'bg-slate-50 border-slate-200 text-slate-800'
-                        : 'bg-[#080f14] border-[#A58D66]/20 text-[#DFCCA8]'
+                        : 'bg-[#000000] border-[#FFFFFF]/20 text-[#E8E8E8]'
                     }`}>
                       {inspectingLaw.example}
                     </pre>
@@ -1110,7 +1110,7 @@ export const BooleanToolModal: React.FC = () => {
               <div className="pt-2 flex justify-end">
                 <button
                   onClick={() => setInspectingLaw(null)}
-                  className="px-4 py-1.5 rounded-lg bg-[#407E8C] hover:bg-[#76B4C2] text-[#E5E1DD] font-bold transition-colors cursor-pointer"
+                  className="px-4 py-1.5 rounded-lg bg-[#8F8F8F] hover:bg-[#B4B4B4] text-[#F5F5F5] font-bold transition-colors cursor-pointer"
                 >
                   Got It
                 </button>
@@ -1121,27 +1121,27 @@ export const BooleanToolModal: React.FC = () => {
 
         {/* Footer: Prominent Actions & Synthesis Mode */}
         <div className={`px-4 sm:px-6 py-3.5 border-t flex flex-wrap items-center justify-between gap-3 text-xs shrink-0 transition-colors ${
-          isLight ? 'bg-slate-50 border-slate-200' : 'bg-[#0d171f] border-[#A58D66]/20'
+          isLight ? 'bg-slate-50 border-slate-200' : 'bg-[#141415] border-[#FFFFFF]/20'
         }`}>
           <div className="flex flex-wrap items-center gap-2">
             <span className={`text-[11px] font-bold uppercase tracking-wider hidden sm:inline ${
-              isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'
+              isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'
             }`}>
               Target Mode:
             </span>
             <div className={`flex items-center gap-1 p-1 rounded-xl border ${
-              isLight ? 'bg-white border-slate-300 shadow-2xs' : 'bg-[#080f14] border-[#A58D66]/20'
+              isLight ? 'bg-white border-slate-300 shadow-2xs' : 'bg-[#000000] border-[#FFFFFF]/20'
             }`}>
               <button
                 onClick={() => setSynthesisArch('direct')}
                 className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                   synthesisArch === 'direct'
                     ? isLight
-                      ? 'bg-[#0d171f] text-[#E5E1DD] font-bold shadow-xs'
-                      : 'bg-[#0d171f] text-[#E5E1DD] font-bold shadow-xs'
+                      ? 'bg-[#141415] text-[#F5F5F5] font-bold shadow-xs'
+                      : 'bg-[#141415] text-[#F5F5F5] font-bold shadow-xs'
                     : isLight
                     ? 'text-slate-600 hover:text-slate-900'
-                    : 'text-[#E5E1DD]/60 hover:text-[#E5E1DD]'
+                    : 'text-[#F5F5F5]/60 hover:text-[#F5F5F5]'
                 }`}
                 title="Synthesize exact gates from formula (Direct translation)"
               >
@@ -1151,10 +1151,10 @@ export const BooleanToolModal: React.FC = () => {
                 onClick={() => setSynthesisArch('optimized_xor')}
                 className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                   synthesisArch === 'optimized_xor'
-                    ? 'bg-[#A58D66] text-[#080f14] font-bold shadow-xs'
+                    ? 'bg-[#FFFFFF] text-[#000000] font-bold shadow-xs'
                     : isLight
                     ? 'text-slate-600 hover:text-slate-900'
-                    : 'text-[#E5E1DD]/60 hover:text-[#E5E1DD]'
+                    : 'text-[#F5F5F5]/60 hover:text-[#F5F5F5]'
                 }`}
                 title="Optimize XOR/XNOR patterns to save gates and canvas space"
               >
@@ -1164,10 +1164,10 @@ export const BooleanToolModal: React.FC = () => {
                 onClick={() => setSynthesisArch('universal_nand')}
                 className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                   synthesisArch === 'universal_nand'
-                    ? 'bg-[#407E8C] text-[#E5E1DD] font-bold shadow-xs'
+                    ? 'bg-[#8F8F8F] text-[#F5F5F5] font-bold shadow-xs'
                     : isLight
                     ? 'text-slate-600 hover:text-slate-900'
-                    : 'text-[#E5E1DD]/60 hover:text-[#E5E1DD]'
+                    : 'text-[#F5F5F5]/60 hover:text-[#F5F5F5]'
                 }`}
                 title="Synthesize 100% all-NAND universal logic"
               >
@@ -1177,10 +1177,10 @@ export const BooleanToolModal: React.FC = () => {
                 onClick={() => setSynthesisArch('universal_nor')}
                 className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                   synthesisArch === 'universal_nor'
-                    ? 'bg-[#407E8C] text-[#E5E1DD] font-bold shadow-xs'
+                    ? 'bg-[#8F8F8F] text-[#F5F5F5] font-bold shadow-xs'
                     : isLight
                     ? 'text-slate-600 hover:text-slate-900'
-                    : 'text-[#E5E1DD]/60 hover:text-[#E5E1DD]'
+                    : 'text-[#F5F5F5]/60 hover:text-[#F5F5F5]'
                 }`}
                 title="Synthesize 100% all-NOR universal logic"
               >
@@ -1197,11 +1197,11 @@ export const BooleanToolModal: React.FC = () => {
               className={`flex items-center gap-2 px-3.5 py-2.5 rounded-xl disabled:opacity-40 font-bold text-xs sm:text-sm transition-all shadow-xs cursor-pointer border ${
                 isLight
                   ? 'bg-white hover:bg-slate-100 text-slate-800 border-slate-300'
-                  : 'bg-[#0d171f] hover:bg-[#0d171f] active:bg-slate-600 border-[#A58D66]/30 hover:border-slate-500 text-[#E5E1DD]'
+                  : 'bg-[#141415] hover:bg-[#141415] active:bg-slate-600 border-[#FFFFFF]/30 hover:border-slate-500 text-[#F5F5F5]'
               }`}
               title="Synthesize unreduced equation onto canvas with selected mode"
             >
-              <Cpu className="w-4 h-4 text-cyan-600" />
+              <Cpu className="w-4 h-4 text-zinc-600" />
               <span>Synthesize Expression</span>
             </button>
 
@@ -1209,10 +1209,10 @@ export const BooleanToolModal: React.FC = () => {
             <button
               onClick={handleSynthesizeSimplified}
               disabled={!solvedResult}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#A58D66] to-[#8C7654] hover:from-[#DFCCA8] hover:to-[#A58D66] text-[#080f14] font-bold text-xs sm:text-sm transition-all shadow-md cursor-pointer disabled:opacity-40"
+              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#FFFFFF] to-[#737373] hover:from-[#E8E8E8] hover:to-[#FFFFFF] text-[#000000] font-bold text-xs sm:text-sm transition-all shadow-md cursor-pointer disabled:opacity-40"
               title="Synthesize minimal simplified equation onto canvas"
             >
-              <Sparkles className="w-4 h-4 text-[#080f14]" />
+              <Sparkles className="w-4 h-4 text-[#000000]" />
               <span>Synthesize Simplified</span>
             </button>
           </div>

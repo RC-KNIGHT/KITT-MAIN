@@ -16,11 +16,11 @@ const RECENT_SERVERS_KEY = 'digilogic_recent_rooms';
 
 const COLLAB_COLORS = [
   '#00f0ff', // Cyber Cyan
-  '#a855f7', // Electric Violet
-  '#10b981', // Emerald Surge
+  '#CCCCCC', // Electric Violet
+  '#F5F5F5', // Emerald Surge
   '#f59e0b', // Solar Amber
   '#ec4899', // Hyper Pink
-  '#3b82f6', // Cobalt Blue
+  '#B4B4B4', // Cobalt Blue
   '#14b8a6', // Teal Flux
   '#e11d48', // Ruby Gate
 ];

@@ -15,18 +15,18 @@ export const ThemesSection: React.FC = () => {
   const currentTheme = THEME_PRESETS[selectedThemeId] || THEME_PRESETS.kitt_sovereign;
 
   return (
-    <section id="themes" className="py-12 sm:py-16 border-b border-[#A58D66]/20">
+    <section id="themes" className="py-12 sm:py-16 border-b border-[#FFFFFF]/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#A58D66]/10 border border-[#A58D66]/30 text-[#DFCCA8] text-xs font-mono mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFFFFF]/10 border border-[#FFFFFF]/30 text-[#E8E8E8] text-xs font-mono mb-4">
             <Palette className="w-3.5 h-3.5" />
             <span>Theme & Styling Engine</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#E5E1DD] tracking-tight leading-tight mb-4">
-            Aesthetic Themes for <span className="text-[#DFCCA8]">Every Environment</span>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#F5F5F5] tracking-tight leading-tight mb-4">
+            Aesthetic Themes for <span className="text-[#E8E8E8]">Every Environment</span>
           </h2>
-          <p className="text-sm sm:text-base text-[#E5E1DD]/60 leading-relaxed">
+          <p className="text-sm sm:text-base text-[#F5F5F5]/60 leading-relaxed">
             Switch between 7 meticulously tuned color schemes engineered for optical contrast, eye comfort during long lab sessions, and classroom projector clarity.
           </p>
         </div>
@@ -42,8 +42,8 @@ export const ThemesSection: React.FC = () => {
                 onClick={() => setSelectedThemeId(id)}
                 className={`p-4 rounded-2xl border text-left transition-all relative overflow-hidden group active:scale-95 cursor-pointer ${
                   isSelected
-                    ? 'border-[#A58D66] ring-2 ring-[#A58D66]/30 shadow-xl shadow-[#A58D66]/10'
-                    : 'border-[#A58D66]/15 hover:border-[#A58D66]/20 bg-[#080f14]/60 hover:bg-[#080f14]'
+                    ? 'border-[#FFFFFF] ring-2 ring-[#FFFFFF]/30 shadow-xl shadow-[#FFFFFF]/10'
+                    : 'border-[#FFFFFF]/15 hover:border-[#FFFFFF]/20 bg-[#000000]/60 hover:bg-[#000000]'
                 }`}
                 style={{
                   backgroundColor: isSelected ? t.panelBg : undefined,
@@ -61,16 +61,16 @@ export const ThemesSection: React.FC = () => {
                     />
                   </div>
                   {isSelected && (
-                    <span className="w-5 h-5 rounded-full bg-[#A58D66] text-[#080f14] flex items-center justify-center shadow">
+                    <span className="w-5 h-5 rounded-full bg-[#FFFFFF] text-[#000000] flex items-center justify-center shadow">
                       <Check className="w-3 h-3 stroke-[3]" />
                     </span>
                   )}
                 </div>
 
-                <h4 className="font-bold text-sm text-[#E5E1DD] mb-1 group-hover:text-[#DFCCA8] transition-colors">
+                <h4 className="font-bold text-sm text-[#F5F5F5] mb-1 group-hover:text-[#E8E8E8] transition-colors">
                   {t.name.split(' (')[0]}
                 </h4>
-                <p className="text-[11px] text-[#E5E1DD]/60 line-clamp-2 leading-relaxed">
+                <p className="text-[11px] text-[#F5F5F5]/60 line-clamp-2 leading-relaxed">
                   {t.description}
                 </p>
               </button>
@@ -91,7 +91,7 @@ export const ThemesSection: React.FC = () => {
               <div className="text-xs font-mono font-bold tracking-wider" style={{ color: currentTheme.primaryColor }}>
                 LIVE PREVIEW: {currentTheme.name.toUpperCase()}
               </div>
-              <p className="text-sm text-[#DFCCA8] mt-0.5">
+              <p className="text-sm text-[#E8E8E8] mt-0.5">
                 {currentTheme.description}
               </p>
             </div>

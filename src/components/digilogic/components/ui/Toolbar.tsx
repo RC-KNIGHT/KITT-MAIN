@@ -121,7 +121,7 @@ export const Toolbar: React.FC = () => {
   const isLight = colorMode === 'light';
   const defaultBtnClass = isLight
     ? 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-700 hover:text-slate-900'
-    : 'bg-[#0d171f] hover:bg-[#A58D66]/15 border-[#A58D66]/25 text-[#E5E1DD] hover:text-[#DFCCA8]';
+    : 'bg-[#141415] hover:bg-[#FFFFFF]/15 border-[#FFFFFF]/25 text-[#F5F5F5] hover:text-[#E8E8E8]';
   const [isEditingName, setIsEditingName] = useState(false);
   const [tempName, setTempName] = useState(circuitName);
   const [exportNotice, setExportNotice] = useState<string | null>(null);
@@ -239,10 +239,10 @@ export const Toolbar: React.FC = () => {
         {/* Return to KITT Home Button */}
         <a
           href="#/"
-          className="h-8 px-2.5 rounded-lg border border-[#A58D66]/40 bg-[#A58D66]/15 hover:bg-[#A58D66]/30 text-[#E5E1DD] text-xs font-mono font-bold flex items-center gap-1.5 transition-all shadow-xs shrink-0 cursor-pointer"
+          className="h-8 px-2.5 rounded-lg border border-[#FFFFFF]/40 bg-[#FFFFFF]/15 hover:bg-[#FFFFFF]/30 text-[#F5F5F5] text-xs font-mono font-bold flex items-center gap-1.5 transition-all shadow-xs shrink-0 cursor-pointer"
           title="Return to KITT Ecosystem Landing Page"
         >
-          <ArrowLeft className="w-3.5 h-3.5 text-[#A58D66]" />
+          <ArrowLeft className="w-3.5 h-3.5 text-[#FFFFFF]" />
           <span className="hidden sm:inline">KITT Home</span>
         </a>
 
@@ -280,16 +280,16 @@ export const Toolbar: React.FC = () => {
           title="DigiLogic Lab • View About, Founders & Full Guide"
         >
           <KittLogo size={20} showGlow={true} className="shrink-0" />
-          <span className={`font-bold text-xs sm:text-sm tracking-tight font-mono flex items-center gap-1 ${isLight ? 'text-slate-900' : 'text-[#E5E1DD]'}`}>
+          <span className={`font-bold text-xs sm:text-sm tracking-tight font-mono flex items-center gap-1 ${isLight ? 'text-slate-900' : 'text-[#F5F5F5]'}`}>
             <span>DigiLogic</span>
-            <span className="text-[10px] font-normal text-[#A58D66] border border-[#A58D66]/40 bg-[#A58D66]/10 px-1 py-0.5 rounded hidden md:inline font-mono">
+            <span className="text-[10px] font-normal text-[#FFFFFF] border border-[#FFFFFF]/40 bg-[#FFFFFF]/10 px-1 py-0.5 rounded hidden md:inline font-mono">
               EDA
             </span>
           </span>
         </button>
 
         {/* Editable Circuit Title */}
-        <div className={`hidden sm:block h-4 w-px mx-0.5 shrink-0 ${isLight ? 'bg-slate-300' : 'bg-[#0d171f]/80'}`} />
+        <div className={`hidden sm:block h-4 w-px mx-0.5 shrink-0 ${isLight ? 'bg-slate-300' : 'bg-[#141415]/80'}`} />
 
         <div className="hidden sm:block shrink-0">
           {isEditingName ? (
@@ -311,7 +311,7 @@ export const Toolbar: React.FC = () => {
               className={`px-2 py-0.5 border rounded text-xs font-semibold focus:outline-none max-w-28 sm:max-w-32 ${
                 isLight
                   ? 'bg-white border-slate-300 text-slate-900'
-                  : 'bg-[#080f14] border-[#A58D66]/20 text-[#E5E1DD]'
+                  : 'bg-[#000000] border-[#FFFFFF]/20 text-[#F5F5F5]'
               }`}
             />
           ) : (
@@ -323,7 +323,7 @@ export const Toolbar: React.FC = () => {
               className={`text-xs font-semibold px-1.5 py-0.5 rounded transition-colors truncate max-w-28 sm:max-w-36 ${
                 isLight
                   ? 'text-slate-700 hover:text-slate-900 hover:bg-slate-200/70'
-                  : 'text-[#DFCCA8] hover:text-[#E5E1DD] hover:bg-[#0d171f]/60'
+                  : 'text-[#E8E8E8] hover:text-[#F5F5F5] hover:bg-[#141415]/60'
               }`}
               title="Click to rename circuit"
             >
@@ -338,7 +338,7 @@ export const Toolbar: React.FC = () => {
         className={`hidden md:flex items-center gap-1 sm:gap-1.5 border px-1 sm:px-2 py-1 rounded-xl shadow-xs shrink-0 h-9 min-h-[36px] ${
           isLight
             ? 'bg-slate-100 border-slate-200'
-            : 'bg-[#080f14]/80 border-slate-800/80'
+            : 'bg-[#000000]/80 border-slate-800/80'
         }`}
       >
         {/* Run/Pause Toggle */}
@@ -368,7 +368,7 @@ export const Toolbar: React.FC = () => {
           className={`flex items-center gap-1 px-2 py-1 rounded-lg font-bold text-xs transition-all shadow-xs ${
             simulationRunning
               ? 'border'
-              : 'bg-[#A58D66]/20 text-[#DFCCA8] border border-[#A58D66]/40 hover:bg-[#A58D66]/30'
+              : 'bg-[#FFFFFF]/20 text-[#E8E8E8] border border-[#FFFFFF]/40 hover:bg-[#FFFFFF]/30'
           }`}
           title={simulationRunning ? 'Simulation Running (Click to Pause)' : 'Simulation Paused (Click to Run)'}
         >
@@ -392,7 +392,7 @@ export const Toolbar: React.FC = () => {
           className={`p-1.5 rounded-lg disabled:opacity-30 transition-colors ${
             isLight
               ? 'text-slate-600 hover:text-slate-900 hover:bg-slate-200'
-              : 'text-[#E5E1DD]/60 hover:text-[#E5E1DD] hover:bg-[#0d171f]'
+              : 'text-[#F5F5F5]/60 hover:text-[#F5F5F5] hover:bg-[#141415]'
           }`}
           title="Single Step Simulation Clock"
         >
@@ -405,7 +405,7 @@ export const Toolbar: React.FC = () => {
           className={`p-1.5 rounded-lg transition-colors ${
             isLight
               ? 'text-slate-600 hover:text-slate-900 hover:bg-slate-200'
-              : 'text-[#E5E1DD]/60 hover:text-[#E5E1DD] hover:bg-[#0d171f]'
+              : 'text-[#F5F5F5]/60 hover:text-[#F5F5F5] hover:bg-[#141415]'
           }`}
           title="Reset Signal States"
         >
@@ -422,11 +422,11 @@ export const Toolbar: React.FC = () => {
           className={`flex items-center gap-1 px-1.5 py-0.5 rounded-md text-[11px] font-mono transition-colors border-l pl-1.5 ${
             isLight
               ? 'hover:bg-slate-200 text-slate-700 hover:text-amber-600 border-slate-200'
-              : 'hover:bg-[#0d171f] text-[#DFCCA8] hover:text-[#DFCCA8] border-slate-800'
+              : 'hover:bg-[#141415] text-[#E8E8E8] hover:text-[#E8E8E8] border-slate-800'
           }`}
           title={`Simulation Speed: ${simulationSpeedHz}Hz (Click to cycle 1, 5, 10, 20, 30Hz)`}
         >
-          <Zap className="w-3 h-3 text-[#A58D66] shrink-0" />
+          <Zap className="w-3 h-3 text-[#FFFFFF] shrink-0" />
           <span>{simulationSpeedHz}Hz</span>
         </button>
       </div>
@@ -437,20 +437,20 @@ export const Toolbar: React.FC = () => {
         {isCollaborating && roomCode ? (
           <button
             onClick={() => setActiveModal('collaborate')}
-            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-[#407E8C]/15 border border-[#407E8C]/50 text-[#76B4C2] hover:bg-[#407E8C]/25 transition-all shadow-sm max-w-[200px] sm:max-w-xs cursor-pointer"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-[#8F8F8F]/15 border border-[#8F8F8F]/50 text-[#B4B4B4] hover:bg-[#8F8F8F]/25 transition-all shadow-sm max-w-[200px] sm:max-w-xs cursor-pointer"
             title={`Live Server: ${room?.name || 'Collaborative Room'} [${roomCode}] - ${collaborators.length + 1} online (Click to manage)`}
           >
             {/* Live pulsing indicator */}
             <span className="relative flex h-2 w-2 shrink-0">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#76B4C2] opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#407E8C]" />
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#B4B4B4] opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#8F8F8F]" />
             </span>
 
             {/* Overlapping User Presence Avatars */}
             <div className="flex items-center -space-x-1.5 shrink-0">
               {collabUser && (
                 <div
-                  className="w-5 h-5 rounded-full border border-slate-900 flex items-center justify-center text-[9px] font-black text-[#E5E1DD] shadow"
+                  className="w-5 h-5 rounded-full border border-slate-900 flex items-center justify-center text-[9px] font-black text-[#F5F5F5] shadow"
                   style={{ backgroundColor: collabUser.color }}
                   title={`${collabUser.name} (You)`}
                 >
@@ -460,7 +460,7 @@ export const Toolbar: React.FC = () => {
               {collaborators.slice(0, 2).map((u) => (
                 <div
                   key={u.id}
-                  className="w-5 h-5 rounded-full border border-slate-900 flex items-center justify-center text-[9px] font-black text-[#E5E1DD] shadow"
+                  className="w-5 h-5 rounded-full border border-slate-900 flex items-center justify-center text-[9px] font-black text-[#F5F5F5] shadow"
                   style={{ backgroundColor: u.color }}
                   title={u.name}
                 >
@@ -468,17 +468,17 @@ export const Toolbar: React.FC = () => {
                 </div>
               ))}
               {collaborators.length > 2 && (
-                <div className="w-5 h-5 rounded-full border border-slate-900 bg-[#0d171f] flex items-center justify-center text-[8px] font-bold text-[#DFCCA8]">
+                <div className="w-5 h-5 rounded-full border border-slate-900 bg-[#141415] flex items-center justify-center text-[8px] font-bold text-[#E8E8E8]">
                   +{collaborators.length - 2}
                 </div>
               )}
             </div>
 
             <div className="flex items-center gap-1 min-w-0">
-              <span className="hidden md:inline text-xs font-bold text-[#E5E1DD] truncate max-w-[100px]">
+              <span className="hidden md:inline text-xs font-bold text-[#F5F5F5] truncate max-w-[100px]">
                 {room?.name || 'Server'}
               </span>
-              <span className="font-mono text-[11px] font-extrabold text-[#76B4C2]">
+              <span className="font-mono text-[11px] font-extrabold text-[#B4B4B4]">
                 {roomCode}
               </span>
             </div>
@@ -489,7 +489,7 @@ export const Toolbar: React.FC = () => {
             className={`p-2 rounded-lg border transition-all ${defaultBtnClass}`}
             title="Live Collaboration Server (Create, Join, or Reconnect)"
           >
-            <Users className="w-4 h-4 text-[#DFCCA8]" />
+            <Users className="w-4 h-4 text-[#E8E8E8]" />
           </button>
         )}
 
@@ -519,8 +519,8 @@ export const Toolbar: React.FC = () => {
               }}
               className={`p-2 rounded-lg transition-all relative ${
                 hasSelection
-                  ? 'bg-[#A58D66]/20 hover:bg-[#A58D66]/30 text-[#A58D66] border border-[#A58D66]/40 shadow-lg shadow-[#A58D66]/20 animate-pulse'
-                  : `border hidden md:block ${defaultBtnClass} hover:text-[#A58D66]`
+                  ? 'bg-[#FFFFFF]/20 hover:bg-[#FFFFFF]/30 text-[#FFFFFF] border border-[#FFFFFF]/40 shadow-lg shadow-[#FFFFFF]/20 animate-pulse'
+                  : `border hidden md:block ${defaultBtnClass} hover:text-[#FFFFFF]`
               }`}
               title={
                 hasSelection
@@ -530,7 +530,7 @@ export const Toolbar: React.FC = () => {
             >
               <Trash2 className="w-4 h-4" />
               {hasSelection && (
-                <span className="absolute -top-1 -right-1 px-1 min-w-3.5 h-3.5 rounded-full bg-[#8C7654] text-[#E5E1DD] text-[9px] font-bold flex items-center justify-center shadow">
+                <span className="absolute -top-1 -right-1 px-1 min-w-3.5 h-3.5 rounded-full bg-[#737373] text-[#F5F5F5] text-[9px] font-bold flex items-center justify-center shadow">
                   {totalSelected}
                 </span>
               )}
@@ -543,7 +543,7 @@ export const Toolbar: React.FC = () => {
           onClick={() => setWireRoutingMode(wireRoutingMode === 'orthogonal' ? 'curved' : 'orthogonal')}
           className={`p-2 rounded-lg border transition-colors hidden xl:block ${
             wireRoutingMode === 'curved'
-              ? 'bg-[#76B4C2]/20 text-[#76B4C2] border-[#76B4C2]/40'
+              ? 'bg-[#B4B4B4]/20 text-[#B4B4B4] border-[#B4B4B4]/40'
               : defaultBtnClass
           }`}
           title={`Wire Style: ${wireRoutingMode === 'curved' ? 'Curved Bezier (Click for 90° Orthogonal)' : '90° Orthogonal (Click for Curved)'}`}
@@ -555,29 +555,29 @@ export const Toolbar: React.FC = () => {
         <button
           id="navbar-saved-circuits-btn"
           onClick={() => setActiveModal('savedCircuits')}
-          className="p-2 rounded-lg bg-[#A58D66]/10 hover:bg-[#A58D66]/20 text-[#DFCCA8] border border-[#A58D66]/30 transition-colors hidden lg:block cursor-pointer"
+          className="p-2 rounded-lg bg-[#FFFFFF]/10 hover:bg-[#FFFFFF]/20 text-[#E8E8E8] border border-[#FFFFFF]/30 transition-colors hidden lg:block cursor-pointer"
           title="Saved Circuits Library (Local Storage)"
         >
-          <Database className="w-4 h-4 text-[#A58D66]" />
+          <Database className="w-4 h-4 text-[#FFFFFF]" />
         </button>
 
         {/* About Team KITT & Lab Guide - Shrunk to the 'i' info symbol (No text) */}
         <button
           id="navbar-about-btn"
           onClick={() => setActiveModal('about')}
-          className="p-2 rounded-lg bg-[#A58D66]/10 hover:bg-[#A58D66]/20 text-[#DFCCA8] border border-[#A58D66]/30 transition-colors flex items-center justify-center cursor-pointer"
+          className="p-2 rounded-lg bg-[#FFFFFF]/10 hover:bg-[#FFFFFF]/20 text-[#E8E8E8] border border-[#FFFFFF]/30 transition-colors flex items-center justify-center cursor-pointer"
           title="About Team KITT & Full Lab Guide"
           aria-label="About Team KITT and Lab Guide"
         >
-          <Info className="w-4 h-4 text-[#A58D66]" />
+          <Info className="w-4 h-4 text-[#FFFFFF]" />
         </button>
 
         {/* Undo / Redo on Tablets & Desktop */}
-        <div className={`hidden sm:flex items-center border rounded-lg p-0.5 ${isLight ? 'bg-slate-100 border-slate-200' : 'bg-[#080f14] border-[#A58D66]/20'}`}>
+        <div className={`hidden sm:flex items-center border rounded-lg p-0.5 ${isLight ? 'bg-slate-100 border-slate-200' : 'bg-[#000000] border-[#FFFFFF]/20'}`}>
           <button
             onClick={undo}
             disabled={!canUndo}
-            className={`p-1.5 rounded disabled:opacity-30 transition-colors ${isLight ? 'text-slate-600 hover:text-slate-900 hover:bg-slate-200' : 'text-[#E5E1DD]/60 hover:text-[#E5E1DD] hover:bg-[#0d171f]'}`}
+            className={`p-1.5 rounded disabled:opacity-30 transition-colors ${isLight ? 'text-slate-600 hover:text-slate-900 hover:bg-slate-200' : 'text-[#F5F5F5]/60 hover:text-[#F5F5F5] hover:bg-[#141415]'}`}
             title="Undo (Ctrl+Z)"
           >
             <Undo2 className="w-3.5 h-3.5" />
@@ -585,7 +585,7 @@ export const Toolbar: React.FC = () => {
           <button
             onClick={redo}
             disabled={!canRedo}
-            className={`p-1.5 rounded disabled:opacity-30 transition-colors ${isLight ? 'text-slate-600 hover:text-slate-900 hover:bg-slate-200' : 'text-[#E5E1DD]/60 hover:text-[#E5E1DD] hover:bg-[#0d171f]'}`}
+            className={`p-1.5 rounded disabled:opacity-30 transition-colors ${isLight ? 'text-slate-600 hover:text-slate-900 hover:bg-slate-200' : 'text-[#F5F5F5]/60 hover:text-[#F5F5F5] hover:bg-[#141415]'}`}
             title="Redo (Ctrl+Y)"
           >
             <Redo2 className="w-3.5 h-3.5" />
@@ -599,7 +599,7 @@ export const Toolbar: React.FC = () => {
             className={`p-2 rounded-lg border transition-colors ${defaultBtnClass}`}
             title="Truth Table Generator"
           >
-            <Table className="w-4 h-4 text-[#A58D66]" />
+            <Table className="w-4 h-4 text-[#FFFFFF]" />
           </button>
 
           <button
@@ -607,7 +607,7 @@ export const Toolbar: React.FC = () => {
             className={`p-2 rounded-lg border transition-colors ${defaultBtnClass}`}
             title="Boolean Algebra Solver & Synthesis"
           >
-            <FileCode2 className="w-4 h-4 text-[#76B4C2]" />
+            <FileCode2 className="w-4 h-4 text-[#B4B4B4]" />
           </button>
 
           <button
@@ -615,7 +615,7 @@ export const Toolbar: React.FC = () => {
             className={`p-2 rounded-lg border transition-colors ${defaultBtnClass}`}
             title="K-Map Minimization"
           >
-            <Sparkles className="w-4 h-4 text-[#407E8C]" />
+            <Sparkles className="w-4 h-4 text-[#8F8F8F]" />
           </button>
 
           <button
@@ -623,7 +623,7 @@ export const Toolbar: React.FC = () => {
             className={`p-2 rounded-lg border transition-colors ${defaultBtnClass}`}
             title="Circuit Presets Library"
           >
-            <FolderOpen className="w-4 h-4 text-[#76B4C2]" />
+            <FolderOpen className="w-4 h-4 text-[#B4B4B4]" />
           </button>
         </div>
 
@@ -632,7 +632,7 @@ export const Toolbar: React.FC = () => {
           onClick={() => setSoundEnabled(!soundEnabled)}
           className={`p-2 rounded-lg border transition-colors hidden xl:block ${
             soundEnabled
-              ? 'bg-[#A58D66]/10 border-[#A58D66]/30 text-[#A58D66] hover:bg-[#A58D66]/20'
+              ? 'bg-[#FFFFFF]/10 border-[#FFFFFF]/30 text-[#FFFFFF] hover:bg-[#FFFFFF]/20'
               : defaultBtnClass
           }`}
           title={soundEnabled ? 'Synthesized Sound FX: ON (Click to Mute)' : 'Synthesized Sound FX: OFF (Click to Unmute)'}
@@ -657,10 +657,10 @@ export const Toolbar: React.FC = () => {
           <div className="relative" ref={userDropdownRef}>
             <button
               onClick={() => setUserDropdownOpen(!userDropdownOpen)}
-              className={`flex items-center gap-1.5 p-1 sm:px-2 sm:py-1 rounded-lg border hover:border-[#A58D66]/40 transition-all text-xs font-mono ${
+              className={`flex items-center gap-1.5 p-1 sm:px-2 sm:py-1 rounded-lg border hover:border-[#FFFFFF]/40 transition-all text-xs font-mono ${
                 isLight
                   ? 'bg-slate-100 hover:bg-slate-200 text-slate-800 border-slate-200'
-                  : 'bg-[#0d171f] hover:bg-[#A58D66]/15 text-[#E5E1DD] border-[#A58D66]/25'
+                  : 'bg-[#141415] hover:bg-[#FFFFFF]/15 text-[#F5F5F5] border-[#FFFFFF]/25'
               }`}
               title={
                 userProfile.uid.startsWith('guest-')
@@ -675,35 +675,35 @@ export const Toolbar: React.FC = () => {
                   className="w-5 h-5 rounded-md object-cover"
                 />
               ) : userProfile.uid.startsWith('guest-') ? (
-                <div className="w-5 h-5 rounded-md bg-[#76B4C2]/20 text-[#76B4C2] border border-[#76B4C2]/30 font-bold flex items-center justify-center text-[10px]">
+                <div className="w-5 h-5 rounded-md bg-[#B4B4B4]/20 text-[#B4B4B4] border border-[#B4B4B4]/30 font-bold flex items-center justify-center text-[10px]">
                   <Compass className="w-3 h-3" />
                 </div>
               ) : (
-                <div className="w-5 h-5 rounded-md bg-[#A58D66]/20 text-[#DFCCA8] font-bold flex items-center justify-center text-[10px]">
+                <div className="w-5 h-5 rounded-md bg-[#FFFFFF]/20 text-[#E8E8E8] font-bold flex items-center justify-center text-[10px]">
                   {userProfile.displayName.charAt(0).toUpperCase()}
                 </div>
               )}
               <span className="hidden xl:inline font-bold truncate max-w-[85px]">
                 {userProfile.displayName}
               </span>
-              <ChevronDown className="w-3 h-3 text-[#E5E1DD]/60 hidden sm:block" />
+              <ChevronDown className="w-3 h-3 text-[#F5F5F5]/60 hidden sm:block" />
             </button>
 
             {userDropdownOpen && (
               <div className={`absolute right-0 top-full mt-2 w-64 rounded-2xl border shadow-2xl p-2 z-50 text-xs font-sans backdrop-blur-xl animate-fadeIn ${
-                isLight ? 'bg-white border-slate-200 text-slate-800' : 'bg-[#0d171f] border-[#A58D66]/25 text-[#E5E1DD]'
+                isLight ? 'bg-white border-slate-200 text-slate-800' : 'bg-[#141415] border-[#FFFFFF]/25 text-[#F5F5F5]'
               }`}>
-                <div className={`p-3 border-b ${isLight ? 'border-slate-200' : 'border-[#A58D66]/20'}`}>
-                  <div className={`font-bold font-mono truncate ${isLight ? 'text-slate-900' : 'text-[#E5E1DD]'}`}>{userProfile.displayName}</div>
-                  <div className={`text-[11px] truncate ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>
+                <div className={`p-3 border-b ${isLight ? 'border-slate-200' : 'border-[#FFFFFF]/20'}`}>
+                  <div className={`font-bold font-mono truncate ${isLight ? 'text-slate-900' : 'text-[#F5F5F5]'}`}>{userProfile.displayName}</div>
+                  <div className={`text-[11px] truncate ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>
                     {authUser.email || (userProfile.uid.startsWith('guest-') ? 'Guest Sandbox Session' : 'Direct Account')}
                   </div>
                   <div className="mt-1.5 flex items-center gap-1.5">
-                    <span className="inline-block px-2 py-0.5 rounded-md bg-[#A58D66]/15 border border-[#A58D66]/35 text-[#DFCCA8] text-[10px] font-mono">
+                    <span className="inline-block px-2 py-0.5 rounded-md bg-[#FFFFFF]/15 border border-[#FFFFFF]/35 text-[#E8E8E8] text-[10px] font-mono">
                       {userProfile.role}
                     </span>
                     {userProfile.uid.startsWith('guest-') && (
-                      <span className="inline-block px-2 py-0.5 rounded-md bg-[#76B4C2]/10 border border-[#76B4C2]/30 text-[#76B4C2] text-[10px] font-mono">
+                      <span className="inline-block px-2 py-0.5 rounded-md bg-[#B4B4B4]/10 border border-[#B4B4B4]/30 text-[#B4B4B4] text-[10px] font-mono">
                         Guest Mode
                       </span>
                     )}
@@ -717,9 +717,9 @@ export const Toolbar: React.FC = () => {
                         setLoginViewOpen(true);
                         setUserDropdownOpen(false);
                       }}
-                      className="w-full flex items-center gap-2 px-3 py-2 rounded-xl text-[#DFCCA8] hover:bg-[#A58D66]/10 text-left transition-colors font-semibold"
+                      className="w-full flex items-center gap-2 px-3 py-2 rounded-xl text-[#E8E8E8] hover:bg-[#FFFFFF]/10 text-left transition-colors font-semibold"
                     >
-                      <LogIn className="w-4 h-4 text-[#A58D66]" />
+                      <LogIn className="w-4 h-4 text-[#FFFFFF]" />
                       <span>Sign In with Google</span>
                     </button>
                   )}
@@ -730,10 +730,10 @@ export const Toolbar: React.FC = () => {
                       setUserDropdownOpen(false);
                     }}
                     className={`w-full flex items-center gap-2 px-3 py-2 rounded-xl text-left transition-colors ${
-                      isLight ? 'text-slate-700 hover:text-slate-900 hover:bg-slate-100' : 'text-[#DFCCA8] hover:text-[#E5E1DD] hover:bg-[#A58D66]/15'
+                      isLight ? 'text-slate-700 hover:text-slate-900 hover:bg-slate-100' : 'text-[#E8E8E8] hover:text-[#F5F5F5] hover:bg-[#FFFFFF]/15'
                     }`}
                   >
-                    <User className="w-4 h-4 text-[#A58D66]" />
+                    <User className="w-4 h-4 text-[#FFFFFF]" />
                     <span>Edit Lab Profile</span>
                   </button>
 
@@ -743,10 +743,10 @@ export const Toolbar: React.FC = () => {
                       setUserDropdownOpen(false);
                     }}
                     className={`w-full flex items-center gap-2 px-3 py-2 rounded-xl text-left transition-colors ${
-                      isLight ? 'text-slate-700 hover:text-slate-900 hover:bg-slate-100' : 'text-[#DFCCA8] hover:text-[#E5E1DD] hover:bg-[#0d171f]/80'
+                      isLight ? 'text-slate-700 hover:text-slate-900 hover:bg-slate-100' : 'text-[#E8E8E8] hover:text-[#F5F5F5] hover:bg-[#141415]/80'
                     }`}
                   >
-                    <Star className="w-4 h-4 text-[#A58D66]" />
+                    <Star className="w-4 h-4 text-[#FFFFFF]" />
                     <span>Community Reviews & Ratings</span>
                   </button>
 
@@ -756,7 +756,7 @@ export const Toolbar: React.FC = () => {
                       setUserDropdownOpen(false);
                     }}
                     className={`w-full flex items-center gap-2 px-3 py-2 rounded-xl text-left transition-colors ${
-                      isLight ? 'text-[#8C7654] hover:bg-[#A58D66]/10' : 'text-[#DFCCA8] hover:bg-[#A58D66]/15'
+                      isLight ? 'text-[#737373] hover:bg-[#FFFFFF]/10' : 'text-[#E8E8E8] hover:bg-[#FFFFFF]/15'
                     }`}
                   >
                     <LogOut className="w-4 h-4" />
@@ -769,25 +769,25 @@ export const Toolbar: React.FC = () => {
         ) : (
           <button
             onClick={() => setLoginViewOpen(true)}
-            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-[#A58D66] hover:bg-[#DFCCA8] text-[#080f14] font-bold text-[11px] shadow-sm transition-all active:scale-95 cursor-pointer"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-[#FFFFFF] hover:bg-[#E8E8E8] text-[#000000] font-bold text-[11px] shadow-sm transition-all active:scale-95 cursor-pointer"
             title="Sign In with Google"
           >
             {/* Google SVG G icon */}
             <svg className="w-3.5 h-3.5" viewBox="0 0 24 24">
               <path
-                fill="#080f14"
+                fill="#000000"
                 d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
               />
               <path
-                fill="#080f14"
+                fill="#000000"
                 d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
               />
               <path
-                fill="#080f14"
+                fill="#000000"
                 d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"
               />
               <path
-                fill="#080f14"
+                fill="#000000"
                 d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
               />
             </svg>
@@ -801,7 +801,7 @@ export const Toolbar: React.FC = () => {
             onClick={() => setToolsDropdownOpen((prev) => !prev)}
             className={`p-2 rounded-lg border transition-all shadow-xs ${
               toolsDropdownOpen
-                ? 'bg-[#A58D66]/20 border-[#A58D66]/40 text-[#DFCCA8]'
+                ? 'bg-[#FFFFFF]/20 border-[#FFFFFF]/40 text-[#E8E8E8]'
                 : defaultBtnClass
             }`}
             title="All Features & Analysis Tools"
@@ -814,28 +814,28 @@ export const Toolbar: React.FC = () => {
           {toolsDropdownOpen && (
             <div
               className={`absolute right-0 top-full mt-2 w-72 sm:w-80 border rounded-xl shadow-2xl p-2 z-50 text-xs space-y-1 backdrop-blur-xl animate-fade-in touch-auto max-h-[calc(100vh-4.5rem)] overflow-y-auto overscroll-contain ${
-                isLight ? 'bg-white border-slate-200 text-slate-800' : 'bg-[#0d171f] border-[#A58D66]/25 text-[#E5E1DD]'
+                isLight ? 'bg-white border-slate-200 text-slate-800' : 'bg-[#141415] border-[#FFFFFF]/25 text-[#F5F5F5]'
               }`}
             >
-              <div className="px-2 py-1 text-[10px] font-bold text-[#A58D66] uppercase tracking-wider flex items-center justify-between">
+              <div className="px-2 py-1 text-[10px] font-bold text-[#FFFFFF] uppercase tracking-wider flex items-center justify-between">
                 <span>⚡ All Circuit Features</span>
-                <span className={`text-[9px] ${isLight ? 'text-[#E5E1DD]/60' : 'text-[#E5E1DD]/45'}`}>Quick Access</span>
+                <span className={`text-[9px] ${isLight ? 'text-[#F5F5F5]/60' : 'text-[#F5F5F5]/45'}`}>Quick Access</span>
               </div>
               <button
                 onClick={() => {
                   setActiveModal('collaborate');
                   setToolsDropdownOpen(false);
                 }}
-                className={`w-full flex items-center gap-2 px-2.5 py-2 text-left rounded-lg text-[#DFCCA8] bg-[#A58D66]/10 border border-[#A58D66]/20 transition-colors font-semibold ${
-                  isLight ? 'hover:bg-[#A58D66]/15' : 'hover:bg-[#A58D66]/20'
+                className={`w-full flex items-center gap-2 px-2.5 py-2 text-left rounded-lg text-[#E8E8E8] bg-[#FFFFFF]/10 border border-[#FFFFFF]/20 transition-colors font-semibold ${
+                  isLight ? 'hover:bg-[#FFFFFF]/15' : 'hover:bg-[#FFFFFF]/20'
                 }`}
               >
-                <Users className="w-4 h-4 text-[#A58D66]" />
+                <Users className="w-4 h-4 text-[#FFFFFF]" />
                 <div>
                   <div className="font-semibold">
                     {isCollaborating ? `Active Room: ${roomCode}` : 'Live Real-Time Room (Create/Join)'}
                   </div>
-                  <div className={`text-[10px] ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>Collaborate simultaneously with zero lag</div>
+                  <div className={`text-[10px] ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>Collaborate simultaneously with zero lag</div>
                 </div>
               </button>
               <button
@@ -843,14 +843,14 @@ export const Toolbar: React.FC = () => {
                   setActiveModal('tutorial');
                   setToolsDropdownOpen(false);
                 }}
-                className={`w-full flex items-center gap-2 px-2.5 py-2 text-left rounded-lg text-cyan-600 bg-[#76B4C2]/10 border border-[#76B4C2]/20 transition-colors font-semibold ${
-                  isLight ? 'hover:bg-[#76B4C2]/15' : 'hover:bg-[#0d171f]/80 text-cyan-300'
+                className={`w-full flex items-center gap-2 px-2.5 py-2 text-left rounded-lg text-zinc-600 bg-[#B4B4B4]/10 border border-[#B4B4B4]/20 transition-colors font-semibold ${
+                  isLight ? 'hover:bg-[#B4B4B4]/15' : 'hover:bg-[#141415]/80 text-zinc-300'
                 }`}
               >
-                <Compass className="w-4 h-4 text-[#76B4C2]" />
+                <Compass className="w-4 h-4 text-[#B4B4B4]" />
                 <div>
                   <div className="font-semibold">Quick Start Guide & Tutorial</div>
-                  <div className={`text-[10px] ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>PC mouse & tablet touch controls overview</div>
+                  <div className={`text-[10px] ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>PC mouse & tablet touch controls overview</div>
                 </div>
               </button>
               <button
@@ -858,14 +858,14 @@ export const Toolbar: React.FC = () => {
                   setActiveModal('settings');
                   setToolsDropdownOpen(false);
                 }}
-                className={`w-full flex items-center gap-2 px-2.5 py-2 text-left rounded-lg text-[#DFCCA8] bg-[#A58D66]/10 transition-colors font-semibold ${
-                  isLight ? 'hover:bg-[#A58D66]/15' : 'hover:bg-[#A58D66]/20'
+                className={`w-full flex items-center gap-2 px-2.5 py-2 text-left rounded-lg text-[#E8E8E8] bg-[#FFFFFF]/10 transition-colors font-semibold ${
+                  isLight ? 'hover:bg-[#FFFFFF]/15' : 'hover:bg-[#FFFFFF]/20'
                 }`}
               >
-                <Settings className="w-4 h-4 text-[#A58D66]" />
+                <Settings className="w-4 h-4 text-[#FFFFFF]" />
                 <div>
                   <div>Settings & Preferences</div>
-                  <div className={`text-[10px] ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>Curved wires, audio & simulation preferences</div>
+                  <div className={`text-[10px] ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>Curved wires, audio & simulation preferences</div>
                 </div>
               </button>
               <button
@@ -874,15 +874,15 @@ export const Toolbar: React.FC = () => {
                   setToolsDropdownOpen(false);
                 }}
                 className={`w-full flex items-center gap-2 px-2.5 py-2 text-left rounded-lg transition-colors ${
-                  isLight ? 'hover:bg-slate-100 text-slate-800' : 'hover:bg-[#0d171f]/80 text-cyan-300 hover:text-cyan-200'
+                  isLight ? 'hover:bg-slate-100 text-slate-800' : 'hover:bg-[#141415]/80 text-zinc-300 hover:text-zinc-200'
                 }`}
               >
-                <Spline className="w-4 h-4 text-[#76B4C2]" />
+                <Spline className="w-4 h-4 text-[#B4B4B4]" />
                 <div>
                   <div className="font-semibold">
                     Toggle Wire Style: {wireRoutingMode === 'orthogonal' ? 'Curved' : 'Orthogonal'}
                   </div>
-                  <div className={`text-[10px] ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>
+                  <div className={`text-[10px] ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>
                     Switch between 90° Manhattan and fluid bezier curves
                   </div>
                 </div>
@@ -892,14 +892,14 @@ export const Toolbar: React.FC = () => {
                   setActiveModal('truthTable');
                   setToolsDropdownOpen(false);
                 }}
-                className={`w-full flex items-center gap-2 px-2.5 py-2 text-left rounded-lg hover:text-[#DFCCA8] transition-colors ${
-                  isLight ? 'hover:bg-slate-100 text-slate-800' : 'hover:bg-[#A58D66]/15 text-[#E5E1DD]'
+                className={`w-full flex items-center gap-2 px-2.5 py-2 text-left rounded-lg hover:text-[#E8E8E8] transition-colors ${
+                  isLight ? 'hover:bg-slate-100 text-slate-800' : 'hover:bg-[#FFFFFF]/15 text-[#F5F5F5]'
                 }`}
               >
-                <Table className="w-4 h-4 text-[#A58D66]" />
+                <Table className="w-4 h-4 text-[#FFFFFF]" />
                 <div>
                   <div className="font-semibold">Truth Table Generator</div>
-                  <div className={`text-[10px] ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>Generate full combinatorial state table</div>
+                  <div className={`text-[10px] ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>Generate full combinatorial state table</div>
                 </div>
               </button>
               <button
@@ -907,14 +907,14 @@ export const Toolbar: React.FC = () => {
                   setActiveModal('boolean');
                   setToolsDropdownOpen(false);
                 }}
-                className={`w-full flex items-center gap-2 px-2.5 py-2 text-left rounded-lg hover:text-[#76B4C2] transition-colors ${
-                  isLight ? 'hover:bg-slate-100 text-slate-800' : 'hover:bg-[#0d171f]/80 text-[#E5E1DD]'
+                className={`w-full flex items-center gap-2 px-2.5 py-2 text-left rounded-lg hover:text-[#B4B4B4] transition-colors ${
+                  isLight ? 'hover:bg-slate-100 text-slate-800' : 'hover:bg-[#141415]/80 text-[#F5F5F5]'
                 }`}
               >
-                <FileCode2 className="w-4 h-4 text-[#76B4C2]" />
+                <FileCode2 className="w-4 h-4 text-[#B4B4B4]" />
                 <div>
                   <div className="font-semibold">Boolean Solver & Synthesis</div>
-                  <div className={`text-[10px] ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>Live as-you-type circuit synthesis & derivation</div>
+                  <div className={`text-[10px] ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>Live as-you-type circuit synthesis & derivation</div>
                 </div>
               </button>
               <button
@@ -922,14 +922,14 @@ export const Toolbar: React.FC = () => {
                   setActiveModal('kmap');
                   setToolsDropdownOpen(false);
                 }}
-                className={`w-full flex items-center gap-2 px-2.5 py-2 text-left rounded-lg hover:text-[#407E8C] transition-colors ${
-                  isLight ? 'hover:bg-slate-100 text-slate-800' : 'hover:bg-[#0d171f]/80 text-[#E5E1DD]'
+                className={`w-full flex items-center gap-2 px-2.5 py-2 text-left rounded-lg hover:text-[#8F8F8F] transition-colors ${
+                  isLight ? 'hover:bg-slate-100 text-slate-800' : 'hover:bg-[#141415]/80 text-[#F5F5F5]'
                 }`}
               >
-                <Sparkles className="w-4 h-4 text-[#407E8C]" />
+                <Sparkles className="w-4 h-4 text-[#8F8F8F]" />
                 <div>
                   <div className="font-semibold">Karnaugh Map (K-Map)</div>
-                  <div className={`text-[10px] ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>Visual Gray-code minimization</div>
+                  <div className={`text-[10px] ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>Visual Gray-code minimization</div>
                 </div>
               </button>
               <button
@@ -937,19 +937,19 @@ export const Toolbar: React.FC = () => {
                   setActiveModal('oscilloscope');
                   setToolsDropdownOpen(false);
                 }}
-                className={`w-full flex items-center gap-2 px-2.5 py-2 text-left rounded-lg hover:text-[#A58D66] transition-colors ${
-                  isLight ? 'hover:bg-slate-100 text-slate-800' : 'hover:bg-[#0d171f]/80 text-[#E5E1DD]'
+                className={`w-full flex items-center gap-2 px-2.5 py-2 text-left rounded-lg hover:text-[#FFFFFF] transition-colors ${
+                  isLight ? 'hover:bg-slate-100 text-slate-800' : 'hover:bg-[#141415]/80 text-[#F5F5F5]'
                 }`}
               >
-                <Activity className="w-4 h-4 text-[#A58D66]" />
+                <Activity className="w-4 h-4 text-[#FFFFFF]" />
                 <div>
                   <div className="font-semibold">Timing Oscilloscope</div>
-                  <div className={`text-[10px] ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>Multi-channel logic analyzer</div>
+                  <div className={`text-[10px] ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>Multi-channel logic analyzer</div>
                 </div>
               </button>
 
-              <div className={`h-px my-1 ${isLight ? 'bg-slate-200' : 'bg-[#0d171f]'}`} />
-              <div className="px-2 py-1 text-[10px] font-bold text-[#76B4C2] uppercase tracking-wider">
+              <div className={`h-px my-1 ${isLight ? 'bg-slate-200' : 'bg-[#141415]'}`} />
+              <div className="px-2 py-1 text-[10px] font-bold text-[#B4B4B4] uppercase tracking-wider">
                 Library & Learning
               </div>
               <button
@@ -957,11 +957,11 @@ export const Toolbar: React.FC = () => {
                   setActiveModal('savedCircuits');
                   setToolsDropdownOpen(false);
                 }}
-                className={`w-full flex items-center gap-2 px-2.5 py-1.5 text-left rounded-lg text-[#DFCCA8] transition-colors font-semibold ${
-                  isLight ? 'hover:bg-slate-100' : 'hover:bg-[#A58D66]/15'
+                className={`w-full flex items-center gap-2 px-2.5 py-1.5 text-left rounded-lg text-[#E8E8E8] transition-colors font-semibold ${
+                  isLight ? 'hover:bg-slate-100' : 'hover:bg-[#FFFFFF]/15'
                 }`}
               >
-                <Database className="w-4 h-4 text-[#A58D66]" />
+                <Database className="w-4 h-4 text-[#FFFFFF]" />
                 <span>Saved Circuits Manager (Local Storage)</span>
               </button>
               <button
@@ -969,11 +969,11 @@ export const Toolbar: React.FC = () => {
                   setActiveModal('presets');
                   setToolsDropdownOpen(false);
                 }}
-                className={`w-full flex items-center gap-2 px-2.5 py-1.5 text-left rounded-lg hover:text-[#76B4C2] transition-colors ${
-                  isLight ? 'hover:bg-slate-100 text-slate-800' : 'hover:bg-[#0d171f]/80 text-[#E5E1DD]'
+                className={`w-full flex items-center gap-2 px-2.5 py-1.5 text-left rounded-lg hover:text-[#B4B4B4] transition-colors ${
+                  isLight ? 'hover:bg-slate-100 text-slate-800' : 'hover:bg-[#141415]/80 text-[#F5F5F5]'
                 }`}
               >
-                <FolderOpen className="w-4 h-4 text-[#76B4C2]" />
+                <FolderOpen className="w-4 h-4 text-[#B4B4B4]" />
                 <span>Circuit Presets Library</span>
               </button>
               <button
@@ -981,11 +981,11 @@ export const Toolbar: React.FC = () => {
                   setActiveModal('challenges');
                   setToolsDropdownOpen(false);
                 }}
-                className={`w-full flex items-center gap-2 px-2.5 py-1.5 text-left rounded-lg text-[#A58D66] hover:bg-[#A58D66]/10 transition-colors ${
-                  isLight ? 'hover:bg-amber-50' : 'hover:bg-[#0d171f]/80'
+                className={`w-full flex items-center gap-2 px-2.5 py-1.5 text-left rounded-lg text-[#FFFFFF] hover:bg-[#FFFFFF]/10 transition-colors ${
+                  isLight ? 'hover:bg-amber-50' : 'hover:bg-[#141415]/80'
                 }`}
               >
-                <Award className="w-4 h-4 text-[#A58D66]" />
+                <Award className="w-4 h-4 text-[#FFFFFF]" />
                 <span>Interactive Challenges</span>
               </button>
               <button
@@ -993,16 +993,16 @@ export const Toolbar: React.FC = () => {
                   setActiveModal('learn');
                   setToolsDropdownOpen(false);
                 }}
-                className={`w-full flex items-center gap-2 px-2.5 py-1.5 text-left rounded-lg hover:text-[#DFCCA8] transition-colors ${
-                  isLight ? 'hover:bg-slate-100 text-slate-800' : 'hover:bg-[#A58D66]/15 text-[#DFCCA8]'
+                className={`w-full flex items-center gap-2 px-2.5 py-1.5 text-left rounded-lg hover:text-[#E8E8E8] transition-colors ${
+                  isLight ? 'hover:bg-slate-100 text-slate-800' : 'hover:bg-[#FFFFFF]/15 text-[#E8E8E8]'
                 }`}
               >
-                <BookOpen className="w-4 h-4 text-[#A58D66]" />
+                <BookOpen className="w-4 h-4 text-[#FFFFFF]" />
                 <span>Logic Gates Educational Guide</span>
               </button>
 
-              <div className={`h-px my-1 ${isLight ? 'bg-slate-200' : 'bg-[#0d171f]'}`} />
-              <div className={`px-2 py-1 text-[10px] font-bold uppercase tracking-wider ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>
+              <div className={`h-px my-1 ${isLight ? 'bg-slate-200' : 'bg-[#141415]'}`} />
+              <div className={`px-2 py-1 text-[10px] font-bold uppercase tracking-wider ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>
                 Edit & Wire Controls
               </div>
               <button
@@ -1010,11 +1010,11 @@ export const Toolbar: React.FC = () => {
                   setSoundEnabled(!soundEnabled);
                   setToolsDropdownOpen(false);
                 }}
-                className={`w-full flex items-center gap-2 px-2.5 py-1.5 text-left rounded-lg text-[#A58D66] transition-colors ${
-                  isLight ? 'hover:bg-slate-100' : 'hover:bg-[#0d171f]/80'
+                className={`w-full flex items-center gap-2 px-2.5 py-1.5 text-left rounded-lg text-[#FFFFFF] transition-colors ${
+                  isLight ? 'hover:bg-slate-100' : 'hover:bg-[#141415]/80'
                 }`}
               >
-                {soundEnabled ? <Volume2 className="w-4 h-4 text-[#A58D66]" /> : <VolumeX className="w-4 h-4 text-[#E5E1DD]/60" />}
+                {soundEnabled ? <Volume2 className="w-4 h-4 text-[#FFFFFF]" /> : <VolumeX className="w-4 h-4 text-[#F5F5F5]/60" />}
                 <span>Sound FX: {soundEnabled ? 'Enabled' : 'Muted'}</span>
               </button>
               <button
@@ -1022,8 +1022,8 @@ export const Toolbar: React.FC = () => {
                   autoArrange();
                   setToolsDropdownOpen(false);
                 }}
-                className={`w-full flex items-center gap-2 px-2.5 py-1.5 text-left rounded-lg hover:text-[#76B4C2] transition-colors ${
-                  isLight ? 'hover:bg-slate-100 text-slate-800' : 'hover:bg-[#0d171f]/80 text-[#DFCCA8]'
+                className={`w-full flex items-center gap-2 px-2.5 py-1.5 text-left rounded-lg hover:text-[#B4B4B4] transition-colors ${
+                  isLight ? 'hover:bg-slate-100 text-slate-800' : 'hover:bg-[#141415]/80 text-[#E8E8E8]'
                 }`}
               >
                 <Network className="w-4 h-4" />
@@ -1034,9 +1034,9 @@ export const Toolbar: React.FC = () => {
                   deleteSelection();
                   setToolsDropdownOpen(false);
                 }}
-                className="w-full flex items-center gap-2 px-2.5 py-1.5 hover:bg-[#A58D66]/20 text-left rounded-lg text-[#A58D66] transition-colors font-semibold"
+                className="w-full flex items-center gap-2 px-2.5 py-1.5 hover:bg-[#FFFFFF]/20 text-left rounded-lg text-[#FFFFFF] transition-colors font-semibold"
               >
-                <Trash2 className="w-4 h-4 text-[#A58D66]" />
+                <Trash2 className="w-4 h-4 text-[#FFFFFF]" />
                 <span>
                   Delete Selected Items (
                   {selection.wireIds.length + selection.componentIds.length})
@@ -1047,8 +1047,8 @@ export const Toolbar: React.FC = () => {
                   clearCanvas();
                   setToolsDropdownOpen(false);
                 }}
-                className={`w-full flex items-center gap-2 px-2.5 py-1.5 text-left rounded-lg text-[#A58D66] transition-colors ${
-                  isLight ? 'hover:bg-slate-100' : 'hover:bg-[#0d171f]/80'
+                className={`w-full flex items-center gap-2 px-2.5 py-1.5 text-left rounded-lg text-[#FFFFFF] transition-colors ${
+                  isLight ? 'hover:bg-slate-100' : 'hover:bg-[#141415]/80'
                 }`}
               >
                 <Trash2 className="w-4 h-4" />
@@ -1059,18 +1059,18 @@ export const Toolbar: React.FC = () => {
                   selectAllWires();
                   setToolsDropdownOpen(false);
                 }}
-                className={`w-full flex items-center gap-2 px-2.5 py-1.5 text-left rounded-lg text-[#DFCCA8] transition-colors ${
-                  isLight ? 'hover:bg-slate-100' : 'hover:bg-[#A58D66]/15'
+                className={`w-full flex items-center gap-2 px-2.5 py-1.5 text-left rounded-lg text-[#E8E8E8] transition-colors ${
+                  isLight ? 'hover:bg-slate-100' : 'hover:bg-[#FFFFFF]/15'
                 }`}
               >
-                <Zap className="w-4 h-4 text-[#76B4C2]" />
+                <Zap className="w-4 h-4 text-[#B4B4B4]" />
                 <span>Select All Wires ({wires.length})</span>
               </button>
               <button
                 onClick={() => { undo(); setToolsDropdownOpen(false); }}
                 disabled={!canUndo}
                 className={`w-full flex items-center gap-2 px-2.5 py-1.5 text-left rounded-lg disabled:opacity-30 transition-colors ${
-                  isLight ? 'hover:bg-slate-100 text-slate-800' : 'hover:bg-[#0d171f]/80 text-[#E5E1DD]'
+                  isLight ? 'hover:bg-slate-100 text-slate-800' : 'hover:bg-[#141415]/80 text-[#F5F5F5]'
                 }`}
               >
                 <Undo2 className="w-4 h-4" />
@@ -1080,42 +1080,42 @@ export const Toolbar: React.FC = () => {
                 onClick={() => { redo(); setToolsDropdownOpen(false); }}
                 disabled={!canRedo}
                 className={`w-full flex items-center gap-2 px-2.5 py-1.5 text-left rounded-lg disabled:opacity-30 transition-colors ${
-                  isLight ? 'hover:bg-slate-100 text-slate-800' : 'hover:bg-[#0d171f]/80 text-[#E5E1DD]'
+                  isLight ? 'hover:bg-slate-100 text-slate-800' : 'hover:bg-[#141415]/80 text-[#F5F5F5]'
                 }`}
               >
                 <Redo2 className="w-4 h-4" />
                 <span>Redo (Ctrl+Y)</span>
               </button>
 
-              <div className={`h-px my-1 ${isLight ? 'bg-slate-200' : 'bg-[#0d171f]'}`} />
-              <div className={`px-2 py-1 text-[10px] font-bold uppercase tracking-wider ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>
+              <div className={`h-px my-1 ${isLight ? 'bg-slate-200' : 'bg-[#141415]'}`} />
+              <div className={`px-2 py-1 text-[10px] font-bold uppercase tracking-wider ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>
                 File Storage & Export
               </div>
               <button
                 onClick={() => setActiveModal('savedCircuits')}
-                className={`w-full flex items-center gap-2 px-2.5 py-1.5 text-left rounded-lg text-[#DFCCA8] transition-colors ${
-                  isLight ? 'hover:bg-slate-100' : 'hover:bg-[#A58D66]/15'
+                className={`w-full flex items-center gap-2 px-2.5 py-1.5 text-left rounded-lg text-[#E8E8E8] transition-colors ${
+                  isLight ? 'hover:bg-slate-100' : 'hover:bg-[#FFFFFF]/15'
                 }`}
               >
-                <Database className="w-4 h-4 text-[#A58D66]" />
+                <Database className="w-4 h-4 text-[#FFFFFF]" />
                 <span>Saved Circuits Manager</span>
               </button>
               <button
                 onClick={handleExport}
                 className={`w-full flex items-center gap-2 px-2.5 py-1.5 text-left rounded-lg transition-colors ${
-                  isLight ? 'hover:bg-slate-100 text-slate-800' : 'hover:bg-[#0d171f]/80 text-[#E5E1DD]'
+                  isLight ? 'hover:bg-slate-100 text-slate-800' : 'hover:bg-[#141415]/80 text-[#F5F5F5]'
                 }`}
               >
-                <Download className="w-4 h-4 text-[#E5E1DD]/60" />
+                <Download className="w-4 h-4 text-[#F5F5F5]/60" />
                 <span>Export Circuit (JSON)</span>
               </button>
               <button
                 onClick={handleTriggerImport}
                 className={`w-full flex items-center gap-2 px-2.5 py-1.5 text-left rounded-lg transition-colors ${
-                  isLight ? 'hover:bg-slate-100 text-slate-800' : 'hover:bg-[#0d171f]/80 text-[#E5E1DD]'
+                  isLight ? 'hover:bg-slate-100 text-slate-800' : 'hover:bg-[#141415]/80 text-[#F5F5F5]'
                 }`}
               >
-                <Upload className="w-4 h-4 text-[#E5E1DD]/60" />
+                <Upload className="w-4 h-4 text-[#F5F5F5]/60" />
                 <span>Import Circuit (JSON)</span>
               </button>
               <button
@@ -1124,27 +1124,27 @@ export const Toolbar: React.FC = () => {
                   setToolsDropdownOpen(false);
                 }}
                 className={`w-full flex items-center gap-2 px-2.5 py-1.5 text-left rounded-lg transition-colors ${
-                  isLight ? 'hover:bg-slate-100 text-slate-800' : 'hover:bg-[#0d171f]/80 text-[#E5E1DD]'
+                  isLight ? 'hover:bg-slate-100 text-slate-800' : 'hover:bg-[#141415]/80 text-[#F5F5F5]'
                 }`}
               >
-                <HelpCircle className="w-4 h-4 text-[#E5E1DD]/60" />
+                <HelpCircle className="w-4 h-4 text-[#F5F5F5]/60" />
                 <span>Keyboard Shortcuts & Touch Gestures</span>
               </button>
 
-              <div className={`h-px my-1 ${isLight ? 'bg-slate-200' : 'bg-[#0d171f]'}`} />
+              <div className={`h-px my-1 ${isLight ? 'bg-slate-200' : 'bg-[#141415]'}`} />
               <button
                 onClick={() => {
                   setToolsDropdownOpen(false);
                   setActiveModal('about');
                 }}
-                className={`w-full flex items-center gap-2 px-2.5 py-2 text-left rounded-lg bg-[#A58D66]/10 border border-[#A58D66]/20 transition-colors font-semibold ${
-                  isLight ? 'hover:bg-[#A58D66]/15 text-slate-900' : 'hover:bg-[#A58D66]/20 text-[#E5E1DD]'
+                className={`w-full flex items-center gap-2 px-2.5 py-2 text-left rounded-lg bg-[#FFFFFF]/10 border border-[#FFFFFF]/20 transition-colors font-semibold ${
+                  isLight ? 'hover:bg-[#FFFFFF]/15 text-slate-900' : 'hover:bg-[#FFFFFF]/20 text-[#F5F5F5]'
                 }`}
               >
-                <Sparkles className="w-4 h-4 text-[#A58D66]" />
+                <Sparkles className="w-4 h-4 text-[#FFFFFF]" />
                 <div>
-                  <div className="font-bold text-xs text-[#DFCCA8]">About Team KITT & Lab Guide</div>
-                  <div className={`text-[10px] ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>Team KITT, Component Catalog, Reviews</div>
+                  <div className="font-bold text-xs text-[#E8E8E8]">About Team KITT & Lab Guide</div>
+                  <div className={`text-[10px] ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>Team KITT, Component Catalog, Reviews</div>
                 </div>
               </button>
             </div>
@@ -1186,9 +1186,9 @@ export const Toolbar: React.FC = () => {
       {/* Floating Export Toast Notification */}
       {exportNotice && (
         <div className={`fixed top-16 right-6 z-50 border text-xs px-3 py-2 rounded-lg shadow-xl flex items-center gap-2 animate-fade-in ${
-          isLight ? 'bg-white border-[#A58D66] text-[#A58D66]' : 'bg-[#0d171f] border-[#A58D66] text-[#DFCCA8]'
+          isLight ? 'bg-white border-[#FFFFFF] text-[#FFFFFF]' : 'bg-[#141415] border-[#FFFFFF] text-[#E8E8E8]'
         }`}>
-          <Check className="w-4 h-4 text-[#A58D66]" />
+          <Check className="w-4 h-4 text-[#FFFFFF]" />
           <span>{exportNotice}</span>
         </div>
       )}

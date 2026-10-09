@@ -18,12 +18,12 @@ export const Minimap: React.FC = () => {
         onClick={() => setCollapsed(false)}
         className={`absolute bottom-4 right-4 z-20 p-2 rounded-lg shadow-xl backdrop-blur-sm transition-colors border ${
           isLight
-            ? 'bg-white/95 border-slate-300 text-slate-600 hover:text-[#A58D66] shadow-[0_4px_20px_rgba(0,0,0,0.1)]'
-            : 'bg-[#0d171f]/95 border-[#A58D66]/25 text-[#DFCCA8] hover:text-[#E5E1DD]'
+            ? 'bg-white/95 border-slate-300 text-slate-600 hover:text-[#FFFFFF] shadow-[0_4px_20px_rgba(0,0,0,0.1)]'
+            : 'bg-[#141415]/95 border-[#FFFFFF]/25 text-[#E8E8E8] hover:text-[#F5F5F5]'
         }`}
         title="Open Minimap"
       >
-        <MapPin className="w-4 h-4 text-[#A58D66]" />
+        <MapPin className="w-4 h-4 text-[#FFFFFF]" />
       </button>
     );
   }
@@ -67,21 +67,21 @@ export const Minimap: React.FC = () => {
       className={`absolute bottom-4 right-4 z-20 rounded-xl overflow-hidden shadow-2xl backdrop-blur-md border transition-colors ${
         isLight
           ? 'bg-white/95 border-slate-300 shadow-[0_8px_30px_rgba(0,0,0,0.12)]'
-          : 'bg-[#0d171f]/95 border-[#A58D66]/25'
+          : 'bg-[#141415]/95 border-[#FFFFFF]/25'
       }`}
     >
       <div
         className={`flex items-center justify-between px-2.5 py-1 border-b text-[11px] font-medium transition-colors ${
           isLight
             ? 'bg-slate-100 border-slate-200 text-slate-700'
-            : 'bg-[#080f14] border-[#A58D66]/20 text-[#DFCCA8]'
+            : 'bg-[#000000] border-[#FFFFFF]/20 text-[#E8E8E8]'
         }`}
       >
         <span>Minimap ({components.length} gates)</span>
         <button
           onClick={() => setCollapsed(true)}
           className={`p-0.5 transition-colors ${
-            isLight ? 'text-slate-500 hover:text-slate-700' : 'text-[#DFCCA8] hover:text-[#E5E1DD]'
+            isLight ? 'text-slate-500 hover:text-slate-700' : 'text-[#E8E8E8] hover:text-[#F5F5F5]'
           }`}
         >
           <ChevronDown className="w-3.5 h-3.5" />
@@ -92,7 +92,7 @@ export const Minimap: React.FC = () => {
         width={mapWidth}
         height={mapHeight}
         className={`cursor-crosshair transition-colors ${
-          isLight ? 'bg-slate-50' : 'bg-[#080f14]'
+          isLight ? 'bg-slate-50' : 'bg-[#000000]'
         }`}
         onClick={handleMinimapClick}
       >
@@ -108,7 +108,7 @@ export const Minimap: React.FC = () => {
               width={Math.max(4, 30 * scale)}
               height={Math.max(3, 20 * scale)}
               rx={1}
-              fill="#A58D66"
+              fill="#FFFFFF"
               opacity={0.85}
             />
           );
@@ -120,8 +120,8 @@ export const Minimap: React.FC = () => {
           y={vpY}
           width={vpWidth}
           height={vpHeight}
-          fill="rgba(165, 141, 102, 0.15)"
-          stroke="#A58D66"
+          fill="rgba(255, 255, 255, 0.15)"
+          stroke="#FFFFFF"
           strokeWidth={1.5}
         />
       </svg>

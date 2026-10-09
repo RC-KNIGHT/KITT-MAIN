@@ -67,18 +67,18 @@ export const PcbLab: React.FC<PcbLabProps> = ({
   const pcbHeightPx = boardHeightMm * pxPerMm;
 
   return (
-    <div className="relative w-full h-full bg-[#080f14] overflow-hidden flex flex-col font-sans select-none">
+    <div className="relative w-full h-full bg-[#000000] overflow-hidden flex flex-col font-sans select-none">
       {/* Top PCB Toolbar (matching Antika screenshot media_1789195659757.png) */}
-      <div className="h-11 px-4 bg-[#0c161d]/90 border-b border-white/10 flex items-center justify-between z-20 backdrop-blur-md relative">
+      <div className="h-11 px-4 bg-[#141415]/90 border-b border-[#29292A] flex items-center justify-between z-20 backdrop-blur-md relative">
         {/* Left: Undo, Redo, Delete */}
         <div className="flex items-center gap-1.5">
-          <button className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer" title="Undo">
+          <button className="p-1.5 rounded-[12px] text-slate-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer" title="Undo">
             <Undo2 className="w-3.5 h-3.5" />
           </button>
-          <button className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer" title="Redo">
+          <button className="p-1.5 rounded-[12px] text-slate-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer" title="Redo">
             <Redo2 className="w-3.5 h-3.5" />
           </button>
-          <button className="p-1.5 rounded-lg text-slate-400 hover:text-rose-400 hover:bg-white/10 transition-colors cursor-pointer" title="Delete">
+          <button className="p-1.5 rounded-[12px] text-slate-400 hover:text-rose-400 hover:bg-white/10 transition-colors cursor-pointer" title="Delete">
             <Trash2 className="w-3.5 h-3.5" />
           </button>
         </div>
@@ -86,7 +86,7 @@ export const PcbLab: React.FC<PcbLabProps> = ({
         {/* Center: Layer Selector, Track Width, Dimensions, All Routed Status - Absolutely Centered */}
         <div className="hidden sm:flex items-center gap-2 text-xs font-mono absolute left-1/2 -translate-x-1/2">
           {/* Layer Selector */}
-          <div className="flex items-center bg-[#080f14] border border-white/10 rounded-lg p-0.5">
+          <div className="flex items-center bg-[#000000] border border-[#29292A] rounded-[12px] p-0.5">
             <button
               onClick={() => setActiveLayer('top')}
               className={`px-2.5 py-1 rounded flex items-center gap-1.5 transition-colors cursor-pointer ${
@@ -99,10 +99,10 @@ export const PcbLab: React.FC<PcbLabProps> = ({
             <button
               onClick={() => setActiveLayer('bottom')}
               className={`px-2.5 py-1 rounded flex items-center gap-1.5 transition-colors cursor-pointer ${
-                activeLayer === 'bottom' ? 'bg-[#3b82f6]/20 text-[#3b82f6] font-bold border border-[#3b82f6]/40' : 'text-slate-400 hover:text-white'
+                activeLayer === 'bottom' ? 'bg-[#B4B4B4]/20 text-[#B4B4B4] font-bold border border-[#B4B4B4]/40' : 'text-slate-400 hover:text-white'
               }`}
             >
-              <span className="w-2 h-2 rounded-full bg-[#3b82f6]" />
+              <span className="w-2 h-2 rounded-full bg-[#B4B4B4]" />
               <span>Bottom</span>
             </button>
           </div>
@@ -111,7 +111,7 @@ export const PcbLab: React.FC<PcbLabProps> = ({
           <select
             value={trackWidth}
             onChange={e => setTrackWidth(e.target.value as any)}
-            className="bg-[#080f14] border border-white/10 text-slate-300 rounded-lg px-2 py-1 outline-none text-xs font-mono cursor-pointer"
+            className="bg-[#000000] border border-[#29292A] text-slate-300 rounded-[12px] px-2 py-1 outline-none text-xs font-mono cursor-pointer"
           >
             <option value="0.5 mm">0.5 mm</option>
             <option value="0.8 mm">0.8 mm</option>
@@ -119,7 +119,7 @@ export const PcbLab: React.FC<PcbLabProps> = ({
           </select>
 
           {/* Dimensions Input (30 × 30 mm) */}
-          <div className="flex items-center gap-1 bg-[#080f14] border border-white/10 rounded-lg px-2 py-1 text-slate-400">
+          <div className="flex items-center gap-1 bg-[#000000] border border-[#29292A] rounded-[12px] px-2 py-1 text-slate-400">
             <input
               type="number"
               value={boardWidthMm}
@@ -137,7 +137,7 @@ export const PcbLab: React.FC<PcbLabProps> = ({
           </div>
 
           {/* All Routed Green Pill */}
-          <div className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-[10px] font-mono font-bold text-emerald-400">
+          <div className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-zinc-500/10 border border-zinc-500/30 text-[10px] font-mono font-bold text-zinc-400">
             <Check className="w-3 h-3" />
             <span>All routed</span>
           </div>
@@ -152,7 +152,7 @@ export const PcbLab: React.FC<PcbLabProps> = ({
       {/* Main PCB Canvas Viewport */}
       <div
         ref={containerRef}
-        className="flex-1 overflow-hidden relative cursor-grab active:cursor-grabbing flex items-center justify-center bg-[#070d12]"
+        className="flex-1 overflow-hidden relative cursor-grab active:cursor-grabbing flex items-center justify-center bg-[#0B0B0C]"
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
@@ -164,9 +164,9 @@ export const PcbLab: React.FC<PcbLabProps> = ({
           className="absolute inset-0 pointer-events-none opacity-20"
           style={{
             backgroundImage: `
-              radial-gradient(circle at 1px 1px, #2dd4bf 1px, transparent 0),
-              linear-gradient(to right, rgba(45,212,191,0.06) 1px, transparent 1px),
-              linear-gradient(to bottom, rgba(45,212,191,0.06) 1px, transparent 1px)
+              radial-gradient(circle at 1px 1px, #B4B4B4 1px, transparent 0),
+              linear-gradient(to right, rgba(180,180,180,0.06) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(180,180,180,0.06) 1px, transparent 1px)
             `,
             backgroundSize: '20px 20px, 100px 100px, 100px 100px'
           }}
@@ -192,8 +192,8 @@ export const PcbLab: React.FC<PcbLabProps> = ({
               width={pcbWidthPx}
               height={pcbHeightPx}
               rx="16"
-              fill="#14532d"
-              stroke="#22c55e"
+              fill="#1D1D1E"
+              stroke="#F5F5F5"
               strokeWidth="1.5"
             />
 
@@ -204,7 +204,7 @@ export const PcbLab: React.FC<PcbLabProps> = ({
               width={pcbWidthPx - 8}
               height={pcbHeightPx - 8}
               rx="12"
-              fill="#0f3d2e"
+              fill="#1D1D1E"
               opacity="0.8"
             />
 
@@ -245,7 +245,7 @@ export const PcbLab: React.FC<PcbLabProps> = ({
               const midX = (startX + endX) / 2;
 
               const isTop = idx % 2 === 0;
-              const color = isTop ? '#ef4444' : '#3b82f6';
+              const color = isTop ? '#ef4444' : '#B4B4B4';
               const widthNum = trackWidth === '0.5 mm' ? 1.6 : trackWidth === '0.8 mm' ? 2.4 : 3.4;
 
               return (
@@ -260,8 +260,8 @@ export const PcbLab: React.FC<PcbLabProps> = ({
                     opacity={activeLayer === (isTop ? 'top' : 'bottom') ? 0.95 : 0.3}
                   />
                   {/* Solder Pad Terminals */}
-                  <circle cx={startX} cy={startY} r="4" fill="#fbbf24" stroke="#78350f" strokeWidth="1" />
-                  <circle cx={endX} cy={endY} r="4" fill="#fbbf24" stroke="#78350f" strokeWidth="1" />
+                  <circle cx={startX} cy={startY} r="4" fill="#fbbf24" stroke="#29292A" strokeWidth="1" />
+                  <circle cx={endX} cy={endY} r="4" fill="#fbbf24" stroke="#29292A" strokeWidth="1" />
                 </g>
               );
             })}

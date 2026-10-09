@@ -39,7 +39,7 @@ export function solveCanonicalCircuitPhysics(circuit: CanonicalCircuitModel): {
     toComponentId: w.toComponentId,
     toPinId: w.toPinId,
     signalType: (w.signalType as any) || 'DIGITAL',
-    wireColor: w.color || '#3b82f6',
+    wireColor: w.color || '#B4B4B4',
     liveVoltage: w.liveVoltage,
     liveCurrent: w.liveCurrent,
   }));

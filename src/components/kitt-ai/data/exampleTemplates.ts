@@ -113,11 +113,11 @@ export function createOpAmpPreampCanonicalCircuit(): CanonicalCircuitModel {
   ];
 
   const wires: CIRWire[] = [
-    { id: 'w1', fromComponentId: 'source_ac_in', fromPinId: 'sig', toComponentId: 'resistor_rin', toPinId: 'p1', signalType: 'ANALOG', color: '#3b82f6', netName: 'NET_AUDIO_IN' },
+    { id: 'w1', fromComponentId: 'source_ac_in', fromPinId: 'sig', toComponentId: 'resistor_rin', toPinId: 'p1', signalType: 'ANALOG', color: '#B4B4B4', netName: 'NET_AUDIO_IN' },
     { id: 'w2', fromComponentId: 'resistor_rin', fromPinId: 'p2', toComponentId: 'opamp_lm741', toPinId: 'inverting', signalType: 'ANALOG', color: '#eab308', netName: 'NET_VIRTUAL_GND' },
     { id: 'w3', fromComponentId: 'opamp_lm741', fromPinId: 'inverting', toComponentId: 'resistor_rf', toPinId: 'p1', signalType: 'ANALOG', color: '#eab308', netName: 'NET_VIRTUAL_GND' },
-    { id: 'w4', fromComponentId: 'resistor_rf', fromPinId: 'p2', toComponentId: 'opamp_lm741', toPinId: 'output', signalType: 'ANALOG', color: '#10b981', netName: 'NET_OPAMP_OUT' },
-    { id: 'w5', fromComponentId: 'opamp_lm741', fromPinId: 'output', toComponentId: 'cap_dc_block', toPinId: 'pos', signalType: 'ANALOG', color: '#10b981', netName: 'NET_OPAMP_OUT' },
+    { id: 'w4', fromComponentId: 'resistor_rf', fromPinId: 'p2', toComponentId: 'opamp_lm741', toPinId: 'output', signalType: 'ANALOG', color: '#F5F5F5', netName: 'NET_OPAMP_OUT' },
+    { id: 'w5', fromComponentId: 'opamp_lm741', fromPinId: 'output', toComponentId: 'cap_dc_block', toPinId: 'pos', signalType: 'ANALOG', color: '#F5F5F5', netName: 'NET_OPAMP_OUT' },
   ];
 
   const nets: CIRNet[] = [
@@ -292,8 +292,8 @@ export function createFlipFlopMultivibratorCircuit(): CanonicalCircuitModel {
   const wires: CIRWire[] = [
     { id: 'w1', fromComponentId: 'r_load1', fromPinId: 'p2', toComponentId: 'led_state1', toPinId: 'anode', signalType: 'POWER_VCC', color: '#ef4444', netName: 'NET_RC1' },
     { id: 'w2', fromComponentId: 'led_state1', fromPinId: 'cathode', toComponentId: 'q1_npn', toPinId: 'collector', signalType: 'DIGITAL', color: '#ef4444', netName: 'NET_Q1_C' },
-    { id: 'w3', fromComponentId: 'r_load2', fromPinId: 'p2', toComponentId: 'led_state2', toPinId: 'anode', signalType: 'POWER_VCC', color: '#10b981', netName: 'NET_RC2' },
-    { id: 'w4', fromComponentId: 'led_state2', fromPinId: 'cathode', toComponentId: 'q2_npn', toPinId: 'collector', signalType: 'DIGITAL', color: '#10b981', netName: 'NET_Q2_C' },
+    { id: 'w3', fromComponentId: 'r_load2', fromPinId: 'p2', toComponentId: 'led_state2', toPinId: 'anode', signalType: 'POWER_VCC', color: '#F5F5F5', netName: 'NET_RC2' },
+    { id: 'w4', fromComponentId: 'led_state2', fromPinId: 'cathode', toComponentId: 'q2_npn', toPinId: 'collector', signalType: 'DIGITAL', color: '#F5F5F5', netName: 'NET_Q2_C' },
   ];
 
   const nets: CIRNet[] = [
@@ -438,8 +438,8 @@ export function createLinearPowerSupplyCircuit(): CanonicalCircuitModel {
 
   const wires: CIRWire[] = [
     { id: 'w1', fromComponentId: 'cap_in', fromPinId: 'p1', toComponentId: 'vreg_7805', toPinId: 'in', signalType: 'POWER_VCC', color: '#ef4444', netName: 'NET_RAW_9V' },
-    { id: 'w2', fromComponentId: 'vreg_7805', fromPinId: 'out', toComponentId: 'cap_out', toPinId: 'p1', signalType: 'POWER_VCC', color: '#10b981', netName: 'NET_VREG_5V' },
-    { id: 'w3', fromComponentId: 'vreg_7805', fromPinId: 'out', toComponentId: 'led_power_good', toPinId: 'anode', signalType: 'POWER_VCC', color: '#10b981', netName: 'NET_VREG_5V' },
+    { id: 'w2', fromComponentId: 'vreg_7805', fromPinId: 'out', toComponentId: 'cap_out', toPinId: 'p1', signalType: 'POWER_VCC', color: '#F5F5F5', netName: 'NET_VREG_5V' },
+    { id: 'w3', fromComponentId: 'vreg_7805', fromPinId: 'out', toComponentId: 'led_power_good', toPinId: 'anode', signalType: 'POWER_VCC', color: '#F5F5F5', netName: 'NET_VREG_5V' },
   ];
 
   const nets: CIRNet[] = [
@@ -561,8 +561,8 @@ export function createHBridgeMotorCircuit(): CanonicalCircuitModel {
   ];
 
   const wires: CIRWire[] = [
-    { id: 'w1', fromComponentId: 'q_high1', fromPinId: 'source', toComponentId: 'motor_dc', toPinId: 'termA', signalType: 'POWER_VCC', color: '#06b6d4', netName: 'NET_HALF_BRIDGE_A' },
-    { id: 'w2', fromComponentId: 'q_low1', fromPinId: 'drain', toComponentId: 'motor_dc', toPinId: 'termA', signalType: 'GROUND', color: '#06b6d4', netName: 'NET_HALF_BRIDGE_A' },
+    { id: 'w1', fromComponentId: 'q_high1', fromPinId: 'source', toComponentId: 'motor_dc', toPinId: 'termA', signalType: 'POWER_VCC', color: '#8F8F8F', netName: 'NET_HALF_BRIDGE_A' },
+    { id: 'w2', fromComponentId: 'q_low1', fromPinId: 'drain', toComponentId: 'motor_dc', toPinId: 'termA', signalType: 'GROUND', color: '#8F8F8F', netName: 'NET_HALF_BRIDGE_A' },
   ];
 
   const nets: CIRNet[] = [
@@ -685,8 +685,8 @@ export function createActiveRCLowPassFilterCircuit(): CanonicalCircuitModel {
   ];
 
   const wires: CIRWire[] = [
-    { id: 'w1', fromComponentId: 'resistor_r1', fromPinId: 'p2', toComponentId: 'opamp_filter', toPinId: 'non_inverting', signalType: 'ANALOG', color: '#10b981', netName: 'NET_FILTER_NODE' },
-    { id: 'w2', fromComponentId: 'resistor_r1', fromPinId: 'p2', toComponentId: 'cap_c1', toPinId: 'p1', signalType: 'ANALOG', color: '#10b981', netName: 'NET_FILTER_NODE' },
+    { id: 'w1', fromComponentId: 'resistor_r1', fromPinId: 'p2', toComponentId: 'opamp_filter', toPinId: 'non_inverting', signalType: 'ANALOG', color: '#F5F5F5', netName: 'NET_FILTER_NODE' },
+    { id: 'w2', fromComponentId: 'resistor_r1', fromPinId: 'p2', toComponentId: 'cap_c1', toPinId: 'p1', signalType: 'ANALOG', color: '#F5F5F5', netName: 'NET_FILTER_NODE' },
   ];
 
   const nets: CIRNet[] = [

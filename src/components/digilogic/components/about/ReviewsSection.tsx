@@ -328,7 +328,7 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({ formOpenByDefaul
 
         {/* Review Submission / Edit Form */}
         {showForm && (
-          <div className="mb-10 p-6 sm:p-8 rounded-2xl bg-gradient-to-b from-[#18181B] to-[#0D0D0F] border border-[#E5092F]/40 shadow-2xl shadow-[#E5092F]/5 animate-fadeIn">
+          <div className="mb-10 p-6 sm:p-8 rounded-2xl bg-gradient-to-b from-[#18181B] to-[#0B0B0C] border border-[#E5092F]/40 shadow-2xl shadow-[#E5092F]/5 animate-fadeIn">
             <div className="flex items-center justify-between mb-6 pb-4 border-b border-zinc-800">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-xl bg-[#E5092F]/20 border border-[#E5092F]/40 text-[#FF2448] flex items-center justify-center font-bold">
@@ -507,7 +507,7 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({ formOpenByDefaul
 
         {/* Reviews Grid */}
         {filteredReviews.length === 0 ? (
-          <div className="py-16 text-center rounded-2xl bg-[#0D0D0F] border border-zinc-800 text-zinc-400">
+          <div className="py-16 text-center rounded-2xl bg-[#0B0B0C] border border-zinc-800 text-zinc-400">
             <MessageCircle className="w-10 h-10 mx-auto text-zinc-600 mb-3" />
             <p className="text-sm font-semibold text-zinc-300">No reviews found in this category yet.</p>
             <p className="text-xs text-zinc-500 mt-1">Be the first to share your thoughts!</p>
@@ -521,7 +521,7 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({ formOpenByDefaul
               return (
                 <div
                   key={review.id}
-                  className={`flex flex-col justify-between p-5 rounded-2xl bg-[#0D0D0F] border transition-all duration-300 ${
+                  className={`flex flex-col justify-between p-5 rounded-2xl bg-[#0B0B0C] border transition-all duration-300 ${
                     isOwner
                       ? 'border-[#E5092F]/50 shadow-[0_0_20px_rgba(229,9,47,0.1)]'
                       : 'border-zinc-800 hover:border-zinc-700'

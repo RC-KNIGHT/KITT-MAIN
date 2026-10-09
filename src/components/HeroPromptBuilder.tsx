@@ -155,37 +155,37 @@ export const HeroPromptBuilder: React.FC = () => {
     <div className="w-full max-w-4xl mx-auto mt-6 relative z-20">
       <Tilt3DCard tiltMaxAngle={3.5} scale={1.01} glareOpacity={0.22} className="w-full">
         {/* Container with Crystal Clear Transparent Glass so the K shows behind it */}
-        <div className="transparent-glass-card rounded-2xl bg-black/20 border border-[#A58D66]/30 p-5 sm:p-7 relative overflow-hidden transition-colors duration-300 hover:border-[#407E8C]/60 backdrop-blur-[2px] shadow-[0_16px_40px_rgba(0,0,0,0.6),0_0_25px_rgba(64,126,140,0.12)]">
+        <div className="transparent-glass-card rounded-2xl bg-black/20 border border-[#FFFFFF]/30 p-5 sm:p-7 relative overflow-hidden transition-colors duration-300 hover:border-[#8F8F8F]/60 backdrop-blur-[2px] shadow-[0_16px_40px_rgba(0,0,0,0.6),0_0_25px_rgba(143,143,143,0.12)]">
         
         {/* Precision Reticle Corner Brackets */}
-        <div className="absolute top-2.5 left-2.5 w-3 h-3 border-t-2 border-l-2 border-[#A58D66]/50 rounded-tl pointer-events-none z-10" />
-        <div className="absolute top-2.5 right-2.5 w-3 h-3 border-t-2 border-r-2 border-[#A58D66]/50 rounded-tr pointer-events-none z-10" />
-        <div className="absolute bottom-2.5 left-2.5 w-3 h-3 border-b-2 border-l-2 border-[#A58D66]/50 rounded-bl pointer-events-none z-10" />
-        <div className="absolute bottom-2.5 right-2.5 w-3 h-3 border-b-2 border-r-2 border-[#A58D66]/50 rounded-br pointer-events-none z-10" />
+        <div className="absolute top-2.5 left-2.5 w-3 h-3 border-t-2 border-l-2 border-[#FFFFFF]/50 rounded-tl pointer-events-none z-10" />
+        <div className="absolute top-2.5 right-2.5 w-3 h-3 border-t-2 border-r-2 border-[#FFFFFF]/50 rounded-tr pointer-events-none z-10" />
+        <div className="absolute bottom-2.5 left-2.5 w-3 h-3 border-b-2 border-l-2 border-[#FFFFFF]/50 rounded-bl pointer-events-none z-10" />
+        <div className="absolute bottom-2.5 right-2.5 w-3 h-3 border-b-2 border-r-2 border-[#FFFFFF]/50 rounded-br pointer-events-none z-10" />
 
         {/* Subtle Engineering Grid Background */}
         <div 
           className="absolute inset-0 pointer-events-none opacity-15"
           style={{
-            backgroundImage: 'radial-gradient(circle at 1px 1px, #A58D66 1px, transparent 0)',
+            backgroundImage: 'radial-gradient(circle at 1px 1px, #FFFFFF 1px, transparent 0)',
             backgroundSize: '24px 24px'
           }}
         />
 
         {/* Top Control Bar: Prompt Question & 2D/3D Mode Selector */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#A58D66]/20 pb-4 mb-4 relative z-10">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#FFFFFF]/20 pb-4 mb-4 relative z-10">
           <div className="flex items-center gap-2.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#407E8C] animate-pulse shadow-[0_0_8px_#407E8C]" />
-            <h2 className="text-base sm:text-lg font-serif font-bold text-[#E5E1DD] tracking-wide">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#8F8F8F] animate-pulse shadow-[0_0_8px_#8F8F8F]" />
+            <h2 className="text-base sm:text-lg font-serif font-bold text-[#F5F5F5] tracking-wide">
               What Will You Force Into Existence?
             </h2>
-            <span className="hidden md:inline text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-[#A58D66]/20 text-[#A58D66] border border-[#A58D66]/30 animate-ambition">
+            <span className="hidden md:inline text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-[#FFFFFF]/20 text-[#FFFFFF] border border-[#FFFFFF]/30 animate-ambition">
               AUTONOMOUS SYNTHESIS
             </span>
           </div>
 
           {/* 2D / 3D Mode Selector Pills */}
-          <div className="flex items-center gap-1 p-1 bg-black/40 rounded-xl border border-[#A58D66]/20 self-start sm:self-auto backdrop-blur-[2px]">
+          <div className="flex items-center gap-1 p-1 bg-black/40 rounded-xl border border-[#FFFFFF]/20 self-start sm:self-auto backdrop-blur-[2px]">
             <button
               type="button"
               onClick={() => {
@@ -194,8 +194,8 @@ export const HeroPromptBuilder: React.FC = () => {
               }}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                 generationMode === '2d'
-                  ? 'bg-gradient-to-r from-[#A58D66] to-[#8C7654] text-[#080f14] shadow-md font-bold'
-                  : 'text-[#E5E1DD]/60 hover:text-[#E5E1DD]'
+                  ? 'bg-gradient-to-r from-[#FFFFFF] to-[#737373] text-[#000000] shadow-md font-bold'
+                  : 'text-[#F5F5F5]/60 hover:text-[#F5F5F5]'
               }`}
             >
               <Binary className="w-3.5 h-3.5" />
@@ -210,8 +210,8 @@ export const HeroPromptBuilder: React.FC = () => {
               }}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                 generationMode === '3d'
-                  ? 'bg-gradient-to-r from-[#A58D66] to-[#8C7654] text-[#080f14] shadow-md font-bold'
-                  : 'text-[#E5E1DD]/60 hover:text-[#E5E1DD]'
+                  ? 'bg-gradient-to-r from-[#FFFFFF] to-[#737373] text-[#000000] shadow-md font-bold'
+                  : 'text-[#F5F5F5]/60 hover:text-[#F5F5F5]'
               }`}
             >
               <Layers className="w-3.5 h-3.5" />
@@ -228,12 +228,12 @@ export const HeroPromptBuilder: React.FC = () => {
             disabled={isGenerating}
             placeholder="Describe your electronic system (e.g. Build an automatic plant watering system with ESP32, soil moisture probe, and 5V pump)..."
             rows={2}
-            className="w-full bg-black/35 border border-[#A58D66]/25 focus:border-[#A58D66] rounded-xl p-3.5 sm:p-4 text-sm sm:text-base text-[#E5E1DD] placeholder:text-[#E5E1DD]/40 focus:outline-none focus:ring-2 focus:ring-[#A58D66]/20 font-sans resize-none transition-all font-light backdrop-blur-[2px]"
+            className="w-full bg-black/35 border border-[#FFFFFF]/25 focus:border-[#FFFFFF] rounded-xl p-3.5 sm:p-4 text-sm sm:text-base text-[#F5F5F5] placeholder:text-[#F5F5F5]/40 focus:outline-none focus:ring-2 focus:ring-[#FFFFFF]/20 font-sans resize-none transition-all font-light backdrop-blur-[2px]"
           />
           {promptText && (
             <button
               onClick={() => setPromptText('')}
-              className="absolute top-3 right-3 text-[#E5E1DD]/40 hover:text-[#E5E1DD] p-1"
+              className="absolute top-3 right-3 text-[#F5F5F5]/40 hover:text-[#F5F5F5] p-1"
               title="Clear prompt"
             >
               <X className="w-4 h-4" />
@@ -243,14 +243,14 @@ export const HeroPromptBuilder: React.FC = () => {
 
         {/* Preset Idea Badges */}
         <div className="flex flex-wrap items-center gap-2 mb-4 relative z-10">
-          <span className="text-[11px] font-mono text-[#A58D66] uppercase tracking-wider">
+          <span className="text-[11px] font-mono text-[#FFFFFF] uppercase tracking-wider">
             Quick Ideas:
           </span>
           {PROMPT_PRESETS.map((preset) => (
             <button
               key={preset.id}
               onClick={() => handleSelectPreset(preset)}
-              className="px-2.5 py-1 rounded-lg bg-black/30 hover:bg-[#407E8C]/25 border border-[#A58D66]/20 hover:border-[#A58D66]/50 text-xs text-[#E5E1DD]/80 hover:text-[#E5E1DD] transition-all cursor-pointer font-medium backdrop-blur-[2px]"
+              className="px-2.5 py-1 rounded-lg bg-black/30 hover:bg-[#8F8F8F]/25 border border-[#FFFFFF]/20 hover:border-[#FFFFFF]/50 text-xs text-[#F5F5F5]/80 hover:text-[#F5F5F5] transition-all cursor-pointer font-medium backdrop-blur-[2px]"
             >
               {preset.label}
             </button>
@@ -258,14 +258,14 @@ export const HeroPromptBuilder: React.FC = () => {
         </div>
 
         {/* Expandable Options: [Choose Components] & [Advanced Settings] */}
-        <div className="flex flex-wrap items-center justify-between gap-3 border-t border-[#A58D66]/15 pt-3 mb-4 relative z-10 text-xs">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-t border-[#FFFFFF]/15 pt-3 mb-4 relative z-10 text-xs">
           <div className="flex items-center gap-2">
             <button
               type="button"
               onClick={() => setShowComponents(!showComponents)}
-              className="flex items-center gap-1 text-[#E5E1DD]/80 hover:text-[#E5E1DD] px-2.5 py-1 rounded-md bg-[#407E8C]/15 hover:bg-[#407E8C]/25 border border-[#407E8C]/35 transition-colors"
+              className="flex items-center gap-1 text-[#F5F5F5]/80 hover:text-[#F5F5F5] px-2.5 py-1 rounded-md bg-[#8F8F8F]/15 hover:bg-[#8F8F8F]/25 border border-[#8F8F8F]/35 transition-colors"
             >
-              <Cpu className="w-3.5 h-3.5 text-[#A58D66]" />
+              <Cpu className="w-3.5 h-3.5 text-[#FFFFFF]" />
               <span>Target: {selectedMcu}</span>
               {showComponents ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
             </button>
@@ -273,9 +273,9 @@ export const HeroPromptBuilder: React.FC = () => {
             <button
               type="button"
               onClick={() => setShowAdvanced(!showAdvanced)}
-              className="flex items-center gap-1 text-[#E5E1DD]/80 hover:text-[#E5E1DD] px-2.5 py-1 rounded-md bg-[#407E8C]/15 hover:bg-[#407E8C]/25 border border-[#407E8C]/35 transition-colors"
+              className="flex items-center gap-1 text-[#F5F5F5]/80 hover:text-[#F5F5F5] px-2.5 py-1 rounded-md bg-[#8F8F8F]/15 hover:bg-[#8F8F8F]/25 border border-[#8F8F8F]/35 transition-colors"
             >
-              <Sliders className="w-3.5 h-3.5 text-[#76B4C2]" />
+              <Sliders className="w-3.5 h-3.5 text-[#B4B4B4]" />
               <span>Power: {powerDomain}</span>
               {showAdvanced ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
             </button>
@@ -286,18 +286,18 @@ export const HeroPromptBuilder: React.FC = () => {
             type="button"
             onClick={handleStartBuild}
             disabled={isGenerating || !promptText.trim()}
-            className="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-[#A58D66] to-[#8C7654] hover:from-[#BFA378] hover:to-[#A58D66] disabled:opacity-50 text-[#080f14] font-bold text-sm shadow-[0_0_20px_rgba(165,141,102,0.35)] transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer"
+            className="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-[#FFFFFF] to-[#737373] hover:from-[#CCCCCC] hover:to-[#FFFFFF] disabled:opacity-50 text-[#000000] font-bold text-sm shadow-[0_0_20px_rgba(255,255,255,0.35)] transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer"
           >
             {isGenerating ? (
               <>
-                <RefreshCw className="w-4 h-4 animate-spin text-[#080f14]" />
+                <RefreshCw className="w-4 h-4 animate-spin text-[#000000]" />
                 <span>Synthesizing Project ({progressPercent}%)...</span>
               </>
             ) : (
               <>
-                <Zap className="w-4 h-4 text-[#080f14] fill-[#080f14]" />
+                <Zap className="w-4 h-4 text-[#000000] fill-[#000000]" />
                 <span>SYNTHESIZE WITH KITT</span>
-                <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#080f14]/20 font-mono font-normal">
+                <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#000000]/20 font-mono font-normal">
                   ↵ Enter
                 </span>
               </>
@@ -315,8 +315,8 @@ export const HeroPromptBuilder: React.FC = () => {
               transition={{ duration: 0.25, ease: 'easeOut' }}
               className="overflow-hidden"
             >
-              <div className="mt-3 p-3.5 rounded-xl bg-[#0b141a] border border-[#A58D66]/20 space-y-2 relative z-10 text-xs">
-                <span className="text-[11px] font-mono text-[#A58D66] uppercase tracking-wider font-semibold">
+              <div className="mt-3 p-3.5 rounded-xl bg-[#0b141a] border border-[#FFFFFF]/20 space-y-2 relative z-10 text-xs">
+                <span className="text-[11px] font-mono text-[#FFFFFF] uppercase tracking-wider font-semibold">
                   Select Microcontroller Architecture:
                 </span>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1">
@@ -329,8 +329,8 @@ export const HeroPromptBuilder: React.FC = () => {
                       }}
                       className={`p-2 rounded-lg border text-left transition-all cursor-pointer ${
                         selectedMcu === mcu
-                          ? 'bg-[#A58D66]/20 border-[#A58D66]/60 text-[#E5E1DD] font-semibold shadow-sm'
-                          : 'bg-white/5 border-white/10 text-[#E5E1DD]/70 hover:bg-white/10'
+                          ? 'bg-[#FFFFFF]/20 border-[#FFFFFF]/60 text-[#F5F5F5] font-semibold shadow-sm'
+                          : 'bg-white/5 border-white/10 text-[#F5F5F5]/70 hover:bg-white/10'
                       }`}
                     >
                       {mcu}
@@ -352,8 +352,8 @@ export const HeroPromptBuilder: React.FC = () => {
               transition={{ duration: 0.25, ease: 'easeOut' }}
               className="overflow-hidden"
             >
-              <div className="mt-3 p-3.5 rounded-xl bg-[#0b141a] border border-[#A58D66]/20 space-y-2 relative z-10 text-xs">
-                <span className="text-[11px] font-mono text-[#407E8C] uppercase tracking-wider font-semibold">
+              <div className="mt-3 p-3.5 rounded-xl bg-[#0b141a] border border-[#FFFFFF]/20 space-y-2 relative z-10 text-xs">
+                <span className="text-[11px] font-mono text-[#8F8F8F] uppercase tracking-wider font-semibold">
                   Power Supply Rails & Protection:
                 </span>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1">
@@ -370,12 +370,12 @@ export const HeroPromptBuilder: React.FC = () => {
                       }}
                       className={`p-2 rounded-lg border text-left transition-all cursor-pointer ${
                         powerDomain === p.name
-                          ? 'bg-[#407E8C]/25 border-[#407E8C] text-[#E5E1DD] font-semibold shadow-sm'
-                          : 'bg-white/5 border-white/10 text-[#E5E1DD]/70 hover:bg-white/10'
+                          ? 'bg-[#8F8F8F]/25 border-[#8F8F8F] text-[#F5F5F5] font-semibold shadow-sm'
+                          : 'bg-white/5 border-white/10 text-[#F5F5F5]/70 hover:bg-white/10'
                       }`}
                     >
                       <div className="font-semibold">{p.name}</div>
-                      <div className="text-[10px] text-[#E5E1DD]/50">{p.desc}</div>
+                      <div className="text-[10px] text-[#F5F5F5]/50">{p.desc}</div>
                     </button>
                   ))}
                 </div>
@@ -392,17 +392,17 @@ export const HeroPromptBuilder: React.FC = () => {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 15, scale: 0.98 }}
               transition={{ duration: 0.35, ease: 'easeOut' }}
-              className="mt-4 p-4 sm:p-5 rounded-xl bg-[#080f14] border border-[#A58D66]/30 space-y-4 relative z-10 shadow-xl"
+              className="mt-4 p-4 sm:p-5 rounded-xl bg-[#000000] border border-[#FFFFFF]/30 space-y-4 relative z-10 shadow-xl"
             >
               {/* Header with Progress Bar */}
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <Terminal className="w-4 h-4 text-[#A58D66]" />
-                  <span className="text-xs font-mono font-bold text-[#E5E1DD] uppercase tracking-wider">
+                  <Terminal className="w-4 h-4 text-[#FFFFFF]" />
+                  <span className="text-xs font-mono font-bold text-[#F5F5F5] uppercase tracking-wider">
                     Oracle Synthesis Pipeline
                   </span>
                 </div>
-                <span className="text-xs font-mono font-bold text-[#A58D66]">
+                <span className="text-xs font-mono font-bold text-[#FFFFFF]">
                   {isCompleted ? '✓ COMPLETED 100%' : `${progressPercent}%`}
                 </span>
               </div>
@@ -410,7 +410,7 @@ export const HeroPromptBuilder: React.FC = () => {
               {/* Progress Bar Track */}
               <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
                 <motion.div 
-                  className="h-full bg-gradient-to-r from-[#A58D66] via-[#E5E1DD] to-[#407E8C]"
+                  className="h-full bg-gradient-to-r from-[#FFFFFF] via-[#F5F5F5] to-[#8F8F8F]"
                   initial={{ width: 0 }}
                   animate={{ width: `${progressPercent}%` }}
                   transition={{ duration: 0.4, ease: 'easeInOut' }}
@@ -428,26 +428,26 @@ export const HeroPromptBuilder: React.FC = () => {
                       key={step.title}
                       className={`p-2 rounded-lg border flex items-start gap-2.5 transition-all ${
                         isDone 
-                          ? 'bg-[#407E8C]/20 border-[#407E8C]/40 text-[#E5E1DD]' 
+                          ? 'bg-[#8F8F8F]/20 border-[#8F8F8F]/40 text-[#F5F5F5]' 
                           : isActive 
-                          ? 'bg-[#A58D66]/20 border-[#A58D66]/60 text-[#E5E1DD] animate-pulse' 
-                          : 'bg-white/5 border-white/5 text-[#E5E1DD]/40 opacity-60'
+                          ? 'bg-[#FFFFFF]/20 border-[#FFFFFF]/60 text-[#F5F5F5] animate-pulse' 
+                          : 'bg-white/5 border-white/5 text-[#F5F5F5]/40 opacity-60'
                       }`}
                     >
                       <div className="mt-0.5 shrink-0">
                         {isDone ? (
-                          <CheckCircle2 className="w-3.5 h-3.5 text-[#407E8C]" />
+                          <CheckCircle2 className="w-3.5 h-3.5 text-[#8F8F8F]" />
                         ) : isActive ? (
-                          <RefreshCw className="w-3.5 h-3.5 text-[#A58D66] animate-spin" />
+                          <RefreshCw className="w-3.5 h-3.5 text-[#FFFFFF] animate-spin" />
                         ) : (
-                          <span className="w-3.5 h-3.5 rounded-full border border-[#A58D66]/30 block text-[9px] text-center font-mono leading-3 text-[#E5E1DD]/50">
+                          <span className="w-3.5 h-3.5 rounded-full border border-[#FFFFFF]/30 block text-[9px] text-center font-mono leading-3 text-[#F5F5F5]/50">
                             {idx + 1}
                           </span>
                         )}
                       </div>
                       <div>
                         <div className="font-semibold text-[11px] leading-tight">{step.title}</div>
-                        <div className="text-[10px] text-[#E5E1DD]/60 line-clamp-1">{step.detail}</div>
+                        <div className="text-[10px] text-[#F5F5F5]/60 line-clamp-1">{step.detail}</div>
                       </div>
                     </div>
                   );
@@ -456,8 +456,8 @@ export const HeroPromptBuilder: React.FC = () => {
 
               {/* Action Bar when Complete */}
               {isCompleted && (
-                <div className="pt-2 border-t border-[#A58D66]/20 flex flex-wrap items-center justify-between gap-3 text-xs">
-                  <div className="flex items-center gap-2 text-[#407E8C] font-medium">
+                <div className="pt-2 border-t border-[#FFFFFF]/20 flex flex-wrap items-center justify-between gap-3 text-xs">
+                  <div className="flex items-center gap-2 text-[#8F8F8F] font-medium">
                     <Check className="w-4 h-4" />
                     <span>0 Violations detected • 8 Nets synchronized • Ready for manifestation</span>
                   </div>
@@ -466,7 +466,7 @@ export const HeroPromptBuilder: React.FC = () => {
                     <a
                       href="#/workspace"
                       onClick={() => circuitAudio.playClick()}
-                      className="px-3.5 py-1.5 rounded-lg bg-[#A58D66] hover:bg-[#b89f76] active:scale-95 text-[#080f14] font-semibold transition-all flex items-center gap-1.5 shadow-[0_0_15px_rgba(165,141,102,0.3)] hover:shadow-[0_0_20px_rgba(165,141,102,0.5)] cursor-pointer"
+                      className="px-3.5 py-1.5 rounded-lg bg-[#FFFFFF] hover:bg-[#b89f76] active:scale-95 text-[#000000] font-semibold transition-all flex items-center gap-1.5 shadow-[0_0_15px_rgba(255,255,255,0.3)] hover:shadow-[0_0_20px_rgba(255,255,255,0.5)] cursor-pointer"
                     >
                       <Layers className="w-3.5 h-3.5" />
                       <span>Launch 3D Lab</span>
@@ -475,16 +475,16 @@ export const HeroPromptBuilder: React.FC = () => {
                     <a
                       href="#/kitt-ai"
                       onClick={() => circuitAudio.playClick()}
-                      className="px-3.5 py-1.5 rounded-lg bg-[#407E8C]/20 hover:bg-[#407E8C]/30 active:scale-95 text-[#E5E1DD] border border-[#407E8C]/40 hover:border-[#407E8C]/80 font-semibold transition-all flex items-center gap-1.5 cursor-pointer shadow-[0_0_15px_rgba(64,126,140,0.2)]"
+                      className="px-3.5 py-1.5 rounded-lg bg-[#8F8F8F]/20 hover:bg-[#8F8F8F]/30 active:scale-95 text-[#F5F5F5] border border-[#8F8F8F]/40 hover:border-[#8F8F8F]/80 font-semibold transition-all flex items-center gap-1.5 cursor-pointer shadow-[0_0_15px_rgba(143,143,143,0.2)]"
                     >
-                      <Zap className="w-3.5 h-3.5 text-[#A58D66]" />
+                      <Zap className="w-3.5 h-3.5 text-[#FFFFFF]" />
                       <span>KITT AI Studio</span>
                     </a>
 
                     <a
                       href="#/digilogic"
                       onClick={() => circuitAudio.playClick()}
-                      className="px-3.5 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 active:scale-95 text-[#A58D66] hover:text-[#E5E1DD] border border-[#A58D66]/20 hover:border-[#A58D66]/50 font-medium transition-all flex items-center gap-1 cursor-pointer"
+                      className="px-3.5 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 active:scale-95 text-[#FFFFFF] hover:text-[#F5F5F5] border border-[#FFFFFF]/20 hover:border-[#FFFFFF]/50 font-medium transition-all flex items-center gap-1 cursor-pointer"
                     >
                       <span>DigiLogic EDA</span>
                       <ExternalLink className="w-3 h-3" />

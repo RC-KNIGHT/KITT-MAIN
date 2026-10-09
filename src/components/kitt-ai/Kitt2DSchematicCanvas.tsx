@@ -61,7 +61,7 @@ export const Kitt2DSchematicCanvas: React.FC<Kitt2DSchematicCanvasProps> = ({
   return (
     <div 
       ref={containerRef}
-      className="relative w-full h-full bg-[#080f14] overflow-hidden select-none cursor-grab active:cursor-grabbing border border-[#A58D66]/20 rounded-xl"
+      className="relative w-full h-full bg-[#000000] overflow-hidden select-none cursor-grab active:cursor-grabbing border border-[#353536] rounded-[12px]"
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
@@ -72,9 +72,9 @@ export const Kitt2DSchematicCanvas: React.FC<Kitt2DSchematicCanvasProps> = ({
         className="absolute inset-0 pointer-events-none opacity-25"
         style={{
           backgroundImage: `
-            radial-gradient(circle at 1px 1px, #A58D66 1px, transparent 0),
-            linear-gradient(to right, rgba(64,126,140,0.08) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(64,126,140,0.08) 1px, transparent 1px)
+            radial-gradient(circle at 1px 1px, #FFFFFF 1px, transparent 0),
+            linear-gradient(to right, rgba(143,143,143,0.08) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(143,143,143,0.08) 1px, transparent 1px)
           `,
           backgroundSize: '24px 24px, 120px 120px, 120px 120px'
         }}
@@ -97,7 +97,7 @@ export const Kitt2DSchematicCanvas: React.FC<Kitt2DSchematicCanvasProps> = ({
             
             {/* Ground Symbol Pattern */}
             <marker id="dot-junction" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
-              <circle cx="5" cy="5" r="4" fill="#A58D66" />
+              <circle cx="5" cy="5" r="4" fill="#FFFFFF" />
             </marker>
           </defs>
 
@@ -141,7 +141,7 @@ export const Kitt2DSchematicCanvas: React.FC<Kitt2DSchematicCanvasProps> = ({
                   strokeWidth={isPower ? "2.5" : "1.75"}
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="transition-all duration-200 group-hover/wire:stroke-[#76B4C2] group-hover/wire:stroke-[3.5]"
+                  className="transition-all duration-200 group-hover/wire:stroke-[#B4B4B4] group-hover/wire:stroke-[3.5]"
                   filter="url(#wire-glow)"
                   opacity={0.9}
                 />
@@ -151,7 +151,7 @@ export const Kitt2DSchematicCanvas: React.FC<Kitt2DSchematicCanvasProps> = ({
                 <circle cx={end.x} cy={end.y} r="3" fill={conn.wireColor} />
                 
                 {/* Mid-route Junction Node */}
-                <circle cx={midX} cy={start.y} r="2.5" fill="#A58D66" opacity={0.7} />
+                <circle cx={midX} cy={start.y} r="2.5" fill="#FFFFFF" opacity={0.7} />
               </g>
             );
           })}
@@ -179,10 +179,10 @@ export const Kitt2DSchematicCanvas: React.FC<Kitt2DSchematicCanvasProps> = ({
                   width={width}
                   height={height}
                   rx="8"
-                  fill="#0c161c"
-                  stroke={isSelected ? '#A58D66' : '#407E8C'}
+                  fill="#141415"
+                  stroke={isSelected ? '#FFFFFF' : '#8F8F8F'}
                   strokeWidth={isSelected ? "2.5" : "1.25"}
-                  className="transition-all duration-200 hover:stroke-[#76B4C2] shadow-2xl"
+                  className="transition-all duration-200 hover:stroke-[#B4B4B4]"
                 />
 
                 {/* Header Strip */}
@@ -192,21 +192,21 @@ export const Kitt2DSchematicCanvas: React.FC<Kitt2DSchematicCanvasProps> = ({
                   width={width}
                   height="26"
                   rx="8"
-                  fill="#12222b"
+                  fill="#1D1D1E"
                 />
                 <rect
                   x="0"
                   y="20"
                   width={width}
                   height="6"
-                  fill="#12222b"
+                  fill="#1D1D1E"
                 />
 
                 {/* Component Name */}
                 <text
                   x="10"
                   y="17"
-                  fill="#E5E1DD"
+                  fill="#F5F5F5"
                   fontSize="11"
                   fontFamily="monospace"
                   fontWeight="bold"
@@ -220,7 +220,7 @@ export const Kitt2DSchematicCanvas: React.FC<Kitt2DSchematicCanvasProps> = ({
                     x={width - 10}
                     y="17"
                     textAnchor="end"
-                    fill="#A58D66"
+                    fill="#FFFFFF"
                     fontSize="10"
                     fontFamily="monospace"
                     fontWeight="bold"
@@ -243,7 +243,7 @@ export const Kitt2DSchematicCanvas: React.FC<Kitt2DSchematicCanvasProps> = ({
                         y1={pin.relativeY}
                         x2={isLeft ? pin.relativeX + 10 : pin.relativeX - 10}
                         y2={pin.relativeY}
-                        stroke="#407E8C"
+                        stroke="#8F8F8F"
                         strokeWidth="1.5"
                       />
 
@@ -252,8 +252,8 @@ export const Kitt2DSchematicCanvas: React.FC<Kitt2DSchematicCanvasProps> = ({
                         cx={pin.relativeX}
                         cy={pin.relativeY}
                         r="3.5"
-                        fill={pin.type === 'ground' ? '#1e293b' : pin.type === 'power' ? '#ef4444' : '#A58D66'}
-                        stroke="#080f14"
+                        fill={pin.type === 'ground' ? '#1e293b' : pin.type === 'power' ? '#ef4444' : '#FFFFFF'}
+                        stroke="#000000"
                         strokeWidth="1.5"
                         className="group-hover/pin:scale-150 transition-transform"
                       />
@@ -284,56 +284,56 @@ export const Kitt2DSchematicCanvas: React.FC<Kitt2DSchematicCanvasProps> = ({
       {/* Floating Voltage Probe Tooltip */}
       {hoveredNode && (
         <div 
-          className="absolute z-30 pointer-events-none bg-[#0c161c]/95 border border-[#A58D66]/60 rounded-lg p-2.5 shadow-2xl backdrop-blur-md transform -translate-x-1/2 -translate-y-full"
+          className="absolute z-30 pointer-events-none bg-[#141415]/95 border border-[#8F8F8F] rounded-[12px] p-2.5 backdrop-blur-md transform -translate-x-1/2 -translate-y-full"
           style={{
             left: `${pan.x + hoveredNode.x * zoom}px`,
             top: `${pan.y + hoveredNode.y * zoom - 10}px`
           }}
         >
-          <div className="flex items-center gap-1.5 text-[11px] font-mono text-[#A58D66] font-bold">
-            <Activity className="w-3 h-3 text-[#76B4C2] animate-pulse" />
+          <div className="flex items-center gap-1.5 text-[11px] font-mono text-[#FFFFFF] font-bold">
+            <Activity className="w-3 h-3 text-[#B4B4B4] animate-pulse" />
             <span>NODE TELEMETRY</span>
           </div>
-          <div className="text-xs text-[#E5E1DD] font-medium mt-0.5">{hoveredNode.name}</div>
-          <div className="text-sm font-bold text-[#10b981] font-mono mt-1">
+          <div className="text-xs text-[#F5F5F5] font-medium mt-0.5">{hoveredNode.name}</div>
+          <div className="text-sm font-bold text-[#F5F5F5] font-mono mt-1">
             {hoveredNode.voltage.toFixed(2)} V
           </div>
         </div>
       )}
 
       {/* Navigation Controls Bar (Zoom In, Zoom Out, Reset) */}
-      <div className="absolute bottom-4 right-4 flex items-center gap-1.5 bg-[#0c161c]/90 border border-[#A58D66]/30 p-1.5 rounded-lg shadow-xl backdrop-blur-md z-20">
+      <div className="absolute bottom-4 right-4 flex items-center gap-1.5 bg-[#141415]/90 border border-[#353536] p-1.5 rounded-[12px] backdrop-blur-md z-20">
         <button
           onClick={handleZoomIn}
-          className="p-1.5 text-[#E5E1DD]/80 hover:text-[#E5E1DD] hover:bg-[#A58D66]/20 rounded transition-colors"
+          className="p-1.5 text-[#F5F5F5]/80 hover:text-[#F5F5F5] hover:bg-[#FFFFFF]/20 rounded transition-colors"
           title="Zoom In"
         >
           <ZoomIn className="w-4 h-4" />
         </button>
         <button
           onClick={handleZoomOut}
-          className="p-1.5 text-[#E5E1DD]/80 hover:text-[#E5E1DD] hover:bg-[#A58D66]/20 rounded transition-colors"
+          className="p-1.5 text-[#F5F5F5]/80 hover:text-[#F5F5F5] hover:bg-[#FFFFFF]/20 rounded transition-colors"
           title="Zoom Out"
         >
           <ZoomOut className="w-4 h-4" />
         </button>
         <button
           onClick={handleResetView}
-          className="p-1.5 text-[#E5E1DD]/80 hover:text-[#E5E1DD] hover:bg-[#A58D66]/20 rounded transition-colors"
+          className="p-1.5 text-[#F5F5F5]/80 hover:text-[#F5F5F5] hover:bg-[#FFFFFF]/20 rounded transition-colors"
           title="Reset View"
         >
           <RotateCcw className="w-4 h-4" />
         </button>
-        <span className="text-[11px] font-mono text-[#A58D66] px-1 font-bold">
+        <span className="text-[11px] font-mono text-[#FFFFFF] px-1 font-bold">
           {Math.round(zoom * 100)}%
         </span>
       </div>
 
       {/* Canvas Mode Stamp */}
-      <div className="absolute top-4 left-4 flex items-center gap-2 bg-[#0c161c]/80 border border-[#407E8C]/30 px-3 py-1.5 rounded-lg backdrop-blur-md">
-        <Zap className="w-3.5 h-3.5 text-[#A58D66]" />
-        <span className="text-xs font-mono font-bold text-[#E5E1DD]">2D IEEE Canonical Schematic</span>
-        <span className="text-[10px] text-[#76B4C2] font-mono">({circuit.components.length} components, {circuit.connections.length} nets)</span>
+      <div className="absolute top-4 left-4 flex items-center gap-2 bg-[#141415]/80 border border-[#8F8F8F]/30 px-3 py-1.5 rounded-[12px] backdrop-blur-md">
+        <Zap className="w-3.5 h-3.5 text-[#FFFFFF]" />
+        <span className="text-xs font-mono font-bold text-[#F5F5F5]">2D IEEE Canonical Schematic</span>
+        <span className="text-[10px] text-[#B4B4B4] font-mono">({circuit.components.length} components, {circuit.connections.length} nets)</span>
       </div>
     </div>
   );

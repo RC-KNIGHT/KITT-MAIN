@@ -205,14 +205,14 @@ export const ArithmeticDrill: React.FC<ArithmeticDrillProps> = ({
   return (
     <div className="flex flex-col items-center w-full max-w-4xl mx-auto px-4 py-6 select-none">
       {/* 1. Drill Configuration Bar */}
-      <div className="w-full bg-[#0d171f] border border-[#A58D66]/20 rounded-2xl p-4 sm:p-5 shadow-xl shadow-black/40 mb-6">
+      <div className="w-full bg-[#141415] border border-[#FFFFFF]/20 rounded-2xl p-4 sm:p-5 shadow-xl shadow-black/40 mb-6">
         <div className="flex flex-wrap items-center justify-between gap-4">
           {/* Base Selection */}
           <div className="flex items-center gap-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#A58D66]">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#FFFFFF]">
               Radix Base:
             </span>
-            <div className="flex bg-[#080f14] p-1 rounded-xl border border-[#A58D66]/25">
+            <div className="flex bg-[#000000] p-1 rounded-xl border border-[#FFFFFF]/25">
               {([2, 8, 16] as NumberBase[]).map((b) => (
                 <button
                   key={b}
@@ -222,8 +222,8 @@ export const ArithmeticDrill: React.FC<ArithmeticDrillProps> = ({
                   }}
                   className={`px-3 py-1.5 rounded-lg text-xs font-semibold tracking-wide transition-all ${
                     base === b
-                      ? 'bg-[#A58D66] text-[#080f14] shadow-md shadow-[#A58D66]/30 font-bold'
-                      : 'text-[#E5E1DD]/70 hover:text-[#E5E1DD] hover:bg-[#A58D66]/10'
+                      ? 'bg-[#FFFFFF] text-[#000000] shadow-md shadow-[#FFFFFF]/30 font-bold'
+                      : 'text-[#F5F5F5]/70 hover:text-[#F5F5F5] hover:bg-[#FFFFFF]/10'
                   }`}
                 >
                   {BASE_METADATA[b].name} ({b})
@@ -234,10 +234,10 @@ export const ArithmeticDrill: React.FC<ArithmeticDrillProps> = ({
 
           {/* Operation Selection */}
           <div className="flex items-center gap-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#A58D66]">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#FFFFFF]">
               Operator:
             </span>
-            <div className="flex bg-[#080f14] p-1 rounded-xl border border-[#A58D66]/25">
+            <div className="flex bg-[#000000] p-1 rounded-xl border border-[#FFFFFF]/25">
               {(['add', 'sub', 'mul'] as ArithmeticOp[]).map((o) => (
                 <button
                   key={o}
@@ -247,8 +247,8 @@ export const ArithmeticDrill: React.FC<ArithmeticDrillProps> = ({
                   }}
                   className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                     op === o
-                      ? 'bg-[#407E8C] text-[#E5E1DD] shadow-md shadow-[#407E8C]/30 font-bold'
-                      : 'text-[#E5E1DD]/70 hover:text-[#E5E1DD] hover:bg-[#407E8C]/10'
+                      ? 'bg-[#8F8F8F] text-[#F5F5F5] shadow-md shadow-[#8F8F8F]/30 font-bold'
+                      : 'text-[#F5F5F5]/70 hover:text-[#F5F5F5] hover:bg-[#8F8F8F]/10'
                   }`}
                 >
                   {OP_METADATA[o].name} ({OP_METADATA[o].symbol})
@@ -259,10 +259,10 @@ export const ArithmeticDrill: React.FC<ArithmeticDrillProps> = ({
 
           {/* Difficulty Level */}
           <div className="flex items-center gap-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#A58D66]">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#FFFFFF]">
               Precision:
             </span>
-            <div className="flex bg-[#080f14] p-1 rounded-xl border border-[#A58D66]/25">
+            <div className="flex bg-[#000000] p-1 rounded-xl border border-[#FFFFFF]/25">
               {(['easy', 'medium', 'hard', 'extreme'] as DifficultyLevel[]).map((l) => (
                 <button
                   key={l}
@@ -272,8 +272,8 @@ export const ArithmeticDrill: React.FC<ArithmeticDrillProps> = ({
                   }}
                   className={`px-2.5 py-1.5 rounded-lg text-[11px] font-semibold capitalize transition-all ${
                     level === l
-                      ? 'bg-[#A58D66]/30 text-[#DFCCA8] border border-[#A58D66] font-bold'
-                      : 'text-[#E5E1DD]/60 hover:text-[#E5E1DD]'
+                      ? 'bg-[#FFFFFF]/30 text-[#E8E8E8] border border-[#FFFFFF] font-bold'
+                      : 'text-[#F5F5F5]/60 hover:text-[#F5F5F5]'
                   }`}
                 >
                   {l}
@@ -285,12 +285,12 @@ export const ArithmeticDrill: React.FC<ArithmeticDrillProps> = ({
           {/* Subtraction Toggle & Carry Hint Toggle */}
           <div className="flex items-center gap-4">
             {op === 'sub' && (
-              <label className="flex items-center gap-2 text-xs text-[#E5E1DD]/80 cursor-pointer">
+              <label className="flex items-center gap-2 text-xs text-[#F5F5F5]/80 cursor-pointer">
                 <input
                   type="checkbox"
                   checked={allowNegative}
                   onChange={(e) => setAllowNegative(e.target.checked)}
-                  className="rounded border-[#A58D66]/40 text-[#A58D66] focus:ring-[#A58D66] bg-[#080f14]"
+                  className="rounded border-[#FFFFFF]/40 text-[#FFFFFF] focus:ring-[#FFFFFF] bg-[#000000]"
                 />
                 <span>Allow Negative</span>
               </label>
@@ -298,7 +298,7 @@ export const ArithmeticDrill: React.FC<ArithmeticDrillProps> = ({
 
             <button
               onClick={() => setShowCarries(!showCarries)}
-              className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#080f14] border border-[#A58D66]/20 text-[11px] text-[#A58D66] hover:text-[#DFCCA8] transition-colors"
+              className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#000000] border border-[#FFFFFF]/20 text-[11px] text-[#FFFFFF] hover:text-[#E8E8E8] transition-colors"
             >
               {showCarries ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}
               <span>{showCarries ? 'Hide Carries' : 'Show Carries'}</span>
@@ -308,27 +308,27 @@ export const ArithmeticDrill: React.FC<ArithmeticDrillProps> = ({
       </div>
 
       {/* 2. Interactive Columnar Math Matrix Canvas */}
-      <div className="w-full bg-[#0d171f] border border-[#A58D66]/25 rounded-3xl p-6 sm:p-10 shadow-2xl shadow-black/60 flex flex-col items-center relative overflow-hidden">
+      <div className="w-full bg-[#141415] border border-[#FFFFFF]/25 rounded-3xl p-6 sm:p-10 shadow-2xl shadow-black/60 flex flex-col items-center relative overflow-hidden">
         {/* Ambient Top Flare */}
-        <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#A58D66] to-transparent opacity-60" />
+        <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#FFFFFF] to-transparent opacity-60" />
 
         {/* Live Streak / State Header */}
-        <div className="w-full flex items-center justify-between mb-8 pb-4 border-b border-[#A58D66]/15">
+        <div className="w-full flex items-center justify-between mb-8 pb-4 border-b border-[#FFFFFF]/15">
           <div className="flex items-center gap-2.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#76B4C2] animate-pulse shadow-md shadow-[#76B4C2]/50" />
-            <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#76B4C2]">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#B4B4B4] animate-pulse shadow-md shadow-[#B4B4B4]/50" />
+            <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#B4B4B4]">
               {BASE_METADATA[problem.base].name} {OP_METADATA[problem.op].name} Matrix
             </span>
           </div>
 
           <div className="flex items-center gap-3">
             {streak > 1 && (
-              <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#A58D66]/15 border border-[#A58D66]/40 text-[#DFCCA8] text-xs font-bold font-mono">
-                <Trophy className="w-3.5 h-3.5 text-[#A58D66]" />
+              <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFFFFF]/15 border border-[#FFFFFF]/40 text-[#E8E8E8] text-xs font-bold font-mono">
+                <Trophy className="w-3.5 h-3.5 text-[#FFFFFF]" />
                 <span>Streak: {streak} 🔥</span>
               </div>
             )}
-            <div className="text-xs text-[#E5E1DD]/60 font-mono">
+            <div className="text-xs text-[#F5F5F5]/60 font-mono">
               Radix Base {problem.base}
             </div>
           </div>
@@ -339,7 +339,7 @@ export const ArithmeticDrill: React.FC<ArithmeticDrillProps> = ({
           {/* Row 0: Carry / Borrow Indicator Row */}
           {showCarries && problem.carries.length > 0 && (
             <div className="flex items-center gap-1.5 sm:gap-2 mb-2">
-              <span className="text-[10px] font-mono text-[#A58D66]/70 uppercase tracking-wider mr-2">
+              <span className="text-[10px] font-mono text-[#FFFFFF]/70 uppercase tracking-wider mr-2">
                 {problem.op === 'sub' ? 'Borrow' : 'Carry'}:
               </span>
               {padCarries.map((c, idx) => (
@@ -347,7 +347,7 @@ export const ArithmeticDrill: React.FC<ArithmeticDrillProps> = ({
                   key={idx}
                   className={`w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center font-mono text-xs sm:text-sm font-bold rounded-lg border transition-all ${
                     c > 0
-                      ? 'bg-[#A58D66]/20 border-[#A58D66] text-[#DFCCA8] shadow-sm shadow-[#A58D66]/30'
+                      ? 'bg-[#FFFFFF]/20 border-[#FFFFFF] text-[#E8E8E8] shadow-sm shadow-[#FFFFFF]/30'
                       : 'border-transparent text-transparent'
                   }`}
                 >
@@ -365,7 +365,7 @@ export const ArithmeticDrill: React.FC<ArithmeticDrillProps> = ({
                 key={idx}
                 className={`w-8 h-10 sm:w-10 sm:h-12 flex items-center justify-center font-mono text-lg sm:text-2xl font-black rounded-xl border transition-all ${
                   char !== ' '
-                    ? 'bg-[#080f14] border-[#A58D66]/30 text-[#E5E1DD] shadow-md shadow-black/40'
+                    ? 'bg-[#000000] border-[#FFFFFF]/30 text-[#F5F5F5] shadow-md shadow-black/40'
                     : 'border-transparent'
                 }`}
               >
@@ -376,7 +376,7 @@ export const ArithmeticDrill: React.FC<ArithmeticDrillProps> = ({
 
           {/* Row 2: Operator & Operand B */}
           <div className="flex items-center gap-1.5 sm:gap-2 mb-3">
-            <div className="w-6 sm:w-8 flex items-center justify-center font-mono text-xl sm:text-2xl font-black text-[#A58D66]">
+            <div className="w-6 sm:w-8 flex items-center justify-center font-mono text-xl sm:text-2xl font-black text-[#FFFFFF]">
               {OP_METADATA[problem.op].symbol}
             </div>
             {padB.split('').map((char, idx) => (
@@ -384,7 +384,7 @@ export const ArithmeticDrill: React.FC<ArithmeticDrillProps> = ({
                 key={idx}
                 className={`w-8 h-10 sm:w-10 sm:h-12 flex items-center justify-center font-mono text-lg sm:text-2xl font-black rounded-xl border transition-all ${
                   char !== ' '
-                    ? 'bg-[#080f14] border-[#A58D66]/30 text-[#E5E1DD] shadow-md shadow-black/40'
+                    ? 'bg-[#000000] border-[#FFFFFF]/30 text-[#F5F5F5] shadow-md shadow-black/40'
                     : 'border-transparent'
                 }`}
               >
@@ -394,12 +394,12 @@ export const ArithmeticDrill: React.FC<ArithmeticDrillProps> = ({
           </div>
 
           {/* Architectural Separation Line */}
-          <div className="w-full h-1 bg-gradient-to-r from-[#A58D66]/40 via-[#A58D66] to-[#407E8C] rounded-full my-1 shadow-sm shadow-[#A58D66]/40" />
+          <div className="w-full h-1 bg-gradient-to-r from-[#FFFFFF]/40 via-[#FFFFFF] to-[#8F8F8F] rounded-full my-1 shadow-sm shadow-[#FFFFFF]/40" />
 
           {/* Row 3: User Answer Input Boxes */}
           <div className="flex items-center gap-1.5 sm:gap-2 mt-3">
             {problem.isNegative && (
-              <div className="w-6 sm:w-8 flex items-center justify-center font-mono text-xl sm:text-2xl font-black text-[#DFCCA8]">
+              <div className="w-6 sm:w-8 flex items-center justify-center font-mono text-xl sm:text-2xl font-black text-[#E8E8E8]">
                 −
               </div>
             )}
@@ -429,12 +429,12 @@ export const ArithmeticDrill: React.FC<ArithmeticDrillProps> = ({
                   placeholder="•"
                   className={`w-8 h-10 sm:w-10 sm:h-12 text-center font-mono text-lg sm:text-2xl font-black rounded-xl border outline-none transition-all ${
                     verification?.isCorrect
-                      ? 'bg-[#407E8C]/20 border-[#76B4C2] text-[#76B4C2] shadow-md shadow-[#76B4C2]/30 ring-1 ring-[#76B4C2]'
+                      ? 'bg-[#8F8F8F]/20 border-[#B4B4B4] text-[#B4B4B4] shadow-md shadow-[#B4B4B4]/30 ring-1 ring-[#B4B4B4]'
                       : isBoxWrong
-                      ? 'bg-[#A58D66]/20 border-[#A58D66] text-[#DFCCA8] shadow-md shadow-[#A58D66]/30 ring-1 ring-[#A58D66]'
+                      ? 'bg-[#FFFFFF]/20 border-[#FFFFFF] text-[#E8E8E8] shadow-md shadow-[#FFFFFF]/30 ring-1 ring-[#FFFFFF]'
                       : digit
-                      ? 'bg-[#080f14] border-[#A58D66] text-[#DFCCA8] shadow-md shadow-[#A58D66]/20'
-                      : 'bg-[#080f14] border-[#A58D66]/30 text-[#E5E1DD] placeholder-[#E5E1DD]/20 hover:border-[#A58D66]/60 focus:border-[#A58D66] focus:ring-2 focus:ring-[#A58D66]/30'
+                      ? 'bg-[#000000] border-[#FFFFFF] text-[#E8E8E8] shadow-md shadow-[#FFFFFF]/20'
+                      : 'bg-[#000000] border-[#FFFFFF]/30 text-[#F5F5F5] placeholder-[#F5F5F5]/20 hover:border-[#FFFFFF]/60 focus:border-[#FFFFFF] focus:ring-2 focus:ring-[#FFFFFF]/30'
                   }`}
                 />
               );
@@ -443,14 +443,14 @@ export const ArithmeticDrill: React.FC<ArithmeticDrillProps> = ({
         </div>
 
         {/* Quick Linear Input for Power Users */}
-        <div className="flex items-center gap-3 mt-4 text-xs text-[#E5E1DD]/60">
+        <div className="flex items-center gap-3 mt-4 text-xs text-[#F5F5F5]/60">
           <span>Fast Input:</span>
           <input
             type="text"
             value={singleInputVal}
             onChange={handleSingleInputChange}
             placeholder={`Type full base ${problem.base} answer...`}
-            className="px-3 py-1.5 rounded-xl bg-[#080f14] border border-[#A58D66]/30 text-[#E5E1DD] font-mono text-xs w-48 focus:outline-none focus:border-[#A58D66] focus:ring-1 focus:ring-[#A58D66]"
+            className="px-3 py-1.5 rounded-xl bg-[#000000] border border-[#FFFFFF]/30 text-[#F5F5F5] font-mono text-xs w-48 focus:outline-none focus:border-[#FFFFFF] focus:ring-1 focus:ring-[#FFFFFF]"
           />
         </div>
 
@@ -459,15 +459,15 @@ export const ArithmeticDrill: React.FC<ArithmeticDrillProps> = ({
           <div
             className={`w-full mt-6 p-4 rounded-2xl border flex items-center justify-between gap-4 transition-all ${
               verification.isCorrect
-                ? 'bg-[#407E8C]/15 border-[#76B4C2]/40 text-[#76B4C2]'
-                : 'bg-[#A58D66]/15 border-[#A58D66]/40 text-[#DFCCA8]'
+                ? 'bg-[#8F8F8F]/15 border-[#B4B4B4]/40 text-[#B4B4B4]'
+                : 'bg-[#FFFFFF]/15 border-[#FFFFFF]/40 text-[#E8E8E8]'
             }`}
           >
             <div className="flex items-center gap-3">
               {verification.isCorrect ? (
-                <CheckCircle2 className="w-6 h-6 text-[#76B4C2] flex-shrink-0" />
+                <CheckCircle2 className="w-6 h-6 text-[#B4B4B4] flex-shrink-0" />
               ) : (
-                <XCircle className="w-6 h-6 text-[#A58D66] flex-shrink-0" />
+                <XCircle className="w-6 h-6 text-[#FFFFFF] flex-shrink-0" />
               )}
               <div>
                 <div className="font-bold text-sm">
@@ -488,9 +488,9 @@ export const ArithmeticDrill: React.FC<ArithmeticDrillProps> = ({
                 playClickTone();
                 setShowExplanation(true);
               }}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#080f14] border border-[#A58D66]/30 text-xs font-semibold hover:border-[#A58D66] text-[#E5E1DD] active:scale-[0.96] transition-all cursor-pointer"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#000000] border border-[#FFFFFF]/30 text-xs font-semibold hover:border-[#FFFFFF] text-[#F5F5F5] active:scale-[0.96] transition-all cursor-pointer"
             >
-              <Lightbulb className="w-3.5 h-3.5 text-[#A58D66]" />
+              <Lightbulb className="w-3.5 h-3.5 text-[#FFFFFF]" />
               <span>Step Breakdown</span>
             </button>
           </div>
@@ -500,9 +500,9 @@ export const ArithmeticDrill: React.FC<ArithmeticDrillProps> = ({
         <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mt-8">
           <button
             onClick={handleVerify}
-            className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#A58D66] to-[#8C7654] hover:from-[#DFCCA8] hover:to-[#A58D66] text-[#080f14] font-bold text-sm tracking-wide active:scale-[0.96] transition-all shadow-lg shadow-[#A58D66]/20 cursor-pointer"
+            className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#FFFFFF] to-[#737373] hover:from-[#E8E8E8] hover:to-[#FFFFFF] text-[#000000] font-bold text-sm tracking-wide active:scale-[0.96] transition-all shadow-lg shadow-[#FFFFFF]/20 cursor-pointer"
           >
-            <CheckCircle2 className="w-4 h-4 text-[#080f14]" />
+            <CheckCircle2 className="w-4 h-4 text-[#000000]" />
             <span>Verify Calculation</span>
           </button>
 
@@ -511,15 +511,15 @@ export const ArithmeticDrill: React.FC<ArithmeticDrillProps> = ({
               playClickTone();
               loadNewProblem();
             }}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#080f14] hover:bg-[#12202b] border border-[#A58D66]/30 hover:border-[#A58D66] text-xs font-semibold text-[#E5E1DD] active:scale-[0.96] transition-all shadow-sm cursor-pointer"
+            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#000000] hover:bg-[#1D1D1E] border border-[#FFFFFF]/30 hover:border-[#FFFFFF] text-xs font-semibold text-[#F5F5F5] active:scale-[0.96] transition-all shadow-sm cursor-pointer"
           >
-            <ArrowRight className="w-4 h-4 text-[#A58D66]" />
+            <ArrowRight className="w-4 h-4 text-[#FFFFFF]" />
             <span>Next Drill</span>
           </button>
 
           <button
             onClick={handleReset}
-            className="flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-[#080f14] hover:bg-[#12202b] border border-[#A58D66]/20 text-xs text-[#E5E1DD]/80 hover:text-[#DFCCA8] active:scale-[0.96] transition-all cursor-pointer"
+            className="flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-[#000000] hover:bg-[#1D1D1E] border border-[#FFFFFF]/20 text-xs text-[#F5F5F5]/80 hover:text-[#E8E8E8] active:scale-[0.96] transition-all cursor-pointer"
             title="Clear Inputs"
           >
             <RotateCcw className="w-4 h-4" />
@@ -536,10 +536,10 @@ export const ArithmeticDrill: React.FC<ArithmeticDrillProps> = ({
               setBase(randB);
               setOp(randO);
             }}
-            className="flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-[#080f14] hover:bg-[#12202b] border border-[#407E8C]/30 text-xs text-[#76B4C2] hover:text-[#DFCCA8] active:scale-[0.96] transition-all cursor-pointer"
+            className="flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-[#000000] hover:bg-[#1D1D1E] border border-[#8F8F8F]/30 text-xs text-[#B4B4B4] hover:text-[#E8E8E8] active:scale-[0.96] transition-all cursor-pointer"
             title="Randomize Base & Operation"
           >
-            <Shuffle className="w-4 h-4 text-[#76B4C2]" />
+            <Shuffle className="w-4 h-4 text-[#B4B4B4]" />
             <span>Randomize</span>
           </button>
 
@@ -548,7 +548,7 @@ export const ArithmeticDrill: React.FC<ArithmeticDrillProps> = ({
               playClickTone();
               setShowExplanation(true);
             }}
-            className="flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-[#080f14] hover:bg-[#12202b] border border-[#A58D66]/25 text-xs text-[#A58D66] hover:text-[#DFCCA8] active:scale-[0.96] transition-all cursor-pointer"
+            className="flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-[#000000] hover:bg-[#1D1D1E] border border-[#FFFFFF]/25 text-xs text-[#FFFFFF] hover:text-[#E8E8E8] active:scale-[0.96] transition-all cursor-pointer"
           >
             <Lightbulb className="w-4 h-4" />
             <span>Tutor Breakdown</span>
@@ -559,48 +559,48 @@ export const ArithmeticDrill: React.FC<ArithmeticDrillProps> = ({
       {/* 3. Modal: Step-by-Step Positional Arithmetic Breakdown */}
       {showExplanation && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in">
-          <div className="w-full max-w-xl bg-[#0d171f] border border-[#A58D66]/40 rounded-3xl p-6 sm:p-8 shadow-2xl shadow-black">
-            <div className="flex items-center justify-between pb-4 border-b border-[#A58D66]/20 mb-4">
+          <div className="w-full max-w-xl bg-[#141415] border border-[#FFFFFF]/40 rounded-3xl p-6 sm:p-8 shadow-2xl shadow-black">
+            <div className="flex items-center justify-between pb-4 border-b border-[#FFFFFF]/20 mb-4">
               <div className="flex items-center gap-2.5">
-                <Sparkles className="w-5 h-5 text-[#A58D66]" />
-                <h3 className="font-bold text-base text-[#E5E1DD]">
+                <Sparkles className="w-5 h-5 text-[#FFFFFF]" />
+                <h3 className="font-bold text-base text-[#F5F5F5]">
                   Positional Arithmetic Step-by-Step Breakdown
                 </h3>
               </div>
               <button
                 onClick={() => setShowExplanation(false)}
-                className="w-7 h-7 rounded-full bg-[#080f14] border border-[#A58D66]/30 flex items-center justify-center text-xs text-[#E5E1DD] hover:text-[#DFCCA8] cursor-pointer"
+                className="w-7 h-7 rounded-full bg-[#000000] border border-[#FFFFFF]/30 flex items-center justify-center text-xs text-[#F5F5F5] hover:text-[#E8E8E8] cursor-pointer"
               >
                 ✕
               </button>
             </div>
 
-            <div className="mb-4 text-xs text-[#E5E1DD]/70">
-              Problem: <span className="font-mono font-bold text-[#DFCCA8]">{problem.operandA}</span>{' '}
+            <div className="mb-4 text-xs text-[#F5F5F5]/70">
+              Problem: <span className="font-mono font-bold text-[#E8E8E8]">{problem.operandA}</span>{' '}
               {OP_METADATA[problem.op].symbol}{' '}
-              <span className="font-mono font-bold text-[#DFCCA8]">{problem.operandB}</span>{' '}
-              in <span className="font-bold text-[#76B4C2]">Base {problem.base}</span> ({BASE_METADATA[problem.base].name}).
+              <span className="font-mono font-bold text-[#E8E8E8]">{problem.operandB}</span>{' '}
+              in <span className="font-bold text-[#B4B4B4]">Base {problem.base}</span> ({BASE_METADATA[problem.base].name}).
             </div>
 
             <div className="space-y-2 max-h-72 overflow-y-auto pr-2">
               {problem.stepExplanations.map((step, idx) => (
                 <div
                   key={idx}
-                  className="p-3 rounded-xl bg-[#080f14] border border-[#A58D66]/15 text-xs text-[#E5E1DD] font-mono leading-relaxed"
+                  className="p-3 rounded-xl bg-[#000000] border border-[#FFFFFF]/15 text-xs text-[#F5F5F5] font-mono leading-relaxed"
                 >
-                  <span className="text-[#A58D66] font-bold mr-2">Step {idx + 1}:</span>
+                  <span className="text-[#FFFFFF] font-bold mr-2">Step {idx + 1}:</span>
                   {step}
                 </div>
               ))}
             </div>
 
-            <div className="mt-6 pt-4 border-t border-[#A58D66]/20 flex items-center justify-between">
-              <div className="text-xs text-[#E5E1DD]/60">
-                Final Result: <span className="font-mono font-bold text-[#76B4C2]">{problem.correctAnswer}</span>
+            <div className="mt-6 pt-4 border-t border-[#FFFFFF]/20 flex items-center justify-between">
+              <div className="text-xs text-[#F5F5F5]/60">
+                Final Result: <span className="font-mono font-bold text-[#B4B4B4]">{problem.correctAnswer}</span>
               </div>
               <button
                 onClick={() => setShowExplanation(false)}
-                className="px-4 py-1.5 rounded-xl bg-[#A58D66] text-[#080f14] text-xs font-bold hover:bg-[#DFCCA8] transition-colors cursor-pointer"
+                className="px-4 py-1.5 rounded-xl bg-[#FFFFFF] text-[#000000] text-xs font-bold hover:bg-[#E8E8E8] transition-colors cursor-pointer"
               >
                 Close Breakdown
               </button>

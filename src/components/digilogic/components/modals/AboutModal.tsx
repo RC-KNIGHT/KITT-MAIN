@@ -40,15 +40,15 @@ export const AboutModal: React.FC<AboutModalProps> = ({ onCloseOverride }) => {
 
   return (
     <div className={`fixed inset-0 z-50 flex flex-col animate-fade-in overflow-hidden ${
-      isLight ? 'bg-[#080f14]/40 backdrop-blur-xs' : 'bg-[#080f14]'
+      isLight ? 'bg-[#000000]/40 backdrop-blur-xs' : 'bg-[#000000]'
     }`}>
       {/* Top Bar with Close & Open in New Tab */}
       <div className={`border-b px-4 sm:px-6 py-3 flex items-center justify-between z-50 shrink-0 ${
-        isLight ? 'bg-white border-slate-200 shadow-xs' : 'bg-[#0d171f] border-[#A58D66]/20'
+        isLight ? 'bg-white border-slate-200 shadow-xs' : 'bg-[#141415] border-[#FFFFFF]/20'
       }`}>
         <div className="flex items-center gap-3">
           <KittLogo size={22} showGlow={true} className="shrink-0" />
-          <h2 className="text-sm sm:text-base font-bold tracking-tight text-[#E5E1DD]">
+          <h2 className="text-sm sm:text-base font-bold tracking-tight text-[#F5F5F5]">
             About DigiLogic Lab • Team KITT Complete Architecture Guide
           </h2>
         </div>
@@ -56,10 +56,10 @@ export const AboutModal: React.FC<AboutModalProps> = ({ onCloseOverride }) => {
         <div className="flex items-center gap-2">
           <button
             onClick={handleClose}
-            className="flex items-center gap-1.5 px-4 py-1.5 rounded-xl bg-gradient-to-r from-[#A58D66] to-[#8C7654] hover:from-[#DFCCA8] hover:to-[#A58D66] text-[#080f14] font-bold text-xs transition-all shadow-md shadow-[#A58D66]/20 active:scale-95 cursor-pointer min-h-[34px]"
+            className="flex items-center gap-1.5 px-4 py-1.5 rounded-xl bg-gradient-to-r from-[#FFFFFF] to-[#737373] hover:from-[#E8E8E8] hover:to-[#FFFFFF] text-[#000000] font-bold text-xs transition-all shadow-md shadow-[#FFFFFF]/20 active:scale-95 cursor-pointer min-h-[34px]"
             title="Close Documentation"
           >
-            <X className="w-4 h-4 text-[#080f14]" />
+            <X className="w-4 h-4 text-[#000000]" />
             <span>Close</span>
           </button>
         </div>

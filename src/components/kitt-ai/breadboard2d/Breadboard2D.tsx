@@ -22,7 +22,7 @@ export const Breadboard2D: React.FC<Breadboard2DProps> = ({
   onRotateComponent,
   zoom: externalZoom,
   onZoomChange,
-  wireColor = '#10b981',
+  wireColor = '#F5F5F5',
   selectedComponentId,
   breadboardSize = 'medium'
 }) => {
@@ -90,7 +90,7 @@ export const Breadboard2D: React.FC<Breadboard2DProps> = ({
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-full bg-[#080f14] overflow-hidden select-none cursor-grab active:cursor-grabbing flex items-center justify-center"
+      className="relative w-full h-full bg-[#000000] overflow-hidden select-none cursor-grab active:cursor-grabbing flex items-center justify-center"
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
@@ -102,9 +102,9 @@ export const Breadboard2D: React.FC<Breadboard2DProps> = ({
         className="absolute inset-0 pointer-events-none opacity-20"
         style={{
           backgroundImage: `
-            radial-gradient(circle at 1px 1px, #A58D66 1px, transparent 0),
-            linear-gradient(to right, rgba(64,126,140,0.06) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(64,126,140,0.06) 1px, transparent 1px)
+            radial-gradient(circle at 1px 1px, #FFFFFF 1px, transparent 0),
+            linear-gradient(to right, rgba(143,143,143,0.06) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(143,143,143,0.06) 1px, transparent 1px)
           `,
           backgroundSize: '24px 24px, 120px 120px, 120px 120px'
         }}
@@ -151,9 +151,9 @@ export const Breadboard2D: React.FC<Breadboard2DProps> = ({
           {hasRails && (
             <>
               {/* Left Blue (-) Rail */}
-              <line x1="24" y1="30" x2="24" y2={boardHeight - 30} stroke="#3b82f6" strokeWidth="1.5" />
-              <text x="24" y="24" fill="#3b82f6" fontSize="11" fontWeight="bold" textAnchor="middle" fontFamily="sans-serif">-</text>
-              <text x="24" y={boardHeight - 16} fill="#3b82f6" fontSize="11" fontWeight="bold" textAnchor="middle" fontFamily="sans-serif">-</text>
+              <line x1="24" y1="30" x2="24" y2={boardHeight - 30} stroke="#B4B4B4" strokeWidth="1.5" />
+              <text x="24" y="24" fill="#B4B4B4" fontSize="11" fontWeight="bold" textAnchor="middle" fontFamily="sans-serif">-</text>
+              <text x="24" y={boardHeight - 16} fill="#B4B4B4" fontSize="11" fontWeight="bold" textAnchor="middle" fontFamily="sans-serif">-</text>
 
               {/* Left Red (+) Rail */}
               <line x1="42" y1="30" x2="42" y2={boardHeight - 30} stroke="#ef4444" strokeWidth="1.5" />
@@ -166,9 +166,9 @@ export const Breadboard2D: React.FC<Breadboard2DProps> = ({
               <text x="298" y={boardHeight - 16} fill="#ef4444" fontSize="11" fontWeight="bold" textAnchor="middle" fontFamily="sans-serif">+</text>
 
               {/* Right Blue (-) Rail */}
-              <line x1="316" y1="30" x2="316" y2={boardHeight - 30} stroke="#3b82f6" strokeWidth="1.5" />
-              <text x="316" y="24" fill="#3b82f6" fontSize="11" fontWeight="bold" textAnchor="middle" fontFamily="sans-serif">-</text>
-              <text x="316" y={boardHeight - 16} fill="#3b82f6" fontSize="11" fontWeight="bold" textAnchor="middle" fontFamily="sans-serif">-</text>
+              <line x1="316" y1="30" x2="316" y2={boardHeight - 30} stroke="#B4B4B4" strokeWidth="1.5" />
+              <text x="316" y="24" fill="#B4B4B4" fontSize="11" fontWeight="bold" textAnchor="middle" fontFamily="sans-serif">-</text>
+              <text x="316" y={boardHeight - 16} fill="#B4B4B4" fontSize="11" fontWeight="bold" textAnchor="middle" fontFamily="sans-serif">-</text>
             </>
           )}
 
@@ -233,7 +233,7 @@ export const Breadboard2D: React.FC<Breadboard2DProps> = ({
                     fill="#0f172a"
                     stroke="#94a3b8"
                     strokeWidth="0.8"
-                    className="hover:fill-[#2dd4bf] hover:r-[3.2] transition-all cursor-crosshair"
+                    className="hover:fill-[#B4B4B4] hover:r-[3.2] transition-all cursor-crosshair"
                     onMouseEnter={() => setHoveredHole(`${col}${rowNum}`)}
                     onMouseLeave={() => setHoveredHole(null)}
                   />
@@ -249,7 +249,7 @@ export const Breadboard2D: React.FC<Breadboard2DProps> = ({
                     fill="#0f172a"
                     stroke="#94a3b8"
                     strokeWidth="0.8"
-                    className="hover:fill-[#2dd4bf] hover:r-[3.2] transition-all cursor-crosshair"
+                    className="hover:fill-[#B4B4B4] hover:r-[3.2] transition-all cursor-crosshair"
                     onMouseEnter={() => setHoveredHole(`${col}${rowNum}`)}
                     onMouseLeave={() => setHoveredHole(null)}
                   />
@@ -289,7 +289,7 @@ export const Breadboard2D: React.FC<Breadboard2DProps> = ({
             const cx2 = startX + dx * 0.8 - 25;
             const cy2 = startY + dy * 0.5 - 20;
 
-            const wColor = wire.color || wireColor || '#10b981';
+            const wColor = wire.color || wireColor || '#F5F5F5';
 
             return (
               <g key={wire.id} className="cursor-pointer group/wire">
@@ -308,7 +308,7 @@ export const Breadboard2D: React.FC<Breadboard2DProps> = ({
                   stroke={wColor}
                   strokeWidth="3.0"
                   strokeLinecap="round"
-                  className="group-hover/wire:stroke-[#DFCCA8] transition-colors"
+                  className="group-hover/wire:stroke-[#E8E8E8] transition-colors"
                 />
                 {/* Terminal Pins */}
                 <circle cx={startX} cy={startY} r="3" fill="#1e293b" stroke={wColor} strokeWidth="1.5" />
@@ -349,13 +349,13 @@ export const Breadboard2D: React.FC<Breadboard2DProps> = ({
                       height="24"
                       rx="3"
                       fill="#d97706"
-                      stroke={isSelected ? '#2dd4bf' : '#78350f'}
+                      stroke={isSelected ? '#B4B4B4' : '#29292A'}
                       strokeWidth={isSelected ? '2' : '1'}
-                      className="filter drop-shadow-md"
+                      className="filter drop-"
                     />
                     {/* Color Bands */}
                     <rect x="-6" y="16" width="12" height="2.5" fill="#ef4444" />
-                    <rect x="-6" y="21" width="12" height="2.5" fill="#10b981" />
+                    <rect x="-6" y="21" width="12" height="2.5" fill="#F5F5F5" />
                     <rect x="-6" y="26" width="12" height="2.5" fill="#f59e0b" />
                     <rect x="-6" y="31" width="12" height="2.5" fill="#eab308" />
                   </g>
@@ -369,9 +369,9 @@ export const Breadboard2D: React.FC<Breadboard2DProps> = ({
                       height="48"
                       rx="3"
                       fill="#1e293b"
-                      stroke={isSelected ? '#2dd4bf' : '#475569'}
+                      stroke={isSelected ? '#B4B4B4' : '#475569'}
                       strokeWidth={isSelected ? '2' : '1'}
-                      className="filter drop-shadow-lg"
+                      className="filter drop-"
                     />
                     {/* Notch */}
                     <circle cx="16" cy="4" r="3" fill="#0f172a" />
@@ -402,11 +402,11 @@ export const Breadboard2D: React.FC<Breadboard2DProps> = ({
                       height="24"
                       rx="4"
                       fill="#0f172a"
-                      stroke={isSelected ? '#2dd4bf' : '#334155'}
+                      stroke={isSelected ? '#B4B4B4' : '#334155'}
                       strokeWidth={isSelected ? '2' : '1'}
-                      className="filter drop-shadow-md"
+                      className="filter drop-"
                     />
-                    <text x="20" y="15" fill="#E5E1DD" fontSize="7" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
+                    <text x="20" y="15" fill="#F5F5F5" fontSize="7" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
                       {comp.displayName.slice(0, 7)}
                     </text>
                   </g>
@@ -419,7 +419,7 @@ export const Breadboard2D: React.FC<Breadboard2DProps> = ({
 
       {/* Hovered Hole Tooltip */}
       {hoveredHole && (
-        <div className="absolute bottom-4 left-4 z-20 px-2 py-1 rounded bg-[#0c161d]/90 border border-white/10 text-[11px] font-mono text-[#2dd4bf] pointer-events-none shadow-md">
+        <div className="absolute bottom-4 left-4 z-20 px-2 py-1 rounded bg-[#141415]/90 border border-[#29292A] text-[11px] font-mono text-[#B4B4B4] pointer-events-none">
           Hole: {hoveredHole.toUpperCase()}
         </div>
       )}

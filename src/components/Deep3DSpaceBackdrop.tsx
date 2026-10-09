@@ -436,7 +436,7 @@ export const Deep3DSpaceBackdrop: React.FC = () => {
     <div
       ref={containerRef}
       aria-hidden="true"
-      className="fixed inset-0 pointer-events-none -z-10 overflow-hidden bg-[#080f14]"
+      className="fixed inset-0 pointer-events-none -z-10 overflow-hidden bg-[#000000]"
     />
   );
 };

@@ -576,17 +576,17 @@ export const Sidebar: React.FC = () => {
         style={{ backgroundColor: activeTheme.panelBg, borderColor: activeTheme.borderTone }}
         className="p-3 border-b space-y-2.5 shrink-0"
       >
-        <div className={`flex items-center justify-between lg:hidden pb-1 border-b ${isLight ? 'border-slate-200' : 'border-[#A58D66]/20'}`}>
-          <span className={`text-xs font-bold ${isLight ? 'text-slate-800' : 'text-[#DFCCA8]'}`}>Component Library</span>
+        <div className={`flex items-center justify-between lg:hidden pb-1 border-b ${isLight ? 'border-slate-200' : 'border-[#FFFFFF]/20'}`}>
+          <span className={`text-xs font-bold ${isLight ? 'text-slate-800' : 'text-[#E8E8E8]'}`}>Component Library</span>
           <button
             onClick={() => setSidebarOpen(false)}
-            className={`p-1 rounded ${isLight ? 'text-[#E5E1DD]/45 hover:text-slate-800' : 'text-[#E5E1DD]/60 hover:text-[#E5E1DD]'}`}
+            className={`p-1 rounded ${isLight ? 'text-[#F5F5F5]/45 hover:text-slate-800' : 'text-[#F5F5F5]/60 hover:text-[#F5F5F5]'}`}
           >
             <X className="w-4 h-4" />
           </button>
         </div>
         <div className="relative">
-          <Search className={`w-3.5 h-3.5 absolute left-2.5 top-2.5 pointer-events-none ${isLight ? 'text-[#E5E1DD]/60' : 'text-[#E5E1DD]/60'}`} />
+          <Search className={`w-3.5 h-3.5 absolute left-2.5 top-2.5 pointer-events-none ${isLight ? 'text-[#F5F5F5]/60' : 'text-[#F5F5F5]/60'}`} />
           <input
             ref={searchInputRef}
             type="text"
@@ -595,8 +595,8 @@ export const Sidebar: React.FC = () => {
             onChange={(e) => setSearchQuery(e.target.value)}
             className={`w-full pl-8 pr-7 py-1.5 rounded-lg text-xs focus:outline-none transition-colors shadow-xs ${
               isLight
-                ? 'bg-slate-50 border border-slate-300 text-slate-900 placeholder-slate-400 focus:border-[#A58D66]'
-                : 'bg-[#080f14]/90 border border-[#A58D66]/30 text-[#E5E1DD] placeholder-[#E5E1DD]/40 focus:border-[#A58D66]'
+                ? 'bg-slate-50 border border-slate-300 text-slate-900 placeholder-slate-400 focus:border-[#FFFFFF]'
+                : 'bg-[#000000]/90 border border-[#FFFFFF]/30 text-[#F5F5F5] placeholder-[#F5F5F5]/40 focus:border-[#FFFFFF]'
             }`}
           />
           {searchQuery ? (
@@ -606,7 +606,7 @@ export const Sidebar: React.FC = () => {
                 searchInputRef.current?.focus();
               }}
               className={`absolute right-2 top-2 p-0.5 rounded transition-colors ${
-                isLight ? 'text-[#E5E1DD]/60 hover:text-slate-700 hover:bg-slate-200' : 'text-[#E5E1DD]/60 hover:text-[#E5E1DD] hover:bg-[#0d171f]'
+                isLight ? 'text-[#F5F5F5]/60 hover:text-slate-700 hover:bg-slate-200' : 'text-[#F5F5F5]/60 hover:text-[#F5F5F5] hover:bg-[#141415]'
               }`}
               title="Clear search"
             >
@@ -614,7 +614,7 @@ export const Sidebar: React.FC = () => {
             </button>
           ) : (
             <kbd className={`absolute right-2 top-2 px-1.5 py-0.2 text-[10px] rounded font-mono border pointer-events-none ${
-              isLight ? 'bg-slate-100 text-[#E5E1DD]/45 border-slate-300' : 'bg-[#0d171f] text-[#E5E1DD]/60 border-[#A58D66]/20'
+              isLight ? 'bg-slate-100 text-[#F5F5F5]/45 border-slate-300' : 'bg-[#141415] text-[#F5F5F5]/60 border-[#FFFFFF]/20'
             }`}>
               /
             </kbd>
@@ -623,7 +623,7 @@ export const Sidebar: React.FC = () => {
 
         {/* Search status & results counter */}
         {searchQuery.trim() && (
-          <div className={`flex items-center justify-between text-[11px] px-0.5 font-medium ${isLight ? 'text-slate-600' : 'text-[#E5E1DD]/60'}`}>
+          <div className={`flex items-center justify-between text-[11px] px-0.5 font-medium ${isLight ? 'text-slate-600' : 'text-[#F5F5F5]/60'}`}>
             <span>
               {totalMatchingItems} {totalMatchingItems === 1 ? 'component' : 'components'} found
             </span>
@@ -666,7 +666,7 @@ export const Sidebar: React.FC = () => {
                     ? ''
                     : isLight
                     ? 'border-slate-200 bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200'
-                    : 'border-[#A58D66]/20 bg-[#080f14] text-[#E5E1DD]/60 hover:text-[#DFCCA8] hover:bg-[#0d171f]'
+                    : 'border-[#FFFFFF]/20 bg-[#000000] text-[#F5F5F5]/60 hover:text-[#E8E8E8] hover:bg-[#141415]'
                 }`}
               >
                 {cat.label}
@@ -680,12 +680,12 @@ export const Sidebar: React.FC = () => {
       <div className="flex-1 min-h-0 overflow-y-auto px-2.5 py-2.5 space-y-4 text-xs touch-auto overscroll-contain">
         {filteredGroups.length === 0 ? (
           <div className="py-12 px-4 flex flex-col items-center justify-center text-center space-y-3">
-            <div className={`p-3 rounded-full border ${isLight ? 'bg-slate-100 border-slate-200 text-[#E5E1DD]/60' : 'bg-[#080f14] border-[#A58D66]/20 text-[#E5E1DD]/45'}`}>
+            <div className={`p-3 rounded-full border ${isLight ? 'bg-slate-100 border-slate-200 text-[#F5F5F5]/60' : 'bg-[#000000] border-[#FFFFFF]/20 text-[#F5F5F5]/45'}`}>
               <Search className="w-5 h-5" />
             </div>
             <div className="space-y-1">
-              <p className={`font-semibold text-xs ${isLight ? 'text-slate-800' : 'text-[#DFCCA8]'}`}>No matching components</p>
-              <p className={`text-[11px] ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/45'}`}>
+              <p className={`font-semibold text-xs ${isLight ? 'text-slate-800' : 'text-[#E8E8E8]'}`}>No matching components</p>
+              <p className={`text-[11px] ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/45'}`}>
                 No components matched "{searchQuery}". Try keywords like <span style={{ color: activeTheme.primaryColor }}>AND</span>, <span style={{ color: activeTheme.primaryColor }}>adder</span>, or <span style={{ color: activeTheme.primaryColor }}>flip-flop</span>.
               </p>
             </div>
@@ -695,7 +695,7 @@ export const Sidebar: React.FC = () => {
                 setActiveCategory('all');
               }}
               className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
-                isLight ? 'bg-slate-200 hover:bg-slate-300 text-slate-800' : 'bg-[#0d171f] hover:bg-[#0d171f] text-[#E5E1DD]'
+                isLight ? 'bg-slate-200 hover:bg-slate-300 text-slate-800' : 'bg-[#141415] hover:bg-[#141415] text-[#F5F5F5]'
               }`}
             >
               Clear Search & Filter
@@ -707,13 +707,13 @@ export const Sidebar: React.FC = () => {
             return (
               <div key={group.id} className="space-y-1.5">
                 <div className={`flex items-center justify-between px-1 text-[11px] font-bold uppercase tracking-wider ${
-                  isLight ? 'text-slate-600' : 'text-[#E5E1DD]/60'
+                  isLight ? 'text-slate-600' : 'text-[#F5F5F5]/60'
                 }`}>
                   <div className="flex items-center gap-1.5">
                     <Icon className="w-3.5 h-3.5" />
                     <span>{group.name}</span>
                   </div>
-                  <span className={`text-[10px] font-mono ${isLight ? 'text-[#E5E1DD]/60' : 'text-[#E5E1DD]/45'}`}>{group.items.length}</span>
+                  <span className={`text-[10px] font-mono ${isLight ? 'text-[#F5F5F5]/60' : 'text-[#F5F5F5]/45'}`}>{group.items.length}</span>
                 </div>
 
                 <div className="grid grid-cols-1 gap-1.5">
@@ -726,7 +726,7 @@ export const Sidebar: React.FC = () => {
                       className={`flex items-center justify-between p-2 rounded-lg text-left transition-all group cursor-grab active:cursor-grabbing select-none border ${
                         isLight
                           ? 'bg-white hover:bg-slate-50 border-slate-200 hover:border-slate-300 shadow-xs'
-                          : 'bg-[#0d171f]/60 hover:bg-[#0d171f] border-[#A58D66]/20 hover:border-[#A58D66]/50'
+                          : 'bg-[#141415]/60 hover:bg-[#141415] border-[#FFFFFF]/20 hover:border-[#FFFFFF]/50'
                       }`}
                     >
                       <div className="flex flex-col min-w-0 pr-2">
@@ -734,21 +734,21 @@ export const Sidebar: React.FC = () => {
                           <span
                             className={`font-semibold transition-colors truncate ${
                               isLight
-                                ? 'text-slate-800 group-hover:text-[#A58D66]'
-                                : 'text-[#E5E1DD] group-hover:text-[#DFCCA8]'
+                                ? 'text-slate-800 group-hover:text-[#FFFFFF]'
+                                : 'text-[#F5F5F5] group-hover:text-[#E8E8E8]'
                             }`}
                           >
                             {item.name}
                           </span>
                           {item.equation && (
                             <span className={`text-[10px] px-1 py-0.2 rounded font-mono ${
-                              isLight ? 'bg-slate-100 text-slate-600 border border-slate-200' : 'bg-[#0d171f] text-[#E5E1DD]/60'
+                              isLight ? 'bg-slate-100 text-slate-600 border border-slate-200' : 'bg-[#141415] text-[#F5F5F5]/60'
                             }`}>
                               {item.equation}
                             </span>
                           )}
                         </div>
-                        <span className={`text-[10px] truncate mt-0.5 ${isLight ? 'text-[#E5E1DD]/45' : 'text-[#E5E1DD]/60'}`}>
+                        <span className={`text-[10px] truncate mt-0.5 ${isLight ? 'text-[#F5F5F5]/45' : 'text-[#F5F5F5]/60'}`}>
                           {item.description}
                         </span>
                       </div>

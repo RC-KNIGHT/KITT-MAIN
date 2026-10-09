@@ -107,12 +107,12 @@ export function createDefaultCanonicalCircuit(): CanonicalCircuitModel {
   const wires: CIRWire[] = [
     { id: 'w1', fromComponentId: 'mcu_esp32', fromPinId: '3v3', toComponentId: 'sensor_moisture', toPinId: 'vcc', signalType: 'POWER_3V3', color: '#ef4444', label: '3.3V Sensor Power', netName: 'NET_3V3' },
     { id: 'w2', fromComponentId: 'mcu_esp32', fromPinId: 'gnd_1', toComponentId: 'sensor_moisture', toPinId: 'gnd', signalType: 'GROUND', color: '#1e293b', label: 'Common GND', netName: 'NET_GND' },
-    { id: 'w3', fromComponentId: 'sensor_moisture', fromPinId: 'aout', toComponentId: 'mcu_esp32', toPinId: 'gpio34', signalType: 'ANALOG', color: '#10b981', label: 'Soil Moisture ADC', netName: 'NET_SOIL_ADC' },
-    { id: 'w4', fromComponentId: 'mcu_esp32', fromPinId: 'gpio26', toComponentId: 'resistor_gate', toPinId: 'p1', signalType: 'PWM', color: '#f97316', label: 'Gate Drive GPIO26', netName: 'NET_PUMP_GATE' },
+    { id: 'w3', fromComponentId: 'sensor_moisture', fromPinId: 'aout', toComponentId: 'mcu_esp32', toPinId: 'gpio34', signalType: 'ANALOG', color: '#F5F5F5', label: 'Soil Moisture ADC', netName: 'NET_SOIL_ADC' },
+    { id: 'w4', fromComponentId: 'mcu_esp32', fromPinId: 'gpio26', toComponentId: 'resistor_gate', toPinId: 'p1', signalType: 'PWM', color: '#CCCCCC', label: 'Gate Drive GPIO26', netName: 'NET_PUMP_GATE' },
     { id: 'w5', fromComponentId: 'resistor_gate', fromPinId: 'p2', toComponentId: 'mosfet_driver', toPinId: 'gate', signalType: 'DIGITAL', color: '#f59e0b', label: 'MOSFET Gate In', netName: 'NET_MOSFET_G' },
     { id: 'w6', fromComponentId: 'mosfet_driver', fromPinId: 'source', toComponentId: 'mcu_esp32', toPinId: 'gnd_2', signalType: 'GROUND', color: '#1e293b', label: 'Source GND', netName: 'NET_GND' },
     { id: 'w7', fromComponentId: 'mcu_esp32', fromPinId: 'vin_5v', toComponentId: 'pump_motor', toPinId: 'pos', signalType: 'POWER_VCC', color: '#dc2626', label: '+5V Pump Rail', netName: 'NET_5V' },
-    { id: 'w8', fromComponentId: 'pump_motor', fromPinId: 'neg', toComponentId: 'mosfet_driver', toPinId: 'drain', signalType: 'DIGITAL', color: '#0ea5e9', label: 'Switched Low-Side Drain', netName: 'NET_MOTOR_DRAIN' },
+    { id: 'w8', fromComponentId: 'pump_motor', fromPinId: 'neg', toComponentId: 'mosfet_driver', toPinId: 'drain', signalType: 'DIGITAL', color: '#8F8F8F', label: 'Switched Low-Side Drain', netName: 'NET_MOTOR_DRAIN' },
     { id: 'w9', fromComponentId: 'pump_motor', fromPinId: 'pos', toComponentId: 'diode_flyback', toPinId: 'cathode', signalType: 'POWER_VCC', color: '#dc2626', label: 'Diode Clamp High', netName: 'NET_5V' },
     { id: 'w10', fromComponentId: 'pump_motor', fromPinId: 'neg', toComponentId: 'diode_flyback', toPinId: 'anode', signalType: 'DIGITAL', color: '#64748b', label: 'Diode Clamp Low', netName: 'NET_MOTOR_DRAIN' },
   ];
@@ -419,12 +419,12 @@ export function createUltrasonicRadarCanonicalCircuit(): CanonicalCircuitModel {
   const wires: CIRWire[] = [
     { id: 'w1', fromComponentId: 'mcu_uno', fromPinId: '5v', toComponentId: 'sensor_ultrasonic', toPinId: 'vcc', signalType: 'POWER_VCC', color: '#ef4444', label: '+5V Power Rail', netName: 'NET_5V' },
     { id: 'w2', fromComponentId: 'mcu_uno', fromPinId: 'gnd_1', toComponentId: 'sensor_ultrasonic', toPinId: 'gnd', signalType: 'GROUND', color: '#1e293b', label: 'System GND', netName: 'NET_GND' },
-    { id: 'w3', fromComponentId: 'mcu_uno', fromPinId: 'd9_pwm', toComponentId: 'sensor_ultrasonic', toPinId: 'trig', signalType: 'DIGITAL', color: '#06b6d4', label: 'Trig Pulse (D9)', netName: 'NET_TRIG' },
-    { id: 'w4', fromComponentId: 'mcu_uno', fromPinId: 'd10_pwm', toComponentId: 'sensor_ultrasonic', toPinId: 'echo', signalType: 'DIGITAL', color: '#3b82f6', label: 'Echo Signal (D10)', netName: 'NET_ECHO' },
+    { id: 'w3', fromComponentId: 'mcu_uno', fromPinId: 'd9_pwm', toComponentId: 'sensor_ultrasonic', toPinId: 'trig', signalType: 'DIGITAL', color: '#8F8F8F', label: 'Trig Pulse (D9)', netName: 'NET_TRIG' },
+    { id: 'w4', fromComponentId: 'mcu_uno', fromPinId: 'd10_pwm', toComponentId: 'sensor_ultrasonic', toPinId: 'echo', signalType: 'DIGITAL', color: '#B4B4B4', label: 'Echo Signal (D10)', netName: 'NET_ECHO' },
     { id: 'w5', fromComponentId: 'mcu_uno', fromPinId: '5v', toComponentId: 'servo_motor', toPinId: 'vcc', signalType: 'POWER_VCC', color: '#ef4444', label: 'Servo 5V', netName: 'NET_5V' },
     { id: 'w6', fromComponentId: 'mcu_uno', fromPinId: 'gnd_1', toComponentId: 'servo_motor', toPinId: 'gnd', signalType: 'GROUND', color: '#1e293b', label: 'Servo GND', netName: 'NET_GND' },
-    { id: 'w7', fromComponentId: 'mcu_uno', fromPinId: 'd3_pwm', toComponentId: 'servo_motor', toPinId: 'pwm', signalType: 'PWM', color: '#f97316', label: 'Servo PWM (D3)', netName: 'NET_SERVO_PWM' },
-    { id: 'w8', fromComponentId: 'mcu_uno', fromPinId: 'd2', toComponentId: 'resistor_led', toPinId: 'p1', signalType: 'DIGITAL', color: '#a855f7', label: 'Alert Drive (D2)', netName: 'NET_ALERT' },
+    { id: 'w7', fromComponentId: 'mcu_uno', fromPinId: 'd3_pwm', toComponentId: 'servo_motor', toPinId: 'pwm', signalType: 'PWM', color: '#CCCCCC', label: 'Servo PWM (D3)', netName: 'NET_SERVO_PWM' },
+    { id: 'w8', fromComponentId: 'mcu_uno', fromPinId: 'd2', toComponentId: 'resistor_led', toPinId: 'p1', signalType: 'DIGITAL', color: '#CCCCCC', label: 'Alert Drive (D2)', netName: 'NET_ALERT' },
     { id: 'w9', fromComponentId: 'resistor_led', fromPinId: 'p2', toComponentId: 'led_alert', toPinId: 'anode', signalType: 'DIGITAL', color: '#ef4444', label: 'Current Limiter', netName: 'NET_LED_ANODE' },
     { id: 'w10', fromComponentId: 'led_alert', fromPinId: 'cathode', toComponentId: 'mcu_uno', toPinId: 'gnd_2', signalType: 'GROUND', color: '#1e293b', label: 'LED Return GND', netName: 'NET_GND' }
   ];
@@ -656,12 +656,12 @@ export function createWeatherStationCanonicalCircuit(): CanonicalCircuitModel {
   const wires: CIRWire[] = [
     { id: 'w1', fromComponentId: 'mcu_esp32', fromPinId: '3v3', toComponentId: 'sensor_dht22', toPinId: 'vcc', signalType: 'POWER_3V3', color: '#ef4444', label: '3.3V Sensor Power', netName: 'NET_3V3' },
     { id: 'w2', fromComponentId: 'mcu_esp32', fromPinId: 'gnd_1', toComponentId: 'sensor_dht22', toPinId: 'gnd', signalType: 'GROUND', color: '#1e293b', label: 'GND Return', netName: 'NET_GND' },
-    { id: 'w3', fromComponentId: 'sensor_dht22', fromPinId: 'data', toComponentId: 'mcu_esp32', toPinId: 'gpio4', signalType: 'DIGITAL', color: '#06b6d4', label: 'One-Wire Data (GPIO4)', netName: 'NET_DHT_DATA' },
+    { id: 'w3', fromComponentId: 'sensor_dht22', fromPinId: 'data', toComponentId: 'mcu_esp32', toPinId: 'gpio4', signalType: 'DIGITAL', color: '#8F8F8F', label: 'One-Wire Data (GPIO4)', netName: 'NET_DHT_DATA' },
     { id: 'w4', fromComponentId: 'mcu_esp32', fromPinId: '3v3', toComponentId: 'resistor_pullup', toPinId: 'p1', signalType: 'POWER_3V3', color: '#ef4444', label: 'Pull-Up Source', netName: 'NET_3V3' },
-    { id: 'w5', fromComponentId: 'resistor_pullup', fromPinId: 'p2', toComponentId: 'sensor_dht22', toPinId: 'data', signalType: 'DIGITAL', color: '#06b6d4', label: 'Pull-Up Tie', netName: 'NET_DHT_DATA' },
+    { id: 'w5', fromComponentId: 'resistor_pullup', fromPinId: 'p2', toComponentId: 'sensor_dht22', toPinId: 'data', signalType: 'DIGITAL', color: '#8F8F8F', label: 'Pull-Up Tie', netName: 'NET_DHT_DATA' },
     { id: 'w6', fromComponentId: 'mcu_esp32', fromPinId: '3v3', toComponentId: 'display_oled', toPinId: 'vcc', signalType: 'POWER_3V3', color: '#ef4444', label: '3.3V Display Power', netName: 'NET_3V3' },
     { id: 'w7', fromComponentId: 'mcu_esp32', fromPinId: 'gnd_2', toComponentId: 'display_oled', toPinId: 'gnd', signalType: 'GROUND', color: '#1e293b', label: 'Display GND', netName: 'NET_GND' },
-    { id: 'w8', fromComponentId: 'mcu_esp32', fromPinId: 'gpio21', toComponentId: 'display_oled', toPinId: 'sda', signalType: 'I2C_SDA', color: '#a855f7', label: 'I2C SDA (GPIO21)', netName: 'NET_I2C_SDA' },
+    { id: 'w8', fromComponentId: 'mcu_esp32', fromPinId: 'gpio21', toComponentId: 'display_oled', toPinId: 'sda', signalType: 'I2C_SDA', color: '#CCCCCC', label: 'I2C SDA (GPIO21)', netName: 'NET_I2C_SDA' },
     { id: 'w9', fromComponentId: 'mcu_esp32', fromPinId: 'gpio22', toComponentId: 'display_oled', toPinId: 'scl', signalType: 'I2C_SCL', color: '#f59e0b', label: 'I2C SCL (GPIO22)', netName: 'NET_I2C_SCL' }
   ];
 
@@ -965,16 +965,16 @@ export function create555TimerFlasherCanonicalCircuit(): CanonicalCircuitModel {
   const wires: CIRWire[] = [
     { id: 'w1', fromComponentId: 'ic_555', fromPinId: 'vcc', toComponentId: 'ic_555', toPinId: 'reset', signalType: 'POWER_VCC', color: '#ef4444', label: 'VCC / RESET Tie', netName: 'NET_9V' },
     { id: 'w2', fromComponentId: 'ic_555', fromPinId: 'vcc', toComponentId: 'resistor_r1', toPinId: 'p1', signalType: 'POWER_VCC', color: '#ef4444', label: 'R1 Charge High', netName: 'NET_9V' },
-    { id: 'w3', fromComponentId: 'resistor_r1', fromPinId: 'p2', toComponentId: 'ic_555', toPinId: 'disch', signalType: 'DIGITAL', color: '#06b6d4', label: 'Discharge Node', netName: 'NET_DISCH' },
-    { id: 'w4', fromComponentId: 'ic_555', fromPinId: 'disch', toComponentId: 'resistor_r2', toPinId: 'p1', signalType: 'DIGITAL', color: '#06b6d4', label: 'R2 Series Node', netName: 'NET_DISCH' },
+    { id: 'w3', fromComponentId: 'resistor_r1', fromPinId: 'p2', toComponentId: 'ic_555', toPinId: 'disch', signalType: 'DIGITAL', color: '#8F8F8F', label: 'Discharge Node', netName: 'NET_DISCH' },
+    { id: 'w4', fromComponentId: 'ic_555', fromPinId: 'disch', toComponentId: 'resistor_r2', toPinId: 'p1', signalType: 'DIGITAL', color: '#8F8F8F', label: 'R2 Series Node', netName: 'NET_DISCH' },
     { id: 'w5', fromComponentId: 'resistor_r2', fromPinId: 'p2', toComponentId: 'ic_555', toPinId: 'thresh', signalType: 'ANALOG', color: '#f59e0b', label: 'Threshold Sensing', netName: 'NET_RC_TIMING' },
     { id: 'w6', fromComponentId: 'ic_555', fromPinId: 'thresh', toComponentId: 'ic_555', toPinId: 'trig', signalType: 'ANALOG', color: '#f59e0b', label: 'Trigger Loop Tie', netName: 'NET_RC_TIMING' },
     { id: 'w7', fromComponentId: 'ic_555', fromPinId: 'trig', toComponentId: 'cap_timing', toPinId: 'pos', signalType: 'ANALOG', color: '#f59e0b', label: 'Capacitor Charge Rail', netName: 'NET_RC_TIMING' },
     { id: 'w8', fromComponentId: 'cap_timing', fromPinId: 'neg', toComponentId: 'ic_555', toPinId: 'gnd', signalType: 'GROUND', color: '#1e293b', label: 'Capacitor GND Return', netName: 'NET_GND' },
-    { id: 'w9', fromComponentId: 'ic_555', fromPinId: 'out', toComponentId: 'resistor_led1', toPinId: 'p1', signalType: 'DIGITAL', color: '#10b981', label: '555 Output Drive', netName: 'NET_OUT' },
+    { id: 'w9', fromComponentId: 'ic_555', fromPinId: 'out', toComponentId: 'resistor_led1', toPinId: 'p1', signalType: 'DIGITAL', color: '#F5F5F5', label: '555 Output Drive', netName: 'NET_OUT' },
     { id: 'w10', fromComponentId: 'resistor_led1', fromPinId: 'p2', toComponentId: 'led_red', toPinId: 'anode', signalType: 'DIGITAL', color: '#ef4444', label: 'Red LED Anode', netName: 'NET_LED1' },
     { id: 'w11', fromComponentId: 'led_red', fromPinId: 'cathode', toComponentId: 'ic_555', toPinId: 'gnd', signalType: 'GROUND', color: '#1e293b', label: 'Red LED GND Return', netName: 'NET_GND' },
-    { id: 'w12', fromComponentId: 'ic_555', fromPinId: 'out', toComponentId: 'resistor_led2', toPinId: 'p1', signalType: 'DIGITAL', color: '#10b981', label: 'Alternate Strobe Tap', netName: 'NET_OUT' },
+    { id: 'w12', fromComponentId: 'ic_555', fromPinId: 'out', toComponentId: 'resistor_led2', toPinId: 'p1', signalType: 'DIGITAL', color: '#F5F5F5', label: 'Alternate Strobe Tap', netName: 'NET_OUT' },
     { id: 'w13', fromComponentId: 'resistor_led2', fromPinId: 'p2', toComponentId: 'led_yellow', toPinId: 'cathode', signalType: 'DIGITAL', color: '#eab308', label: 'Yellow Active-Low', netName: 'NET_LED2' },
     { id: 'w14', fromComponentId: 'led_yellow', fromPinId: 'anode', toComponentId: 'ic_555', toPinId: 'vcc', signalType: 'POWER_VCC', color: '#ef4444', label: 'Yellow VCC Pull', netName: 'NET_9V' }
   ];
@@ -1179,10 +1179,10 @@ export function createTrafficLightCanonicalCircuit(): CanonicalCircuitModel {
     { id: 'w2', fromComponentId: 'led_red', fromPinId: 'cathode', toComponentId: 'mcu_uno', toPinId: 'gnd_1', signalType: 'GROUND', color: '#1e293b', label: 'Red Return GND', netName: 'NET_GND' },
     { id: 'w3', fromComponentId: 'mcu_uno', fromPinId: 'd11_mosi', toComponentId: 'led_yellow', toPinId: 'anode', signalType: 'DIGITAL', color: '#eab308', label: 'Yellow Light (D11)', netName: 'NET_YELLOW' },
     { id: 'w4', fromComponentId: 'led_yellow', fromPinId: 'cathode', toComponentId: 'mcu_uno', toPinId: 'gnd_1', signalType: 'GROUND', color: '#1e293b', label: 'Yellow Return GND', netName: 'NET_GND' },
-    { id: 'w5', fromComponentId: 'mcu_uno', fromPinId: 'd10_pwm', toComponentId: 'led_green', toPinId: 'anode', signalType: 'DIGITAL', color: '#10b981', label: 'Green Light (D10)', netName: 'NET_GREEN' },
+    { id: 'w5', fromComponentId: 'mcu_uno', fromPinId: 'd10_pwm', toComponentId: 'led_green', toPinId: 'anode', signalType: 'DIGITAL', color: '#F5F5F5', label: 'Green Light (D10)', netName: 'NET_GREEN' },
     { id: 'w6', fromComponentId: 'led_green', fromPinId: 'cathode', toComponentId: 'mcu_uno', toPinId: 'gnd_1', signalType: 'GROUND', color: '#1e293b', label: 'Green Return GND', netName: 'NET_GND' },
     { id: 'w7', fromComponentId: 'mcu_uno', fromPinId: '5v', toComponentId: 'btn_pedestrian', toPinId: 'p1', signalType: 'POWER_VCC', color: '#ef4444', label: 'Button 5V Supply', netName: 'NET_5V' },
-    { id: 'w8', fromComponentId: 'btn_pedestrian', fromPinId: 'p2', toComponentId: 'mcu_uno', toPinId: 'd2', signalType: 'DIGITAL', color: '#3b82f6', label: 'Pedestrian Interrupt (D2)', netName: 'NET_PED_BTN' }
+    { id: 'w8', fromComponentId: 'btn_pedestrian', fromPinId: 'p2', toComponentId: 'mcu_uno', toPinId: 'd2', signalType: 'DIGITAL', color: '#B4B4B4', label: 'Pedestrian Interrupt (D2)', netName: 'NET_PED_BTN' }
   ];
 
   const nets: CIRNet[] = [
@@ -1484,8 +1484,8 @@ export function synthesizeDynamicCircuit(
       confidenceScore: 0.98
     });
     addWire('sensor_ldr', 'vcc', mcuId, mcuPowerPin, 'NET_POWER', '#ef4444', 'LDR VCC');
-    addWire('sensor_ldr', 'gnd', mcuId, mcuGndPin, 'NET_GND', '#10b981', 'LDR GND');
-    addWire('sensor_ldr', 'aout', mcuId, aPin.id, 'NET_SIG_LDR', '#3b82f6', `LDR -> ${aPin.label}`);
+    addWire('sensor_ldr', 'gnd', mcuId, mcuGndPin, 'NET_GND', '#F5F5F5', 'LDR GND');
+    addWire('sensor_ldr', 'aout', mcuId, aPin.id, 'NET_SIG_LDR', '#B4B4B4', `LDR -> ${aPin.label}`);
 
     codeDeclarations.push(`const int LDR_PIN = ${aPin.pinNum};`);
     codeSetups.push(`  pinMode(LDR_PIN, INPUT);`);
@@ -1515,7 +1515,7 @@ export function synthesizeDynamicCircuit(
       confidenceScore: 0.98
     });
     addWire('sensor_tmp36', 'vcc', mcuId, mcuPowerPin, 'NET_POWER', '#ef4444', 'TMP36 Vs');
-    addWire('sensor_tmp36', 'gnd', mcuId, mcuGndPin, 'NET_GND', '#10b981', 'TMP36 GND');
+    addWire('sensor_tmp36', 'gnd', mcuId, mcuGndPin, 'NET_GND', '#F5F5F5', 'TMP36 GND');
     addWire('sensor_tmp36', 'vout', mcuId, aPin.id, 'NET_SIG_TEMP', '#f59e0b', `TMP36 -> ${aPin.label}`);
 
     codeDeclarations.push(`const int TEMP_PIN = ${aPin.pinNum};`);
@@ -1547,8 +1547,8 @@ export function synthesizeDynamicCircuit(
       confidenceScore: 0.96
     });
     addWire('sensor_pir', 'vcc', mcuId, mcuPowerPin, 'NET_POWER', '#ef4444', 'PIR 5V');
-    addWire('sensor_pir', 'gnd', mcuId, mcuGndPin, 'NET_GND', '#10b981', 'PIR GND');
-    addWire('sensor_pir', 'out', mcuId, dPin.id, 'NET_SIG_PIR', '#10b981', `PIR -> ${dPin.label}`);
+    addWire('sensor_pir', 'gnd', mcuId, mcuGndPin, 'NET_GND', '#F5F5F5', 'PIR GND');
+    addWire('sensor_pir', 'out', mcuId, dPin.id, 'NET_SIG_PIR', '#F5F5F5', `PIR -> ${dPin.label}`);
 
     codeDeclarations.push(`const int PIR_PIN = ${dPin.pinNum};`);
     codeSetups.push(`  pinMode(PIR_PIN, INPUT);`);
@@ -1578,8 +1578,8 @@ export function synthesizeDynamicCircuit(
       confidenceScore: 0.99
     });
     addWire('pot_10k', 'p1', mcuId, mcuPowerPin, 'NET_POWER', '#ef4444', 'Pot VCC');
-    addWire('pot_10k', 'p2', mcuId, mcuGndPin, 'NET_GND', '#10b981', 'Pot GND');
-    addWire('pot_10k', 'wiper', mcuId, aPin.id, 'NET_SIG_POT', '#8b5cf6', `Pot -> ${aPin.label}`);
+    addWire('pot_10k', 'p2', mcuId, mcuGndPin, 'NET_GND', '#F5F5F5', 'Pot GND');
+    addWire('pot_10k', 'wiper', mcuId, aPin.id, 'NET_SIG_POT', '#8F8F8F', `Pot -> ${aPin.label}`);
 
     codeDeclarations.push(`const int POT_PIN = ${aPin.pinNum};`);
     codeSetups.push(`  pinMode(POT_PIN, INPUT);`);
@@ -1609,7 +1609,7 @@ export function synthesizeDynamicCircuit(
       confidenceScore: 1.0
     });
     addWire('btn_tactile', 'p1', mcuId, dPin.id, 'NET_SIG_BTN', '#f59e0b', `Button -> ${dPin.label}`);
-    addWire('btn_tactile', 'p2', mcuId, mcuGndPin, 'NET_GND', '#10b981', 'Button GND');
+    addWire('btn_tactile', 'p2', mcuId, mcuGndPin, 'NET_GND', '#F5F5F5', 'Button GND');
 
     codeDeclarations.push(`const int BTN_PIN = ${dPin.pinNum};`);
     codeSetups.push(`  pinMode(BTN_PIN, INPUT_PULLUP);`);
@@ -1639,7 +1639,7 @@ export function synthesizeDynamicCircuit(
       confidenceScore: 0.98
     });
     addWire('buzzer_piezo', 'pos', mcuId, dPin.id, 'NET_SIG_BUZZER', '#ec4899', `Buzzer -> ${dPin.label}`);
-    addWire('buzzer_piezo', 'neg', mcuId, mcuGndPin, 'NET_GND', '#10b981', 'Buzzer GND');
+    addWire('buzzer_piezo', 'neg', mcuId, mcuGndPin, 'NET_GND', '#F5F5F5', 'Buzzer GND');
 
     codeDeclarations.push(`const int BUZZER_PIN = ${dPin.pinNum};`);
     codeSetups.push(`  pinMode(BUZZER_PIN, OUTPUT);`);
@@ -1670,8 +1670,8 @@ export function synthesizeDynamicCircuit(
       confidenceScore: 0.98
     });
     addWire('relay_module', 'vcc', mcuId, mcuPowerPin, 'NET_POWER', '#ef4444', 'Relay VCC');
-    addWire('relay_module', 'gnd', mcuId, mcuGndPin, 'NET_GND', '#10b981', 'Relay GND');
-    addWire('relay_module', 'in', mcuId, dPin.id, 'NET_SIG_RELAY', '#3b82f6', `Relay -> ${dPin.label}`);
+    addWire('relay_module', 'gnd', mcuId, mcuGndPin, 'NET_GND', '#F5F5F5', 'Relay GND');
+    addWire('relay_module', 'in', mcuId, dPin.id, 'NET_SIG_RELAY', '#B4B4B4', `Relay -> ${dPin.label}`);
 
     codeDeclarations.push(`const int RELAY_PIN = ${dPin.pinNum};`);
     codeSetups.push(`  pinMode(RELAY_PIN, OUTPUT); digitalWrite(RELAY_PIN, HIGH); // Relay off (Active low)`);
@@ -1701,8 +1701,8 @@ export function synthesizeDynamicCircuit(
       confidenceScore: 0.99
     });
     addWire('servo_sg90', 'vcc', mcuId, mcuPowerPin, 'NET_POWER', '#ef4444', 'Servo VCC');
-    addWire('servo_sg90', 'gnd', mcuId, mcuGndPin, 'NET_GND', '#10b981', 'Servo GND');
-    addWire('servo_sg90', 'sig', mcuId, dPin.id, 'NET_SIG_SERVO', '#f97316', `Servo -> ${dPin.label}`);
+    addWire('servo_sg90', 'gnd', mcuId, mcuGndPin, 'NET_GND', '#F5F5F5', 'Servo GND');
+    addWire('servo_sg90', 'sig', mcuId, dPin.id, 'NET_SIG_SERVO', '#CCCCCC', `Servo -> ${dPin.label}`);
 
     codeDeclarations.push(`#include <Servo.h>\nServo actuationServo;\nconst int SERVO_PIN = ${dPin.pinNum};`);
     codeSetups.push(`  actuationServo.attach(SERVO_PIN); actuationServo.write(90);`);
@@ -1757,7 +1757,7 @@ export function synthesizeDynamicCircuit(
     // Wire Resistor pin 2 -> LED anode
     addWire(resId, 'p2', ledId, 'anode', `NET_${ledId.toUpperCase()}_ANODE`, colorHex, `Resistor -> LED`);
     // Wire LED cathode -> GND
-    addWire(ledId, 'cathode', mcuId, mcuGndPin, 'NET_GND', '#10b981', `${label} LED GND`);
+    addWire(ledId, 'cathode', mcuId, mcuGndPin, 'NET_GND', '#F5F5F5', `${label} LED GND`);
 
     codeDeclarations.push(`const int ${ledId.toUpperCase()}_PIN = ${dPin.pinNum};`);
     codeSetups.push(`  pinMode(${ledId.toUpperCase()}_PIN, OUTPUT);`);
@@ -1773,10 +1773,10 @@ export function synthesizeDynamicCircuit(
     addLedWithResistor('LED-RED', 'led_red', 'res_red', '#ef4444', 'Red');
   }
   if (hasGreenLED) {
-    addLedWithResistor('LED-GREEN', 'led_green', 'res_green', '#10b981', 'Green');
+    addLedWithResistor('LED-GREEN', 'led_green', 'res_green', '#F5F5F5', 'Green');
   }
   if (hasBlueLED) {
-    addLedWithResistor('LED-BLUE', 'led_blue', 'res_blue', '#3b82f6', 'Blue');
+    addLedWithResistor('LED-BLUE', 'led_blue', 'res_blue', '#B4B4B4', 'Blue');
   }
   if (hasYellowLED) {
     addLedWithResistor('LED-YELLOW', 'led_yellow', 'res_yellow', '#f59e0b', 'Yellow');

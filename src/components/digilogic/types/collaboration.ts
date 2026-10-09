@@ -9,7 +9,7 @@ export interface CollaboratorUser {
   id: string;
   name: string;
   initial: string; // First letter of name (e.g. "V", "E", "S")
-  color: string;   // Sovereign user accent color (e.g. "#76B4C2", "#A58D66", "#DFCCA8")
+  color: string;   // Sovereign user accent color (e.g. "#B4B4B4", "#FFFFFF", "#E8E8E8")
   avatarBg: string;
   isHost: boolean;
   joinedAt: number;

@@ -400,7 +400,7 @@ export const KittAiStudio: React.FC<KittAiStudioProps> = ({ initialCanvasView })
   };
 
   return (
-    <div className="w-screen h-screen bg-[#080f14] text-[#E5E1DD] flex overflow-hidden font-sans select-none">
+    <div className="kds-root w-screen h-screen flex overflow-hidden select-none">
       {/* 1. IF IN EDITOR MODE: RENDER FULL-SCREEN IDE WORKSPACE */}
       {currentView === 'editor' ? (
         <EditorView
@@ -430,6 +430,7 @@ export const KittAiStudio: React.FC<KittAiStudioProps> = ({ initialCanvasView })
           <Sidebar
             currentView={currentView}
             onNavigate={setCurrentView}
+            onNewProject={() => setShowNewProjectModal(true)}
             projectCount={projects.length}
             exampleCount={KITT_EXAMPLE_TEMPLATES.length}
             trashCount={trashedProjects.length}
@@ -437,14 +438,14 @@ export const KittAiStudio: React.FC<KittAiStudioProps> = ({ initialCanvasView })
           />
 
           {/* Main Area: TopBar + Active View */}
-          <div className="flex-1 flex flex-col overflow-hidden bg-[#080f14]">
+          <div className="flex-1 flex flex-col overflow-hidden bg-black min-w-0">
             <TopBar
               onOpenCommandPalette={() => setShowCommandPalette(true)}
               onOpenUpgradeModal={() => setShowUpgradeModal(true)}
               onNavigate={setCurrentView}
             />
 
-            <main className="flex-1 flex overflow-hidden bg-[#080f14]">
+            <main className="flex-1 flex overflow-hidden bg-black">
               {currentView === 'home' && (
                 <HomeDashboard
                   projects={projects}

@@ -71,7 +71,7 @@ export function createPhotorealisticLabEnvironment(): THREE.CanvasTexture {
     const tr = 40 + Math.abs(Math.sin(i * 2.2)) * 45;
     ctx.beginPath();
     ctx.arc(tx, ty, tr, 0, Math.PI * 2);
-    ctx.fillStyle = i % 2 === 0 ? '#15803d' : '#16a34a';
+    ctx.fillStyle = i % 2 === 0 ? '#15803d' : '#E8E8E8';
     ctx.fill();
   }
 
@@ -137,9 +137,9 @@ export function createPhotorealisticLabEnvironment(): THREE.CanvasTexture {
   // Monitor 1: Code IDE
   ctx.fillStyle = '#181825';
   ctx.fillRect(deskX + 6, deskY - 114, 188, 103);
-  ctx.fillStyle = '#38bdf8';
+  ctx.fillStyle = '#B4B4B4';
   ctx.fillRect(deskX + 20, deskY - 100, 90, 5);
-  ctx.fillStyle = '#c084fc';
+  ctx.fillStyle = '#CCCCCC';
   ctx.fillRect(deskX + 20, deskY - 90, 120, 5);
   ctx.fillStyle = '#4ade80';
   ctx.fillRect(deskX + 20, deskY - 80, 75, 5);
@@ -151,7 +151,7 @@ export function createPhotorealisticLabEnvironment(): THREE.CanvasTexture {
   ctx.fillStyle = '#022c22';
   ctx.fillRect(deskX + 225, deskY - 110, 160, 100);
 
-  ctx.strokeStyle = '#10b981';
+  ctx.strokeStyle = '#F5F5F5';
   ctx.lineWidth = 2.5;
   ctx.beginPath();
   for (let s = 0; s < 145; s += 4) {
@@ -164,13 +164,13 @@ export function createPhotorealisticLabEnvironment(): THREE.CanvasTexture {
   // Desktop PC Case with Glass Side Panel and RGB Cooling Fan
   ctx.fillStyle = '#18181b';
   ctx.fillRect(deskX + 410, deskY - 130, 80, 140);
-  ctx.fillStyle = 'rgba(30, 41, 59, 0.75)';
+  ctx.fillStyle = 'rgba(30, 30, 31, 0.75)';
   ctx.fillRect(deskX + 415, deskY - 124, 70, 126);
 
   // Glowing Cyan/Magenta RGB Ring
   const rgbGrad = ctx.createRadialGradient(deskX + 450, deskY - 65, 4, deskX + 450, deskY - 65, 26);
-  rgbGrad.addColorStop(0, '#06b6d4');
-  rgbGrad.addColorStop(0.5, '#a855f7');
+  rgbGrad.addColorStop(0, '#8F8F8F');
+  rgbGrad.addColorStop(0.5, '#CCCCCC');
   rgbGrad.addColorStop(1, 'transparent');
   ctx.fillStyle = rgbGrad;
   ctx.beginPath();
@@ -188,7 +188,7 @@ export function createPhotorealisticLabEnvironment(): THREE.CanvasTexture {
     ctx.fillRect(shelfX, shelfY + s * 88, 260, 12);
     // Drawers / Component boxes
     for (let b = 0; b < 4; b++) {
-      ctx.fillStyle = b % 2 === 0 ? '#38bdf8' : '#e2e8f0';
+      ctx.fillStyle = b % 2 === 0 ? '#B4B4B4' : '#e2e8f0';
       ctx.fillRect(shelfX + 16 + b * 58, shelfY + s * 88 - 36, 48, 34);
       ctx.fillStyle = '#0f172a';
       ctx.fillRect(shelfX + 32 + b * 58, shelfY + s * 88 - 22, 16, 7);

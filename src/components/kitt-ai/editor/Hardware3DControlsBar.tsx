@@ -26,51 +26,51 @@ export const Hardware3DControlsBar: React.FC<Hardware3DControlsBarProps> = ({
   return (
     <div className="flex flex-col items-center gap-1.5 select-none pointer-events-auto">
       {/* Floating Pill Buttons */}
-      <div className="flex items-center gap-1 bg-[#0c161d]/90 border border-[#A58D66]/35 p-1 rounded-xl shadow-2xl backdrop-blur-md">
+      <div className="flex items-center gap-1 bg-[#141415]/90 border border-[#353536] p-1 rounded-[12px] backdrop-blur-md">
         {/* Fit */}
         <button
           onClick={onFit}
-          className="px-2.5 py-1.5 rounded-lg text-xs font-mono text-slate-300 hover:text-white hover:bg-white/10 flex items-center gap-1.5 transition-colors cursor-pointer"
+          className="px-2.5 py-1.5 rounded-[12px] text-xs font-mono text-slate-300 hover:text-white hover:bg-white/10 flex items-center gap-1.5 transition-colors cursor-pointer"
           title="Fit Board in View"
         >
-          <Maximize2 className="w-3.5 h-3.5 text-[#A58D66]" />
+          <Maximize2 className="w-3.5 h-3.5 text-[#FFFFFF]" />
           <span>Fit</span>
         </button>
 
         {/* Top view */}
         <button
           onClick={onTopView}
-          className="px-2.5 py-1.5 rounded-lg text-xs font-mono text-slate-300 hover:text-white hover:bg-white/10 flex items-center gap-1.5 transition-colors cursor-pointer"
+          className="px-2.5 py-1.5 rounded-[12px] text-xs font-mono text-slate-300 hover:text-white hover:bg-white/10 flex items-center gap-1.5 transition-colors cursor-pointer"
           title="Orthogonal Top-down Camera View"
         >
-          <Square className="w-3.5 h-3.5 text-[#407E8C]" />
+          <Square className="w-3.5 h-3.5 text-[#8F8F8F]" />
           <span>Top view</span>
         </button>
 
         {/* 3D view */}
         <button
           onClick={onPerspectiveView}
-          className="px-2.5 py-1.5 rounded-lg text-xs font-mono text-slate-300 hover:text-white hover:bg-white/10 flex items-center gap-1.5 transition-colors cursor-pointer"
+          className="px-2.5 py-1.5 rounded-[12px] text-xs font-mono text-slate-300 hover:text-white hover:bg-white/10 flex items-center gap-1.5 transition-colors cursor-pointer"
           title="3D Perspective Camera View"
         >
-          <Box className="w-3.5 h-3.5 text-[#DFCCA8]" />
+          <Box className="w-3.5 h-3.5 text-[#E8E8E8]" />
           <span>3D view</span>
         </button>
 
         {/* Focus */}
         <button
           onClick={onFocus}
-          className="px-2.5 py-1.5 rounded-lg text-xs font-mono text-slate-300 hover:text-white hover:bg-white/10 flex items-center gap-1.5 transition-colors cursor-pointer"
+          className="px-2.5 py-1.5 rounded-[12px] text-xs font-mono text-slate-300 hover:text-white hover:bg-white/10 flex items-center gap-1.5 transition-colors cursor-pointer"
           title="Focus on Active Part"
         >
-          <Crosshair className="w-3.5 h-3.5 text-emerald-400" />
+          <Crosshair className="w-3.5 h-3.5 text-zinc-400" />
           <span>Focus</span>
         </button>
 
         {/* Reset view */}
         <button
           onClick={onResetView}
-          className="px-2.5 py-1.5 rounded-lg text-xs font-mono text-slate-300 hover:text-white hover:bg-white/10 flex items-center gap-1.5 transition-colors cursor-pointer"
+          className="px-2.5 py-1.5 rounded-[12px] text-xs font-mono text-slate-300 hover:text-white hover:bg-white/10 flex items-center gap-1.5 transition-colors cursor-pointer"
           title="Reset Camera View"
         >
           <RotateCcw className="w-3.5 h-3.5 text-slate-400" />

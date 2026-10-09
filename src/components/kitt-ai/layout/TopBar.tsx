@@ -1,16 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { 
-  Search, 
-  Bell, 
-  ChevronDown, 
-  CheckCircle2, 
-  Sparkles, 
-  Zap, 
-  Layers, 
-  LogOut, 
-  Settings, 
-  ExternalLink,
-  ShieldCheck
+import {
+  Search,
+  Bell,
+  ChevronDown,
+  Sparkles,
+  LogOut,
+  Settings,
+  ExternalLink
 } from 'lucide-react';
 import { KittStudioView } from './Sidebar';
 
@@ -33,7 +29,6 @@ export const TopBar: React.FC<TopBarProps> = ({
   const notifRef = useRef<HTMLDivElement>(null);
   const userRef = useRef<HTMLDivElement>(null);
 
-  // Close menus on outside click
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (planRef.current && !planRef.current.contains(e.target as Node)) setShowPlanMenu(false);
@@ -47,85 +42,71 @@ export const TopBar: React.FC<TopBarProps> = ({
   const notifications = [
     {
       id: 'n1',
-      title: 'KiCad Footprint Library Synced',
-      desc: 'Loaded 45,000+ verified IPC-7351 surface-mount & through-hole components.',
-      time: '12m ago',
-      icon: ShieldCheck,
-      unread: true
+      title: 'Component library synced',
+      desc: 'Loaded 45,000+ verified IPC-7351 surface-mount and through-hole components.',
+      time: '12m ago'
     },
     {
       id: 'n2',
-      title: 'SPICE Mixed-Signal Solver Calibrated',
-      desc: 'Deterministic matrix solver configured for 100ns transient timebase.',
-      time: '1h ago',
-      icon: Zap,
-      unread: false
+      title: 'Simulation solver calibrated',
+      desc: 'Deterministic matrix solver configured for a 100ns transient timebase.',
+      time: '1h ago'
     }
   ];
 
   return (
-    <header className="h-14 px-6 border-b border-[#A58D66]/20 bg-[#080f14]/80 backdrop-blur-md flex items-center justify-between shrink-0 font-sans z-10">
-      {/* Left: Quick Search / Command Palette Trigger */}
-      <div className="flex items-center gap-3">
-        <button
-          onClick={onOpenCommandPalette}
-          className="flex items-center gap-3 px-3.5 py-1.5 rounded-lg bg-[#0c161d] hover:bg-[#121c22] border border-[#A58D66]/25 hover:border-[#A58D66]/50 text-slate-400 hover:text-[#E5E1DD] transition-all cursor-pointer shadow-inner w-64 md:w-80 group text-left"
-        >
-          <Search className="w-3.5 h-3.5 text-slate-400 group-hover:text-[#A58D66] transition-colors" />
-          <span className="text-xs font-mono truncate flex-1">Search circuits, templates, docs...</span>
-          <kbd className="hidden sm:inline-flex items-center gap-0.5 text-[10px] font-mono px-1.5 py-0.5 rounded bg-white/10 text-slate-400 border border-white/5">
-            ⌘K
-          </kbd>
-        </button>
-      </div>
+    <header className="h-14 px-6 border-b border-[#353536] bg-black flex items-center justify-between shrink-0 z-10">
+      {/* Command palette trigger */}
+      <button
+        onClick={onOpenCommandPalette}
+        className="flex items-center gap-3 px-4 min-h-[36px] rounded-full border border-[#353536] hover:border-[#8F8F8F] bg-transparent hover:bg-white/[0.06] text-[#9E9E9E] hover:text-[#F5F5F5] transition-colors cursor-pointer w-64 md:w-80 text-left kds-focusable"
+      >
+        <Search className="w-4 h-4 shrink-0" />
+        <span className="kds-body-sm truncate flex-1">Search projects, templates, docs</span>
+        <kbd className="hidden sm:inline-flex items-center kds-caption border border-[#353536] rounded-[10px] px-1.5 py-0.5">
+          ⌘K
+        </kbd>
+      </button>
 
-      {/* Right: Synced Status, Plan, Notifications, User Avatar */}
-      <div className="flex items-center gap-3">
-        {/* Synced Status Badge */}
-        <div className="hidden sm:flex items-center gap-2 px-2.5 py-1 rounded-full bg-[#10b981]/10 border border-[#10b981]/25 text-[11px] font-mono text-[#10b981]">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse" />
-          <span>Synced</span>
+      <div className="flex items-center gap-2">
+        {/* Sync status */}
+        <div className="hidden sm:flex items-center gap-2 px-3 py-1 rounded-full border border-[#353536]">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#F5F5F5]" />
+          <span className="kds-caption text-[#F5F5F5]">Synced</span>
         </div>
 
-        {/* Current Plan Badge Dropdown (matching Antika's Student / Credits button) */}
+        {/* Plan */}
         <div className="relative" ref={planRef}>
           <button
             onClick={() => setShowPlanMenu(m => !m)}
-            className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-[#0c161d] hover:bg-[#121c22] border border-[#A58D66]/30 text-xs font-mono text-[#E5E1DD] transition-colors cursor-pointer"
+            aria-expanded={showPlanMenu}
+            className="flex items-center gap-2 px-3 min-h-[36px] rounded-full border border-[#353536] hover:border-[#8F8F8F] kds-body-sm text-[#F5F5F5] transition-colors cursor-pointer kds-focusable"
           >
-            <div className="flex items-center gap-1.5">
-              <span className="font-semibold text-[#DFCCA8]">Student</span>
-              <span className="text-slate-500">•</span>
-              <span className="text-slate-400">8 credits left</span>
-            </div>
-            <ChevronDown className={`w-3.5 h-3.5 text-slate-400 transition-transform ${showPlanMenu ? 'rotate-180' : ''}`} />
+            <span>Student</span>
+            <span className="kds-caption">8 credits left</span>
+            <ChevronDown className={`w-4 h-4 text-[#9E9E9E] transition-transform ${showPlanMenu ? 'rotate-180' : ''}`} />
           </button>
 
-          {/* Plan Popover */}
           {showPlanMenu && (
-            <div className="absolute top-full mt-2 right-0 w-72 rounded-xl bg-[#0c161d] border border-[#A58D66]/35 shadow-2xl p-4 z-50 animate-in fade-in zoom-in-95 duration-100 font-sans">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-xs font-mono uppercase text-slate-400 font-bold">Current Plan</span>
-                <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-[#A58D66]/20 text-[#DFCCA8] border border-[#A58D66]/30">
-                  STUDENT
-                </span>
+            <div className="absolute top-full mt-2 right-0 w-72 kds-popover p-4 z-50">
+              <div className="flex items-center justify-between mb-3">
+                <span className="kds-caption uppercase tracking-wide">Current plan</span>
+                <span className="kds-badge text-[#F5F5F5]">STUDENT</span>
               </div>
 
-              {/* Credits Usage Bar */}
               <div className="mb-4">
-                <div className="flex justify-between text-xs font-mono mb-1">
-                  <span className="text-slate-400">Daily AI Credits</span>
-                  <span className="text-[#E5E1DD] font-bold">8 / 10 remaining</span>
+                <div className="flex justify-between kds-caption mb-2">
+                  <span>Daily AI credits</span>
+                  <span className="text-[#F5F5F5]">8 / 10 remaining</span>
                 </div>
-                <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
-                  <div className="w-4/5 h-full bg-gradient-to-r from-[#A58D66] to-[#407E8C] rounded-full" />
+                <div className="w-full h-1 bg-[#353536] overflow-hidden">
+                  <div className="w-4/5 h-full bg-[#F5F5F5]" />
                 </div>
               </div>
 
-              {/* Projects Usage */}
-              <div className="flex justify-between items-center text-xs font-mono text-slate-400 py-2 border-t border-white/5 mb-3">
-                <span>Active Cloud Projects</span>
-                <span className="text-[#E5E1DD]">3 / 5 max</span>
+              <div className="flex justify-between items-center kds-caption py-3 border-t border-[#353536] mb-3">
+                <span>Active cloud projects</span>
+                <span className="text-[#F5F5F5]">3 / 5 max</span>
               </div>
 
               <button
@@ -133,73 +114,66 @@ export const TopBar: React.FC<TopBarProps> = ({
                   setShowPlanMenu(false);
                   onOpenUpgradeModal();
                 }}
-                className="w-full py-2 px-3 rounded-lg bg-gradient-to-r from-[#A58D66] to-[#8C7654] hover:from-[#bfa378] hover:to-[#A58D66] text-[#080f14] font-mono font-bold text-xs flex items-center justify-center gap-1.5 shadow-[0_0_12px_rgba(165,141,102,0.25)] transition-all cursor-pointer"
+                className="kds-btn kds-btn-primary w-full kds-focusable"
               >
-                <Zap className="w-3.5 h-3.5" />
-                <span>Upgrade to Pro Plan</span>
+                Upgrade to Pro
               </button>
             </div>
           )}
         </div>
 
-        {/* Notifications Button */}
+        {/* Notifications */}
         <div className="relative" ref={notifRef}>
           <button
             onClick={() => setShowNotifications(n => !n)}
-            className="p-2 rounded-lg bg-[#0c161d] hover:bg-[#121c22] border border-[#A58D66]/20 text-slate-300 hover:text-white transition-colors relative cursor-pointer"
+            aria-expanded={showNotifications}
+            className="relative p-2.5 rounded-full border border-[#353536] hover:border-[#8F8F8F] text-[#9E9E9E] hover:text-[#F5F5F5] transition-colors cursor-pointer kds-focusable"
             title="Notifications"
           >
             <Bell className="w-4 h-4" />
-            <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-[#A58D66]" />
+            <span className="absolute top-2 right-2.5 w-1.5 h-1.5 rounded-full bg-[#F5F5F5]" />
           </button>
 
           {showNotifications && (
-            <div className="absolute top-full mt-2 right-0 w-80 rounded-xl bg-[#0c161d] border border-[#A58D66]/35 shadow-2xl p-3 z-50 animate-in fade-in zoom-in-95 duration-100">
-              <div className="flex items-center justify-between pb-2 border-b border-white/5 mb-2 px-1">
-                <span className="text-xs font-mono font-bold text-[#E5E1DD]">Notifications</span>
-                <span className="text-[10px] font-mono text-[#A58D66] cursor-pointer hover:underline">Mark all read</span>
+            <div className="absolute top-full mt-2 right-0 w-80 kds-popover p-3 z-50">
+              <div className="flex items-center justify-between pb-3 border-b border-[#353536] mb-2 px-1">
+                <span className="kds-heading-xs text-[#F5F5F5]">Notifications</span>
+                <span className="kds-caption">Mark all read</span>
               </div>
 
-              <div className="space-y-2">
-                {notifications.map(item => {
-                  const Icon = item.icon;
-                  return (
-                    <div key={item.id} className="p-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors flex items-start gap-2.5">
-                      <div className="p-1.5 rounded bg-[#A58D66]/20 text-[#A58D66] shrink-0 mt-0.5">
-                        <Icon className="w-3.5 h-3.5" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center justify-between">
-                          <span className="text-xs font-semibold text-[#E5E1DD] truncate">{item.title}</span>
-                          <span className="text-[10px] text-slate-500 font-mono shrink-0">{item.time}</span>
-                        </div>
-                        <p className="text-[11px] text-slate-400 mt-0.5 leading-snug line-clamp-2">{item.desc}</p>
-                      </div>
+              <div className="space-y-1">
+                {notifications.map(item => (
+                  <div key={item.id} className="p-3 rounded-[10px] hover:bg-white/[0.06] transition-colors">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="kds-body-sm text-[#F5F5F5] truncate">{item.title}</span>
+                      <span className="kds-caption shrink-0">{item.time}</span>
                     </div>
-                  );
-                })}
+                    <p className="kds-caption mt-1 leading-relaxed">{item.desc}</p>
+                  </div>
+                ))}
               </div>
             </div>
           )}
         </div>
 
-        {/* User Profile Avatar */}
+        {/* User */}
         <div className="relative" ref={userRef}>
           <button
             onClick={() => setShowUserMenu(u => !u)}
-            className="flex items-center gap-2 p-1 pl-1.5 rounded-lg bg-[#0c161d] hover:bg-[#121c22] border border-[#A58D66]/30 transition-colors cursor-pointer"
+            aria-expanded={showUserMenu}
+            className="flex items-center gap-2 p-1 rounded-full border border-[#353536] hover:border-[#8F8F8F] transition-colors cursor-pointer kds-focusable"
           >
-            <div className="w-7 h-7 rounded-md bg-gradient-to-tr from-[#A58D66] to-[#407E8C] flex items-center justify-center text-xs font-bold text-[#080f14] font-mono">
+            <span className="w-7 h-7 rounded-full bg-[#F5F5F5] text-[#0D0D0D] flex items-center justify-center text-xs font-semibold">
               OM
-            </div>
-            <ChevronDown className="w-3 h-3 text-slate-400 hidden sm:inline" />
+            </span>
+            <ChevronDown className="w-3.5 h-3.5 text-[#9E9E9E] hidden sm:inline mr-1" />
           </button>
 
           {showUserMenu && (
-            <div className="absolute top-full mt-2 right-0 w-52 rounded-xl bg-[#0c161d] border border-[#A58D66]/35 shadow-2xl p-2 z-50 animate-in fade-in zoom-in-95 duration-100 font-sans">
-              <div className="px-3 py-2 border-b border-white/5 mb-1">
-                <p className="text-xs font-bold text-[#E5E1DD]">OM PRAKASH</p>
-                <p className="text-[11px] text-slate-400 truncate">om@kitt-engineering.io</p>
+            <div className="absolute top-full mt-2 right-0 w-56 kds-popover p-2 z-50">
+              <div className="px-3 py-2 border-b border-[#353536] mb-1">
+                <p className="kds-body-sm text-[#F5F5F5]">OM PRAKASH</p>
+                <p className="kds-caption truncate">om@kitt-engineering.io</p>
               </div>
 
               <button
@@ -207,31 +181,34 @@ export const TopBar: React.FC<TopBarProps> = ({
                   setShowUserMenu(false);
                   onNavigate('settings');
                 }}
-                className="w-full flex items-center gap-2 px-3 py-1.5 rounded text-xs font-mono text-slate-300 hover:text-white hover:bg-white/5 transition-colors text-left cursor-pointer"
+                className="kds-nav-item kds-focusable"
               >
-                <Settings className="w-3.5 h-3.5 text-slate-400" />
-                <span>Workspace Settings</span>
+                <span className="flex items-center gap-2">
+                  <Settings className="w-4 h-4" />
+                  <span>Workspace settings</span>
+                </span>
               </button>
 
-              <a
-                href="#/"
-                className="w-full flex items-center gap-2 px-3 py-1.5 rounded text-xs font-mono text-slate-300 hover:text-white hover:bg-white/5 transition-colors text-left"
-              >
-                <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
-                <span>Ecosystem Landing</span>
+              <a href="#/" className="kds-nav-item kds-focusable">
+                <span className="flex items-center gap-2">
+                  <ExternalLink className="w-4 h-4" />
+                  <span>Ecosystem landing</span>
+                </span>
               </a>
 
-              <div className="border-t border-white/5 my-1" />
+              <div className="border-t border-[#353536] my-1" />
 
               <button
                 onClick={() => {
                   setShowUserMenu(false);
                   window.location.hash = '#/';
                 }}
-                className="w-full flex items-center gap-2 px-3 py-1.5 rounded text-xs font-mono text-rose-400 hover:bg-rose-500/10 transition-colors text-left cursor-pointer"
+                className="kds-nav-item kds-focusable"
               >
-                <LogOut className="w-3.5 h-3.5" />
-                <span>Sign Out</span>
+                <span className="flex items-center gap-2">
+                  <LogOut className="w-4 h-4" />
+                  <span>Sign out</span>
+                </span>
               </button>
             </div>
           )}

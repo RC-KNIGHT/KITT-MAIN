@@ -109,7 +109,7 @@ export const LogicGateBackground: React.FC = () => {
           state: g.out,
           pulsePos: (i * 0.17) % 1,
           pulseSpeed: 0.002 + ((i % 5) * 0.0008),
-          pulseColor: g.out ? '#DFCCA8' : '#407E8C',
+          pulseColor: g.out ? '#E8E8E8' : '#8F8F8F',
         });
       }
     };
@@ -149,8 +149,8 @@ export const LogicGateBackground: React.FC = () => {
       ctx.translate(g.x, g.y);
 
       // Gate body fill & stroke
-      ctx.fillStyle = g.out ? 'rgba(165, 141, 102, 0.2)' : 'rgba(13, 23, 31, 0.6)';
-      ctx.strokeStyle = g.out ? '#A58D66' : '#1d2c38';
+      ctx.fillStyle = g.out ? 'rgba(255, 255, 255, 0.2)' : 'rgba(29, 29, 30, 0.6)';
+      ctx.strokeStyle = g.out ? '#FFFFFF' : '#29292A';
       ctx.lineWidth = 1.5;
 
       const w = g.width;
@@ -206,7 +206,7 @@ export const LogicGateBackground: React.FC = () => {
       ctx.stroke();
 
       // Gate Text Label
-      ctx.fillStyle = g.out ? '#DFCCA8' : 'rgba(229, 225, 221, 0.6)';
+      ctx.fillStyle = g.out ? '#E8E8E8' : 'rgba(245, 245, 245, 0.6)';
       ctx.font = 'bold 9px monospace';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
@@ -215,7 +215,7 @@ export const LogicGateBackground: React.FC = () => {
       // Output pin LED
       ctx.beginPath();
       ctx.arc(w / 2, 0, 2.5, 0, Math.PI * 2);
-      ctx.fillStyle = g.out ? '#DFCCA8' : '#1d2c38';
+      ctx.fillStyle = g.out ? '#E8E8E8' : '#29292A';
       ctx.fill();
 
       ctx.restore();
@@ -226,12 +226,12 @@ export const LogicGateBackground: React.FC = () => {
       lastTick = now;
 
       // Dark background
-      ctx.fillStyle = '#080f14';
+      ctx.fillStyle = '#000000';
       ctx.fillRect(0, 0, width, height);
 
       // Ambient Circuit Grid Dots
       const gridSize = 32;
-      ctx.fillStyle = 'rgba(165, 141, 102, 0.15)';
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.15)';
       for (let x = 0; x < width; x += gridSize) {
         for (let y = 0; y < height; y += gridSize) {
           ctx.fillRect(x, y, 1.5, 1.5);
@@ -250,7 +250,7 @@ export const LogicGateBackground: React.FC = () => {
         for (let p = 1; p < pts.length; p++) {
           ctx.lineTo(pts[p].x, pts[p].y);
         }
-        ctx.strokeStyle = wire.state ? 'rgba(165, 141, 102, 0.4)' : 'rgba(29, 44, 56, 0.4)';
+        ctx.strokeStyle = wire.state ? 'rgba(255, 255, 255, 0.4)' : 'rgba(41, 41, 42, 0.4)';
         ctx.lineWidth = 1.5;
         ctx.stroke();
 
@@ -273,7 +273,7 @@ export const LogicGateBackground: React.FC = () => {
           // Spark glow
           const grad = ctx.createRadialGradient(pulseX, pulseY, 0, pulseX, pulseY, 8);
           grad.addColorStop(0, wire.pulseColor);
-          grad.addColorStop(1, 'rgba(165, 141, 102, 0)');
+          grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
           ctx.fillStyle = grad;
           ctx.beginPath();
           ctx.arc(pulseX, pulseY, 8, 0, Math.PI * 2);
@@ -287,7 +287,7 @@ export const LogicGateBackground: React.FC = () => {
 
           // Subtle Binary digit (0 / 1) floating alongside pulse
           if (i % 3 === 0) {
-            ctx.fillStyle = wire.state ? 'rgba(223, 204, 168, 0.8)' : 'rgba(118, 180, 194, 0.5)';
+            ctx.fillStyle = wire.state ? 'rgba(232, 232, 232, 0.8)' : 'rgba(180, 180, 180, 0.5)';
             ctx.font = '8px monospace';
             ctx.fillText(wire.state ? '1' : '0', pulseX + 6, pulseY - 4);
           }
@@ -304,9 +304,9 @@ export const LogicGateBackground: React.FC = () => {
       const my = mousePosRef.current.y;
       if (mx > 0 && my > 0) {
         const mouseGrad = ctx.createRadialGradient(mx, my, 0, mx, my, 180);
-        mouseGrad.addColorStop(0, 'rgba(165, 141, 102, 0.12)');
-        mouseGrad.addColorStop(0.5, 'rgba(64, 126, 140, 0.04)');
-        mouseGrad.addColorStop(1, 'rgba(8, 15, 20, 0)');
+        mouseGrad.addColorStop(0, 'rgba(255, 255, 255, 0.12)');
+        mouseGrad.addColorStop(0.5, 'rgba(143, 143, 143, 0.04)');
+        mouseGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
         ctx.fillStyle = mouseGrad;
         ctx.fillRect(0, 0, width, height);
       }
