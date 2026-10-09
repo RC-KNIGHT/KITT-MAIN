@@ -71,6 +71,18 @@ export const SignatureHeroK: React.FC<SignatureHeroKProps> = ({ className = '' }
     let width = (canvas.width = window.innerWidth * dpr);
     let height = (canvas.height = window.innerHeight * dpr);
 
+    // Reduced-motion users get a frozen field that only follows direct input.
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let renderFn: ((t: number) => void) | null = null;
+
+    // Arms one animation frame; render() re-arms itself while there is motion
+    // to show. Under reduced motion the loop idles and is poked by input.
+    const schedule = () => {
+      if (!animationFrameRef.current && renderFn && !document.hidden) {
+        animationFrameRef.current = requestAnimationFrame(renderFn);
+      }
+    };
+
     const updateDimensions = () => {
       if (!canvas) return;
       width = canvas.width = window.innerWidth * dpr;
@@ -88,6 +100,7 @@ export const SignatureHeroK: React.FC<SignatureHeroKProps> = ({ className = '' }
       const ny = (e.clientY / window.innerHeight) * 2 - 1;
       mouseRef.current.targetX = nx * 0.40;
       mouseRef.current.targetY = ny * 0.30;
+      if (reducedMotion) schedule();
     };
 
     // Smooth mobile touch parallax listener
@@ -98,12 +111,26 @@ export const SignatureHeroK: React.FC<SignatureHeroKProps> = ({ className = '' }
         const ny = (touch.clientY / window.innerHeight) * 2 - 1;
         mouseRef.current.targetX = nx * 0.35;
         mouseRef.current.targetY = ny * 0.25;
+        if (reducedMotion) schedule();
       }
     };
 
-    // Smooth scroll progress tracker
-    const handleScroll = () => {
-      const docHeight = Math.max(
+    // ---- Cached layout metrics -------------------------------------------------
+    // The render loop must never force layout. The hero-word center and the
+    // document height are measured in DOCUMENT coordinates and only refreshed
+    // on resize, font load, or at most every 800ms while scrolling.
+    let docHeight = 1;
+    let heroWordDocX = -1;
+    let heroWordDocY = -1;
+    let lastMetricsAt = 0;
+    let disposed = false;
+
+    const refreshMetrics = (force = false) => {
+      const now = performance.now();
+      if (!force && now - lastMetricsAt < 800) return;
+      lastMetricsAt = now;
+
+      docHeight = Math.max(
         document.body.scrollHeight,
         document.documentElement.scrollHeight,
         document.body.offsetHeight,
@@ -111,6 +138,22 @@ export const SignatureHeroK: React.FC<SignatureHeroKProps> = ({ className = '' }
         document.body.clientHeight,
         document.documentElement.clientHeight
       );
+
+      const el = document.getElementById('hero-inventions-word');
+      if (el) {
+        const rect = el.getBoundingClientRect();
+        if (rect.width > 0 && rect.height > 0) {
+          heroWordDocX = rect.left + rect.width * 0.5;
+          heroWordDocY = rect.top + rect.height * 0.5 + (window.scrollY || 0);
+        }
+      } else {
+        heroWordDocX = -1;
+      }
+    };
+
+    // Smooth scroll progress tracker — layout-free on the hot path.
+    const handleScroll = () => {
+      refreshMetrics();
       const winHeight = window.innerHeight;
       const maxScroll = Math.max(1, docHeight - winHeight);
       const currentScroll = window.scrollY || window.pageYOffset || 0;
@@ -118,12 +161,22 @@ export const SignatureHeroK: React.FC<SignatureHeroKProps> = ({ className = '' }
 
       scrollRef.current.scrollY = currentScroll;
       scrollRef.current.targetProgress = progress;
+      if (reducedMotion) schedule(); // idle loop: follow scroll on demand
     };
 
+    const handleResizeMetrics = () => refreshMetrics(true);
+
+    refreshMetrics(true);
     handleScroll();
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready
+        .then(() => { if (!disposed) refreshMetrics(true); })
+        .catch(() => {});
+    }
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
     window.addEventListener('touchmove', handleTouchMove, { passive: true });
     window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleResizeMetrics, { passive: true });
 
     // Balanced particle count: 680 on desktop, 420 on mobile
     // Clean, crisp, fully visible and bold without being an opaque blob
@@ -414,11 +467,28 @@ export const SignatureHeroK: React.FC<SignatureHeroKProps> = ({ className = '' }
     particlesRef.current = particles;
     startTimeRef.current = performance.now();
 
+    // Preallocated projection pool: the render loop mutates these objects
+    // instead of allocating ~680 fresh ones per frame (GC churn = jank).
+    const renderedList: {
+      p: Particle;
+      projX: number;
+      projY: number;
+      projZ: number;
+      projScale: number;
+      currentAlpha: number;
+    }[] = [];
+    for (let i = 0; i < particles.length; i++) {
+      renderedList.push({ p: particles[i], projX: 0, projY: 0, projZ: 0, projScale: 1, currentAlpha: 0 });
+    }
+
     const easeOutQuint = (x: number): number => 1 - Math.pow(1 - x, 5);
 
     // Main 60-120 FPS High-Performance Render Loop
     const render = (currentTimeMs: number) => {
+      animationFrameRef.current = 0;
       const elapsedSec = (currentTimeMs - startTimeRef.current) / 1000;
+      // Frozen clock for reduced motion: autonomous drift/twinkle/pulse off.
+      const animTime = reducedMotion ? 0 : elapsedSec;
       const ctx = canvas.getContext('2d');
       if (!ctx) return;
 
@@ -431,6 +501,13 @@ export const SignatureHeroK: React.FC<SignatureHeroKProps> = ({ className = '' }
       scrollObj.currentProgress += (scrollObj.targetProgress - scrollObj.currentProgress) * 0.08;
       const progress = scrollObj.currentProgress;
 
+      // Is anything still moving? Under reduced motion the loop only keeps
+      // running while the camera is settling after direct input.
+      const settling =
+        Math.abs(scrollObj.targetProgress - scrollObj.currentProgress) > 0.0005 ||
+        Math.abs(mouseRef.current.targetX - mouseRef.current.x) > 0.002 ||
+        Math.abs(mouseRef.current.targetY - mouseRef.current.y) > 0.002;
+
       // CONTINUOUS, BUTTER-SMOOTH MORPHING:
       // Morph ratio: smooth cosine curve from 0 (top of page, Logo) to 1 (bottom of page, Letter K)
       const morphRatio = 0.5 - 0.5 * Math.cos(progress * Math.PI);
@@ -441,18 +518,16 @@ export const SignatureHeroK: React.FC<SignatureHeroKProps> = ({ className = '' }
 
       ctx.clearRect(0, 0, width, height);
 
-      // Dynamic viewport center
-      const inventionsEl = document.getElementById('hero-inventions-word');
+      // Dynamic viewport center — derived from cached document-space metrics.
+      // (The old code called getBoundingClientRect() every single frame,
+      // forcing a synchronous layout pass 60+ times per second.)
       let topCenterX = width / 2;
       let topCenterY = height * 0.44;
 
-      if (inventionsEl) {
-        const rect = inventionsEl.getBoundingClientRect();
-        if (rect.width > 0 && rect.height > 0) {
-          topCenterX = (rect.left + rect.width * 0.5) * dpr;
-          const elCenterY = (rect.top + rect.height * 0.5) * dpr;
-          topCenterY = Math.max(height * 0.35, Math.min(height * 0.50, elCenterY));
-        }
+      if (heroWordDocX >= 0) {
+        topCenterX = heroWordDocX * dpr;
+        const elCenterY = (heroWordDocY - scrollObj.scrollY) * dpr;
+        topCenterY = Math.max(height * 0.35, Math.min(height * 0.50, elCenterY));
       }
 
       const bottomCenterX = width / 2;
@@ -476,17 +551,7 @@ export const SignatureHeroK: React.FC<SignatureHeroKProps> = ({ className = '' }
 
       const count = particles.length;
 
-      // Array to hold projected particles for depth-sorting and circuit line rendering
-      const renderedList: {
-        p: Particle;
-        projX: number;
-        projY: number;
-        projZ: number;
-        projScale: number;
-        currentAlpha: number;
-      }[] = [];
-
-      // Compute 3D projection for each particle
+      // Compute 3D projection for each particle into the preallocated pool
       for (let i = 0; i < count; i++) {
         const p = particles[i];
 
@@ -503,7 +568,7 @@ export const SignatureHeroK: React.FC<SignatureHeroKProps> = ({ className = '' }
         if (p.segment !== 'ambient') {
           const particleElapsed = Math.max(0, elapsedSec - p.activationDelay);
           const pRatio = Math.min(1.0, particleElapsed / p.duration);
-          const pEased = easeOutQuint(pRatio);
+          const pEased = reducedMotion ? 1 : easeOutQuint(pRatio);
 
           fx = p.startX + (targetX - p.startX) * pEased;
           fy = p.startY + (targetY - p.startY) * pEased;
@@ -511,9 +576,9 @@ export const SignatureHeroK: React.FC<SignatureHeroKProps> = ({ className = '' }
         }
 
         // Ambient cosmic drift reaching all corners of the screen
-        const driftX = Math.sin(elapsedSec * p.driftSpeed + p.driftPhase) * p.driftRadiusX;
-        const driftY = Math.cos(elapsedSec * p.driftSpeed * 0.85 + p.driftPhase) * p.driftRadiusY;
-        const driftZ = Math.sin(elapsedSec * p.driftSpeed * 0.5 + p.driftPhase) * 0.15;
+        const driftX = Math.sin(animTime * p.driftSpeed + p.driftPhase) * p.driftRadiusX;
+        const driftY = Math.cos(animTime * p.driftSpeed * 0.85 + p.driftPhase) * p.driftRadiusY;
+        const driftZ = Math.sin(animTime * p.driftSpeed * 0.5 + p.driftPhase) * 0.15;
 
         const dispersedX = p.scatterX + driftX;
         const dispersedY = p.scatterY + driftY;
@@ -525,7 +590,7 @@ export const SignatureHeroK: React.FC<SignatureHeroKProps> = ({ className = '' }
 
         // Living breathing micro-pulse when formed into Logo or K
         if (scatterAmount < 0.08) {
-          const breath = Math.sin(elapsedSec * 1.8 + p.pulsePhase) * 0.004;
+          const breath = Math.sin(animTime * 1.8 + p.pulsePhase) * 0.004;
           px += breath;
           py += breath * 0.5;
         }
@@ -547,14 +612,13 @@ export const SignatureHeroK: React.FC<SignatureHeroKProps> = ({ className = '' }
         const projY = cy + y2 * projScale;
         const currentAlpha = p.alpha * (0.75 + 0.25 * (1 - scatterAmount * 0.25));
 
-        renderedList.push({
-          p,
-          projX,
-          projY,
-          projZ: z2,
-          projScale,
-          currentAlpha
-        });
+        const item = renderedList[i];
+        item.p = p;
+        item.projX = projX;
+        item.projY = projY;
+        item.projZ = z2;
+        item.projScale = projScale;
+        item.currentAlpha = currentAlpha;
       }
 
       // Sort back-to-front for realistic depth
@@ -639,7 +703,7 @@ export const SignatureHeroK: React.FC<SignatureHeroKProps> = ({ className = '' }
         if (p.type === 'chip') {
           // Rotating SMD chip with silicon body and gold/platinum terminals
           ctx.translate(px, py);
-          ctx.rotate(p.rotation + elapsedSec * p.rotationSpeed);
+          ctx.rotate(p.rotation + animTime * p.rotationSpeed);
           const w = (p.width || 4.8) * dpr;
           const h = (p.height || 2.2) * dpr;
 
@@ -670,7 +734,7 @@ export const SignatureHeroK: React.FC<SignatureHeroKProps> = ({ className = '' }
           ctx.fill();
         } else if (p.type === 'specular') {
           // Twinkling diamond specular glint
-          const glint = Math.sin(elapsedSec * 3.2 + p.pulsePhase);
+          const glint = Math.sin(animTime * 3.2 + p.pulsePhase);
           if (glint > 0.25) {
             ctx.beginPath();
             ctx.arc(px, py, pSize * 1.8, 0, Math.PI * 2);
@@ -710,14 +774,18 @@ export const SignatureHeroK: React.FC<SignatureHeroKProps> = ({ className = '' }
         ctx.restore();
       }
 
-      animationFrameRef.current = requestAnimationFrame(render);
+      if (!reducedMotion || settling) schedule();
     };
 
-    animationFrameRef.current = requestAnimationFrame(render);
+    renderFn = render;
+    schedule();
 
     return () => {
+      disposed = true;
       cancelAnimationFrame(animationFrameRef.current);
+      animationFrameRef.current = 0;
       window.removeEventListener('resize', updateDimensions);
+      window.removeEventListener('resize', handleResizeMetrics);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('scroll', handleScroll);

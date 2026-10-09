@@ -18,10 +18,13 @@ export const PremiumLogicGatesMatrix: React.FC<{ className?: string }> = ({ clas
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    let animId: number;
+    let animId = 0;
     let width = 0;
-    let height = 0;
+    let viewportH = 0;
+    let docH = 0;
+    let scrollY = 0;
     const dpr = Math.min(window.devicePixelRatio || 1, 1.15);
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     const mouse = {
       x: -1000,
@@ -31,10 +34,19 @@ export const PremiumLogicGatesMatrix: React.FC<{ className?: string }> = ({ clas
       radius: 180,
     };
 
+    // Arms a single animation frame. The bitmap is viewport-sized and follows
+    // the document with a compositor transform, so scrolling itself never
+    // requires a redraw — only window resizes and animated frames do.
+    const schedule = () => {
+      if (!animId && !document.hidden) {
+        animId = requestAnimationFrame(render);
+      }
+    };
+
+    // Viewport-relative device coords; no getBoundingClientRect on every event.
     const handleMouseMove = (e: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      mouse.targetX = (e.clientX - rect.left) * dpr;
-      mouse.targetY = (e.clientY - rect.top) * dpr;
+      mouse.targetX = e.clientX * dpr;
+      mouse.targetY = e.clientY * dpr;
     };
 
     const handleMouseLeave = () => {
@@ -46,15 +58,32 @@ export const PremiumLogicGatesMatrix: React.FC<{ className?: string }> = ({ clas
     window.addEventListener('mouseleave', handleMouseLeave, { passive: true });
 
     const resize = () => {
-      const rect = canvas.getBoundingClientRect();
-      width = rect.width * dpr;
-      height = rect.height * dpr;
+      width = window.innerWidth * dpr;
+      viewportH = window.innerHeight * dpr;
+      docH = Math.max(document.documentElement.scrollHeight, window.innerHeight);
       canvas.width = width;
-      canvas.height = height;
+      canvas.height = viewportH;
+      canvas.style.width = `${window.innerWidth}px`;
+      canvas.style.height = `${window.innerHeight}px`;
+      schedule();
     };
 
-    resize();
+    const handleScroll = () => {
+      scrollY = window.scrollY || 0;
+      canvas.style.transform = `translate3d(0, ${scrollY}px, 0)`;
+      // Under reduced motion the loop never runs, so redraw on demand.
+      if (reducedMotion) schedule();
+    };
+
     window.addEventListener('resize', resize, { passive: true });
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    // Document height changes (fonts, images, accordions) without a window
+    // resize; keep the cached value fresh without per-frame layout reads.
+    const docObserver = new ResizeObserver(() => {
+      docH = Math.max(document.documentElement.scrollHeight, window.innerHeight);
+    });
+    docObserver.observe(document.body);
 
     // ============================================================
     // 1. LOGIC GATES ARCHITECTURE (ANSI / IEEE Standard Symbols)
@@ -535,14 +564,32 @@ export const PremiumLogicGatesMatrix: React.FC<{ className?: string }> = ({ clas
       mouse.x += (mouse.targetX - mouse.x) * 0.1;
       mouse.y += (mouse.targetY - mouse.y) * 0.1;
 
-      ctx.clearRect(0, 0, width, height);
+      animId = 0;
 
-      // Traces
+      const docDeviceH = docH * dpr;
+      const scrollDevice = scrollY * dpr;
+
+      // Clear the viewport bitmap, then draw in document coordinates so the
+      // scene scrolls underneath the bitmap without any per-frame DOM reads.
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.clearRect(0, 0, width, viewportH);
+      ctx.setTransform(1, 0, 0, 1, 0, -scrollDevice);
+
+      // Traces (culled to the visible document window)
       traceDefs.forEach((pts) => {
+        let minY = Infinity;
+        let maxY = -Infinity;
+        for (let i = 0; i < pts.length; i++) {
+          const py = pts[i].y * docDeviceH;
+          if (py < minY) minY = py;
+          if (py > maxY) maxY = py;
+        }
+        if (maxY - scrollDevice < -80 || minY - scrollDevice > viewportH + 80) return;
+
         ctx.beginPath();
         for (let i = 0; i < pts.length; i++) {
           const px = pts[i].x * width;
-          const py = pts[i].y * height;
+          const py = pts[i].y * docDeviceH;
           if (i === 0) ctx.moveTo(px, py);
           else ctx.lineTo(px, py);
         }
@@ -566,7 +613,8 @@ export const PremiumLogicGatesMatrix: React.FC<{ className?: string }> = ({ clas
         const p1 = pts[segIdx];
         const p2 = pts[segIdx + 1];
         const x = (p1.x + (p2.x - p1.x) * segProgress) * width;
-        const y = (p1.y + (p2.y - p1.y) * segProgress) * height;
+        const y = (p1.y + (p2.y - p1.y) * segProgress) * docDeviceH;
+        if (y - scrollDevice < -20 || y - scrollDevice > viewportH + 20) return;
 
         ctx.save();
         ctx.beginPath();
@@ -584,21 +632,28 @@ export const PremiumLogicGatesMatrix: React.FC<{ className?: string }> = ({ clas
         ctx.restore();
       });
 
-      // Center ASIC
+      // Center ASIC (anchored ~46% down the document, culled to the viewport)
       if (width > 800) {
-        drawAsicPackage(width * 0.50, height * 0.46, timeSec);
+        const asicY = docDeviceH * 0.46;
+        if (asicY - scrollDevice > -160 * dpr && asicY - scrollDevice < viewportH + 160 * dpr) {
+          drawAsicPackage(width * 0.50, asicY, timeSec);
+        }
       }
 
-      // Logic Gates
+      // Logic Gates (positions live in document space; off-screen gates keep
+      // their pulse timers but are not drawn)
       gates.forEach((gate) => {
         const gx = gate.normX * width;
-        const gy = gate.normY * height;
+        const gy = gate.normY * docDeviceH;
+        const gyView = gy - scrollDevice;
 
         gate.pulseTimer += dt * 0.8;
         gate.activePulse = 0.4 + 0.6 * Math.sin(gate.pulseTimer * 3);
 
+        if (gyView < -120 || gyView > viewportH + 120) return;
+
         const dx = mouse.x - gx;
-        const dy = mouse.y - gy;
+        const dy = mouse.y - gyView;
         const dist = Math.sqrt(dx * dx + dy * dy);
         if (dist < mouse.radius * dpr) {
           const factor = 1 - dist / (mouse.radius * dpr);
@@ -640,27 +695,34 @@ export const PremiumLogicGatesMatrix: React.FC<{ className?: string }> = ({ clas
         ctx.restore();
       });
 
-      if (!document.hidden) {
-        animId = requestAnimationFrame(render);
-      }
+      if (!reducedMotion) schedule();
     };
 
-    animId = requestAnimationFrame(render);
+    // Static frame for reduced-motion users; animated loop otherwise.
+    resize();
+    handleScroll(); // sync transform when the page loads restored mid-scroll
+    if (reducedMotion) {
+      render(performance.now());
+    } else {
+      schedule();
+    }
 
     const handleVisibility = () => {
       if (!document.hidden) {
-        cancelAnimationFrame(animId);
-        animId = requestAnimationFrame(render);
+        schedule();
       }
     };
     document.addEventListener('visibilitychange', handleVisibility);
 
     return () => {
       cancelAnimationFrame(animId);
+      animId = 0;
       document.removeEventListener('visibilitychange', handleVisibility);
       window.removeEventListener('resize', resize);
+      window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseleave', handleMouseLeave);
+      docObserver.disconnect();
     };
   }, []);
 
