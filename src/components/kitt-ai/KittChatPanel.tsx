@@ -341,7 +341,7 @@ export const KittChatPanel: React.FC<KittChatPanelProps> = ({
           const isThinkingOpen = expandedThinkingIds.has(msg.id);
 
           return (
-            <div key={msg.id} className={`flex flex-col ${isKitt ? 'items-start' : 'items-end'}`}>
+            <div key={msg.id} className={`kds-enter flex flex-col ${isKitt ? 'items-start' : 'items-end'}`}>
               {/* Thinking trace */}
               {isKitt && msg.thinkingTrace && (
                 <div className="w-full mb-2">

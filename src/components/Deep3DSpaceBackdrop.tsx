@@ -6,10 +6,13 @@ import * as THREE from 'three';
  * 
  * Cinematic WebGL backdrop featuring:
  * 1. Volumetric electron particle field driven by GPU curl noise & physics drift
- * 2. Volumetric colored god-ray light shafts sweeping through the circuit atmosphere (Teal, Gold, Emerald)
- * 3. 3D copper PCB trace grid & photon pulse signals in perspective
+ * 2. Volumetric neutral god-ray light shafts sweeping through the atmosphere
+ * 3. 3D engineering trace grid & photon pulse signals in perspective
  * 4. Scroll-choreographed warp morphing scattered electron cloud into aligned circuit matrices
  * 5. Device pixel ratio clamped (<= 1.5) & full Three.js memory disposal on unmount
+ *
+ * Palette: monochrome (canvas #000000, neutrals #F5F5F5→#5D5D5D) — kept in
+ * sync with the design tokens in src/index.css.
  */
 export const Deep3DSpaceBackdrop: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -28,7 +31,7 @@ export const Deep3DSpaceBackdrop: React.FC = () => {
 
     // 1. Scene, Camera & Renderer setup with error protection
     const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x080f14, 0.015);
+    scene.fog = new THREE.FogExp2(0x000000, 0.015);
 
     const camera = new THREE.PerspectiveCamera(
       55,
@@ -52,7 +55,7 @@ export const Deep3DSpaceBackdrop: React.FC = () => {
 
     renderer.setPixelRatio(dpr);
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setClearColor(0x080f14, 1);
+    renderer.setClearColor(0x000000, 1);
 
     const handleContextLost = (e: Event) => {
       e.preventDefault();
@@ -91,11 +94,11 @@ export const Deep3DSpaceBackdrop: React.FC = () => {
     const phases = new Float32Array(particleCount);
 
     const colorPalette = [
-      new THREE.Color(0xA58D66), // Antique Gold
-      new THREE.Color(0x407E8C), // Oceanic Teal
-      new THREE.Color(0xDFCCA8), // Alabaster Sand
-      new THREE.Color(0x76B4C2), // Light Teal
-      new THREE.Color(0x10b981), // Emerald PCB
+      new THREE.Color(0xF5F5F5), // Platinum
+      new THREE.Color(0xE8E8E8), // Accent light
+      new THREE.Color(0x9E9E9E), // Muted neutral
+      new THREE.Color(0x8F8F8F), // Mid grey
+      new THREE.Color(0xFFFFFF), // White glint
     ];
 
     for (let i = 0; i < particleCount; i++) {
@@ -247,9 +250,9 @@ export const Deep3DSpaceBackdrop: React.FC = () => {
     };
 
     const rays = [
-      { mesh: new THREE.Mesh(rayGeo, createRayMat(0x407E8C, 0.20)), rotZ: 0.35, rotX: 0.2, posX: -18, speed: 0.4 },
-      { mesh: new THREE.Mesh(rayGeo, createRayMat(0xA58D66, 0.18)), rotZ: -0.28, rotX: -0.15, posX: 14, speed: 0.3 },
-      { mesh: new THREE.Mesh(rayGeo, createRayMat(0x10b981, 0.12)), rotZ: 0.12, rotX: 0.3, posX: 0, speed: 0.5 },
+      { mesh: new THREE.Mesh(rayGeo, createRayMat(0x9E9E9E, 0.20)), rotZ: 0.35, rotX: 0.2, posX: -18, speed: 0.4 },
+      { mesh: new THREE.Mesh(rayGeo, createRayMat(0xE8E8E8, 0.18)), rotZ: -0.28, rotX: -0.15, posX: 14, speed: 0.3 },
+      { mesh: new THREE.Mesh(rayGeo, createRayMat(0x8F8F8F, 0.12)), rotZ: 0.12, rotX: 0.3, posX: 0, speed: 0.5 },
     ];
 
     rays.forEach((r) => {
@@ -278,7 +281,7 @@ export const Deep3DSpaceBackdrop: React.FC = () => {
     const gridGeo = new THREE.BufferGeometry();
     gridGeo.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
     const gridMat = new THREE.LineBasicMaterial({
-      color: 0x407E8C,
+      color: 0x5D5D5D,
       transparent: true,
       opacity: 0.08,
       blending: THREE.AdditiveBlending,
@@ -300,7 +303,7 @@ export const Deep3DSpaceBackdrop: React.FC = () => {
     }
     pulseGeo.setAttribute('position', new THREE.BufferAttribute(pulsePos, 3));
     const pulseMat = new THREE.PointsMaterial({
-      color: 0xDFCCA8,
+      color: 0xE8E8E8,
       size: 3.5,
       transparent: true,
       opacity: 0.75,
@@ -309,24 +312,33 @@ export const Deep3DSpaceBackdrop: React.FC = () => {
     const pulsePoints = new THREE.Points(pulseGeo, pulseMat);
     scene.add(pulsePoints);
 
-    // Resize Handler
+    // Resize Handler — also refreshes the cached scroll range so the animate
+    // loop never reads scrollHeight per frame (forced layout every frame).
+    let maxScroll = 1;
+    const measureScrollRange = () => {
+      maxScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+    };
     const onResize = () => {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
       particleMaterial.uniforms.uPixelRatio.value = Math.min(window.devicePixelRatio || 1, 1.5);
+      measureScrollRange();
     };
     window.addEventListener('resize', onResize);
 
-    // 6. Animation Loop
+    const scrollRangeObserver = new ResizeObserver(measureScrollRange);
+    scrollRangeObserver.observe(document.body);
+    measureScrollRange();
+
+    // 6. Animation Loop (performance.now instead of the deprecated THREE.Clock)
     let animId = 0;
-    const clock = new THREE.Clock();
+    const startTime = performance.now();
 
     const animate = () => {
       animId = requestAnimationFrame(animate);
 
-      const delta = clock.getDelta();
-      const elapsedTime = clock.getElapsedTime();
+      const elapsedTime = (performance.now() - startTime) / 1000;
 
       // Smooth camera lerp on mouse parallax
       mouse.x += (mouse.targetX - mouse.x) * 0.05;
@@ -334,9 +346,8 @@ export const Deep3DSpaceBackdrop: React.FC = () => {
       camera.position.x = mouse.x * 3.5;
       camera.position.y = mouse.y * 2.5;
 
-      // Smooth scroll lerp
+      // Smooth scroll lerp (maxScroll cached via resize/ResizeObserver)
       scrollY += (targetScrollY - scrollY) * 0.08;
-      const maxScroll = Math.max(document.body.scrollHeight - window.innerHeight, 1);
       const scrollProgress = Math.min(Math.max(scrollY / maxScroll, 0), 1);
 
       // Camera depth response to scroll
@@ -413,6 +424,7 @@ export const Deep3DSpaceBackdrop: React.FC = () => {
       window.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onResize);
+      scrollRangeObserver.disconnect();
       document.removeEventListener('visibilitychange', handleVisibilityChange);
       renderer.domElement.removeEventListener('webglcontextlost', handleContextLost);
 

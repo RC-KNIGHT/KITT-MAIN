@@ -67,6 +67,11 @@ export const InfiniteSpiral = <T extends Record<string, any>>({
   const dragStartYRef = useRef<number>(0);
   const dragStartProgressRef = useRef<number>(0);
 
+  // Off-screen spirals sleep (no rAF, no DOM writes). hasPlaced forces the
+  // first style pass so cards don't linger at their placeholder transform.
+  const visibleRef = useRef<boolean>(false);
+  const hasPlacedRef = useRef<boolean>(false);
+
   const [containerHeight, setContainerHeight] = useState<number>(580);
 
   // Total slots: clean multiple of cardsPerTurn to eliminate wrapping seams
@@ -128,6 +133,17 @@ export const InfiniteSpiral = <T extends Record<string, any>>({
     progressRef.current += (targetProgressRef.current - progressRef.current) * lerpFactor;
 
     const currentProgress = progressRef.current;
+
+    // While parked (hover-paused + settled inertia) skip the DOM write pass —
+    // per-frame transform/opacity/blur writes are this component's main cost.
+    const moving =
+      !hasPlacedRef.current ||
+      Math.abs(targetProgressRef.current - currentProgress) > 0.0005;
+    if (!moving) {
+      rafIdRef.current = requestAnimationFrame(tick);
+      return;
+    }
+    hasPlacedRef.current = true;
 
     for (let k = 0; k < totalSlots; k++) {
       const el = cardsRef.current[k];
@@ -239,10 +255,57 @@ export const InfiniteSpiral = <T extends Record<string, any>>({
     isFrozen
   ]);
 
-  useEffect(() => {
-    rafIdRef.current = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(rafIdRef.current);
+  const stopLoop = useCallback(() => {
+    if (rafIdRef.current) {
+      cancelAnimationFrame(rafIdRef.current);
+      rafIdRef.current = 0;
+    }
+  }, []);
+
+  const startLoop = useCallback(() => {
+    if (!rafIdRef.current) {
+      rafIdRef.current = requestAnimationFrame(tick);
+    }
   }, [tick]);
+
+  // Re-arm with the latest tick closure, but only while on screen.
+  useEffect(() => {
+    if (visibleRef.current) startLoop();
+    return stopLoop;
+  }, [tick, startLoop, stopLoop]);
+
+  // Sleep entirely while scrolled off-screen: the community/reviews section
+  // holds two of these, and they used to burn CPU down the whole page.
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return undefined;
+    if (typeof IntersectionObserver === 'undefined') {
+      visibleRef.current = true;
+      startLoop();
+      return undefined;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (!entry) return;
+        if (entry.isIntersecting) {
+          if (!visibleRef.current) {
+            visibleRef.current = true;
+            startLoop();
+          }
+        } else if (visibleRef.current) {
+          visibleRef.current = false;
+          stopLoop();
+        }
+      },
+      { rootMargin: '150px 0px' }
+    );
+    io.observe(el);
+    return () => {
+      io.disconnect();
+      visibleRef.current = false;
+    };
+  }, [startLoop, stopLoop]);
 
   // Pointer drag controls (mouse / touch)
   const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {

@@ -741,9 +741,18 @@ html {
   font-weight: 500;
   letter-spacing: -0.2px;
   cursor: pointer;
-  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease,
+    transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   border: 1px solid transparent;
   white-space: nowrap;
+}
+
+.kds-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.kds-btn:active:not(:disabled) {
+  transform: translateY(0) scale(0.98);
 }
 
 .kds-btn-primary {
@@ -894,6 +903,84 @@ html {
 }
 
 /* ============================================================
+   KITT AI micro-motion — restrained, neutral, premium.
+   Entrance rises, a slow ambient hero glow, and an occasional
+   light sweep. Opacity/transform only, staggered via
+   --kds-enter-delay / --kds-sweep-delay custom properties.
+   ============================================================ */
+@keyframes kds-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.kds-enter {
+  opacity: 0;
+  animation: kds-rise 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: var(--kds-enter-delay, 0ms);
+}
+
+@keyframes kds-glow-breathe {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.75;
+    transform: scale(1.05);
+  }
+}
+
+/* Slow ambient light pool behind the dashboard hero. */
+.kds-hero-glow::before {
+  content: '';
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  top: -30%;
+  height: 130%;
+  background: radial-gradient(ellipse at 50% 45%, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0) 65%);
+  pointer-events: none;
+  z-index: -1;
+  animation: kds-glow-breathe 8s ease-in-out infinite;
+}
+
+@keyframes kds-sweep {
+  0% {
+    transform: translateX(-130%);
+  }
+  55%,
+  100% {
+    transform: translateX(230%);
+  }
+}
+
+/* Occasional slow light sweep across bordered surfaces. */
+.kds-sweep {
+  position: relative;
+  overflow: hidden;
+}
+
+.kds-sweep::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 35%;
+  background: linear-gradient(100deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.07) 50%, rgba(255, 255, 255, 0) 100%);
+  transform: translateX(-130%);
+  animation: kds-sweep 7s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  animation-delay: var(--kds-sweep-delay, 1.2s);
+  pointer-events: none;
+}
+
+/* ============================================================
    Reduced motion preference
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
@@ -904,6 +991,17 @@ html {
   .animate-node-pulse,
   .animate-circuit-breathe,
   .animate-oscilloscope-trace {
+    animation: none !important;
+  }
+
+  /* KITT AI micro-motion: land everything in its final state. */
+  .kds-enter {
+    opacity: 1;
+    transform: none;
+    animation: none !important;
+  }
+  .kds-hero-glow::before,
+  .kds-sweep::after {
     animation: none !important;
   }
 }

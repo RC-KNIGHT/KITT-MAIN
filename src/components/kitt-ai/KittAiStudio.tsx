@@ -57,17 +57,12 @@ export const KittAiStudio: React.FC<KittAiStudioProps> = ({ initialCanvasView })
     return 'home';
   });
 
-  // Keep view in sync if route hash switches between kitt-ai and workspace
+  // Keep the view in sync when the hash switches to the workspace route.
   useEffect(() => {
     const handleHash = () => {
       const hash = window.location.hash.toLowerCase();
       if (hash.startsWith('#/workspace') || hash === '#workspace') {
         setCurrentView('editor');
-      } else if (hash.startsWith('#/kitt-ai') || hash === '#kitt-ai') {
-        // If returning to dashboard root
-        if (!hash.includes('workspace')) {
-          // keep existing view if in editor or switch to home if explicitly navigating
-        }
       }
     };
     window.addEventListener('hashchange', handleHash);

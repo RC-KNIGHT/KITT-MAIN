@@ -11,14 +11,24 @@ interface Spark {
   color: string;
 }
 
+// Detected once at module load: the cursor is a fine-pointer enhancement only.
+const isFinePointer =
+  typeof window !== 'undefined'
+    ? window.matchMedia('(pointer: fine)').matches
+    : false;
+
 /**
  * SurrealAuraCursor
- * 
+ *
  * Cinematic electronics-inspired cursor experience:
  * 1. Micro soldering-spark & electron trail particle emitter
- * 2. Magnetic dual-ring glowing aura (Oceanic Teal & Antique Gold)
+ * 2. Magnetic dual-ring glowing aura
  * 3. Reactive physics on click (spark burst) and interactive element hover
  * 4. Strictly disabled on touch devices and respects prefers-reduced-motion
+ *
+ * The layer stays mounted (hidden via opacity) so the effect can attach its
+ * listeners exactly once; hover/visibility are tracked through refs so the
+ * RAF loop and listeners are never torn down mid-interaction.
  */
 export const SurrealAuraCursor: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -34,10 +44,12 @@ export const SurrealAuraCursor: React.FC = () => {
   const dotElRef = useRef<HTMLDivElement>(null);
   const auraElRef = useRef<HTMLDivElement>(null);
 
+  const isVisibleRef = useRef(false);
+  const isHoveredRef = useRef(false);
+
   useEffect(() => {
-    // Only enable on non-touch devices with fine pointers
-    const isTouch = window.matchMedia('(pointer: coarse)').matches;
-    if (isTouch) return;
+    // Only enable on non-touch devices with fine pointers.
+    if (!isFinePointer) return;
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -79,7 +91,10 @@ export const SurrealAuraCursor: React.FC = () => {
 
     let moveDistance = 0;
     const handleMouseMove = (e: MouseEvent) => {
-      if (!isVisible) setIsVisible(true);
+      if (!isVisibleRef.current) {
+        isVisibleRef.current = true;
+        setIsVisible(true);
+      }
       cursorRef.current.prevX = cursorRef.current.x;
       cursorRef.current.prevY = cursorRef.current.y;
       cursorRef.current.x = e.clientX;
@@ -104,14 +119,21 @@ export const SurrealAuraCursor: React.FC = () => {
     };
 
     const handleMouseUp = () => setIsClicking(false);
-    const handleMouseLeave = () => setIsVisible(false);
-    const handleMouseEnter = () => setIsVisible(true);
+    const handleMouseLeave = () => {
+      isVisibleRef.current = false;
+      setIsVisible(false);
+    };
 
     const handleOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null;
       if (!target) return;
       const interactive = target.closest('a, button, input, [role=button], .tilt-card-wrapper, .cursor-pointer');
-      setIsHovered(!!interactive);
+      const next = !!interactive;
+      // Only touch React state when the value actually changes.
+      if (next !== isHoveredRef.current) {
+        isHoveredRef.current = next;
+        setIsHovered(next);
+      }
     };
 
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
@@ -119,11 +141,10 @@ export const SurrealAuraCursor: React.FC = () => {
     window.addEventListener('mousedown', handleMouseDown);
     window.addEventListener('mouseup', handleMouseUp);
     document.addEventListener('mouseleave', handleMouseLeave);
-    document.addEventListener('mouseenter', handleMouseEnter);
 
     const updateLoop = () => {
       // Smooth spring lerp for outer aura
-      const lerpFactor = isHovered ? 0.22 : 0.16;
+      const lerpFactor = isHoveredRef.current ? 0.22 : 0.16;
       auraRef.current.x += (cursorRef.current.x - auraRef.current.x) * lerpFactor;
       auraRef.current.y += (cursorRef.current.y - auraRef.current.y) * lerpFactor;
 
@@ -134,30 +155,32 @@ export const SurrealAuraCursor: React.FC = () => {
         auraElRef.current.style.transform = `translate3d(${auraRef.current.x}px, ${auraRef.current.y}px, 0) translate(-50%, -50%)`;
       }
 
-      // Render soldering sparks on 2D canvas
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      // Render soldering sparks on 2D canvas (skip when nothing is visible)
+      if (isVisibleRef.current) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      for (let i = sparksRef.current.length - 1; i >= 0; i--) {
-        const p = sparksRef.current[i];
-        p.x += p.vx;
-        p.y += p.vy;
-        p.vy += 0.04; // gravity
-        p.alpha -= p.decay;
+        for (let i = sparksRef.current.length - 1; i >= 0; i--) {
+          const p = sparksRef.current[i];
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += 0.04; // gravity
+          p.alpha -= p.decay;
 
-        if (p.alpha <= 0) {
-          sparksRef.current.splice(i, 1);
-          continue;
+          if (p.alpha <= 0) {
+            sparksRef.current.splice(i, 1);
+            continue;
+          }
+
+          ctx.save();
+          ctx.globalAlpha = p.alpha;
+          ctx.fillStyle = p.color;
+          ctx.shadowColor = p.color;
+          ctx.shadowBlur = 6;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
         }
-
-        ctx.save();
-        ctx.globalAlpha = p.alpha;
-        ctx.fillStyle = p.color;
-        ctx.shadowColor = p.color;
-        ctx.shadowBlur = 6;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
       }
 
       animFrameRef.current = requestAnimationFrame(updateLoop);
@@ -167,20 +190,26 @@ export const SurrealAuraCursor: React.FC = () => {
 
     return () => {
       cancelAnimationFrame(animFrameRef.current);
+      animFrameRef.current = 0;
       window.removeEventListener('resize', updateCanvasSize);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseover', handleOver);
       window.removeEventListener('mousedown', handleMouseDown);
       window.removeEventListener('mouseup', handleMouseUp);
       document.removeEventListener('mouseleave', handleMouseLeave);
-      document.removeEventListener('mouseenter', handleMouseEnter);
     };
-  }, [isVisible, isHovered]);
+  }, []);
 
-  if (!isVisible) return null;
+  // Fine-pointer devices only; the layer itself fades in on first movement.
+  if (!isFinePointer) return null;
 
   return (
-    <div className="pointer-events-none fixed inset-0 z-50 overflow-hidden select-none">
+    <div
+      aria-hidden="true"
+      className={`pointer-events-none fixed inset-0 z-50 overflow-hidden select-none transition-opacity duration-300 ${
+        isVisible ? 'opacity-100' : 'opacity-0'
+      }`}
+    >
       {/* Solder spark canvas trail */}
       <canvas
         ref={canvasRef}

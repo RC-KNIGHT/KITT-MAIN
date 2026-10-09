@@ -54,8 +54,19 @@ export default function App() {
 
   useEffect(() => {
     const handleHashChange = () => {
-      setRoute(parseRoute());
-      window.scrollTo(0, 0);
+      const hash = window.location.hash;
+      const next = parseRoute();
+      setRoute(next);
+
+      // In-page anchors (#pricing, #team, …) must keep native browser
+      // navigation — resetting scroll here fought the anchor jump and yanked
+      // the page straight back to the top. Only real route changes reset,
+      // and they do it instantly instead of smooth-scrolling during the
+      // route transition.
+      const anchorJump = next === 'landing' && hash.length > 1 && !hash.startsWith('#/');
+      if (!anchorJump) {
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      }
     };
 
     window.addEventListener('hashchange', handleHashChange);

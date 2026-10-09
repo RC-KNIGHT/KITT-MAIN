@@ -71,7 +71,7 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({
     <div className="flex-1 overflow-y-auto w-full">
       <div className="max-w-5xl mx-auto w-full px-6 md:px-8 py-16 md:py-24 space-y-24">
         {/* Hero */}
-        <section className="text-center space-y-6">
+        <section className="relative kds-hero-glow kds-enter text-center space-y-6">
           <h1 className="kds-display-xl text-[#F5F5F5]">What are we building today?</h1>
           <p className="kds-body-md text-[#9E9E9E] max-w-xl mx-auto">
             Describe a system in plain language, then inspect the schematic, breadboard, and
@@ -106,7 +106,7 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({
         </section>
 
         {/* Templates */}
-        <section className="space-y-6">
+        <section className="kds-enter space-y-6" style={{ '--kds-enter-delay': '80ms' } as React.CSSProperties}>
           <div className="flex items-end justify-between gap-4">
             <div>
               <h2 className="kds-heading-md text-[#F5F5F5]">Start from an example</h2>
@@ -122,13 +122,14 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {featuredTemplates.map((tpl) => {
+            {featuredTemplates.map((tpl, tplIdx) => {
               const Icon = templateIcon(tpl.svgIconType);
               return (
                 <button
                   key={tpl.id}
                   onClick={() => onOpenExample(tpl)}
-                  className="kds-card-interactive p-5 text-left flex flex-col justify-between gap-6 cursor-pointer kds-focusable"
+                  className="kds-card-interactive kds-sweep p-5 text-left flex flex-col justify-between gap-6 cursor-pointer kds-focusable"
+                  style={{ '--kds-sweep-delay': `${0.9 + tplIdx * 1.4}s` } as React.CSSProperties}
                 >
                   <div className="space-y-4">
                     <span className="w-10 h-10 rounded-[10px] bg-[#29292A] border border-[#353536] flex items-center justify-center text-[#F5F5F5]">
@@ -158,7 +159,7 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({
         </section>
 
         {/* Recent projects */}
-        <section className="space-y-6">
+        <section className="kds-enter space-y-6" style={{ '--kds-enter-delay': '160ms' } as React.CSSProperties}>
           <div className="flex items-end justify-between gap-4">
             <div>
               <h2 className="kds-heading-md text-[#F5F5F5]">Recent projects</h2>
@@ -184,8 +185,12 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {projects.map((proj) => (
-                <div key={proj.id} className="kds-card p-5 flex flex-col justify-between gap-5">
+              {projects.map((proj, projIdx) => (
+                <div
+                  key={proj.id}
+                  className="kds-card kds-enter p-5 flex flex-col justify-between gap-5"
+                  style={{ '--kds-enter-delay': `${Math.min(projIdx, 8) * 45}ms` } as React.CSSProperties}
+                >
                   <div className="space-y-2">
                     <div className="flex items-start justify-between gap-2">
                       <button
