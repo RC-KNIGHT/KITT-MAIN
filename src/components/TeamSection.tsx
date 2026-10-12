@@ -18,6 +18,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     emoji: '🚀',
     role: 'Founder & Innovator',
     intro: 'Vision, Product & Core Development',
+    isLead: true,
   },
   {
     id: 'roshan-vishwakarma',
@@ -32,7 +33,6 @@ export const TEAM_MEMBERS: TeamMember[] = [
     emoji: '⚙️',
     role: 'Chief Backend Architect',
     intro: 'Backend, Systems & Infrastructure',
-    isLead: true,
   },
   {
     id: 'harshdeep-singh',
