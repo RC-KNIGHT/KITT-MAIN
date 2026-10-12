@@ -20,6 +20,7 @@ import { Deep3DSpaceBackdrop } from './components/Deep3DSpaceBackdrop';
 import { PremiumLogicGatesMatrix } from './components/PremiumLogicGatesMatrix';
 import { RootErrorBoundary } from './components/ErrorBoundary';
 import { KittLogo } from './components/KittLogo';
+import { SurrealAuraCursor } from './components/SurrealAuraCursor';
 
 const KittAiStudio = lazy(() => import('./components/kitt-ai/KittAiStudio').then(m => ({ default: m.KittAiStudio })));
 const WorkspaceApp = lazy(() => import('./components/workspace/WorkspaceApp').then(m => ({ default: m.WorkspaceApp })));
@@ -144,6 +145,9 @@ export default function App() {
           transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
           className="min-h-screen bg-[#000000] text-[#F5F5F5] selection:bg-[#8F8F8F]/40 selection:text-[#F5F5F5] antialiased font-sans relative overflow-x-hidden"
         >
+
+      {/* Cinematic Micro-Spark & Magnetic Aura Cursor */}
+      <SurrealAuraCursor />
 
       {/* Deep 3D Infinite Space Backdrop: Stars, 3D Grid & Floating Orbital Glyphs */}
       <Deep3DSpaceBackdrop />

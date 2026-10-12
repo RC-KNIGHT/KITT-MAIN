@@ -555,26 +555,16 @@ export const PremiumLogicGatesMatrix: React.FC<{ className?: string }> = ({ clas
     };
 
     let lastTime = performance.now();
-    // Atmospheric instrumentation runs at half rate: packets and pulses move
-    // slowly, so 30fps looks identical while halving the full-viewport
-    // bitmap raster cost that competes with the foreground content.
-    const FRAME_MS = 1000 / 30;
-    let lastFrameAt = -FRAME_MS;
 
     const render = (time: number) => {
-      animId = 0;
-      if (time - lastFrameAt < FRAME_MS) {
-        schedule();
-        return;
-      }
-      lastFrameAt = time;
-
       const dt = Math.min((time - lastTime) / 1000, 0.1);
       lastTime = time;
       const timeSec = time / 1000;
 
       mouse.x += (mouse.targetX - mouse.x) * 0.1;
       mouse.y += (mouse.targetY - mouse.y) * 0.1;
+
+      animId = 0;
 
       const docDeviceH = docH * dpr;
       const scrollDevice = scrollY * dpr;

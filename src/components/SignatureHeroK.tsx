@@ -483,27 +483,6 @@ export const SignatureHeroK: React.FC<SignatureHeroKProps> = ({ className = '' }
 
     const easeOutQuint = (x: number): number => 1 - Math.pow(1 - x, 5);
 
-    // Cached soft-halo sprite: every particle shares the same radial glow, so
-    // it is rasterized once and blitted per particle instead of building an
-    // arc path + gradient ~680 times per frame (Canvas2D path construction is
-    // the single most expensive part of this loop).
-    const haloSprite = document.createElement('canvas');
-    const haloSize = 64;
-    haloSprite.width = haloSize;
-    haloSprite.height = haloSize;
-    const haloCtx = haloSprite.getContext('2d');
-    if (haloCtx) {
-      const haloGrad = haloCtx.createRadialGradient(
-        haloSize / 2, haloSize / 2, 0,
-        haloSize / 2, haloSize / 2, haloSize / 2
-      );
-      haloGrad.addColorStop(0, 'rgba(255, 255, 255, 0.40)');
-      haloGrad.addColorStop(0.55, 'rgba(255, 255, 255, 0.12)');
-      haloGrad.addColorStop(1, 'rgba(255, 255, 255, 0)');
-      haloCtx.fillStyle = haloGrad;
-      haloCtx.fillRect(0, 0, haloSize, haloSize);
-    }
-
     // Main 60-120 FPS High-Performance Render Loop
     const render = (currentTimeMs: number) => {
       animationFrameRef.current = 0;
@@ -712,16 +691,17 @@ export const SignatureHeroK: React.FC<SignatureHeroKProps> = ({ className = '' }
 
         if (alpha <= 0.02) continue;
 
+        ctx.save();
         ctx.globalAlpha = alpha;
 
-        // Soft radiant halo (cached sprite blit, identical look to the old
-        // arc+gradient but without per-particle path construction)
-        const haloR = Math.max(1.8, pSize * 2.0);
-        ctx.drawImage(haloSprite, px - haloR, py - haloR, haloR * 2, haloR * 2);
+        // Soft radiant halo
+        ctx.beginPath();
+        ctx.arc(px, py, Math.max(1.8, pSize * 2.0), 0, Math.PI * 2);
+        ctx.fillStyle = p.glowColor;
+        ctx.fill();
 
         if (p.type === 'chip') {
           // Rotating SMD chip with silicon body and gold/platinum terminals
-          ctx.save();
           ctx.translate(px, py);
           ctx.rotate(p.rotation + animTime * p.rotationSpeed);
           const w = (p.width || 4.8) * dpr;
@@ -740,8 +720,6 @@ export const SignatureHeroK: React.FC<SignatureHeroKProps> = ({ className = '' }
           // Central glowing micro-contact
           ctx.fillStyle = '#F5F2ED';
           ctx.fillRect(-0.8 * dpr, -0.8 * dpr, 1.6 * dpr, 1.6 * dpr);
-
-          ctx.restore();
         } else if (p.type === 'via') {
           // Circular circuit via with dark central drill hole
           ctx.beginPath();
@@ -758,8 +736,10 @@ export const SignatureHeroK: React.FC<SignatureHeroKProps> = ({ className = '' }
           // Twinkling diamond specular glint
           const glint = Math.sin(animTime * 3.2 + p.pulsePhase);
           if (glint > 0.25) {
-            const glintR = pSize * 1.8;
-            ctx.drawImage(haloSprite, px - glintR, py - glintR, glintR * 2, glintR * 2);
+            ctx.beginPath();
+            ctx.arc(px, py, pSize * 1.8, 0, Math.PI * 2);
+            ctx.fillStyle = p.glowColor;
+            ctx.fill();
           }
 
           ctx.beginPath();
@@ -773,8 +753,9 @@ export const SignatureHeroK: React.FC<SignatureHeroKProps> = ({ className = '' }
           ctx.fillStyle = p.color;
           ctx.fill();
         }
+
+        ctx.restore();
       }
-      ctx.globalAlpha = 1;
 
       // Subtle golden dashed alignment axis crosshair when assembled
       if (scatterAmount < 0.12) {
