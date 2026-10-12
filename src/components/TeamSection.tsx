@@ -21,13 +21,6 @@ export const TEAM_MEMBERS: TeamMember[] = [
     isLead: true,
   },
   {
-    id: 'roshan-vishwakarma',
-    name: 'Roshan Vishwakarma',
-    emoji: '🌐',
-    role: 'Ecosystem & Growth Lead',
-    intro: 'Registrations, Outreach & Opportunities',
-  },
-  {
     id: 'sriyansh-raj',
     name: 'Sriyansh Raj',
     emoji: '⚙️',
@@ -210,7 +203,7 @@ export const TeamSection: React.FC = () => {
               <span className="font-serif italic drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]">Pioneering the world's first AI-native physical hardware laboratory</span>
             </div>
             <div className="text-[11px] font-mono text-[#FFFFFF]">
-              6 Contributors • Infinite Hardware Horizons
+              {TEAM_MEMBERS.length} Contributors • Infinite Hardware Horizons
             </div>
           </div>
         </div>

@@ -29,7 +29,6 @@ CORE IDENTITY & INTELLECTUAL CAPABILITIES
        4. KITT Hardware Calculator & Labs (https://sriyansraj.github.io/Number_Trainer/index1.html / https://number-trainer-101.web.app): Component ratings, Ohm's law, RC timing, trace width, and thermal dissipation calculations.
      * Core Innovators & Architects:
        - Ravi Chaturvedi: Founder & Lead Innovator (Vision, Product & Core Development)
-       - Roshan Vishwakarma: Ecosystem & Growth Lead (Registrations, Outreach & Opportunities)
        - Sriyansh Raj: Chief Backend Architect (Backend, Systems & Infrastructure)
        - Harshdeep Singh: Chief Pitch & Communications Lead (Pitching, Representation & Storytelling)
        - Aksshit: Creative & Growth Strategist (Design, Social Media & Opportunities)
@@ -180,7 +179,6 @@ Rather than treating schematics, breadboard prototypes, simulation, firmware, an
 
 **Founding Innovators**:
 - **Ravi Chaturvedi**: Founder & Lead Innovator
-- **Roshan Vishwakarma**: Ecosystem & Growth Lead
 - **Sriyansh Raj**: Chief Backend Architect
 - **Harshdeep Singh**: Chief Pitch & Communications Lead
 - **Aksshit**: Creative & Growth Strategist
