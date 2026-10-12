@@ -335,19 +335,32 @@ export const Deep3DSpaceBackdrop: React.FC = () => {
     let animId = 0;
     const startTime = performance.now();
 
+    // 30fps cap: this deep-space layer is slow atmospheric motion, so half
+    // rate is visually identical and halves the WebGL raster cost. The lerp
+    // factors below are multiplied by frame time so smoothing feels the same
+    // at any cap value.
+    const FRAME_MS = 1000 / 30;
+    let lastFrameAt = -FRAME_MS;
+
     const animate = () => {
       animId = requestAnimationFrame(animate);
 
-      const elapsedTime = (performance.now() - startTime) / 1000;
+      const now = performance.now();
+      if (now - lastFrameAt < FRAME_MS) return;
+      const frameT = Math.min(0.1, (now - lastFrameAt) / 1000);
+      lastFrameAt = now;
 
-      // Smooth camera lerp on mouse parallax
-      mouse.x += (mouse.targetX - mouse.x) * 0.05;
-      mouse.y += (mouse.targetY - mouse.y) * 0.05;
+      const elapsedTime = (now - startTime) / 1000;
+
+      // Smooth camera lerp on mouse parallax (time-based, ≈0.05/frame at 60fps)
+      const mouseK = Math.min(1, frameT * 3.0);
+      mouse.x += (mouse.targetX - mouse.x) * mouseK;
+      mouse.y += (mouse.targetY - mouse.y) * mouseK;
       camera.position.x = mouse.x * 3.5;
       camera.position.y = mouse.y * 2.5;
 
       // Smooth scroll lerp (maxScroll cached via resize/ResizeObserver)
-      scrollY += (targetScrollY - scrollY) * 0.08;
+      scrollY += (targetScrollY - scrollY) * Math.min(1, frameT * 4.8);
       const scrollProgress = Math.min(Math.max(scrollY / maxScroll, 0), 1);
 
       // Camera depth response to scroll
@@ -359,7 +372,7 @@ export const Deep3DSpaceBackdrop: React.FC = () => {
       particleMaterial.uniforms.uMorph.value = THREE.MathUtils.lerp(
         particleMaterial.uniforms.uMorph.value,
         morphTarget,
-        0.06
+        Math.min(1, frameT * 3.6)
       );
 
       // Update particle shader uniforms

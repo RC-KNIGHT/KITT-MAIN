@@ -19,9 +19,16 @@ export const DynamicCircuitBackdrop: React.FC = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    let animId: number;
+    let animId = 0;
     const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // The static furniture (reticle grid, copper traces, pads, pinout labels)
+    // never changes between resizes, so it is rasterized once into an
+    // offscreen bitmap and blitted per frame instead of re-stroking hundreds
+    // of paths 60 times per second.
+    let staticDirty = true;
+    let inView = true;
 
     const updateSize = () => {
       if (!canvas || !canvas.parentElement) return;
@@ -30,6 +37,7 @@ export const DynamicCircuitBackdrop: React.FC = () => {
       canvas.height = rect.height * dpr;
       canvas.style.width = `${rect.width}px`;
       canvas.style.height = `${rect.height}px`;
+      staticDirty = true;
     };
 
     updateSize();
@@ -143,6 +151,129 @@ export const DynamicCircuitBackdrop: React.FC = () => {
 
     const startTime = performance.now();
 
+    interface TraceGeometry {
+      pts: { x: number; y: number }[];
+      segLens: number[];
+      totalLen: number;
+    }
+
+    let traceGeometry: TraceGeometry[] = [];
+    let staticLayer: HTMLCanvasElement | null = null;
+
+    // Cached glow sprites: one radial-gradient disc per pulse color, rasterized
+    // once. Replaces the per-frame createRadialGradient + arc + fill for every
+    // pulse head and tail segment.
+    const glowSprites = new Map<string, HTMLCanvasElement>();
+    const spriteFor = (color: string): HTMLCanvasElement => {
+      const cached = glowSprites.get(color);
+      if (cached) return cached;
+      const size = 32;
+      const sprite = document.createElement('canvas');
+      sprite.width = size;
+      sprite.height = size;
+      const sctx = sprite.getContext('2d');
+      if (sctx) {
+        const grad = sctx.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
+        grad.addColorStop(0, '#FFFFFF');
+        grad.addColorStop(0.3, color);
+        grad.addColorStop(0.72, 'rgba(143, 143, 143, 0)');
+        grad.addColorStop(1, 'rgba(143, 143, 143, 0)');
+        sctx.fillStyle = grad;
+        sctx.fillRect(0, 0, size, size);
+      }
+      glowSprites.set(color, sprite);
+      return sprite;
+    };
+
+    const buildStaticLayer = () => {
+      if (!canvas.parentElement) return;
+      const rect = canvas.parentElement.getBoundingClientRect();
+      const w = Math.max(1, Math.round(rect.width * dpr));
+      const h = Math.max(1, Math.round(rect.height * dpr));
+
+      const layer =
+        staticLayer && staticLayer.width === w && staticLayer.height === h
+          ? staticLayer
+          : document.createElement('canvas');
+      layer.width = w;
+      layer.height = h;
+      const sctx = layer.getContext('2d');
+      if (!sctx) return;
+
+      // 1. Precision EDA Reticle Grid with Micro Crosshairs
+      const gridSpacing = 48 * dpr;
+      const crossSize = 2.5 * dpr;
+      sctx.strokeStyle = 'rgba(255, 255, 255, 0.14)';
+      sctx.lineWidth = 0.8 * dpr;
+
+      for (let x = gridSpacing; x < w; x += gridSpacing) {
+        for (let y = gridSpacing; y < h; y += gridSpacing) {
+          sctx.beginPath();
+          sctx.moveTo(x - crossSize, y);
+          sctx.lineTo(x + crossSize, y);
+          sctx.moveTo(x, y - crossSize);
+          sctx.lineTo(x, y + crossSize);
+          sctx.stroke();
+        }
+      }
+
+      // 3a. Base copper hairlines, terminal pads, and pinout labels
+      traceGeometry = traces.map((trace) => {
+        const pts = trace.points.map((p) => ({ x: p.x * w, y: p.y * h }));
+
+        if (pts.length >= 2) {
+          sctx.strokeStyle = trace.color;
+          sctx.lineWidth = 1.5 * dpr;
+          sctx.lineCap = 'round';
+          sctx.lineJoin = 'round';
+
+          sctx.beginPath();
+          sctx.moveTo(pts[0].x, pts[0].y);
+          for (let i = 1; i < pts.length; i++) {
+            sctx.lineTo(pts[i].x, pts[i].y);
+          }
+          sctx.stroke();
+
+          // Terminal circular pads with via holes
+          [pts[0], pts[pts.length - 1]].forEach((pt, pIdx) => {
+            sctx.beginPath();
+            sctx.arc(pt.x, pt.y, 3.5 * dpr, 0, Math.PI * 2);
+            sctx.strokeStyle = trace.pulseColor;
+            sctx.lineWidth = 1.2 * dpr;
+            sctx.stroke();
+
+            sctx.beginPath();
+            sctx.arc(pt.x, pt.y, 1.2 * dpr, 0, Math.PI * 2);
+            sctx.fillStyle = trace.pulseColor;
+            sctx.fill();
+
+            // Terminal pinout label
+            if (pIdx === 0 && trace.label) {
+              sctx.fillStyle = 'rgba(245, 245, 245, 0.45)';
+              sctx.font = `${8 * dpr}px monospace`;
+              sctx.textAlign = pt.x < w / 2 ? 'left' : 'right';
+              const textX = pt.x < w / 2 ? pt.x + 8 * dpr : pt.x - 8 * dpr;
+              sctx.fillText(trace.label, textX, pt.y - 6 * dpr);
+            }
+          });
+        }
+
+        // Segment geometry for the moving pulse (device px, rebuilt on resize)
+        let totalLen = 0;
+        const segLens: number[] = [];
+        for (let i = 0; i < pts.length - 1; i++) {
+          const dx = pts[i + 1].x - pts[i].x;
+          const dy = pts[i + 1].y - pts[i].y;
+          const len = Math.sqrt(dx * dx + dy * dy);
+          segLens.push(len);
+          totalLen += len;
+        }
+        return { pts, segLens, totalLen };
+      });
+
+      staticLayer = layer;
+    };
+
     const draw = (now: number) => {
       const elapsed = prefersReducedMotion ? 1.0 : (now - startTime) / 1000;
       const w = canvas.width;
@@ -150,24 +281,14 @@ export const DynamicCircuitBackdrop: React.FC = () => {
 
       ctx.clearRect(0, 0, w, h);
 
-      // 1. Precision EDA Reticle Grid with Micro Crosshairs
-      const gridSpacing = 48 * dpr;
-      ctx.strokeStyle = 'rgba(143, 143, 143, 0.08)';
-      ctx.lineWidth = 0.5 * dpr;
-
-      const crossSize = 2.5 * dpr;
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.14)';
-      ctx.lineWidth = 0.8 * dpr;
-
-      for (let x = gridSpacing; x < w; x += gridSpacing) {
-        for (let y = gridSpacing; y < h; y += gridSpacing) {
-          ctx.beginPath();
-          ctx.moveTo(x - crossSize, y);
-          ctx.lineTo(x + crossSize, y);
-          ctx.moveTo(x, y - crossSize);
-          ctx.lineTo(x, y + crossSize);
-          ctx.stroke();
-        }
+      // 1. Static EDA furniture (reticle grid, copper traces, pads, labels)
+      // blitted from the cached offscreen bitmap — rebuilt only on resize.
+      if (staticDirty) {
+        buildStaticLayer();
+        staticDirty = false;
+      }
+      if (staticLayer) {
+        ctx.drawImage(staticLayer, 0, 0, w, h);
       }
 
       // 2. Dual-Channel Oscilloscope Waveforms (Channel 1: Oceanic Teal PWM, Channel 2: Antique Gold Sine)
@@ -185,10 +306,7 @@ export const DynamicCircuitBackdrop: React.FC = () => {
 
         ctx.save();
         ctx.strokeStyle = glowColor;
-        ctx.lineWidth = 3.2 * dpr;
         ctx.lineCap = 'round';
-        ctx.shadowColor = glowColor;
-        ctx.shadowBlur = 10 * dpr;
         ctx.beginPath();
 
         const step = 4 * dpr;
@@ -214,12 +332,20 @@ export const DynamicCircuitBackdrop: React.FC = () => {
           if (x === 0) ctx.moveTo(x, y);
           else ctx.lineTo(x, y);
         }
+        // Layered halo strokes instead of ctx.shadowBlur: blur forces a
+        // full-canvas raster pass per waveform, while these reuse the path
+        // that was just built.
+        ctx.globalAlpha = 0.30;
+        ctx.lineWidth = 3.4 * dpr;
+        ctx.stroke();
+        ctx.globalAlpha = 0.55;
+        ctx.lineWidth = 1.9 * dpr;
         ctx.stroke();
 
         // Inner bright beam core
+        ctx.globalAlpha = 1;
         ctx.strokeStyle = '#FFFFFF';
         ctx.lineWidth = 1.0 * dpr;
-        ctx.shadowBlur = 0;
         ctx.stroke();
         ctx.restore();
       };
@@ -229,61 +355,14 @@ export const DynamicCircuitBackdrop: React.FC = () => {
       // Lower oscilloscope channel: Analog Sensor Wave (Antique Gold)
       renderOscilloscopeWaveform(0.92, 'rgba(255, 255, 255, 0.4)', 'rgba(232, 232, 232, 0.35)', -0.8, 3.5, 16, false);
 
-      // 3. Render High-Speed Circuit Traces & Dynamic Phosphor Pulse Tails
-      traces.forEach((trace) => {
-        const pts = trace.points.map((p) => ({
-          x: p.x * w,
-          y: p.y * h
-        }));
+      // 3b. Dynamic phosphor data pulses riding the cached copper traces
+      traceGeometry.forEach((td, traceIndex) => {
+        const trace = traces[traceIndex];
+        const pts = td.pts;
+        const totalLen = td.totalLen;
+        const segLens = td.segLens;
 
-        if (pts.length < 2) return;
-
-        // Base copper hairline
-        ctx.strokeStyle = trace.color;
-        ctx.lineWidth = 1.5 * dpr;
-        ctx.lineCap = 'round';
-        ctx.lineJoin = 'round';
-
-        ctx.beginPath();
-        ctx.moveTo(pts[0].x, pts[0].y);
-        for (let i = 1; i < pts.length; i++) {
-          ctx.lineTo(pts[i].x, pts[i].y);
-        }
-        ctx.stroke();
-
-        // Terminal circular pads with via holes
-        [pts[0], pts[pts.length - 1]].forEach((pt, pIdx) => {
-          ctx.beginPath();
-          ctx.arc(pt.x, pt.y, 3.5 * dpr, 0, Math.PI * 2);
-          ctx.strokeStyle = trace.pulseColor;
-          ctx.lineWidth = 1.2 * dpr;
-          ctx.stroke();
-
-          ctx.beginPath();
-          ctx.arc(pt.x, pt.y, 1.2 * dpr, 0, Math.PI * 2);
-          ctx.fillStyle = trace.pulseColor;
-          ctx.fill();
-
-          // Terminal pinout label
-          if (pIdx === 0 && trace.label) {
-            ctx.fillStyle = 'rgba(245, 245, 245, 0.45)';
-            ctx.font = `${8 * dpr}px monospace`;
-            ctx.textAlign = pt.x < w / 2 ? 'left' : 'right';
-            const textX = pt.x < w / 2 ? pt.x + 8 * dpr : pt.x - 8 * dpr;
-            ctx.fillText(trace.label, textX, pt.y - 6 * dpr);
-          }
-        });
-
-        // Compute total line length for pulse interpolation
-        let totalLen = 0;
-        const segLens: number[] = [];
-        for (let i = 0; i < pts.length - 1; i++) {
-          const dx = pts[i + 1].x - pts[i].x;
-          const dy = pts[i + 1].y - pts[i].y;
-          const len = Math.sqrt(dx * dx + dy * dy);
-          segLens.push(len);
-          totalLen += len;
-        }
+        if (pts.length < 2 || totalLen <= 0) return;
 
         // Animated Logic Data Pulse with phosphor decay trail
         const pulseProgress = ((elapsed * 0.35 + trace.pulseOffset) % 1);
@@ -307,7 +386,8 @@ export const DynamicCircuitBackdrop: React.FC = () => {
 
         const headPt = getPointAtDistance(pulseDist);
 
-        // Draw phosphor fading tail
+        // Draw phosphor fading tail (cached glow sprite, no per-frame paths)
+        const pulseSprite = spriteFor(trace.pulseColor);
         const tailLength = totalLen * 0.18;
         const tailSegments = 6;
         for (let tIdx = 0; tIdx < tailSegments; tIdx++) {
@@ -315,37 +395,53 @@ export const DynamicCircuitBackdrop: React.FC = () => {
           if (tDist > 0) {
             const tailPt = getPointAtDistance(tDist);
             const alpha = (1 - tIdx / tailSegments) * 0.4;
-            ctx.fillStyle = trace.pulseColor;
+            const r = (3.5 - tIdx * 0.4) * dpr;
             ctx.globalAlpha = alpha;
-            ctx.beginPath();
-            ctx.arc(tailPt.x, tailPt.y, (3.5 - tIdx * 0.4) * dpr, 0, Math.PI * 2);
-            ctx.fill();
+            ctx.drawImage(pulseSprite, tailPt.x - r, tailPt.y - r, r * 2, r * 2);
           }
         }
         ctx.globalAlpha = 1.0;
 
-        // Draw primary radiant head photon
-        const grad = ctx.createRadialGradient(headPt.x, headPt.y, 0, headPt.x, headPt.y, 9 * dpr);
-        grad.addColorStop(0, '#FFFFFF');
-        grad.addColorStop(0.3, trace.pulseColor);
-        grad.addColorStop(0.7, trace.color);
-        grad.addColorStop(1, 'transparent');
-
-        ctx.fillStyle = grad;
-        ctx.beginPath();
-        ctx.arc(headPt.x, headPt.y, 9 * dpr, 0, Math.PI * 2);
-        ctx.fill();
+        // Draw primary radiant head photon (same sprite, full radius)
+        const headR = 9 * dpr;
+        ctx.drawImage(pulseSprite, headPt.x - headR, headPt.y - headR, headR * 2, headR * 2);
       });
 
-      if (!prefersReducedMotion) {
+      if (!prefersReducedMotion && inView) {
         animId = requestAnimationFrame(draw);
+      } else {
+        animId = 0;
       }
     };
 
     animId = requestAnimationFrame(draw);
 
+    // Sleep entirely while the hero section is offscreen: the canvas lives at
+    // the top of a very long page, so most scroll positions paid full drawing
+    // cost for a backdrop nobody could see.
+    let io: IntersectionObserver | null = null;
+    if (!prefersReducedMotion && canvas.parentElement && 'IntersectionObserver' in window) {
+      io = new IntersectionObserver(
+        (entries) => {
+          const next = entries[0]?.isIntersecting ?? true;
+          if (next === inView) return;
+          inView = next;
+          if (inView) {
+            if (!animId) animId = requestAnimationFrame(draw);
+          } else if (animId) {
+            cancelAnimationFrame(animId);
+            animId = 0;
+          }
+        },
+        { rootMargin: '120px' }
+      );
+      io.observe(canvas.parentElement);
+    }
+
     return () => {
       cancelAnimationFrame(animId);
+      animId = 0;
+      io?.disconnect();
       window.removeEventListener('resize', updateSize);
     };
   }, []);
