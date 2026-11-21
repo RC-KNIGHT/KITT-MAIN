@@ -940,7 +940,9 @@ export function simulateCircuit(
     }
   }
 
-  if (iterations >= maxIterations) {
+  // A loop/iteration-limit warning is valid only if
+  // the circuit is STILL changing after the final iteration.
+  if (changed && iterations >= maxIterations) {
     loopDetected = true;
   }
 
