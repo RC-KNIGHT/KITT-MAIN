@@ -40,106 +40,103 @@ export function evaluateComponent(
 
   switch (component.type) {
     case "AND": {
-      // 1 if all inputs are 1
-      let allHigh = true;
-      for (let i = 0; i < component.inputCount; i++) {
-        const val = inputs[`in_${i}`];
-        if (val !== 1) {
-          allHigh = false;
-          break;
-        }
-      }
-      outputs["out"] = allHigh ? 1 : 0;
+      const values = Array.from(
+        { length: component.inputCount },
+        (_, i) => inputs[`in_${i}`],
+      );
+
+      outputs["out"] = values.includes(0)
+        ? 0
+        : values.some((v) => v !== 1)
+          ? "X"
+          : 1;
       break;
     }
 
     case "OR": {
-      // 1 if any input is 1
-      let anyHigh = false;
-      for (let i = 0; i < component.inputCount; i++) {
-        const val = inputs[`in_${i}`];
-        if (val === 1) {
-          anyHigh = true;
-          break;
-        }
-      }
-      outputs["out"] = anyHigh ? 1 : 0;
+      const values = Array.from(
+        { length: component.inputCount },
+        (_, i) => inputs[`in_${i}`],
+      );
+
+      outputs["out"] = values.includes(1)
+        ? 1
+        : values.some((v) => v !== 0)
+          ? "X"
+          : 0;
       break;
     }
 
     case "NOT": {
-      const inVal = inputs["in_0"];
-      outputs["out"] = inVal === 1 ? 0 : 1;
+      const value = inputs["in_0"];
+
+      outputs["out"] = value === 0 ? 1 : value === 1 ? 0 : "X";
       break;
     }
 
     case "NAND": {
-      // 0 if all inputs are 1, otherwise 1
-      let allHigh = true;
-      for (let i = 0; i < component.inputCount; i++) {
-        const val = inputs[`in_${i}`];
-        if (val !== 1) {
-          allHigh = false;
-          break;
-        }
-      }
-      outputs["out"] = allHigh ? 0 : 1;
+      const values = Array.from(
+        { length: component.inputCount },
+        (_, i) => inputs[`in_${i}`],
+      );
+
+      outputs["out"] = values.includes(0)
+        ? 1
+        : values.some((v) => v !== 1)
+          ? "X"
+          : 0;
       break;
     }
 
     case "NOR": {
-      // 1 if all inputs are 0 (no input is 1)
-      let anyHigh = false;
-      for (let i = 0; i < component.inputCount; i++) {
-        const val = inputs[`in_${i}`];
-        if (val === 1) {
-          anyHigh = true;
-          break;
-        }
-      }
-      outputs["out"] = anyHigh ? 0 : 1;
+      const values = Array.from(
+        { length: component.inputCount },
+        (_, i) => inputs[`in_${i}`],
+      );
+
+      outputs["out"] = values.includes(1)
+        ? 0
+        : values.some((v) => v !== 0)
+          ? "X"
+          : 1;
       break;
     }
 
-    case "XOR": {
-      // 1 if odd number of 1s (Modulo-2 sum / Odd parity)
-      let count1 = 0;
-      for (let i = 0; i < component.inputCount; i++) {
-        if (inputs[`in_${i}`] === 1) count1++;
-      }
-      outputs["out"] = count1 % 2 === 1 ? 1 : 0;
-      break;
-    }
-
+    case "XOR":
     case "XNOR": {
-      // 1 if even number of 1s (Inverted XOR / Even parity)
-      let count1 = 0;
-      for (let i = 0; i < component.inputCount; i++) {
-        if (inputs[`in_${i}`] === 1) count1++;
+      const values = Array.from(
+        { length: component.inputCount },
+        (_, i) => inputs[`in_${i}`],
+      );
+
+      if (values.some((v) => v !== 0 && v !== 1)) {
+        outputs["out"] = "X";
+      } else {
+        const parity = values.filter((v) => v === 1).length % 2;
+
+        outputs["out"] =
+          component.type === "XOR" ? (parity ? 1 : 0) : parity ? 0 : 1;
       }
-      outputs["out"] = count1 % 2 === 0 ? 1 : 0;
       break;
     }
 
     case "BUFFER": {
-      const inVal = inputs["in_0"];
-      if (inVal === "X") outputs["out"] = "X";
-      else if (inVal === 1) outputs["out"] = 1;
-      else outputs["out"] = 0;
+      const value = inputs["in_0"];
+
+      outputs["out"] = value === 0 || value === 1 ? value : "X";
       break;
     }
 
     case "TRI_STATE_BUFFER": {
-      const en = inputs["in_en"];
+      const enable = inputs["in_en"];
       const data = inputs["in_0"];
-      // Active HIGH Enable
-      if (en === 1) {
-        if (data === "X") outputs["out"] = "X";
-        else if (data === 1) outputs["out"] = 1;
-        else outputs["out"] = 0;
-      } else {
-        // Disabled / High-Impedance State
+
+      if (enable === 0) {
         outputs["out"] = "Z";
+      } else if (enable === 1) {
+        outputs["out"] = data === 0 || data === 1 ? data : "X";
+      } else {
+        outputs["out"] = "X";
       }
       break;
     }
